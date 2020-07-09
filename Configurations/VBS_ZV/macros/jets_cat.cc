@@ -214,7 +214,7 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   float deltamass_Vjet=1e5;
   float detajj_tmp=0;
   float detajj_mjj_max=0;
-  float Vjet_mass_tmp = 0.;
+  float Vjet_mass_max = 0.;
   unsigned int njet{*nCleanJet->Get()};
   unsigned int nFJ{*nFatJet->Get()};
   // Index in the collection of CleanJetNotFat
@@ -255,7 +255,7 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
     // Check if boosted
     if (nFJ >= 1){
       category = 0;
-      Vjet_mass_tmp = FatJet_mass->At(0);
+      Vjet_mass_max = FatJet_mass->At(0);
 
     }else if (njet>=4)
     { 
@@ -273,7 +273,7 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
               V_jets[0] = ijet;
               V_jets[1] = jjet;
               deltamass_Vjet = dmass;
-              Vjet_mass_tmp = mvjet;
+              Vjet_mass_max = mvjet;
             }
           }
         }
@@ -300,9 +300,9 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   else                     returnValues[v_jet_1] = -999;
 
 
-  returnValues[mjj_max]= Mjj_tmp;
+  returnValues[mjj_max]= Mjj_max;
   returnValues[detajj_mjjmax] = detajj_mjj_max;
-  returnValues[Vjet_mass] = Vjet_mass_tmp;
+  returnValues[Vjet_mass] = Vjet_mass_max;
   returnValues[vbs_category] = category;
 
 }
