@@ -262,7 +262,8 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
       category = 1;
       for (unsigned int ijet=0 ; ijet<njet ; ijet++){
       for (unsigned int jjet= ijet+1 ; jjet<njet ; jjet++){
-          if (VBS_jets[0] == ijet || VBS_jets[1] == ijet || VBS_jets[0] == jjet || VBS_jets[1] == jjet){
+          if (VBS_jets[0] == ijet || VBS_jets[1] == ijet || VBS_jets[0] == jjet || VBS_jets[1] == jjet) continue;
+          else{
             TLorentzVector jet0 = vectors.at(ijet);
             TLorentzVector jet1 = vectors.at(jjet); 
             float mvjet = (jet0+jet1).M();
