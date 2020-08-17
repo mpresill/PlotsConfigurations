@@ -137,7 +137,7 @@ ptllDYW_NLO = '(0.87*(gen_ptll<10)+(0.379119+0.099744*gen_ptll-0.00487351*gen_pt
 ptllDYW_LO = '((0.632927+0.0456956*gen_ptll-0.00154485*gen_ptll*gen_ptll+2.64397e-05*gen_ptll*gen_ptll*gen_ptll-2.19374e-07*gen_ptll*gen_ptll*gen_ptll*gen_ptll+6.99751e-10*gen_ptll*gen_ptll*gen_ptll*gen_ptll*gen_ptll)*(gen_ptll>0)*(gen_ptll<100)+(1.41713-0.00165342*gen_ptll)*(gen_ptll>=100)*(gen_ptll<300)+1*(gen_ptll>=300))'
 
 useDYtt = False
-
+"""
 files=[]
 if useDYtt:
   files = nanoGetSampleFiles(mcDirectory, 'DYJetsToTT_MuEle_M-50') + \
@@ -158,7 +158,7 @@ else:
           nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-4to50_HT-200to400') + \
           nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-4to50_HT-400to600') + \
           nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-4to50_HT-600toInf')
-
+"""
 if useDYtt:
     samples['DY'] = {
         'name': files,
@@ -211,7 +211,7 @@ samples['top'] = {
 addSampleWeight(samples,'top','TTTo2L2Nu','Top_pTrw')
 
 ######WJets#####
-"""
+
 files = nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT100_200') + \
     nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT200_400') + \
     nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT400_600') + \
@@ -224,10 +224,9 @@ files = nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT100_200') + \
 samples['WJets'] = {
     'name': files,
     'weight': mcCommonWeight, 
-    'FilesPerJob': 2
+    'FilesPerJob': 4
 }
 
-"""
 ###### WW ########
 
 samples['WW'] = {
@@ -254,22 +253,20 @@ samples['ggWW'] = {
     'FilesPerJob': 4
 }
 ######## Vg ########
-
+"""
 files = nanoGetSampleFiles(mcDirectory, 'Wg_MADGRAPHMLM') + \
     nanoGetSampleFiles(mcDirectory, 'Zg')
 
 samples['Vg'] = {
     'name': files,
     'weight': mcCommonWeightNoMatch + '*(Gen_ZGstar_mass <= 0)',
-    'FilesPerJob': 1
+    'FilesPerJob': 4
 }
 # the following is needed in both v5 and v6
 addSampleWeight(samples, 'Vg', 'Zg', '0.448')
 
-
-
 ######## VgS ########
-"""
+
 files = nanoGetSampleFiles(mcDirectory, 'Wg_MADGRAPHMLM') + \
     nanoGetSampleFiles(mcDirectory, 'Zg') + \
     nanoGetSampleFiles(mcDirectory, 'WZTo3LNu_mllmin01')
@@ -277,7 +274,7 @@ files = nanoGetSampleFiles(mcDirectory, 'Wg_MADGRAPHMLM') + \
 samples['VgS'] = {
     'name': files,
     'weight': mcCommonWeight + ' * (gstarLow * 0.94 + gstarHigh * 1.14)',
-    'FilesPerJob': 1,
+    'FilesPerJob': 4,
     'subsamples': {
       'L': 'gstarLow',
       'H': 'gstarHigh'

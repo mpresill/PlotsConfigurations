@@ -122,6 +122,11 @@ variables['detajj_mjjmax']  = {   'name': 'detajj_mjjmax',            #   variab
                            'fold' :3
                            }
 
+variables['dphijj_mjjmax']  = {   'name': 'dphijj_mjjmax',            #   variable name    
+                           'range' : (8,0,3.14),    #   variable range
+                           'xaxis' : '#Delta #phi jj',  #   x axis name
+                           'fold' :3
+                           }
 
 
 #Zeppenfeld variables
@@ -137,4 +142,5 @@ variables['Zlep_2'] = {   'name': '( Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+
                         'xaxis' : 'Z^{lep}_{l2}', 
                         'fold' : 3
                         }
+
 

@@ -2,10 +2,9 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_22June2020'
+date='_17Aug2020'
 
 tag = 'VBS_ZV'+date
-
 
 # used by mkShape to define output directory for root files
 outputDir = 'rootFile'+date
@@ -37,8 +36,8 @@ lumi = 59.74
 outputDirPlots = '/eos/user/m/mpresill/www/VBS/2018_v6/PlotsVBS_ZV'+date
 
 
-# used by mkDatacards to define output directory for datacards
-outputDirDatacard = 'datacards'+date
+# used by mkDatacards to define output directory for datacards: common vbs-italia github folder 
+outputDirDatacard = '/afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/cms-vbs/ZV-lvqq/AN-2020-076/'+date
 
 
 # structure file for datacard

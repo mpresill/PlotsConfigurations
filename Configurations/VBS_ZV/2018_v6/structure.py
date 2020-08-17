@@ -11,12 +11,12 @@ structure['DY']  = {
                   'isData'   : 0
               }
 
-"""
+
 structure['WJets']  = {  
                   'isSignal' : 0,
                   'isData'   : 0 
               }
-
+"""
 structure['Fake']  = {  
                   'isSignal' : 0,
                   'isData'   : 0 
@@ -44,12 +44,12 @@ structure['ggWW']  = {
                   'isSignal' : 0,
                   'isData'   : 0    
                   }
-
+"""
 structure['Vg']  = { 
                   'isSignal' : 0,
                   'isData'   : 0 
                   }
-"""
+
 structure['VgS'] = { 
                   'isSignal' : 0,
                   'isData'   : 0 
