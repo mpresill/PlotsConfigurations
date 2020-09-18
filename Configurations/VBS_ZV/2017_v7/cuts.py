@@ -17,11 +17,11 @@ cuts['preselection'] = '1.'
 #   BOOSTED CATEGORY
 #   vbs_category = 0 (at least one FJ)
 #######################################
-cuts['Boosted_topcr']  = 'vbs_category==0 && nCleanFatJet==1 && Vjet_mass >65 && Vjet_mass<105 && bReqTight && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13)'
+cuts['Boosted_topcr']  = 'vbs_category==0 && nCleanFatJet>=1 && Vjet_mass >65 && Vjet_mass<105 && bReqTight && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13)'
 
-cuts['Boosted_DYcr']  = 'vbs_category==0 &&  nCleanFatJet==1 && ( Vjet_mass<65 || Vjet_mass>105) && bVeto && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
+cuts['Boosted_DYcr']  = 'vbs_category==0 &&  nCleanFatJet>=1 && ( Vjet_mass<65 || Vjet_mass>105) && bVeto && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
 
-cuts['Boosted_SR']  = 'vbs_category==0 &&  mll>76. && mll<106. && nCleanFatJet==1 && Vjet_mass > 65 && Vjet_mass<105 && bVeto && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
+cuts['Boosted_SR']  = 'vbs_category==0 &&  mll>76. && mll<106. && nCleanFatJet>=1 && Vjet_mass > 65 && Vjet_mass<105 && bVeto && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
 
 #######################################
 #

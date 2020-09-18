@@ -108,6 +108,9 @@ variables['V_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[v_jet_1],-9999.)',      
                         }
 
 
+
+
+
 # new variables
 
 variables['mjj_max']  = {   'name': 'mjj_max',            #   variable name    
@@ -144,6 +147,14 @@ variables['Zlep_2'] = {   'name': '( Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+
                         }
 
 
+variables['Zlep_ll'] = {   'name': '0.5* fabs( ( Lepton_eta[0]+Lepton_eta[1]-(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) )',      
+                        'range' : (40,0,5),  
+                        'xaxis' : 'Z^{lep}_{ll}', 
+                        'fold' : 3
+                        }
+
+
+
 #more variabiles for the optimization
 
 variables['nvtx']  = {   'name': 'PV_npvsGood',      
@@ -178,7 +189,7 @@ variables['pt_lep']  = {   'name': 'Lepton_pt',
 variables['nCleanJetNotFat']  = {
                         'name': 'nCleanJetNotFat',     
                         'range' : (10,0,10),   
-                        'xaxis' : 'Number of jets w/ p_{T}>30 GeV (cleaned)',
+                        'xaxis' : 'Number of jets ',
                         'fold' : 2   # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
                         }
 
@@ -189,7 +200,7 @@ variables['nCleanJetNotFat']  = {
 variables['nFatJet']  = {
                         'name': 'nCleanFatJet',     
                         'range' : (6,0,6),   
-                        'xaxis' : 'Number of FatJets w/ p_{T}>200 GeV',
+                        'xaxis' : 'Number of FatJets',
                         'fold' : 2   # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
                         }
 
@@ -212,6 +223,14 @@ variables['FatJet_softdropmass'] = {   'name': 'Alt$(CleanFatJet_mass,0.)',
                                'xaxis': 'AK8 jet softdrop mass',
                                'fold': 0
                                }
+
+
+variables['Vjet_mass'] = {   'name': 'Alt$(Vjet_mass,0.)',
+                               'range': (50,0.,200),
+                               'xaxis': 'V jets mass',
+                               'fold': 0
+                               }
+
 ##this is the softdrop mass
 
                                                                                                                         
