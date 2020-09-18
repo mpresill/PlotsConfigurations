@@ -13,14 +13,15 @@ outputDir = 'rootFile'+date
 aliasesFile = 'aliases.py'
 
 # file with list of variables
-variablesFile = 'variables.py'
+#variablesFile = 'variables.py'
+variablesFile = 'variables_test.py'
 
 # file with list of cuts
 cutsFile = 'cuts.py'
 
 # file with list of samples
-samplesFile = 'samples_test.py'
-#samplesFile = 'samples.py'
+#samplesFile = 'samples_test.py'
+samplesFile = 'samples.py'
 
 
 # file with list of samples
@@ -44,5 +45,5 @@ outputDirDatacard = '/afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/s
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
-nuisancesFile = 'nuisances.py'
-#nuisancesFile ='nuisances_StatOnly.py'
+#nuisancesFile = 'nuisances.py'
+nuisancesFile ='nuisances_StatOnly.py'

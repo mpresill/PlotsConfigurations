@@ -140,7 +140,7 @@ aliases['Top_pTrw'] = {
 ############b tag
 # B tagging
 #loose 0.1241
-# tight 0.7527
+#tight 0.7527
 
 aliases['bVeto'] = {
     'expr': '(Sum$(CleanJet_pt > 20. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.1241) == 0)'
