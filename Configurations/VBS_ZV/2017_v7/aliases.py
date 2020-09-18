@@ -39,7 +39,7 @@ aliases['vbs_category'] = {
         '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
     ],
     'class': 'jets_cat',
-    'args': ('vbs_category','2018')
+    'args': ('vbs_category','2017')
 }
 
 aliases['vbs_jet_0'] = {
@@ -48,7 +48,7 @@ aliases['vbs_jet_0'] = {
         '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
     ],
     'class': 'jets_cat',
-    'args': ('vbs_jet_0','2018')
+    'args': ('vbs_jet_0','2017')
 }
 
 aliases['vbs_jet_1'] = {
@@ -57,7 +57,7 @@ aliases['vbs_jet_1'] = {
         '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
     ],
     'class': 'jets_cat',
-    'args': ('vbs_jet_1','2018')
+    'args': ('vbs_jet_1','2017')
 }
 
 aliases['v_jet_0'] = {
@@ -66,7 +66,7 @@ aliases['v_jet_0'] = {
         '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
     ],
     'class': 'jets_cat',
-    'args': ('v_jet_0','2018')
+    'args': ('v_jet_0','2017')
 }
 
 aliases['v_jet_1'] = {
@@ -75,7 +75,7 @@ aliases['v_jet_1'] = {
         '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
     ],
     'class': 'jets_cat',
-    'args': ('v_jet_1','2018')
+    'args': ('v_jet_1','2017')
 }
 
 
@@ -85,7 +85,7 @@ aliases['mjj_max'] = {
         '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
     ],
     'class': 'jets_cat',
-    'args': ('mjj_max','2018')
+    'args': ('mjj_max','2017')
 }
 
 aliases['detajj_mjjmax'] = {
@@ -94,7 +94,7 @@ aliases['detajj_mjjmax'] = {
         '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
     ],
     'class': 'jets_cat',
-    'args': ('detajj_mjjmax','2018')
+    'args': ('detajj_mjjmax','2017')
 }
 
 aliases['dphijj_mjjmax'] = {
@@ -103,7 +103,7 @@ aliases['dphijj_mjjmax'] = {
         '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
     ],
     'class': 'jets_cat',
-    'args': ('dphijj_mjjmax','2018')
+    'args': ('dphijj_mjjmax','2017')
 }
 
 aliases['Vjet_mass'] = {
@@ -112,7 +112,7 @@ aliases['Vjet_mass'] = {
         '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
     ],
     'class': 'jets_cat',
-    'args': ('Vjet_mass','2018')
+    'args': ('Vjet_mass','2017')
 }
 ############################################################
 ############################################################
@@ -200,7 +200,7 @@ aliases['PUJetIdSF'] = {
         '.L %s/patches/pujetidsf_event.cc+' % configurations
     ],
     'class': 'PUJetIdEventSF',
-    'args': (puidSFSource, '2018', 'loose'),
+    'args': (puidSFSource, '2017', 'loose'),
     'samples': mc
 }
 """

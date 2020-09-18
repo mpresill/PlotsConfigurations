@@ -25,25 +25,25 @@ variables['events']  = {   'name': '1',
 # leptons
 #
 
-variables['pt1']  = {   'name': 'Alt$(Lepton_pt[0],-999.)',
+variables['pt1']  = {   'name': 'Alt$(Lepton_pt[0],-9999.)',
                         'range' : (20,0.,200),
                         'xaxis' : 'p_{T} 1st lep [GeV]',
                         'fold' :3
                         }
-variables['pt2']  = {   'name': 'Alt$(Lepton_pt[1],-999.)',
+variables['pt2']  = {   'name': 'Alt$(Lepton_pt[1],-9999.)',
                         'range' : (20,0.,200),
                         'xaxis' : 'p_{T} 2nd lep [GeV]',
                         'fold' :3
                         }
 
 
-variables['eta1']  = {   'name': 'Alt$(Lepton_eta[0],-999.)',
+variables['eta1']  = {   'name': 'Alt$(Lepton_eta[0],-9999.)',
                         'range' : (30,-3,3),
                         'xaxis' : '#eta 1st lep',
                         'fold' :3
                         }
 
-variables['eta2']  = {   'name': 'Alt$(Lepton_eta[1],-999.)',
+variables['eta2']  = {   'name': 'Alt$(Lepton_eta[1],-9999.)',
                         'range' : (30,-3,3),
                         'xaxis' : '#eta 2nd lep',
                         'fold' : 3
@@ -60,23 +60,23 @@ variables['mll-peak']  = {   'name': 'mll',            #   variable name
 # VBS jet AK4
 #
 
-variables['VBS_jet_eta1'] = {  'name': 'Alt$(CleanJet_eta[vbs_jet_0],-999.)',
+variables['VBS_jet_eta1'] = {  'name': 'Alt$(CleanJet_eta[vbs_jet_0],-9999.)',
                         'range': (30,-5,5),
                         'xaxis': '#eta 1st VBS jet',
                         'fold' : 3
                         }
-variables['VBS_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[vbs_jet_1],-999.)',
+variables['VBS_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[vbs_jet_1],-9999.)',
                         'range': (30,-5,5),
                         'xaxis': '#eta 2nd VBS jet',
                         'fold' : 3
                         }
 
-variables['VBS_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_0],-999.)',            #   variable name    
+variables['VBS_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_0],-9999.)',            #   variable name    
                         'range' : (30,0,400),    #   variable range
                         'xaxis' : 'p_{T} 1st VBS jet [GeV]',  #   x axis name
                         'fold' : 3
                         }
-variables['VBS_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_1],-999.)',            #   variable name    
+variables['VBS_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_1],-9999.)',            #   variable name    
                         'range' : (30,0,400),    #   variable range
                         'xaxis' : 'p_{T} 2nd VBS jet [GeV]',  #   x axis name
                         'fold' : 3
@@ -85,23 +85,23 @@ variables['VBS_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_1],-999.)',   
 #
 # V- jet(s) #
 
-variables['V_jet_eta1'] = {  'name': 'Alt$(CleanJet_eta[v_jet_0],-999.)',
+variables['V_jet_eta1'] = {  'name': 'Alt$(CleanJet_eta[v_jet_0],-9999.)',
                         'range': (30,-5,5),
                         'xaxis': '#eta 1st VBS jet',
                         'fold' : 3
                         }
-variables['V_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[v_jet_1],-999.)',
+variables['V_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[v_jet_1],-9999.)',
                         'range': (30,-5,5),
                         'xaxis': '#eta 2nd VBS jet',
                         'fold' : 3
                         }
 
-variables['V_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[v_jet_0],-999.)',            #   variable name    
+variables['V_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[v_jet_0],-9999.)',            #   variable name    
                         'range' : (60,0,800),    #   variable range
                         'xaxis' : 'p_{T} 1st VBS jet [GeV]',  #   x axis name
                         'fold' : 3
                         }
-variables['V_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[v_jet_1],-999.)',            #   variable name    
+variables['V_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[v_jet_1],-9999.)',            #   variable name    
                         'range' : (30,0,400),    #   variable range
                         'xaxis' : 'p_{T} 2nd VBS jet [GeV]',  #   x axis name
                         'fold' : 3
@@ -130,7 +130,7 @@ variables['dphijj_mjjmax']  = {   'name': 'dphijj_mjjmax',            #   variab
 
 
 #Zeppenfeld variables
-"""
+
 variables['Zlep_1'] = {   'name': '( Lepton_eta[0]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',      
                         'range' : (40,-1.5,1.5),  
                         'xaxis' : 'Z^{lep}_{l1}', 
@@ -142,5 +142,5 @@ variables['Zlep_2'] = {   'name': '( Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+
                         'xaxis' : 'Z^{lep}_{l2}', 
                         'fold' : 3
                         }
-"""
+
 

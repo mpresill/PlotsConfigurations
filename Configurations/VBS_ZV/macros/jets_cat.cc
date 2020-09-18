@@ -27,10 +27,24 @@ Note that according to the definition in ll. 147, 149 we use the CleanJetNotFat 
 #include <stdexcept>
 #include <tuple>
 
-// --- function Helper
+// --- functions Helper
 float deltaEta(float eta1, float eta2) {
   return std::abs(eta1 - eta2);
 }
+
+float deltaPhi(float phi1, float phi2){
+  float PHI = std::abs(phi1-phi2);
+  if (PHI<=3.14159265)
+    return PHI;
+  else
+    return 2*3.14159265-PHI;
+}
+
+//float deltaR(float phi1, float eta1, float phi2, float eta2) {
+  //return sqrt((eta2-eta1)**2+deltaPhi(phi1,phi2)**2);
+//  return sqrt( pow((eta2-eta1),2) + pow(deltaPhi(phi1,phi2),2) );
+//}
+ //--- end functions Helper
 
 
 class jets_cat : public multidraw::TTreeFunction {
@@ -54,6 +68,7 @@ protected:
 
     mjj_max, 
     detajj_mjjmax, 
+    dphijj_mjjmax,
     Vjet_mass, 
     nVarTypes
   };
@@ -81,7 +96,7 @@ protected:
   static IntArrayReader* CleanJet_jetId;
   static IntArrayReader* CleanJetNotFat_jetId;
   static FloatArrayReader* Jet_mass;
-  static UIntValueReader* nCleanJet;
+  static UIntValueReader* nCleanJetNotFat;
   static FloatArrayReader* CleanJet_pt;
   static FloatArrayReader* CleanJet_eta;
   static FloatArrayReader* CleanJet_phi;
@@ -103,7 +118,7 @@ FloatArrayReader* jets_cat::FatJet_mass{};
 IntArrayReader*   jets_cat::CleanJet_jetId{};
 IntArrayReader*   jets_cat::CleanJetNotFat_jetId{};
 FloatArrayReader* jets_cat::Jet_mass{};
-UIntValueReader*  jets_cat::nCleanJet; 
+UIntValueReader*  jets_cat::nCleanJetNotFat; 
 FloatArrayReader* jets_cat::CleanJet_pt{};
 FloatArrayReader* jets_cat::CleanJet_eta{};
 FloatArrayReader* jets_cat::CleanJet_phi{};
@@ -136,6 +151,8 @@ jets_cat::jets_cat( char const* _type, const char* year):
       returnVar_ = mjj_max;
     else if (type == "detajj_mjjmax")
       returnVar_ = detajj_mjjmax;
+    else if (type == "dphijj_mjjmax")
+      returnVar_ = dphijj_mjjmax;
     else
       throw std::runtime_error("unknown return type " + type);
 
@@ -172,7 +189,7 @@ jets_cat::bindTree_(multidraw::FunctionLibrary& _library)
     _library.bindBranch(CleanJetNotFat_jetId, "CleanJetNotFat_jetIdx");
     _library.bindBranch(CleanJet_jetId, "CleanJet_jetIdx");
     _library.bindBranch(Jet_mass, "Jet_mass");
-    _library.bindBranch(nCleanJet, "nCleanJetNotFat");
+    _library.bindBranch(nCleanJetNotFat, "nCleanJetNotFat");
     _library.bindBranch(CleanJet_pt, "CleanJet_pt");
     _library.bindBranch(CleanJet_eta, "CleanJet_eta");
     _library.bindBranch(CleanJet_phi, "CleanJet_phi");
@@ -186,7 +203,7 @@ jets_cat::bindTree_(multidraw::FunctionLibrary& _library)
                                      FatJet_eta = nullptr;
                                      FatJet_phi = nullptr;
                                      FatJet_mass = nullptr;
-                                     nCleanJet = nullptr;
+                                     nCleanJetNotFat = nullptr;
                                      CleanJet_pt = nullptr;
                                      CleanJet_eta = nullptr;
                                      CleanJet_phi = nullptr;
@@ -212,15 +229,15 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   float Mjj_tmp=0;
   float Mjj_max=0;
   float deltamass_Vjet=1e5;
-  float detajj_tmp=0;
   float detajj_mjj_max=0;
+  float dphijj_mjj_max=0;
   float Vjet_mass_max = 0.;
-  unsigned int njet{*nCleanJet->Get()};
+  unsigned int njet{*nCleanJetNotFat->Get()};
   unsigned int nFJ{*nFatJet->Get()};
   // Index in the collection of CleanJetNotFat
-  int VBS_jets[2] = {-999,-999};
-  int V_jets[2]   = {-999,-999};
-  int category = -999;  // 0 fatjet, 1 resolved, -1 none
+  int VBS_jets[2] = {999,999};
+  int V_jets[2]   = {999,999};
+  int category = 999;  // 0 fatjet, 1 resolved, -1 none
 
   // Load all the quadrivectors for performance reason
   std::vector<TLorentzVector> vectors; 
@@ -240,10 +257,11 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
         TLorentzVector jet1 = vectors.at(jjet); 
 
         Mjj_tmp = (jet0 + jet1).M();
-        detajj_tmp = deltaEta(CleanJet_eta->At(CleanJetNotFat_jetId->At(ijet)),CleanJet_eta->At(CleanJetNotFat_jetId->At(jjet)));
+        
         if( Mjj_tmp >= Mjj_max ){
           Mjj_max=Mjj_tmp;
-          detajj_mjj_max=detajj_tmp;
+          detajj_mjj_max=deltaEta(CleanJet_eta->At(CleanJetNotFat_jetId->At(ijet)),CleanJet_eta->At(CleanJetNotFat_jetId->At(jjet)));
+          dphijj_mjj_max=deltaPhi(CleanJet_phi->At(CleanJetNotFat_jetId->At(ijet)),CleanJet_phi->At(CleanJetNotFat_jetId->At(jjet)));
           // Index in the collection of CleanJetNotFat
           VBS_jets[0]= ijet;
           VBS_jets[1]= jjet;
@@ -287,21 +305,22 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   }
 
   // Now go back to CleanJet indexes for easy use of the collection
-  if (VBS_jets[0] != -999) returnValues[vbs_jet_0] = CleanJetNotFat_jetId->At(VBS_jets[0]);
-  else                     returnValues[vbs_jet_0] = -999;
+  if (VBS_jets[0] != 999) returnValues[vbs_jet_0] = CleanJetNotFat_jetId->At(VBS_jets[0]);
+  else                     returnValues[vbs_jet_0] = 999;
 
-  if (VBS_jets[1] != -999) returnValues[vbs_jet_1] = CleanJetNotFat_jetId->At(VBS_jets[1]);
-  else                     returnValues[vbs_jet_1] = -999;
+  if (VBS_jets[1] != 999) returnValues[vbs_jet_1] = CleanJetNotFat_jetId->At(VBS_jets[1]);
+  else                     returnValues[vbs_jet_1] = 999;
  
-  if (V_jets[0] != -999) returnValues[v_jet_0] = CleanJetNotFat_jetId->At(V_jets[0]);
-  else                     returnValues[v_jet_0] = -999;
+  if (V_jets[0] != 999) returnValues[v_jet_0] = CleanJetNotFat_jetId->At(V_jets[0]);
+  else                     returnValues[v_jet_0] = 999;
 
-  if (V_jets[1] != -999) returnValues[v_jet_1] = CleanJetNotFat_jetId->At(V_jets[1]);
-  else                     returnValues[v_jet_1] = -999;
+  if (V_jets[1] != 999) returnValues[v_jet_1] = CleanJetNotFat_jetId->At(V_jets[1]);
+  else                     returnValues[v_jet_1] = 999;
 
 
   returnValues[mjj_max]= Mjj_max;
   returnValues[detajj_mjjmax] = detajj_mjj_max;
+  returnValues[dphijj_mjjmax] = dphijj_mjj_max;
   returnValues[Vjet_mass] = Vjet_mass_max;
   returnValues[vbs_category] = category;
 

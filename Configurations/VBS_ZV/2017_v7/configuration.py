@@ -2,7 +2,7 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_17Sept2020'
+date='_16Sept2020'
 
 tag = 'VBS_ZV'+date
 
@@ -29,11 +29,11 @@ plotFile = 'plot.py'
 
 
 # luminosity to normalize to (in 1/fb)
-lumi = 59.74
+lumi = 41.53
 
 # used by mkPlot to define output directory for plots
 # different from "outputDir" to do things more tidy
-outputDirPlots = '/eos/user/m/mpresill/www/VBS/2018_v6/PlotsVBS_ZV'+date
+outputDirPlots = '/eos/user/m/mpresill/www/VBS/2017_v7/PlotsVBS_ZV'+date
 
 
 # used by mkDatacards to define output directory for datacards: common vbs-italia github folder 
