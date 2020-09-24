@@ -176,7 +176,7 @@ else:
         'name': files,
         'weight': mcCommonWeight + "*( !(Sum$(PhotonGen_isPrompt==1 && PhotonGen_pt>15 && abs(PhotonGen_eta)<2.6) > 0 &&\
                                          Sum$(LeptonGen_isPrompt==1 && LeptonGen_pt>15)>=2) )",
-        'FilesPerJob': 8,
+        'FilesPerJob': 4,
     }
 
     #addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50', '('+ptllDYW_NLO+')*(LHE_HT < 100)')
@@ -228,7 +228,7 @@ files = nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT100_200') + \
 samples['WJets'] = {
     'name': files,
     'weight': mcCommonWeight, 
-    'FilesPerJob': 4
+    'FilesPerJob': 2
 }
 
 ###### WW ########
@@ -254,7 +254,7 @@ files = nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENEN') + \
 samples['ggWW'] = {
     'name': files,
     'weight': mcCommonWeight + '*1.53/1.4', # updating k-factor
-    'FilesPerJob': 4
+    'FilesPerJob': 2
 }
 ######## Vg ########
 """
@@ -299,7 +299,7 @@ files = nanoGetSampleFiles(mcDirectory, 'ZZTo2L2Nu') + \
 samples['VZ'] = {
     'name': files,
     'weight': mcCommonWeight + '*1.11',
-    'FilesPerJob': 4
+    'FilesPerJob': 2
 }
 
 ########## VVV #########
@@ -325,7 +325,7 @@ files =nanoGetSampleFiles(mcDirectory, 'WLNuJJ_EWK') + \
 samples['VBF-V'] = {
     'name': files,
     'weight': mcCommonWeight,
-    'FilesPerJob': 4
+    'FilesPerJob': 2
 }
 
 ###########################################

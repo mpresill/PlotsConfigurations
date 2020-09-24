@@ -135,24 +135,36 @@ variables['dphijj_mjjmax']  = {   'name': 'dphijj_mjjmax',            #   variab
 #Zeppenfeld variables
 
 variables['Zlep_1'] = {   'name': '( Lepton_eta[0]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',      
-                        'range' : (40,-1.5,1.5),  
+                        'range' : (40,-2.5,2.5),  
                         'xaxis' : 'Z^{lep}_{l1}', 
                         'fold' : 3
                         }
 
 variables['Zlep_2'] = {   'name': '( Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',      
-                        'range' : (40,-1.5,1.5),  
+                        'range' : (40,-2.5,2.5),  
                         'xaxis' : 'Z^{lep}_{l2}', 
                         'fold' : 3
                         }
 
 
-variables['Zlep_ll'] = {   'name': '0.5* fabs( ( Lepton_eta[0]+Lepton_eta[1]-(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) )',      
+variables['Zlep_ll'] = {   'name': ' fabs( ( Lepton_eta[0]+Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) )/detajj_mjjmax',      
                         'range' : (40,0,5),  
                         'xaxis' : 'Z^{lep}_{ll}', 
                         'fold' : 3
                         }
 
+
+variables['Zlep_V_res'] = {   'name': ' fabs( ( CleanJet_eta[v_jet_0]+CleanJet_eta[v_jet_1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) )/detajj_mjjmax',      
+                        'range' : (40,0,5),  
+                        'xaxis' : 'Z^{lep}_{V} (resolved)', 
+                        'fold' : 3
+                        }
+
+variables['Zlep_V_boost'] = {   'name': ' fabs( ( CleanFatJet_eta[0]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) )/detajj_mjjmax',      
+                        'range' : (40,0,5),  
+                        'xaxis' : 'Z^{lep}_{V} (boosted)', 
+                        'fold' : 3
+                        }
 
 
 #more variabiles for the optimization
@@ -233,10 +245,10 @@ variables['Vjet_mass'] = {   'name': 'Alt$(Vjet_mass,0.)',
 
 ##this is the softdrop mass
 
-                                                                                                                        
+"""                                                                                                                        
 variables['FatJet_tau21'] = {   'name': 'CleanFatJet_tau21',
                         'range' : (50,0,1),
                         'xaxis' : '#tau_{21}',
                         'fold' : 0
                         }
-
+"""

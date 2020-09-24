@@ -48,13 +48,13 @@ variables['eta2']  = {   'name': 'Alt$(Lepton_eta[1],-9999.)',
                         'xaxis' : '#eta 2nd lep',
                         'fold' : 3
                         }
-
+"""
 variables['mll-peak']  = {   'name': 'mll',            #   variable name    
                         'range' : (30,60,120),    #   variable range
                         'xaxis' : 'm_{ll} [GeV]',  #   x axis name
                         'fold' :3
                         }
-
+"""
 
 #
 # VBS jet AK4
@@ -87,25 +87,41 @@ variables['VBS_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_1],-9999.)',  
 
 variables['V_jet_eta1'] = {  'name': 'Alt$(CleanJet_eta[v_jet_0],-9999.)',
                         'range': (30,-5,5),
-                        'xaxis': '#eta 1st VBS jet',
+                        'xaxis': '#eta 1st V jet',
                         'fold' : 3
                         }
 variables['V_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[v_jet_1],-9999.)',
                         'range': (30,-5,5),
-                        'xaxis': '#eta 2nd VBS jet',
+                        'xaxis': '#eta 2nd V jet',
                         'fold' : 3
                         }
 
 variables['V_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[v_jet_0],-9999.)',            #   variable name    
                         'range' : (60,0,800),    #   variable range
-                        'xaxis' : 'p_{T} 1st VBS jet [GeV]',  #   x axis name
+                        'xaxis' : 'p_{T} 1st V jet [GeV]',  #   x axis name
                         'fold' : 3
                         }
 variables['V_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[v_jet_1],-9999.)',            #   variable name    
                         'range' : (30,0,400),    #   variable range
-                        'xaxis' : 'p_{T} 2nd VBS jet [GeV]',  #   x axis name
+                        'xaxis' : 'p_{T} 2nd V jet [GeV]',  #   x axis name
                         'fold' : 3
                         }
+
+
+# Fat Jet
+
+variables['FatJet_pt']  = {
+                        'name': 'CleanFatJet_pt',     
+                        'range' : (30,150,800),   
+                        'xaxis' : 'FatJet p_{T}',
+                        'fold' : 0   # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
+                        }
+
+variables['FatJet_eta'] = {'name': 'CleanFatJet_eta',
+                           'range' : (25,-2.7,2.7),
+                           'xaxis' : '\eta FatJet',
+                           'fold'  : 0
+                           }
 
 
 # new variables
@@ -130,7 +146,6 @@ variables['dphijj_mjjmax']  = {   'name': 'dphijj_mjjmax',            #   variab
 
 
 #Zeppenfeld variables
-
 variables['Zlep_1'] = {   'name': '( Lepton_eta[0]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',      
                         'range' : (40,-1.5,1.5),  
                         'xaxis' : 'Z^{lep}_{l1}', 
@@ -143,4 +158,23 @@ variables['Zlep_2'] = {   'name': '( Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+
                         'fold' : 3
                         }
 
+"""
+variables['Zlep_ll'] = {   'name': '  ( Lepton_eta[0]+Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) /detajj_mjjmax',      
+                        'range' : (40,-1.5,1.5),  
+                        'xaxis' : 'Z^{lep}_{ll}', 
+                        'fold' : 3
+                        }
 
+
+variables['Zlep_V_res'] = {   'name': '  ( CleanJet_eta[v_jet_0]+CleanJet_eta[v_jet_1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) /detajj_mjjmax',      
+                        'range' : (40,-1.5,-1.5),  
+                        'xaxis' : 'Z^{lep}_{V} (resolved)', 
+                        'fold' : 3
+                        }
+
+variables['Zlep_V_boosted'] = {   'name': '  ( CleanFatJet_eta[0] -0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) /detajj_mjjmax',      
+                        'range' : (40,-1.5,-1.5),  
+                        'xaxis' : 'Z^{lep}_{V} (boosted)', 
+                        'fold' : 3
+                        }
+"""
