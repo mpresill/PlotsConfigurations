@@ -39,47 +39,28 @@ HiggsXS = HiggsXSection()
 #}
 
 nuisances['lumi_Uncorrelated'] = {
-    'name': 'lumi_13TeV_2017',
+    'name': 'lumi_13TeV_2018',
     'type': 'lnN',
-    'samples': dict((skey, '1.02') for skey in mc if skey not in ['WW', 'top', 'DY'])
+    'samples': dict((skey, '1.015') for skey in mc if skey not in ['WW', 'top', 'DY'])
 }
 
 nuisances['lumi_XYFact'] = {
     'name': 'lumi_13TeV_XYFact',
     'type': 'lnN',
-    'samples': dict((skey, '1.008') for skey in mc if skey not in ['WW', 'top', 'DY'])
+    'samples': dict((skey, '1.02') for skey in mc if skey not in ['WW', 'top', 'DY'])
 }
 
 nuisances['lumi_LScale'] = {
     'name': 'lumi_13TeV_LSCale',
     'type': 'lnN',
-    'samples': dict((skey, '1.003') for skey in mc if skey not in ['WW', 'top', 'DY'])
-}
-
-nuisances['lumi_BBDefl'] = {
-    'name': 'lumi_13TeV_BBDefl',
-    'type': 'lnN',
-    'samples': dict((skey, '1.004') for skey in mc if skey not in ['WW', 'top', 'DY'])
-}
-
-nuisances['lumi_DynBeta'] = {
-    'name': 'lumi_13TeV_DynBeta',
-    'type': 'lnN',
-    'samples': dict((skey, '1.005') for skey in mc if skey not in ['WW', 'top', 'DY'])
+    'samples': dict((skey, '1.002') for skey in mc if skey not in ['WW', 'top', 'DY'])
 }
 
 nuisances['lumi_CurrCalib'] = {
     'name': 'lumi_13TeV_CurrCalib',
     'type': 'lnN',
-    'samples': dict((skey, '1.003') for skey in mc if skey not in ['WW', 'top', 'DY'])
+    'samples': dict((skey, '1.002') for skey in mc if skey not in ['WW', 'top', 'DY'])
 }
-
-nuisances['lumi_Ghosts'] = {
-    'name': 'lumi_13TeV_Ghosts',
-    'type': 'lnN',
-    'samples': dict((skey, '1.001') for skey in mc if skey not in ['WW', 'top', 'DY'])
-}
-
 ##### B-tagger
 
 for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2', 'cferr1', 'cferr2']:
@@ -87,7 +68,7 @@ for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2',
 
     name = 'CMS_btag_%s' % shift
     if 'stats' in shift:
-        name += '_2017'
+        name += '_2018'
 
     nuisances['btag_shape_%s' % shift] = {
         'name': name,
@@ -101,35 +82,26 @@ for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2',
 trig_syst = ['((TriggerEffWeight_2l_u)/(TriggerEffWeight_2l))*(TriggerEffWeight_2l>0.02) + (TriggerEffWeight_2l<=0.02)', '(TriggerEffWeight_2l_d)/(TriggerEffWeight_2l)']
 
 nuisances['trigg'] = {
-    'name': 'CMS_eff_hwwtrigger_2017',
+    'name': 'CMS_eff_hwwtrigger_2018',
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, trig_syst) for skey in mc), 
 }
 
 
-####### Pre firing 2017 syst
-prefire_syst = ['PrefireWeight_Up/PrefireWeight', 'PrefireWeight_Down/PrefireWeight']
 
-nuisances['prefire'] = {
-    'name': 'CMS_eff_prefiring_2017',
-    'kind': 'weight',
-    'type': 'shape',
-    'samples': dict((skey, prefire_syst) for skey in mc), 
-
-}
 
 ##### Electron Efficiency and energy scale
 
 nuisances['eff_e'] = {
-    'name': 'CMS_eff_e_2017',
+    'name': 'CMS_eff_e_2018',
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc),
 }
 
 nuisances['electronpt'] = {
-    'name': 'CMS_scale_e_2017',
+    'name': 'CMS_scale_e_2018',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'ElepTup',
@@ -143,14 +115,14 @@ nuisances['electronpt'] = {
 ##### Muon Efficiency and energy scale
 
 nuisances['eff_m'] = {
-    'name': 'CMS_eff_m_2017',
+    'name': 'CMS_eff_m_2018',
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['SFweightMuUp', 'SFweightMuDown']) for skey in mc),
 }
 
 nuisances['muonpt'] = {
-    'name': 'CMS_scale_m_2017',
+    'name': 'CMS_scale_m_2018',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'MupTup',
@@ -164,7 +136,7 @@ nuisances['muonpt'] = {
 ##### Jet energy scale
 
 nuisances['jes'] = {
-    'name': 'CMS_scale_j_2017',
+    'name': 'CMS_scale_j_2018',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'JESup',
@@ -178,16 +150,15 @@ nuisances['jes'] = {
 ######## !!!!JER is missing here!!!
 
 ##### Pileup
-
 nuisances['PU'] = {
-    'name': 'CMS_PU_2017',
+    'name': 'CMS_PU_2018',
     'kind': 'weight',
     'type': 'shape',
     'samples': {
         'DY': ['0.993259983266*(puWeightUp/puWeight)', '0.997656381501*(puWeightDown/puWeight)'],
         'top': ['1.00331969187*(puWeightUp/puWeight)', '0.999199609528*(puWeightDown/puWeight)'],
         'WW': ['1.0033022059*(puWeightUp/puWeight)', '0.997085330608*(puWeightDown/puWeight)'],
-    },
+            },
     'AsLnN': '1',
 }
 
