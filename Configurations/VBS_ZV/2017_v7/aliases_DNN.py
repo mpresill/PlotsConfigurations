@@ -28,8 +28,7 @@ aliases['PromptGenLepMatch2l'] = {
     'expr': 'Alt$(Lepton_promptgenmatched[0]*Lepton_promptgenmatched[1], 0)',
     'samples': mc
 }
-
-
+############################################
 ##additional variables for VgS
 
 aliases['gstarLow'] = {
@@ -41,6 +40,37 @@ aliases['gstarHigh'] = {
     'expr': 'Gen_ZGstar_mass <0 || Gen_ZGstar_mass > 4',
     'samples': 'VgS'
 }
+
+############################################
+# DNN reader - Updated to 2017 specific
+###########################################
+
+mva_reader_path = os.getenv('CMSSW_BASE') + '/src/PlotsConfigurations/Configurations/VBS_ZV/mva_macros/'
+models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/'
+
+#aliases['DNNoutput_boosted'] = {
+#    'class': 'MVAReaderBoosted_v72',
+#    'args': ( models_path +'boos_sig_mjjincl/models/v72/', False, 0),
+#    'linesToAdd':[
+#        'gSystem->Load("libLatinoAnalysisMultiDraw.so")',
+#        'gSystem->Load("libDNNEvaluator.so")',
+#        '.L ' + mva_reader_path + 'mva_reader_boosted_v72.cc+', 
+#    ],
+#}
+
+aliases['DNNoutput_resolved'] = {
+    'class': 'MVAReaderResolved_v70',
+    'args': ( models_path+ '2017_v7/Resolved_SR/DNN/', False, 1),
+    'linesToAdd':[
+        'gSystem->Load("libLatinoAnalysisMultiDraw.so")',
+        'gSystem->Load("libDNNEvaluator.so")',
+        '.L ' + mva_reader_path + 'mva_reader_resolved_2017v7.cc+', 
+    ],
+}
+
+#aliases['DNNoutput'] = {
+#    'expr': '(VBS_category==0)*(DNNoutput_boosted) + (VBS_category==1)*(DNNoutput_resolved)'
+#}
 
 ############################################################
 ############# VBS variables

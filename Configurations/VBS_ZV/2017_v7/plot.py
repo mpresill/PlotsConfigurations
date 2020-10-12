@@ -130,7 +130,7 @@ plot['DY']  = {
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
                 'isData'   : 0, 
-                'scale'    : 0.65,
+                'scale'    : 1.,
             }
 
 """
@@ -167,8 +167,12 @@ plot['top'] = {
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                 'scale'    : 0.92,
-                #  'cuts': {
+                 #'scale'    : 1.,
+                 'cuts':{
+			"Boosted_topcr": 1.095,
+			"Resolved_topcr": 0.77,
+		}
+		#  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
                 #     "res_wjetcr_mjjincl_dnnhigh_mu":1.065,
@@ -213,6 +217,18 @@ plot['VBS_ZV']  = {
                   'scale'    : 1.   ,
               }
 
+plot['DY']  = {
+                'isSignal' : 0,
+                'color': palette["Green2"],
+            	'isData'   : 0,
+		#'scale'    : 1.018,
+		 'cuts':{
+                        "Boosted_DYcr": 1.17,
+                        "Resolved_DYcr": 1.98,
+                }
+		}
+
+
 # # data
 
 plot['DATA']  = { 
@@ -228,6 +244,6 @@ plot['DATA']  = {
 
 # additional options
 
-legend['lumi'] = 'L = 59.74/fb'
+legend['lumi'] = 'L = 41.53/fb'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'
