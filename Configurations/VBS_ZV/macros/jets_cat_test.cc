@@ -71,6 +71,18 @@ protected:
     dphijj_mjjmax,
     Vjet_mass, 
     Zepp_ll,
+    Zlep_1,
+    Zlep_2,
+    eta1,
+    eta2,
+    vbs_jet_pt1,
+    vbs_jet_pt2,
+    vbs_jet_eta1,
+    vbs_jet_eta2,
+    V_jet_eta1,
+    V_jet_eta2,
+    V_jet_pt1,
+    V_jet_pt2,
     nVarTypes
   };
   
@@ -164,6 +176,30 @@ jets_cat_test::jets_cat_test( char const* _type, const char* year):
       returnVar_ = dphijj_mjjmax;
     else if (type == "Zepp_ll")
       returnVar_ = Zepp_ll;
+    else if (type == "Zlep_1")
+      returnVar_ = Zlep_1;
+    else if (type == "Zlep_2")
+      returnVar_ = Zlep_2;
+    else if (type == "eta1")
+      returnVar_ = eta1;
+    else if (type == "eta2")
+      returnVar_ = eta2;
+    else if (type == "vbs_jet_pt1")
+      returnVar_ = vbs_jet_pt1;
+    else if (type == "vbs_jet_pt2")
+      returnVar_ = vbs_jet_pt2;
+    else if (type == "vbs_jet_eta1")
+      returnVar_ = vbs_jet_eta1;
+    else if (type == "vbs_jet_eta2")
+      returnVar_ = vbs_jet_eta2;
+    else if (type == "V_jet_pt1")
+      returnVar_ = V_jet_pt1;
+    else if (type == "V_jet_pt2")
+      returnVar_ = V_jet_pt2;
+    else if (type == "V_jet_eta1")
+      returnVar_ = V_jet_eta1;
+    else if (type == "V_jet_eta2")
+      returnVar_ = V_jet_eta2;
     else
       throw std::runtime_error("unknown return type " + type);
 
@@ -345,7 +381,23 @@ jets_cat_test::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   returnValues[detajj_mjjmax] = detajj_mjj_max;
   returnValues[dphijj_mjjmax] = dphijj_mjj_max;
   returnValues[Vjet_mass] = Vjet_mass_max;
+
   returnValues[Zepp_ll] = abs(sum_eta_lep-mean_eta_vbs)/detajj_mjj_max;
+  returnValues[Zlep_1] = (Lepton_eta->At(0)-mean_eta_vbs)/detajj_mjj_max;
+  returnValues[Zlep_2] = (Lepton_eta->At(1)-mean_eta_vbs)/detajj_mjj_max;
+
+  returnValues[vbs_jet_pt1]= CleanJet_pt->At(vbs_jet_0);
+  returnValues[vbs_jet_pt2]= CleanJet_pt->At(vbs_jet_1);
+  returnValues[vbs_jet_eta1]= CleanJet_eta->At(vbs_jet_0);
+  returnValues[vbs_jet_eta2]= CleanJet_eta->At(vbs_jet_1);
+  
+  if(category == 1){
+    returnValues[V_jet_pt1]= CleanJet_pt->At(v_jet_0);
+    returnValues[V_jet_pt2]= CleanJet_pt->At(v_jet_1);
+    returnValues[V_jet_eta1]= CleanJet_eta->At(v_jet_0);
+    returnValues[V_jet_eta2]= CleanJet_eta->At(v_jet_1);
+  }
+
   returnValues[vbs_category] = category;
 
 }

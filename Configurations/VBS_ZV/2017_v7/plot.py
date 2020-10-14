@@ -66,6 +66,7 @@ groupPlot['Vg']  = {
                   'fill': 1001
               }
 """
+
 groupPlot['DY']  = {  
                 'nameHR' : "DY",
                 'isSignal' : 0,
@@ -125,7 +126,7 @@ plot['VZ']  = {
               }   
          
 
-
+"""
 plot['DY']  = {  
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
@@ -133,6 +134,7 @@ plot['DY']  = {
                 'scale'    : 1.,
             }
 
+"""
 """
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
@@ -169,8 +171,8 @@ plot['top'] = {
                  'isData'   : 0, 
                  #'scale'    : 1.,
                  'cuts':{
-			"Boosted_topcr": 1.095,
-			"Resolved_topcr": 0.77,
+			"Boosted_topcr": 2.6,
+			"Resolved_topcr": 1.81,
 		}
 		#  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,

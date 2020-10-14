@@ -2,7 +2,7 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_13Oct2020'
+date='_7Oct2020'
 
 tag = 'VBS_ZV'+date
 
@@ -10,10 +10,10 @@ tag = 'VBS_ZV'+date
 outputDir = 'rootFile'+date
 
 # file with TTree aliases
-aliasesFile = 'aliases_DNN.py'
+aliasesFile = 'aliase.py'
 
 # file with list of variables
-variablesFile = 'variables_DNN.py'
+variablesFile = 'variables.py'
 #variablesFile = 'variables_test.py'
 
 # file with list of cuts
@@ -45,5 +45,5 @@ outputDirDatacard = '/afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/s
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
-#nuisancesFile = 'nuisances.py'
-nuisancesFile ='nuisances_StatOnly.py'
+nuisancesFile = 'nuisances.py'
+#nuisancesFile ='nuisances_StatOnly.py'

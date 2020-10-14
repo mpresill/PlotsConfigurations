@@ -283,8 +283,8 @@ addSampleWeight(samples,'DY','DYJetsToLL_M-4to50_HT-400to600',       'ptllDYW_LO
 #addSampleWeight(samples,'DY','DYJetsToLL_M-4to50_HT-400to600_ext1',  'ptllDYW_LO')
 addSampleWeight(samples,'DY','DYJetsToLL_M-4to50_HT-600toInf',       'ptllDYW_LO')
 #addSampleWeight(samples,'DY','DYJetsToLL_M-4to50_HT-600toInf_ext1',  'ptllDYW_LO')
-"""
 
+"""
 #NB the weight ptllDYW_LO needs to be updated with DY_LO_pTllrw available in https://github.com/latinos/PlotsConfigurations/blob/master/Configurations/patches/DYrew30.py
 #and https://github.com/UniMiBAnalyses/PlotsConfigurations/blob/master/Configurations/VBSWWOS/Full2016_v6/FitDir/samples.py#L160
 ###### Top #######
