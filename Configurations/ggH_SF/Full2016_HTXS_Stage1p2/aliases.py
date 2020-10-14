@@ -16,9 +16,12 @@ mc = [skey for skey in samples if skey not in ('Fake', 'DATA')]
 
 eleWP = 'mva_90p_Iso2016'
 muWP = 'cut_Tight80x'
+newMuWP = 'cut_Tight80x_tthmva_80'
+
 
 aliases['LepWPCut'] = {
-    'expr': 'LepCut2l__ele_'+eleWP+'__mu_'+muWP,
+    #'expr': 'LepCut2l__ele_'+eleWP+'__mu_'+muWP,
+    'expr': 'LepCut2l__ele_'+eleWP+'__mu_'+muWP+'*( (abs(Lepton_pdgId[0])==11 || Muon_mvaTTH[Lepton_muonIdx[0]]>0.8) && (abs(Lepton_pdgId[1])==11 || Muon_mvaTTH[Lepton_muonIdx[1]]>0.8) )',    
     'samples': mc + ['DATA']
 }
 
@@ -34,40 +37,40 @@ aliases['gstarHigh'] = {
 
 # Fake leptons transfer factor
 aliases['fakeW'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP,
+    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+newMuWP,
     'samples': ['Fake']
 }
 # And variations - already divided by central values in formulas !
 aliases['fakeWEleUp'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_EleUp',
+    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+newMuWP+'_EleUp',
     'samples': ['Fake']
 }
 aliases['fakeWEleDown'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_EleDown',
+    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+newMuWP+'_EleDown',
     'samples': ['Fake']
 }
 aliases['fakeWMuUp'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_MuUp',
+    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+newMuWP+'_MuUp',
     'samples': ['Fake']
 }
 aliases['fakeWMuDown'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_MuDown',
+    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+newMuWP+'_MuDown',
     'samples': ['Fake']
 }
 aliases['fakeWStatEleUp'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_statEleUp',
+    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+newMuWP+'_statEleUp',
     'samples': ['Fake']
 }
 aliases['fakeWStatEleDown'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_statEleDown',
+    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+newMuWP+'_statEleDown',
     'samples': ['Fake']
 }
 aliases['fakeWStatMuUp'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_statMuUp',
+    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+newMuWP+'_statMuUp',
     'samples': ['Fake']
 }
 aliases['fakeWStatMuDown'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_statMuDown',
+    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+newMuWP+'_statMuDown',
     'samples': ['Fake']
 }
 
@@ -231,22 +234,31 @@ for shift in ['jes','lf','hf','lfstats1','lfstats2','hfstats1','hfstats2','cferr
         'samples': mc
     }
 
-puidSFSource = '%s/src/LatinoAnalysis/NanoGardener/python/data/JetPUID_effcyandSF.root' % os.getenv('CMSSW_BASE')
+#puidSFSource = '{}/patches/PUID_80XTraining_EffSFandUncties.root'.format(configurations)
 
-aliases['PUJetIdSF'] = {
-    'linesToAdd': [
-        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L %s/patches/pujetidsf_event.cc+' % configurations
-    ],
-    'class': 'PUJetIdEventSF',
-    'args': (puidSFSource, '2016', 'loose'),
-    'samples': mc
-}
+#aliases['PUJetIdSF'] = {
+#    'linesToAdd': [
+#        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+#        '.L %s/patches/pujetidsf_event.cc+' % configurations
+#    ],
+#    'class': 'PUJetIdEventSF',
+#    'args': (puidSFSource, '2016', 'loose'),
+#    'samples': mc
+#}
 
 
 # data/MC scale factors
+
+aliases['ttHMVA_SF_2l'] = {'linesToAdd': ['.L %s/patches/compute_SF.C+' % configurations],
+                           'class': 'compute_SF',
+                           'args' : ('2016', 2, 'total_SF'),
+                           'samples': mc
+                          }
+
+
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF', 'PrefireWeight']),
+    #'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF', 'PrefireWeight']),
+    'expr': ' * '.join(['SFweight2l', 'ttHMVA_SF_2l', 'LepWPCut', 'btagSF', 'PrefireWeight']),
     'samples': mc
 }
 # variations
@@ -266,6 +278,39 @@ aliases['SFweightMuDown'] = {
     'expr': 'LepSF2l__mu_'+muWP+'__Do',
     'samples': mc
 }
+
+
+aliases['ttHMVA_SF_Up_0'] = {'linesToAdd': ['.L %s/patches/compute_SF.C+' % configurations],
+                             'class': 'compute_SF',
+                             'args' : ('2016', 2, 'single_SF_up', 0),
+                             'samples': mc
+                            }
+aliases['ttHMVA_SF_Up_1'] = {'linesToAdd': ['.L %s/patches/compute_SF.C+' % configurations],
+                             'class': 'compute_SF',
+                             'args' : ('2016', 2, 'single_SF_up', 1),
+                             'samples': mc
+                            }
+aliases['ttHMVA_SF_Down_0'] = {'linesToAdd': ['.L %s/patches/compute_SF.C+' % configurations],
+                               'class': 'compute_SF',
+                               'args' : ('2016', 2, 'single_SF_down', 0),
+                               'samples': mc
+                              }
+aliases['ttHMVA_SF_Down_1'] = {'linesToAdd': ['.L %s/patches/compute_SF.C+' % configurations],
+                               'class': 'compute_SF',
+                               'args' : ('2016', 2, 'single_SF_down', 1),
+                               'samples': mc
+                              }
+aliases['ttHMVA_2l_mu_SF_Up'] = {'expr' : '(ttHMVA_SF_Up_0*(TMath::Abs(Lepton_pdgId[0]) == 13) + (TMath::Abs(Lepton_pdgId[0]) == 11)) *\
+                                           (ttHMVA_SF_Up_1*(TMath::Abs(Lepton_pdgId[1]) == 13) + (TMath::Abs(Lepton_pdgId[1]) == 11))',
+                                 'samples': mc
+                                }
+aliases['ttHMVA_2l_mu_SF_Down'] = {'expr' : '(ttHMVA_SF_Down_0*(TMath::Abs(Lepton_pdgId[0]) == 13) + (TMath::Abs(Lepton_pdgId[0]) == 11)) *\
+                                             (ttHMVA_SF_Down_1*(TMath::Abs(Lepton_pdgId[1]) == 13) + (TMath::Abs(Lepton_pdgId[1]) == 11))',
+                                   'samples': mc
+                                  }
+
+
+
 
 aliases['nllWOTF'] = {
     'linesToAdd': ['.L %s/Differential/nllW.cc+' % configurations],
@@ -299,17 +344,19 @@ aliases['nCleanGenJet'] = {
 #    'samples': signals
 #}
 
+
+
 # GGHUncertaintyProducer wasn't run for 2016 nAODv5 non-private
 #thus = [
 #    'ggH_mu',
 #    'ggH_res',
 #    'ggH_mig01',
 #    'ggH_mig12',
-#    'ggH_VBF2j',
-#    'ggH_VBF3j',
-#    'ggH_pT60',
-#    'ggH_pT120',
-#    'ggH_qmtop'
+ #   'ggH_VBF2j',
+ #   'ggH_VBF3j',
+ #   'ggH_pT60',
+  #  'ggH_pT120',
+ #   'ggH_qmtop'
 #]
 
 #for thu in thus:
@@ -317,14 +364,33 @@ aliases['nCleanGenJet'] = {
 #        'linesToAdd': ['.L %s/Differential/gghuncertainty.cc+' % configurations],
 #        'class': 'GGHUncertainty',
 #        'args': (thu,),
-#        'samples': [ #'ggH_hww',                                                                                                              
-#                      'ggH_hww_0J_PTH_0_10'                 ,'ggH_hww_GE2J_MJJ_0_350_PTH_60_120'
-#                     ,'ggH_hww_0J_PTH_GT10'                 ,'ggH_hww_GE2J_MJJ_350_700_PTHJJ_0_25'
-#                     ,'ggH_hww_1J_PTH_0_60'                 ,'ggH_hww_GE2J_MJJ_350_700_PTHJJ_GT25'
-#                     ,'ggH_hww_1J_PTH_120_200'              ,'ggH_hww_GE2J_MJJ_GT700_PTHJJ_0_25'
-#                     ,'ggH_hww_1J_PTH_60_120'               ,'ggH_hww_GE2J_MJJ_GT700_PTHJJ_GT25'
-#                     ,'ggH_hww_GE2J_MJJ_0_350_PTH_0_60'     ,'ggH_hww_GE2J_MJJ_0_350_PTH_120_200'
-#                     ,'ggH_hww_PTH_200_300'                 ,'ggH_hww_PTH_300_450'
-#                     ,'ggH_hww_PTH_450_650'                 ,'ggH_hww_PTH_GT650'],
-#        'nominalOnly': True
-#    }
+ #       'samples': [skey for skey in samples if 'ggH_hww' in skey],
+ #       'nominalOnly': True
+ #   }
+
+
+
+
+thusQQ = [
+  "qqH_YIELD",
+  "qqH_PTH200",
+  "qqH_Mjj60",
+  "qqH_Mjj120",
+  "qqH_Mjj350",
+  "qqH_Mjj700",
+  "qqH_Mjj1000",
+  "qqH_Mjj1500",
+  "qqH_PTH25",
+  "qqH_JET01",
+  "qqH_EWK",
+]
+
+for thu in thusQQ:
+    aliases[thu] = {
+        'linesToAdd': ['.L %s/patches/qqhuncertainty.cc+' % configurations],
+        'class': 'QQHUncertainty',
+        'args': (thu,),
+        'samples': [skey for skey in samples if 'qqH_hww' in skey],
+        'nominalOnly': True
+    }
+

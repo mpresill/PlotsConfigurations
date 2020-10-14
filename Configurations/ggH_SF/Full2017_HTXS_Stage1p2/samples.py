@@ -33,11 +33,13 @@ dataReco = 'Run2017_102X_nAODv5_Full2017v6'
 
 mcProduction = 'Fall2017_102X_nAODv5_Full2017v6'
 
-mcSteps = 'MCl1loose2017v6__MCCorr2017v6__l2loose__l2tightOR2017v6__DYMVA_alt{var}'
+mcSteps = 'MCl1loose2017v6__MCCorr2017v6__l2loose__l2tightOR2017v6{var}'
 
-fakeSteps = 'DATAl1loose2017v6__l2loose__fakeW__DYMVA_alt'
+fakeReco = 'Run2017_102X_nAODv5_Full2017v6_ForNewWPs'
 
-dataSteps = 'DATAl1loose2017v6__l2loose__l2tightOR2017v6__DYMVA_alt'
+fakeSteps = 'DATAl1loose2017v6__l2loose__fakeW__DYMVA'
+
+dataSteps = 'DATAl1loose2017v6__l2loose__l2tightOR2017v6'
 
 ##############################################
 ###### Tree base directory for the site ######
@@ -56,7 +58,7 @@ def makeMCDirectory(var=''):
         return os.path.join(treeBaseDir, mcProduction, mcSteps.format(var=''))
 
 mcDirectory = makeMCDirectory()
-fakeDirectory = os.path.join(treeBaseDir, dataReco, fakeSteps)
+fakeDirectory = os.path.join(treeBaseDir, fakeReco, fakeSteps)
 dataDirectory = os.path.join(treeBaseDir, dataReco, dataSteps)
 
 ################################################
@@ -308,7 +310,7 @@ for cat,num in HTXSStage1_1Categories.iteritems():
                                                               'suppressNegativeNuisances' :['all'],
                                                               'linesToAdd': ['.L %s/Differential/weight2MINLO.cc+' % configurations]
             }
-            signals.append('ggH_hww'+cat.replace('GG2H_',''))
+            signals.append('ggH_hww_'+cat.replace('GG2H_',''))
 
 # Stage 1.2 binning for high pTH bin       
 samples['ggH_hww_PTH_200_300']  = {  'name': nanoGetSampleFiles(mcDirectory,'GluGluHToWWTo2L2NuPowheg_M125'),

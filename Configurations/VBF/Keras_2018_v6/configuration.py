@@ -2,7 +2,7 @@
 
 treeName = 'Events'
 
-tag = 'vbf_2018_14_06'
+tag = 'vbf_2018_02_10_ext_try'
 
 # used by mkShape to define output directory for root files
 outputDir = 'rootFile'
@@ -37,3 +37,6 @@ structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
 nuisancesFile = 'nuisances.py'
+
+# input files
+# /eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__LepTrgFix__dorochester__formulasMC__wwSel

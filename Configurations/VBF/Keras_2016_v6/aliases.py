@@ -173,12 +173,13 @@ for shift in ['jes','lf','hf','lfstats1','lfstats2','hfstats1','hfstats2','cferr
         'samples': mc
     }
 
-puidSFSource = '%s/src/LatinoAnalysis/NanoGardener/python/data/JetPUID_effcyandSF.root' % os.getenv('CMSSW_BASE')
+#puidSFSource = '%s/src/LatinoAnalysis/NanoGardener/python/data/JetPUID_effcyandSF.root' % os.getenv('CMSSW_BASE')
+puidSFSource = '{}/patches/PUID_80XTraining_EffSFandUncties.root'.format(configurations)
 
 aliases['PUJetIdSF'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L %s/patches/pujetidsf_event.cc+' % configurations
+        '.L %s/patches/pujetidsf_event_new.cc+' % configurations
     ],
     'class': 'PUJetIdEventSF',
     'args': (puidSFSource, '2016', 'loose'),
@@ -328,6 +329,37 @@ aliases['wwlike'] = {
 aliases['gghlike'] = { 
         'expr': 'gghdnn>vbfdnn && gghdnn>topdnn && gghdnn>wwdnn',
 }
+
+
+aliases['Weight2MINLO'] = {
+    'linesToAdd': ['.L %s/Differential/weight2MINLO.cc+' % configurations],
+    'class': 'Weight2MINLO',
+    'args': '%s/src/LatinoAnalysis/Gardener/python/data/powheg2minlo/NNLOPS_reweight.root' % os.getenv('CMSSW_BASE'),
+    'samples' : [skey for skey in samples if 'ggH_hww' in skey],
+}
+
+thusQQ = [
+  "qqH_YIELD",
+  "qqH_PTH200",
+  "qqH_Mjj60",
+  "qqH_Mjj120",
+  "qqH_Mjj350",
+  "qqH_Mjj700",
+  "qqH_Mjj1000",
+  "qqH_Mjj1500",
+  "qqH_PTH25",
+  "qqH_JET01",
+  "qqH_EWK",
+]
+
+for thu in thusQQ:
+    aliases[thu] = {
+        'linesToAdd': ['.L %s/patches/qqhuncertainty.cc+' % configurations],
+        'class': 'QQHUncertainty',
+        'args': (thu,),
+        'samples': ['qqH_hww'],
+        'nominalOnly': True
+    }
 
 
 

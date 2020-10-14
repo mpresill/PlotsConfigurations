@@ -171,12 +171,12 @@ for shift in ['jes', 'lf', 'hf', 'lfstats1', 'lfstats2', 'hfstats1', 'hfstats2',
         'samples': mc
     }
 
-puidSFSource = '%s/src/LatinoAnalysis/NanoGardener/python/data/JetPUID_effcyandSF.root' % os.getenv('CMSSW_BASE')
+puidSFSource = '{}/patches/PUID_80XTraining_EffSFandUncties.root'.format(configurations)
 
 aliases['PUJetIdSF'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L %s/patches/pujetidsf_event.cc+' % configurations
+        '.L %s/patches/pujetidsf_event_new.cc+' % configurations
     ],
     'class': 'PUJetIdEventSF',
     'args': (puidSFSource, '2017', 'loose'),
@@ -241,9 +241,63 @@ aliases['ttHMVA_2l_mu_SF_Down'] = {'expr' : '(ttHMVA_SF_Down_0*(TMath::Abs(Lepto
                                    'samples': mc_emb
                                   }
 
+aliases['Weight2MINLO'] = {
+    'linesToAdd': ['.L %s/Differential/weight2MINLO.cc+' % configurations],
+    'class': 'Weight2MINLO',
+    'args': '%s/src/LatinoAnalysis/Gardener/python/data/powheg2minlo/NNLOPS_reweight.root' % os.getenv('CMSSW_BASE'),
+    'samples' : [skey for skey in samples if 'ggH_hww' in skey],
+}
+
+
 aliases['nCleanGenJet'] = {
     'linesToAdd': ['.L %s/Differential/ngenjet.cc+' % configurations],
     'class': 'CountGenJet',
     'samples': mc
 }
+
+#thus= [
+#    'ggH_mu',
+#    'ggH_res',
+#    'ggH_mig01',
+#    'ggH_mig12',
+#    'ggH_VBF2j',
+#    'ggH_VBF3j',
+#    'ggH_pT60',
+#    'ggH_pT120',
+#    'ggH_qmtop'
+#]
+
+#for thu in thus:
+#    aliases[thu] = {
+#        'linesToAdd': ['.L %s/Differential/gghuncertainty.cc+' % configurations],
+#        'class': 'GGHUncertainty',
+#        'args': (thu,),
+#        'samples': ['ggH_hww'],
+#        'nominalOnly': True
+#    }
+
+
+thusQQ = [
+  "qqH_YIELD",
+  "qqH_PTH200",
+  "qqH_Mjj60",
+  "qqH_Mjj120",
+  "qqH_Mjj350",
+  "qqH_Mjj700",
+  "qqH_Mjj1000",
+  "qqH_Mjj1500",
+  "qqH_PTH25",
+  "qqH_JET01",
+  "qqH_EWK",
+]
+
+for thu in thusQQ:
+    aliases[thu] = {
+        'linesToAdd': ['.L %s/patches/qqhuncertainty.cc+' % configurations],
+        'class': 'QQHUncertainty',
+        'args': (thu,),
+        'samples': ['qqH_hww'],
+        'nominalOnly': True
+    }
+
 

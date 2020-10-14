@@ -565,15 +565,15 @@ nuisances['CRSR_accept_top'] = {
 #   see https://twiki.cern.ch/twiki/bin/viewauth/CMS/HiggsWG/SignalModelingTools
 
 thus = [
-    ('THU_ggH_Mu', 'ggH_mu'),
-    ('THU_ggH_Res', 'ggH_res'),
-    ('THU_ggH_Mig01', 'ggH_mig01'),
-    ('THU_ggH_Mig12', 'ggH_mig12'),
-    ('THU_ggH_VBF2j', 'ggH_VBF2j'),
-    ('THU_ggH_VBF3j', 'ggH_VBF3j'),
-    ('THU_ggH_PT60', 'ggH_pT60'),
-    ('THU_ggH_PT120', 'ggH_pT120'),
-    ('THU_ggH_qmtop', 'ggH_qmtop')
+    ('THU_ggH_Mu', 'ggH_mu_OTF'),
+    ('THU_ggH_Res', 'ggH_res_OTF'),
+    ('THU_ggH_Mig01', 'ggH_mig01_OTF'),
+    ('THU_ggH_Mig12', 'ggH_mig12_OTF'),
+    ('THU_ggH_VBF2j', 'ggH_VBF2j_OTF'),
+    ('THU_ggH_VBF3j', 'ggH_VBF3j_OTF'),
+    ('THU_ggH_PT60', 'ggH_pT60_OTF'),
+    ('THU_ggH_PT120', 'ggH_pT120_OTF'),
+    ('THU_ggH_qmtop', 'ggH_qmtop_OTF')
 ]
 
 for name, vname in thus:
@@ -587,6 +587,39 @@ for name, vname in thus:
         'samples': {
           'ggH_hww': updown,
           #'ggH_htt': updown
+        }
+    }
+
+
+# Theory uncertainty for qqH 
+#
+#
+#   see https://gitlab.cern.ch/LHCHIGGSXS/LHCHXSWG2/STXS/VBF-Uncertainties/-/blob/master/qq2Hqq_uncert_scheme.cpp
+
+thusQQH = [
+  ("THU_qqH_YIELD","qqH_YIELD"),
+  ("THU_qqH_PTH200","qqH_PTH200"),
+  ("THU_qqH_Mjj60","qqH_Mjj60"),
+  ("THU_qqH_Mjj120","qqH_Mjj120"),
+  ("THU_qqH_Mjj350","qqH_Mjj350"),
+  ("THU_qqH_Mjj700","qqH_Mjj700"),
+  ("THU_qqH_Mjj1000","qqH_Mjj1000"),
+  ("THU_qqH_Mjj1500","qqH_Mjj1500"),
+  ("THU_qqH_PTH25","qqH_PTH25"),
+  ("THU_qqH_JET01","qqH_JET01"),
+  ("THU_qqH_EWK","qqH_EWK"),
+]
+
+for name, vname in thusQQH:
+    updown = [vname, '2.-%s' % vname]
+    
+    nuisances[name] = {
+        'name': name,
+        'skipCMS': 1,
+        'kind': 'weight',
+        'type': 'shape',
+        'samples': {
+          'qqH_hww': updown,
         }
     }
 
@@ -728,3 +761,4 @@ for n in nuisances.values():
     n['skipCMS'] = 1
 
 print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))
+

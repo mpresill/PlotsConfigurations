@@ -77,6 +77,13 @@ aliases['PromptGenLepMatch2l'] = {
     'samples': mc
 }
 
+#nCleanGenJet
+aliases['nCleanGenJet'] = {
+    'linesToAdd': ['.L %s/src/PlotsConfigurations/Configurations/Differential/ngenjet.cc+' % os.getenv('CMSSW_BASE')],
+    'class': 'CountGenJet',
+    'samples': mc
+}
+
 # PostProcessing did not create (anti)topGenPt for ST samples with _ext1
 lastcopy = (1 << 13)
 
@@ -103,6 +110,21 @@ aliases['isSingleTop'] = {
 aliases['Top_pTrw'] = {
     'expr': 'isTTbar * (TMath::Sqrt(TMath::Exp(0.0615 - 0.0005 * topGenPt) * TMath::Exp(0.0615 - 0.0005 * antitopGenPt))) + isSingleTop',
     'samples': ['top']
+}
+
+handle = open('%s/src/PlotsConfigurations/Configurations/patches/DYrew.py' % os.getenv('CMSSW_BASE'),'r')
+exec(handle)
+handle.close()
+aliases['DY_NLO_pTllrw'] = {
+    #'expr': '1',
+    'expr': '('+DYrew['2018']['NLO'].replace('x', 'gen_ptll')+')*(nCleanGenJet == 0)+1.0*(nCleanGenJet > 0)',
+    'samples': ['DY']
+}
+
+aliases['DY_LO_pTllrw'] = {
+    #'expr': '1',
+    'expr': '('+DYrew['2018']['LO'].replace('x', 'gen_ptll')+')*(nCleanGenJet == 0)+1.0*(nCleanGenJet > 0)',
+    'samples': ['DY']
 }
 
 # Jet bins
@@ -136,11 +158,12 @@ aliases['bReq'] = {
 # CR definitions
 
 aliases['topcr'] = {
-    'expr': 'mtw2>30 && mll>50 && ((zeroJet && !bVeto) || bReq)'
+#    'expr': 'mtw2>30 && mll>50 && ((zeroJet && !bVeto) || bReq)'
+    'expr': 'mll>50 && ((zeroJet && !bVeto) || bReq)'
 }
 
 aliases['dycr'] = {
-    'expr': 'mth<60 && mll>70 && mll<120 && bVeto'
+    'expr': 'mth<60 && bVeto'
 }
 
 aliases['wwcr'] = {
@@ -150,8 +173,8 @@ aliases['wwcr'] = {
 # SR definition
 
 aliases['sr'] = {
-    'expr': 'mth>60 && mtw2>30 && bVeto'
-#    'expr': 'mth>60 && bVeto'
+#    'expr': 'mth>60 && mtw2>30 && bVeto'
+    'expr': 'mth>60 && bVeto'
 }
 
 aliases['centralVeto'] = {
