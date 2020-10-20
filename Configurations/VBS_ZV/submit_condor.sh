@@ -1,7 +1,7 @@
 #! /bin/bash
 #DATE=3May2020 #change date 
 #mkShapesMulti.py --pycfg=configuration.py --batchSplit=Samples,Files
-cd 2018_v6
+cd 2018_v7
 mkShapesMulti.py --pycfg=configuration.py --doBatch=1 --batchSplit=Samples,Files --batchQueue=workday #--dry-run #espresso #longlunch #--dry-run
 
 cd ..

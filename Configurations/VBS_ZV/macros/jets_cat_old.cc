@@ -240,17 +240,14 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   int category = 999;  // 0 fatjet, 1 resolved, -1 none
 
   // Load all the quadrivectors for performance reason
-  float pt_cut=30.;
   std::vector<TLorentzVector> vectors; 
   for (unsigned int ijet=0 ; ijet<njet ; ijet++){
     TLorentzVector jet0; 
     jet0.SetPtEtaPhiM(CleanJet_pt->At(CleanJetNotFat_jetId->At(ijet)), CleanJet_eta->At(CleanJetNotFat_jetId->At(ijet)),
                       CleanJet_phi->At(CleanJetNotFat_jetId->At(ijet)),Jet_mass->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(ijet)))); 
-if(jet0.pt()>pt_cut){vectors.push_back(jet0);}
+    vectors.push_back(jet0);
   }
-  njet=vetors.size();
-  njetNotFat=njet;  
-
+  
   if (njet>=2){
     // Calculate max mjj invariant pair on CleanJetNotFat to exclude the correct jets
     for (unsigned int ijet=0 ; ijet<njet ; ijet++){

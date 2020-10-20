@@ -118,7 +118,7 @@ protected:
   static FloatArrayReader* Lepton_eta;
   
 
-  static std::array<double, nVarTypes> returnValues;
+  static std::array<float, nVarTypes> returnValues;
 
   static void setValues(UInt_t, UInt_t, ULong64_t);
 };
@@ -146,7 +146,7 @@ FloatArrayReader* jets_cat_test::Lepton_eta{};
 
 string jets_cat_test::year_{};
 
-std::array<double, jets_cat_test::nVarTypes> jets_cat_test::returnValues{};
+std::array<float, jets_cat_test::nVarTypes> jets_cat_test::returnValues{};
 
 
 // function Helper ---
@@ -213,8 +213,7 @@ TTreeFunction(), returnVar_(type){
 }
 
 
-double
-jets_cat_test::evaluate(unsigned)
+double jets_cat_test::evaluate(unsigned)
 {
   setValues(*run->Get(), *luminosityBlock->Get(), *event->Get());
   return returnValues[returnVar_];
@@ -295,16 +294,16 @@ jets_cat_test::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   int VBS_jets[2] = {999,999};
   int V_jets[2]   = {999,999};
   int category = 999;  // 0 fatjet, 1 resolved, -1 none
-
+  float pt_cut = 30.;
   // Load all the quadrivectors for performance reason
   std::vector<TLorentzVector> vectors; 
   for (unsigned int ijet=0 ; ijet<njet ; ijet++){
     TLorentzVector jet0; 
     jet0.SetPtEtaPhiM(CleanJet_pt->At(CleanJetNotFat_jetId->At(ijet)), CleanJet_eta->At(CleanJetNotFat_jetId->At(ijet)),
                       CleanJet_phi->At(CleanJetNotFat_jetId->At(ijet)),Jet_mass->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(ijet)))); 
-    vectors.push_back(jet0);
+    if (jet0.Pt() > pt_cut){vectors.push_back(jet0);}
   }
-  
+  njet=vectors.size();
   if (njet>=2 && nlep==2){
     sum_eta_lep=abs(Lepton_eta->At(0)+Lepton_eta->At(1));
     // Calculate max mjj invariant pair on CleanJetNotFat to exclude the correct jets
@@ -390,7 +389,8 @@ jets_cat_test::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   returnValues[vbs_jet_pt2]= CleanJet_pt->At(vbs_jet_1);
   returnValues[vbs_jet_eta1]= CleanJet_eta->At(vbs_jet_0);
   returnValues[vbs_jet_eta2]= CleanJet_eta->At(vbs_jet_1);
-  
+  returnValues[eta1]=Lepton_eta->At(0);
+  returnValues[eta2]=Lepton_eta->At(1);  
   if(category == 1){
     returnValues[V_jet_pt1]= CleanJet_pt->At(v_jet_0);
     returnValues[V_jet_pt2]= CleanJet_pt->At(v_jet_1);
