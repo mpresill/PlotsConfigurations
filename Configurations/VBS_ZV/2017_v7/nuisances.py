@@ -175,7 +175,21 @@ nuisances['jes'] = {
     'AsLnN': '1'
 }
 
-######## !!!!JER is missing here!!!
+######## JER
+nuisances['jer'] = {
+    'name': 'CMS_resolution_j_2017',
+    'kind': 'suffix',
+    'type': 'shape',
+    'mapUp': 'JERup',
+    'mapDown': 'JERdo',
+    'samples': dict((skey, ['1', '1']) for skey in mc),
+    'folderUp': makeMCDirectory('JERup_suffix'),
+    'folderDown': makeMCDirectory('JERdo_suffix'),
+    'AsLnN': '1'
+}
+
+
+#####missing JER/JES for AK8
 
 ##### Pileup
 
@@ -237,7 +251,8 @@ nuisances['VZ'] = {
 }
 
 
-
+################
+# for the rateparam is better to add them manually              
 ## rate parameters
 """
 nuisances['DYttnorm0j']  = {
@@ -250,6 +265,8 @@ nuisances['DYttnorm0j']  = {
               }
 
 """    
+
+
 ## Use the following if you want to apply the automatic combine MC stat nuisances.
 nuisances['stat'] = {
     'type': 'auto',

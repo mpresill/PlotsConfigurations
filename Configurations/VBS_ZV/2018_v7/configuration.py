@@ -2,7 +2,7 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_29Sept2020'
+date='_20Oct2020'
 
 tag = 'VBS_ZV'+date
 
@@ -37,8 +37,8 @@ lumi = 59.74
 outputDirPlots = '/eos/user/m/mpresill/www/VBS/2018_v7/PlotsVBS_ZV'+date
 
 
-# used by mkDatacards to define output directory for datacards: common vbs-italia github folder 
-outputDirDatacard = '/afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/cms-vbs/ZV-lvqq/AN-2020-076/'+date
+# used by mkDatacards to define output directory for datacards: common vbs-italia github folder : /afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/2017_v7/
+outputDirDatacard = '/afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/'+date
 
 
 # structure file for datacard
@@ -47,3 +47,4 @@ structureFile = 'structure.py'
 # nuisances file for mkDatacards and for mkShape
 nuisancesFile = 'nuisances.py'
 #nuisancesFile ='nuisances_StatOnly.py'
+

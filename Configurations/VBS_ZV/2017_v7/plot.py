@@ -48,8 +48,16 @@ Colors
 "Wjets5": (211, 87, 38), #d34912 
 '''
 #
- 
+ """
+groupPlot['Other']  = {  
+                  'nameHR' : 'Other',
+                  'isSignal' : 0,
+                  'color': palette["MediumBlue2"],  
+                  'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD', 'Vg', 'VgS' , 'WJets'],
+                  'fill': 1001
+              }
 
+"""
 groupPlot['vbfV+VV+VVV']  = {  
                   'nameHR' : 'vbfV+VV+VVV',
                   'isSignal' : 0,
@@ -57,15 +65,25 @@ groupPlot['vbfV+VV+VVV']  = {
                   'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
                   'fill': 1001
               }
-"""
-groupPlot['Vg']  = {  
-                  'nameHR' : "V#gamma",
+
+groupPlot['Vg+VgS']  = {  
+                  'nameHR' : "V#gamma + V#gamma* ",
                   'isSignal' : 0,
                   'color'    : 409,   # kOrange + 10
                   'samples'  : ['Vg'],
                   'fill': 1001
               }
-"""
+
+groupPlot['WJets']  = {  
+                  'nameHR' : 'W+Jets',
+                  'isSignal' : 0,
+                  'color':   palette["Yellow"],
+                  'samples'  : ['WJets'],
+                  'fill': 1001
+
+              }
+
+
 
 groupPlot['DY']  = {  
                 'nameHR' : "DY",
@@ -86,14 +104,6 @@ groupPlot['top']  = {
              }
 
 
-groupPlot['WJets']  = {  
-                  'nameHR' : 'W+Jets',
-                  'isSignal' : 0,
-                  'color':   palette["Yellow"],
-                  'samples'  : ['WJets'],
-                  'fill': 1001
-
-              }
 
 groupPlot['VBS']  = {  
                  'nameHR' : 'VBS',
@@ -126,16 +136,7 @@ plot['VZ']  = {
               }   
          
 
-"""
-plot['DY']  = {  
-                'color': colors['kMagenta']+1,
-                'isSignal' : 0,
-                'isData'   : 0, 
-                'scale'    : 1.,
-            }
 
-"""
-"""
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
                   'isSignal' : 0,
@@ -148,7 +149,6 @@ plot['VgS'] = {
                   'isData'   : 0,
                   'scale'    : 1.0
                   }
-"""
 plot['VBF-V']  = {
                   'color': colors['kYellow']+3,  
                   'isSignal' : 0,
@@ -171,8 +171,8 @@ plot['top'] = {
                  'isData'   : 0, 
                  #'scale'    : 1.,
                  'cuts':{
-			"Boosted_topcr": 2.6,
-			"Resolved_topcr": 1.81,
+			#"Boosted_topcr": 2.6,
+			#"Resolved_topcr": 1.81,
 		}
 		#  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
@@ -225,14 +225,13 @@ plot['DY']  = {
             	'isData'   : 0,
 		#'scale'    : 1.018,
 		 'cuts':{
-                        "Boosted_DYcr": 1.17,
-                        "Resolved_DYcr": 1.98,
+                       # "Boosted_DYcr": 1.17,
+                       # "Resolved_DYcr": 1.98,
                 }
 		}
 
 
 # # data
-
 plot['DATA']  = { 
                  'nameHR' : 'Data',
                  'color': 1 ,  
@@ -240,7 +239,6 @@ plot['DATA']  = {
                  'isData'   : 1 ,
                  'isBlind'  : 0
              }
-
 
 
 
