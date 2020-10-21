@@ -3,6 +3,10 @@
 #include "NNEvaluation/DNNTensorflow/interface/DNNEvaluator.hh"
 
 #include "TMath.h"
+#include "TGraph.h"
+#include "TVector2.h"
+#include "TSystem.h"
+#include "TLorentzVector.h"
 
 #include <cmath>
 #include <string>
@@ -13,6 +17,9 @@ using namespace NNEvaluation;
 
 #ifndef MVAREADERResolved_v70_H
 #define MVAREADERResolved_v70_H
+
+typedef TTreeReaderValue<Double_t> DoubleValueReader;
+
 
 class MVAReaderResolved_v70 : public multidraw::TTreeFunction {
 public:
@@ -34,39 +41,35 @@ protected:
   
   DNNEvaluator* dnn_tensorflow;
 
-  FloatValueReader* pt1{};
-  FloatValueReader* pt2{};
-  FloatValueReader* eta1{};
-  FloatValueReader* eta2{};
+  DoubleValueReader* category{};
+  FloatArrayReader* Lepton_eta{};
+  FloatArrayReader* Lepton_pt{};
+  FloatArrayReader* CleanJet_pt{};
+  FloatArrayReader* CleanJet_eta{};
   FloatValueReader* mll{};
-  FloatValueReader* Zlep_1{};
-  FloatValueReader* Zlep_2{};
-  FloatValueReader* vbs_jet_pt1{};
-  FloatValueReader* vbs_jet_pt2{};
-  FloatValueReader* vbs_jet_eta1{};
-  FloatValueReader* vbs_jet_eta2{};
-  FloatValueReader* V_jet_pt1{};
-  FloatValueReader* V_jet_pt2{};
-  FloatValueReader* V_jet_eta1{};
-  FloatValueReader* V_jet_eta2{};
-  FloatValueReader* mjj_max{};
-  FloatValueReader* detajj_mjjmax{};
-  FloatValueReader* V_jet_mass{};
-//  IntValueReader* VBS_category{};
-//  FloatArrayReader* Lepton_pt{};
-//  FloatArrayReader* Lepton_eta{};
-//  FloatValueReader* vjet_0_pt{};
-//  FloatValueReader* vjet_1_pt{};
-//  FloatValueReader* vjet_0_eta{};
-//  FloatValueReader* vjet_1_eta{};
-//  FloatValueReader* deltaeta_vbs{};
-//  FloatValueReader* deltaphi_vbs{};
-//  FloatValueReader* vbs_0_pt{};
-//  FloatValueReader* vbs_1_pt{};
-//  FloatValueReader* vbs_0_eta{};
-//  FloatValueReader* vbs_1_eta{};
-//  FloatValueReader* mjj_vbs{};
-//  IntArrayReader* Lepton_flavour{};
+  FloatArrayReader* CleanJet_phi{};
+  DoubleValueReader* vbs_jet_0{};
+  DoubleValueReader* vbs_jet_1{};
+  DoubleValueReader* v_jet_0{};
+  DoubleValueReader* v_jet_1{};
+  FloatArrayReader* Jet_mass{};
+  IntArrayReader* CleanJet_jetId{};
+
+  //  IntValueReader* VBS_category{};
+  //  FloatArrayReader* Lepton_pt{};
+  //  FloatArrayReader* Lepton_eta{};
+  //  FloatValueReader* vjet_0_pt{};
+  //  FloatValueReader* vjet_1_pt{};
+  //  FloatValueReader* vjet_0_eta{};
+  //  FloatValueReader* vjet_1_eta{};
+  //  FloatValueReader* deltaeta_vbs{};
+  //  FloatValueReader* deltaphi_vbs{};
+  //  FloatValueReader* vbs_0_pt{};
+  //  FloatValueReader* vbs_1_pt{};
+  //  FloatValueReader* vbs_0_eta{};
+  //  FloatValueReader* vbs_1_eta{};
+  //  FloatValueReader* mjj_vbs{};
+  //  IntArrayReader* Lepton_flavour{};
 };
 
 
@@ -86,29 +89,47 @@ MVAReaderResolved_v70::evaluate(unsigned)
 //  if ( *(VBS_category->Get()) != category_) {
  //   return -999.;
   //}
+  int vbs_jet0_idx = *(vbs_jet_0->Get());
+  int vbs_jet1_idx = *(vbs_jet_1->Get());
+  int v_jet0_idx = *(v_jet_0->Get());
+  int v_jet1_idx = *(v_jet_1->Get());
+  TLorentzVector vbs_jet0;
+  TLorentzVector vbs_jet1;
+  TLorentzVector v_jet0;
+  TLorentzVector v_jet1;
 
+  vbs_jet0.SetPtEtaPhiM(CleanJet_pt->At(vbs_jet0_idx), CleanJet_eta->At(vbs_jet0_idx), CleanJet_phi->At(vbs_jet0_idx), Jet_mass->At(CleanJet_jetId->At(vbs_jet0_idx)));
+  vbs_jet1.SetPtEtaPhiM(CleanJet_pt->At(vbs_jet1_idx), CleanJet_eta->At(vbs_jet1_idx), CleanJet_phi->At(vbs_jet1_idx), Jet_mass->At(CleanJet_jetId->At(vbs_jet1_idx)));
+  vbs_jet0.SetPtEtaPhiM(CleanJet_pt->At(v_jet0_idx), CleanJet_eta->At(v_jet0_idx), CleanJet_phi->At(v_jet0_idx), Jet_mass->At(CleanJet_jetId->At(v_jet0_idx)));
+  vbs_jet0.SetPtEtaPhiM(CleanJet_pt->At(v_jet1_idx), CleanJet_eta->At(v_jet1_idx), CleanJet_phi->At(v_jet1_idx), Jet_mass->At(CleanJet_jetId->At(v_jet1_idx)));
+
+  float mean_eta_vbs = TMath::Abs(CleanJet_eta->At(vbs_jet0_idx) + CleanJet_eta->At(vbs_jet1_idx))*0.5;
+  float detajj =TMath::Abs(CleanJet_eta->At(vbs_jet0_idx) - CleanJet_eta->At(vbs_jet1_idx)) ;
+  float mjj =(vbs_jet0 + vbs_jet1).M() ;
+  float V_mass =(v_jet0 + v_jet1).M() ;
+  float Zlep_1 = (Lepton_eta->At(0) - mean_eta_vbs) / detajj;
+  float Zlep_2 = (Lepton_eta->At(1) - mean_eta_vbs) / detajj;
   std::vector<float> input{};
 
 
-  input.push_back( *(pt1->Get()) );
-  input.push_back( *(pt2->Get()) );
-  input.push_back( *(eta1->Get()) );
-  input.push_back( *(eta2->Get()) );
+  input.push_back( (Lepton_pt->At(0) ));//pt1
+  input.push_back( (Lepton_pt->At(1) ));//pt2
+  input.push_back( (Lepton_eta->At(0) ));//#eta1
+  input.push_back( (Lepton_eta->At(1) ));//#eta2
   input.push_back( *(mll->Get()) );
-  input.push_back( *(Zlep_1->Get()) );
-  input.push_back( *(Zlep_2->Get()) );
-  input.push_back( *(vbs_jet_pt1->Get()) );
-  input.push_back( *(vbs_jet_pt2->Get()) );
-  input.push_back( *(vbs_jet_eta1->Get()) );
-  input.push_back( *(vbs_jet_eta2->Get()) );
-  input.push_back( *(V_jet_pt1->Get()) );
-  input.push_back( *(V_jet_pt2->Get()) );
-  input.push_back( *(V_jet_eta1->Get()) );
-  input.push_back( *(V_jet_eta2->Get()) );
-  input.push_back( *(mjj_max->Get()) );
-  input.push_back( *(detajj_mjjmax->Get()) );
-  input.push_back( *(V_jet_mass->Get()) );
-
+  input.push_back(Zlep_1);
+  input.push_back(Zlep_2);
+  input.push_back(vbs_jet0.Pt());
+  input.push_back(vbs_jet1.Pt());
+  input.push_back(vbs_jet0.Eta());
+  input.push_back(vbs_jet1.Eta());
+  input.push_back(v_jet0.Pt());
+  input.push_back(v_jet1.Pt());
+  input.push_back(v_jet0.Eta());
+  input.push_back(v_jet1.Eta());
+  input.push_back(mjj);
+  input.push_back(detajj);
+  input.push_back(V_mass);
   //input.push_back( *(mjj_vbs->Get()) );
   //input.push_back( *(vbs_0_pt->Get()) );
   //input.push_back( *(vbs_1_pt->Get()) );
@@ -123,7 +144,6 @@ MVAReaderResolved_v70::evaluate(unsigned)
   //input.push_back( TMath::Abs((float)Lepton_flavour->At(0) ));
 
   return dnn_tensorflow->analyze(input);
-  
 }
 
 void
@@ -143,24 +163,19 @@ MVAReaderResolved_v70::bindTree_(multidraw::FunctionLibrary& _library)
  // _library.bindBranch(Lepton_eta, "Lepton_eta");
  // _library.bindBranch(Lepton_flavour, "Lepton_pdgId");
 
-  _library.bindBranch(pt1, "pt1");
-  _library.bindBranch(pt2, "pt2");
-  _library.bindBranch(eta1, "eta1");
-  _library.bindBranch(eta2, "eta2");
+  _library.bindBranch(category, "vbs_category");
+  _library.bindBranch(Lepton_eta, "Lepton_eta");
+  _library.bindBranch(Lepton_pt, "Lepton_pt");
+  _library.bindBranch(CleanJet_pt, "CleanJet_pt");
+  _library.bindBranch(CleanJet_eta, "CleanJet_eta");
   _library.bindBranch(mll, "mll");
-  _library.bindBranch(Zlep_1, "Zlep_1");
-  _library.bindBranch(Zlep_2, "Zlep_2");
-  _library.bindBranch(vbs_jet_pt1, "vbs_jet_pt1");
-  _library.bindBranch(vbs_jet_pt2, "vbs_jet_pt2");
-  _library.bindBranch(vbs_jet_eta1, "vbs_jet_eta1");
-  _library.bindBranch(vbs_jet_eta2, "vbs_jet_eta2");
-  _library.bindBranch(V_jet_pt1, "V_jet_pt1");
-  _library.bindBranch(V_jet_pt2, "V_jet_pt2");
-  _library.bindBranch(V_jet_eta1, "V_jet_eta1");
-  _library.bindBranch(V_jet_eta2, "V_jet_eta2");
-  _library.bindBranch(mjj_max, "mjj_max");
-  _library.bindBranch(detajj_mjjmax, "detajj_mjjmax");
-  _library.bindBranch(V_jet_mass, "V_jet_mass");
+  _library.bindBranch(CleanJet_phi, "CleanJet_phi");
+  _library.bindBranch(vbs_jet_0, "vbs_jet_0");
+  _library.bindBranch(vbs_jet_1, "vbs_jet_1");
+  _library.bindBranch(v_jet_0, "v_jet_0");
+  _library.bindBranch(v_jet_1, "v_jet_1");
+  _library.bindBranch(Jet_mass, "Jet_mass");
+  _library.bindBranch(CleanJet_jetId, "CleanJet_jetIdx");
 
 
   // _library.addDestructorCallback([&]() {

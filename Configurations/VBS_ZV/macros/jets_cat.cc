@@ -5,9 +5,7 @@ This macrol computes the AK4 jets categorization in the VBS event:
     - their detajj
     - the indices of these VBS-jets
     - in the resolved case (4jets and no FJ), the inv mass of the other two jets (Vjets_mass)
-
 Note that according to the definition in ll. 147, 149 we use the CleanJetNotFat indecing 
-
 */
 
 
@@ -65,10 +63,6 @@ protected:
     vbs_jet_1, 
     v_jet_0,
     v_jet_1,
-
-    mjj_max, 
-    detajj_mjjmax, 
-    dphijj_mjjmax,
     Vjet_mass, 
     nVarTypes
   };
@@ -101,7 +95,7 @@ protected:
   static FloatArrayReader* CleanJet_eta;
   static FloatArrayReader* CleanJet_phi;
 
-  static std::array<double, nVarTypes> returnValues;
+  static std::array<float, nVarTypes> returnValues;
 
   static void setValues(UInt_t, UInt_t, ULong64_t);
 };
@@ -125,7 +119,7 @@ FloatArrayReader* jets_cat::CleanJet_phi{};
 
 string jets_cat::year_{};
 
-std::array<double, jets_cat::nVarTypes> jets_cat::returnValues{};
+std::array<float, jets_cat::nVarTypes> jets_cat::returnValues{};
 
 
 // function Helper ---
@@ -147,12 +141,6 @@ jets_cat::jets_cat( char const* _type, const char* year):
       returnVar_ = v_jet_1;
     else if (type == "Vjet_mass")
       returnVar_ = Vjet_mass;
-    else if (type == "mjj_max")
-      returnVar_ = mjj_max;
-    else if (type == "detajj_mjjmax")
-      returnVar_ = detajj_mjjmax;
-    else if (type == "dphijj_mjjmax")
-      returnVar_ = dphijj_mjjmax;
     else
       throw std::runtime_error("unknown return type " + type);
 
@@ -238,19 +226,19 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   int VBS_jets[2] = {999,999};
   int V_jets[2]   = {999,999};
   int category = 999;  // 0 fatjet, 1 resolved, -1 none
+  //float pt_cut = 30;
+
 
   // Load all the quadrivectors for performance reason
-  float pt_cut=30.;
   std::vector<TLorentzVector> vectors; 
   for (unsigned int ijet=0 ; ijet<njet ; ijet++){
     TLorentzVector jet0; 
     jet0.SetPtEtaPhiM(CleanJet_pt->At(CleanJetNotFat_jetId->At(ijet)), CleanJet_eta->At(CleanJetNotFat_jetId->At(ijet)),
                       CleanJet_phi->At(CleanJetNotFat_jetId->At(ijet)),Jet_mass->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(ijet)))); 
-if(jet0.pt()>pt_cut){vectors.push_back(jet0);}
-  }
-  njet=vetors.size();
-  njetNotFat=njet;  
-
+    //if(jet0.Pt()>pt_cut){vectors.push_back(jet0);} //this is for the minimal threhsold in the jet ak4 pt => vetoing ak4 with pt>30 GeV
+    vectors.push_back(jet0);
+   }
+  
   if (njet>=2){
     // Calculate max mjj invariant pair on CleanJetNotFat to exclude the correct jets
     for (unsigned int ijet=0 ; ijet<njet ; ijet++){
@@ -320,13 +308,7 @@ if(jet0.pt()>pt_cut){vectors.push_back(jet0);}
   if (V_jets[1] != 999) returnValues[v_jet_1] = CleanJetNotFat_jetId->At(V_jets[1]);
   else                     returnValues[v_jet_1] = 999;
 
-
-  returnValues[mjj_max]= Mjj_max;
-  returnValues[detajj_mjjmax] = detajj_mjj_max;
-  returnValues[dphijj_mjjmax] = dphijj_mjj_max;
-  returnValues[Vjet_mass] = Vjet_mass_max;
   returnValues[vbs_category] = category;
-
+  returnValues[Vjet_mass] = Vjet_mass_max;
 }
-
 
