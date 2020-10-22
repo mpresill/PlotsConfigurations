@@ -14,6 +14,7 @@ using namespace NNEvaluation;
 #ifndef MVAREADERResolved_v70_H
 #define MVAREADERResolved_v70_H
 
+typedef TTreeReaderValue<Double_t> DoubleValueReader;
 class MVAReaderResolved_v70 : public multidraw::TTreeFunction {
 public:
   

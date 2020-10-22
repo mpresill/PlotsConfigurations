@@ -49,56 +49,84 @@ aliases['gstarHigh'] = {
 aliases['vbs_category'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
     ],
-    'class': 'jets_cat',
+    'class': 'jets_cat_test',
     'args': ('vbs_category','2017')
 }
 
 aliases['vbs_jet_0'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
     ],
-    'class': 'jets_cat',
+    'class': 'jets_cat_test',
     'args': ('vbs_jet_0','2017')
 }
 
 aliases['vbs_jet_1'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
     ],
-    'class': 'jets_cat',
+    'class': 'jets_cat_test',
     'args': ('vbs_jet_1','2017')
 }
 
 aliases['v_jet_0'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
     ],
-    'class': 'jets_cat',
+    'class': 'jets_cat_test',
     'args': ('v_jet_0','2017')
 }
 
 aliases['v_jet_1'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
     ],
-    'class': 'jets_cat',
+    'class': 'jets_cat_test',
     'args': ('v_jet_1','2017')
 }
-aliases['V_jet_mass'] = {
+
+
+aliases['mjj_max'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
     ],
-    'class': 'jets_cat',
-    'args': ('Vjet_mass','2017')
+    'class': 'jets_cat_test',
+    'args': ('mjj_max','2017')
 }
 
+aliases['detajj_mjjmax'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('detajj_mjjmax','2017')
+}
+
+aliases['dphijj_mjjmax'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('dphijj_mjjmax','2017')
+}
+
+aliases['Vjet_mass'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('Vjet_mass','2017')
+}
 ############################################################
 ############################################################
 
@@ -235,7 +263,115 @@ aliases['SFweightMuDown'] = {
 ##########################################
 ##### helper variables for DNN
 ##########################################
+aliases['eta1'] = {
+     'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('eta1','2017')
+}
 
+aliases['eta2'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('eta2','2017')
+}
+aliases['Zlep_1'] = {
+     'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('Zlep_1','2017')
+}
+
+aliases['Zlep_2'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('Zlep_2','2017')
+}
+aliases['vbs_jet_pt1'] = {
+     'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('vbs_jet_pt1','2017')
+}
+
+aliases['vbs_jet_pt2'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('vbs_jet_pt2','2017')
+}
+
+aliases['vbs_jet_eta1'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('vbs_jet_eta1','2017')
+}
+
+aliases['vbs_jet_eta2'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('vbs_jet_eta2','2017')
+}
+
+aliases['V_jet_pt1'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('V_jet_pt1','2017')
+}
+
+aliases['V_jet_pt2'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('V_jet_pt2','2017')
+}
+
+aliases['V_jet_eta1'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('V_jet_eta1','2017')
+}
+
+aliases['V_jet_eta2'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L /afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+    ],
+    'class': 'jets_cat_test',
+    'args': ('V_jet_eta2','2017')
+}
+
+aliases['V_jet_mass'] = {
+    'expr': 'Vjet_mass'
+}
 ############################################
 # DNN reader - Updated to 2017 specific
 ###########################################
@@ -262,7 +398,7 @@ aliases['DNNoutput_resolved'] = {
     'linesToAdd':[
         'gSystem->Load("libLatinoAnalysisMultiDraw.so")',
         'gSystem->Load("libDNNEvaluator.so")',
-        '.L ' + mva_reader_path + 'mva_reader_resolved_2018v7.cc+', 
+        '.L ' + mva_reader_path + 'mva.cc+', 
     ],
 }
 
