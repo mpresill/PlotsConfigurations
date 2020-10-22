@@ -31,14 +31,24 @@ aliases['PromptGenLepMatch2l'] = {
     'samples': mc
 }
 
+##additional variables for VgS
+aliases['gstarLow'] = {
+    'expr': 'Gen_ZGstar_mass >0 && Gen_ZGstar_mass < 4',
+    'samples': 'VgS'
+}
+
+aliases['gstarHigh'] = {
+    'expr': 'Gen_ZGstar_mass <0 || Gen_ZGstar_mass > 4',
+    'samples': 'VgS'
+}
 
 ############################################################
-############# VBS variables
+############# VBS variables for jet pairing
 ############################################################
 aliases['vbs_category'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L %s/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+' % os.getenv('CMSSW_BASE')
     ],
     'class': 'jets_cat',
     'args': ('vbs_category','2018')
@@ -47,7 +57,7 @@ aliases['vbs_category'] = {
 aliases['vbs_jet_0'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L %s/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+' % os.getenv('CMSSW_BASE')
     ],
     'class': 'jets_cat',
     'args': ('vbs_jet_0','2018')
@@ -56,7 +66,7 @@ aliases['vbs_jet_0'] = {
 aliases['vbs_jet_1'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L %s/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+' % os.getenv('CMSSW_BASE')
     ],
     'class': 'jets_cat',
     'args': ('vbs_jet_1','2018')
@@ -65,7 +75,7 @@ aliases['vbs_jet_1'] = {
 aliases['v_jet_0'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L %s/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+' % os.getenv('CMSSW_BASE')
     ],
     'class': 'jets_cat',
     'args': ('v_jet_0','2018')
@@ -74,7 +84,7 @@ aliases['v_jet_0'] = {
 aliases['v_jet_1'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L %s/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+' % os.getenv('CMSSW_BASE')
     ],
     'class': 'jets_cat',
     'args': ('v_jet_1','2018')
@@ -84,7 +94,7 @@ aliases['v_jet_1'] = {
 aliases['mjj_max'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L %s/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+' % os.getenv('CMSSW_BASE')
     ],
     'class': 'jets_cat',
     'args': ('mjj_max','2018')
@@ -93,7 +103,7 @@ aliases['mjj_max'] = {
 aliases['detajj_mjjmax'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L %s/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+' % os.getenv('CMSSW_BASE')
     ],
     'class': 'jets_cat',
     'args': ('detajj_mjjmax','2018')
@@ -102,7 +112,7 @@ aliases['detajj_mjjmax'] = {
 aliases['dphijj_mjjmax'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L %s/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+' % os.getenv('CMSSW_BASE')
     ],
     'class': 'jets_cat',
     'args': ('dphijj_mjjmax','2018')
@@ -111,7 +121,7 @@ aliases['dphijj_mjjmax'] = {
 aliases['Vjet_mass'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+'.format(configurations)
+        '.L %s/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat.cc+' % os.getenv('CMSSW_BASE')
     ],
     'class': 'jets_cat',
     'args': ('Vjet_mass','2018')
@@ -143,7 +153,6 @@ aliases['Top_pTrw'] = {
 # B tagging
 #loose 0.1241
 #tight 0.7527
-
 aliases['bVeto'] = {
     'expr': '(Sum$(CleanJet_pt > 20. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.1241) == 0)'
 }
@@ -165,7 +174,6 @@ aliases['bReqSF'] = {
     'expr': 'TMath::Exp(Sum$(TMath::Log((CleanJet_pt>30 && abs(CleanJet_eta)<2.5)*Jet_btagSF_deepcsv_shape[CleanJet_jetIdx]+1*(CleanJet_pt<=30 || abs(CleanJet_eta)>=2.5))))',
     'samples': mc
 }
-
 
 aliases['btagSF'] = {
     'expr': 'bVeto*bVetoSF + bReqTight *bReqSF',
@@ -192,17 +200,48 @@ for shift in ['jes','lf','hf','lfstats1','lfstats2','hfstats1','hfstats2','cferr
         'expr': aliases['btagSF']['expr'].replace('SF', 'SF' + shift + 'down'),
         'samples': mc
     }
+
+#########################################################################################
+
+aliases['nCleanGenJet'] = {
+    'linesToAdd': ['.L %s/src/PlotsConfigurations/Configurations/Differential/ngenjet.cc+' % os.getenv('CMSSW_BASE')],
+    'class': 'CountGenJet',
+    'samples': mc
+}
+
+##### DY Z pT reweighting
+aliases['getGenZpt_OTF'] = {
+    'linesToAdd':['.L %s/src/PlotsConfigurations/Configurations/patches/getGenZpt.cc+' % os.getenv('CMSSW_BASE')],
+    'class': 'getGenZpt',
+    'samples': ['DY']
+}
+handle = open('%s/src/PlotsConfigurations/Configurations/patches/DYrew30.py' % os.getenv('CMSSW_BASE'),'r')
+exec(handle)
+handle.close()
+aliases['DY_NLO_pTllrw'] = {
+    'expr': '('+DYrew['2018']['NLO'].replace('x', 'getGenZpt_OTF')+')*(nCleanGenJet == 0)+1.0*(nCleanGenJet > 0)',
+    'samples': ['DY']
+}
+aliases['DY_LO_pTllrw'] = {
+    'expr': '('+DYrew['2018']['LO'].replace('x', 'getGenZpt_OTF')+')*(nCleanGenJet == 0)+1.0*(nCleanGenJet > 0)',
+    'samples': ['DY']
+}
+
+
+###########################################################################################
 # PU jet Id SF
 """
-puidSFSource = '%s/src/LatinoAnalysis/NanoGardener/python/data/JetPUID_effcyandSF.root' % os.getenv('CMSSW_BASE')
+# PU jet Id SF
+
+puidSFSource = '{}/patches/PUID_81XTraining_EffSFandUncties.root'.format(configurations)
 
 aliases['PUJetIdSF'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L %s/patches/pujetidsf_event.cc+' % configurations
+        '.L %s/patches/pujetidsf_event_new.cc+' % configurations
     ],
     'class': 'PUJetIdEventSF',
-    'args': (puidSFSource, '2016', 'loose'),
+    'args': (puidSFSource, '2018', 'loose'),
     'samples': mc
 }
 """
@@ -229,3 +268,4 @@ aliases['SFweightMuDown'] = {
     'expr': 'LepSF2l__mu_'+muWP+'__Do',
     'samples': mc
 }
+

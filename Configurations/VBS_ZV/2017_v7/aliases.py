@@ -17,18 +17,18 @@ configurations = os.path.dirname(configurations) # Configurations
 mc = [skey for skey in samples if skey not in ('Fake', 'DATA')]
 
 eleWP='mvaFall17V1Iso_WP90'
-#muWP='cut_Tight_HWWW' #old muon WP
-muWP='cut_Tight_HWWW_tthmva_80' 
+muWP='cut_Tight_HWWW' #old muon WP
+#muWP='cut_Tight_HWWW_tthmva_80' 
 
 aliases['LepWPCut'] = {
     'expr': 'LepCut2l__ele_'+eleWP+'__mu_'+muWP,
     'samples': mc + ['DATA']
 }
 
-aliases['LepWPSF'] = {
-    'expr': 'LepSF2l__ele_'+eleWP+'__mu_'+muWP,
-    'samples': mc
-}
+#aliases['LepWPSF'] = {
+#    'expr': 'LepSF2l__ele_'+eleWP+'__mu_'+muWP,
+#    'samples': mc
+#}
 
 # gen-matching to prompt only (GenLepMatch2l matches to *any* gen lepton)
 aliases['PromptGenLepMatch2l'] = {
@@ -36,9 +36,19 @@ aliases['PromptGenLepMatch2l'] = {
     'samples': mc
 }
 
+##additional variables for VgS
+aliases['gstarLow'] = {
+    'expr': 'Gen_ZGstar_mass >0 && Gen_ZGstar_mass < 4',
+    'samples': 'VgS'
+}
+
+aliases['gstarHigh'] = {
+    'expr': 'Gen_ZGstar_mass <0 || Gen_ZGstar_mass > 4',
+    'samples': 'VgS'
+}
 
 ############################################################
-############# VBS variables
+############# VBS variables for jet pairing
 ############################################################
 aliases['vbs_category'] = {
     'linesToAdd': [
@@ -275,7 +285,7 @@ aliases['PUJetIdSF'] = {
 
 # data/MC scale factors  for now removed Jet PU id since it was not working. For we keep the loose one...
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l','LepWPCut','LepWPSF','PrefireWeight','Jet_PUIDSF_loose']),
+    'expr': ' * '.join(['SFweight2l','LepWPCut','LepSF2l__ele_' + eleWP + '__mu_' + muWP,'PrefireWeight','Jet_PUIDSF_loose']),
     'samples': mc
 }
 
@@ -298,15 +308,4 @@ aliases['SFweightMuDown'] = {
 }
 
 
-##additional variables for VgS
-
-aliases['gstarLow'] = {
-    'expr': 'Gen_ZGstar_mass >0 && Gen_ZGstar_mass < 4',
-    'samples': 'VgS'
-}
-
-aliases['gstarHigh'] = {
-    'expr': 'Gen_ZGstar_mass <0 || Gen_ZGstar_mass > 4',
-    'samples': 'VgS'
-}
 
