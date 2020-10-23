@@ -134,7 +134,7 @@ nuisances['muonpt'] = {
 }
 
 ##### Jet energy scale
-
+"""
 nuisances['jes'] = {
     'name': 'CMS_scale_j_2018',
     'kind': 'suffix',
@@ -146,7 +146,7 @@ nuisances['jes'] = {
     'folderDown': makeMCDirectory('JESdo_suffix'),
     'AsLnN': '1'
 }
-
+"""
 ######## JER
 nuisances['jer'] = {
     'name': 'CMS_resolution_j_2018',

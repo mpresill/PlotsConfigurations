@@ -230,24 +230,24 @@ aliases['DY_LO_pTllrw'] = {
 
 ###########################################################################################
 # PU jet Id SF
-"""
+
 # PU jet Id SF
 
-puidSFSource = '{}/patches/PUID_81XTraining_EffSFandUncties.root'.format(configurations)
+puidSFSource = '{}/Configurations/patches/PUID_81XTraining_EffSFandUncties.root'.format(configurations)
 
 aliases['PUJetIdSF'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L %s/patches/pujetidsf_event_new.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/patches/pujetidsf_event_new.cc+' % configurations
     ],
     'class': 'PUJetIdEventSF',
-    'args': (puidSFSource, '2018', 'loose'),
+    'args': (puidSFSource, "2018", "loose"),
     'samples': mc
 }
-"""
+
 # data/MC scale factors
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF']),
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF','PUJetIdSF']),
     'samples': mc
 }
 

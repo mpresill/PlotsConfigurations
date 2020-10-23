@@ -57,15 +57,15 @@ groupPlot['vbfV+VV+VVV']  = {
                   'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
                   'fill': 1001
               }
-"""
-groupPlot['Vg']  = {  
-                  'nameHR' : "V#gamma",
+
+groupPlot['Vg+VgS']  = {  
+                  'nameHR' : "V#gamma+V#gamma*",
                   'isSignal' : 0,
                   'color'    : 409,   # kOrange + 10
-                  'samples'  : ['Vg'],
+                  'samples'  : ['Vg','VgS'],
                   'fill': 1001
               }
-"""
+
 groupPlot['DY']  = {  
                 'nameHR' : "DY",
                 'isSignal' : 0,
@@ -130,10 +130,9 @@ plot['DY']  = {
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
                 'isData'   : 0, 
-                'scale'    : 0.65,
+                #'scale'    : 0.65,
             }
 
-"""
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
                   'isSignal' : 0,
@@ -146,7 +145,7 @@ plot['VgS'] = {
                   'isData'   : 0,
                   'scale'    : 1.0
                   }
-"""
+
 plot['VBF-V']  = {
                   'color': colors['kYellow']+3,  
                   'isSignal' : 0,
@@ -167,7 +166,7 @@ plot['top'] = {
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                 'scale'    : 0.92,
+                # 'scale'    : 0.92,
                 #  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
