@@ -238,7 +238,7 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   int VBS_jets[2] = {999,999};
   int V_jets[2]   = {999,999};
   int category = 999;  // 0 fatjet, 1 resolved, -1 none
-  //float pt_cut = 30;
+  float pt_cut = 30;
 
 
   // Load all the quadrivectors for performance reason
@@ -247,10 +247,10 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
     TLorentzVector jet0; 
     jet0.SetPtEtaPhiM(CleanJet_pt->At(CleanJetNotFat_jetId->At(ijet)), CleanJet_eta->At(CleanJetNotFat_jetId->At(ijet)),
                       CleanJet_phi->At(CleanJetNotFat_jetId->At(ijet)),Jet_mass->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(ijet)))); 
-    //if(jet0.Pt()>pt_cut){vectors.push_back(jet0);} //this is for the minimal threhsold in the jet ak4 pt => vetoing ak4 with pt>30 GeV
-    vectors.push_back(jet0);
+    if(jet0.Pt()>pt_cut){vectors.push_back(jet0);} //this is for the minimal threhsold in the jet ak4 pt => vetoing ak4 with pt>30 GeV
+    //vectors.push_back(jet0);
    }
-  
+  njet=vectors.size();
   if (njet>=2){
     // Calculate max mjj invariant pair on CleanJetNotFat to exclude the correct jets
     for (unsigned int ijet=0 ; ijet<njet ; ijet++){
