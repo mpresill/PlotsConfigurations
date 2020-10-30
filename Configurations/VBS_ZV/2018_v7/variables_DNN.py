@@ -160,13 +160,14 @@ variables['V_jet_mass']  = {   'name': 'V_jet_mass',            #   variable nam
 ####################
 ### DNN variables
 
-variables['DNNoutput_resolved'] = {
-    'name': 'DNNoutput_resolved',
+variables['DNNoutput'] = {
+    'name': 'DNNoutput',
     'range': ([0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],),
     'xaxis': 'DNN output',
     'fold': 3 ,
     'blind': {   
         "Resolved_SR": [0.8,1],
+	"Boosted_SR": [0.8,1],
         #"boost_sig_mjjincl_ele": [0.8,1],
     }
 }

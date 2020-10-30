@@ -1,5 +1,4 @@
 # nuisances
-# nuisances
 
 #nuisances = {}
 
@@ -33,7 +32,7 @@ HiggsXS = HiggsXSection()
 #### Luminosity
 
 #nuisances['lumi'] = {
-#    'name': 'lumi_13TeV_2017',
+#    'name': 'lumi_13TeV_2018',
 #    'type': 'lnN',
 #    'samples': dict((skey, '1.023') for skey in mc if skey not in ['WW', 'top', 'DY'])
 #}
@@ -134,7 +133,7 @@ nuisances['muonpt'] = {
 }
 
 ##### Jet energy scale
-
+"""
 nuisances['jes'] = {
     'name': 'CMS_scale_j_2018',
     'kind': 'suffix',
@@ -147,7 +146,21 @@ nuisances['jes'] = {
     'AsLnN': '1'
 }
 
-######## !!!!JER is missing here!!!
+######## JER
+nuisances['jer'] = {
+    'name': 'CMS_resolution_j_2018',
+    'kind': 'suffix',
+    'type': 'shape',
+    'mapUp': 'JERup',
+    'mapDown': 'JERdo',
+    'samples': dict((skey, ['1', '1']) for skey in mc),
+    'folderUp': makeMCDirectory('JERup_suffix'),
+    'folderDown': makeMCDirectory('JERdo_suffix'),
+    'AsLnN': '1'
+}
+"""
+#####missing JER/JES for AK8
+
 
 ##### Pileup
 nuisances['PU'] = {
@@ -219,7 +232,6 @@ nuisances['DYttnorm0j']  = {
                'type'  : 'rateParam',
                'cuts'  : cuts0j
               }
-
 """    
 ## Use the following if you want to apply the automatic combine MC stat nuisances.
 nuisances['stat'] = {

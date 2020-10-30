@@ -15,6 +15,7 @@ using namespace NNEvaluation;
 #define MVAREADERResolved_v70_H
 
 typedef TTreeReaderValue<Double_t> DoubleValueReader;
+
 class MVAReaderResolved_v70 : public multidraw::TTreeFunction {
 public:
   
@@ -35,39 +36,38 @@ protected:
   
   DNNEvaluator* dnn_tensorflow;
 
-  FloatValueReader* pt1{};
-  FloatValueReader* pt2{};
-  FloatValueReader* eta1{};
-  FloatValueReader* eta2{};
+
   FloatValueReader* mll{};
-  FloatValueReader* Zlep_1{};
-  FloatValueReader* Zlep_2{};
-  FloatValueReader* vbs_jet_pt1{};
-  FloatValueReader* vbs_jet_pt2{};
-  FloatValueReader* vbs_jet_eta1{};
-  FloatValueReader* vbs_jet_eta2{};
-  FloatValueReader* V_jet_pt1{};
-  FloatValueReader* V_jet_pt2{};
-  FloatValueReader* V_jet_eta1{};
-  FloatValueReader* V_jet_eta2{};
-  FloatValueReader* mjj_max{};
-  FloatValueReader* detajj_mjjmax{};
-  FloatValueReader* V_jet_mass{};
-//  IntValueReader* VBS_category{};
-//  FloatArrayReader* Lepton_pt{};
-//  FloatArrayReader* Lepton_eta{};
-//  FloatValueReader* vjet_0_pt{};
-//  FloatValueReader* vjet_1_pt{};
-//  FloatValueReader* vjet_0_eta{};
-//  FloatValueReader* vjet_1_eta{};
-//  FloatValueReader* deltaeta_vbs{};
-//  FloatValueReader* deltaphi_vbs{};
-//  FloatValueReader* vbs_0_pt{};
-//  FloatValueReader* vbs_1_pt{};
-//  FloatValueReader* vbs_0_eta{};
-//  FloatValueReader* vbs_1_eta{};
-//  FloatValueReader* mjj_vbs{};
-//  IntArrayReader* Lepton_flavour{};
+  DoubleValueReader* Zlep_1{};
+  DoubleValueReader* Zlep_2{};
+  DoubleValueReader* vbs_jet_pt1{};
+  DoubleValueReader* vbs_jet_pt2{};
+  DoubleValueReader* vbs_jet_eta1{};
+  DoubleValueReader* vbs_jet_eta2{};
+  DoubleValueReader* V_jet_pt1{};
+  DoubleValueReader* V_jet_pt2{};
+  DoubleValueReader* V_jet_eta1{};
+  DoubleValueReader* V_jet_eta2{};
+  DoubleValueReader* mjj_max{};
+  DoubleValueReader* detajj_mjjmax{};
+  DoubleValueReader* V_jet_mass{};
+  FloatArrayReader* Lepton_pt{};
+  FloatArrayReader* Lepton_eta{};
+  //  IntValueReader* VBS_category{};
+  //  FloatArrayReader* Lepton_pt{};
+  //  FloatArrayReader* Lepton_eta{};
+  //  FloatValueReader* vjet_0_pt{};
+  //  FloatValueReader* vjet_1_pt{};
+  //  FloatValueReader* vjet_0_eta{};
+  //  FloatValueReader* vjet_1_eta{};
+  //  FloatValueReader* deltaeta_vbs{};
+  //  FloatValueReader* deltaphi_vbs{};
+  //  FloatValueReader* vbs_0_pt{};
+  //  FloatValueReader* vbs_1_pt{};
+  //  FloatValueReader* vbs_0_eta{};
+  //  FloatValueReader* vbs_1_eta{};
+  //  FloatValueReader* mjj_vbs{};
+  //  IntArrayReader* Lepton_flavour{};
 };
 
 
@@ -91,10 +91,10 @@ MVAReaderResolved_v70::evaluate(unsigned)
   std::vector<float> input{};
 
 
-  input.push_back( *(pt1->Get()) );
-  input.push_back( *(pt2->Get()) );
-  input.push_back( *(eta1->Get()) );
-  input.push_back( *(eta2->Get()) );
+  input.push_back( (Lepton_pt->At(0)) );
+  input.push_back( (Lepton_pt->At(1)));
+  input.push_back( (Lepton_eta->At(0)));
+  input.push_back( (Lepton_eta->At(1)));
   input.push_back( *(mll->Get()) );
   input.push_back( *(Zlep_1->Get()) );
   input.push_back( *(Zlep_2->Get()) );
@@ -144,10 +144,8 @@ MVAReaderResolved_v70::bindTree_(multidraw::FunctionLibrary& _library)
  // _library.bindBranch(Lepton_eta, "Lepton_eta");
  // _library.bindBranch(Lepton_flavour, "Lepton_pdgId");
 
-  _library.bindBranch(pt1, "pt1");
-  _library.bindBranch(pt2, "pt2");
-  _library.bindBranch(eta1, "eta1");
-  _library.bindBranch(eta2, "eta2");
+  _library.bindBranch(Lepton_pt, "Lepton_pt");
+  _library.bindBranch(Lepton_eta, "Lepton_eta");
   _library.bindBranch(mll, "mll");
   _library.bindBranch(Zlep_1, "Zlep_1");
   _library.bindBranch(Zlep_2, "Zlep_2");

@@ -29,4 +29,4 @@ supercut = '   nLepton == 2 \
 
 cuts['Resolved_SR']  = 'vbs_category==1 && bVeto  && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
 
-
+cuts['Boosted_SR'] = 'vbs_category == 0 && bVeto && (Lepton_pdgId[0] * Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0] * Lepton_pdgId[1] == -13*13)'

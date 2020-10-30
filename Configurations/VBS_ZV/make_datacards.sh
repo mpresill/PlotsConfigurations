@@ -1,5 +1,5 @@
 #! /bin/bash
-DATE=22June2020 #change date 
+DATE=29Oct2020 #change date 
 #mkShapesMulti.py --pycfg=configuration.py --batchSplit=Samples,Files
 
 #mkShapesMulti.py --pycfg=configuration.py --doBatch=1 --batchSplit=Samples,Files --batchQueue=longlunch  #espresso #longlunch #--dry-run
@@ -15,6 +15,6 @@ DATE=22June2020 #change date
 #to resubmit jobs:
 #for i in *jid; do sed -i "s/longlunch/microcentury/g" ${i/jid/jds}; condor_submit ${i/jid/jds}; done
 
-cd 2018_v6
+cd 2018_v7
 #to make datacard:
-mkDatacards.py --pycfg configuration.py --inputFile plots_VBS_ZV_${DATE}.root
+mkDatacards.py --pycfg configuration.py --inputFile rootFile_${DATE}/plots_VBS_ZV_SR_${DATE}.root
