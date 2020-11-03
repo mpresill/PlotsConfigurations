@@ -1,4 +1,5 @@
 # nuisances
+# nuisances
 
 #nuisances = {}
 
@@ -232,6 +233,7 @@ nuisances['DYttnorm0j']  = {
                'type'  : 'rateParam',
                'cuts'  : cuts0j
               }
+
 """    
 ## Use the following if you want to apply the automatic combine MC stat nuisances.
 nuisances['stat'] = {

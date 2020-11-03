@@ -11,6 +11,7 @@ structure['DY']  = {
                   'isData'   : 0
               }
 
+
 structure['WJets']  = {  
                   'isSignal' : 0,
                   'isData'   : 0 
@@ -48,6 +49,7 @@ structure['Vg']  = {
                   'isSignal' : 0,
                   'isData'   : 0 
                   }
+
 structure['VgS'] = { 
                   'isSignal' : 0,
                   'isData'   : 0 
@@ -93,9 +95,13 @@ print "INSTRUCTURE"
 print cuts
 print nuisances['']
 print "OK"
+
 for nuis in nuisances.itervalues():
   if 'cutspost' in nuis:
     nuis['cuts'] = nuis['cutspost'](nuis, cuts)
+
     print nuis
+
 """
+
 

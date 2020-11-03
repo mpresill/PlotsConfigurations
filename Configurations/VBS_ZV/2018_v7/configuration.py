@@ -2,22 +2,22 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_30Oct2020'
+date='_03Nov2020'
 
-tag = 'VBS_ZV_SR'+date
+tag = 'VBS_ZV'+date
 
 # used by mkShape to define output directory for root files
 outputDir = 'rootFile'+date
 
 # file with TTree aliases
-aliasesFile = 'aliases_DNN.py'
+aliasesFile = 'aliases.py'
 
 # file with list of variables
-variablesFile = 'variables_DNN.py'
+variablesFile = 'variables.py'
 #variablesFile = 'variables_test.py'
 
 # file with list of cuts
-cutsFile = 'cuts_DNN_SR.py'
+cutsFile = 'cuts.py'
 
 # file with list of samples
 #samplesFile = 'samples_test.py'
@@ -34,10 +34,10 @@ lumi = 59.74
 
 # used by mkPlot to define output directory for plots
 # different from "outputDir" to do things more tidy
-outputDirPlots = '/afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/2018_v7/Plots'+date
+outputDirPlots = '/eos/home-a/ahakimi/www/ZV_analysis/Plots'+date
 
 
-# used by mkDatacards to define output directory for datacards: common vbs-italia github folder 
+# used by mkDatacards to define output directory for datacards: common vbs-italia github folder : /afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/2017_v7/
 outputDirDatacard = '/afs/cern.ch/user/a/ahakimi/ZV_analysis/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/2018_v7/Datacards'+date
 
 
@@ -47,3 +47,4 @@ structureFile = 'structure.py'
 # nuisances file for mkDatacards and for mkShape
 nuisancesFile = 'nuisances.py'
 #nuisancesFile ='nuisances_StatOnly.py'
+

@@ -95,7 +95,7 @@ aliases['v_jet_1'] = {
 aliases['mjj_max'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
+        '.L {}/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_test.cc+'.format(configurations)
     ],
     'class': 'jets_cat_test',
     'args': ('mjj_max','2017')

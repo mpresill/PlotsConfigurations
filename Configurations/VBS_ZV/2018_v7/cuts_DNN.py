@@ -9,7 +9,7 @@ supercut = '   nLepton == 2 \
             && V_jet_mass >65. && V_jet_mass <105. \
             '
 #I have considered all CleanedJetNotFat, i.e. cleaned from AK8, since in the case in which nCleanFatJet==0 => nCleanJetNotFat = NCleanJet
-#cuts['preselection'] = '1.'
+cuts['preselection'] = '1.'
 
 #######################################
 #
@@ -26,7 +26,9 @@ supercut = '   nLepton == 2 \
 #   vbs_category = 1
 #######################################
 
-
+"""
 cuts['Resolved_SR']  = 'vbs_category==1 && bVeto  && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
 
 cuts['Boosted_SR'] = 'vbs_category == 0 && bVeto && (Lepton_pdgId[0] * Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0] * Lepton_pdgId[1] == -13*13)'
+
+"""
