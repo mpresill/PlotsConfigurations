@@ -366,7 +366,7 @@ models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/'
 
 aliases['DNNoutput_boosted'] = {
     'class': 'MVAReaderBoosted_v70',
-   'args': ( models_path +'2018_v7/Boosted_SR/DNN/', False, 0),
+   'args': ( models_path +'2018_PU/Boosted_SR/DNN/', False, 0),
     'linesToAdd':[
       'gSystem->Load("libLatinoAnalysisMultiDraw.so")',
         'gSystem->Load("libDNNEvaluator.so")',
@@ -376,7 +376,7 @@ aliases['DNNoutput_boosted'] = {
 
 aliases['DNNoutput_resolved'] = {
     'class': 'MVAReaderResolved_v70',
-    'args': ( models_path+ '2018_v7/Resolved_SR/DNN/', False, 1),
+    'args': ( models_path+ '2018_PU/Resolved_SR/DNN/', False, 1),
     'linesToAdd':[
         'gSystem->Load("libLatinoAnalysisMultiDraw.so")',
         'gSystem->Load("libDNNEvaluator.so")',

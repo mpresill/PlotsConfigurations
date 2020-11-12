@@ -199,9 +199,10 @@ files = nanoGetSampleFiles(mcDirectory, 'TTTo2L2Nu') + \
     nanoGetSampleFiles(mcDirectory, 'ST_t-channel_top') + \
     nanoGetSampleFiles(mcDirectory, 'ST_tW_antitop_ext1') + \
     nanoGetSampleFiles(mcDirectory, 'ST_tW_top_ext1') + \
-    nanoGetSampleFiles(mcDirectory,'TTToSemiLeptonic') + \
-    nanoGetSampleFiles(mcDirectory,'TTZjets') + \
-    nanoGetSampleFiles(mcDirectory,'TTWjets')
+    nanoGetSampleFiles(mcDirectory,'TTToSemiLeptonic') 
+    
+#nanoGetSampleFiles(mcDirectory,'TTZjets') + \
+   #nanoGetSampleFiles(mcDirectory,'TTWjets')
 
 samples['top'] = {
     'name': files,

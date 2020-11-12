@@ -30,6 +30,7 @@ variables['pt1']  = {   'name': 'Alt$(Lepton_pt[0],-9999.)',
                         'xaxis' : 'p_{T} 1st lep [GeV]',
                         'fold' :3
                         }
+
 variables['pt2']  = {   'name': 'Alt$(Lepton_pt[1],-9999.)',
                         'range' : (20,0.,200),
                         'xaxis' : 'p_{T} 2nd lep [GeV]',
@@ -177,8 +178,8 @@ variables['Zlep_V_boosted'] = {   'name': '  ( CleanFatJet_eta[0] -0.5*(CleanJet
                         'xaxis' : 'Z^{lep}_{V} (boosted)', 
                         'fold' : 3
                         }
-"""
 
+"""
 
 
 ### DNN variables
@@ -187,10 +188,14 @@ variables['DNNoutput'] = {
     'name': 'DNNoutput',
     'range': ([0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],),
     'xaxis': 'DNN output',
-    'fold': 3 ,
+    'fold': 1 ,
     'blind': {
         "Resolved_SR": [0.8,1],
         "Boosted_SR": [0.8,1],
+	"Boosted_DYcr" : [0.99,1],
+	"Boosted_topcr" : [0.99,1],
+	"Resolved_topcr" : [0.99,1],
+	"Resolved_DYcr" : [0.99,1],
         #"boost_sig_mjjincl_ele": [0.8,1],
     }
 }
