@@ -285,7 +285,7 @@ aliases['PUJetIdSF'] = {
 
 # data/MC scale factors  for now removed Jet PU id since it was not working. For we keep the loose one...
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l','LepWPCut','LepSF2l__ele_' + eleWP + '__mu_' + muWP,'PrefireWeight','Jet_PUIDSF_loose']),
+    'expr': ' * '.join(['SFweight2l','LepWPCut','LepSF2l__ele_' + eleWP + '__mu_' + muWP,'PrefireWeight','Jet_PUIDSF_loose','btagSF']),
     'samples': mc
 }
 
