@@ -47,8 +47,8 @@ Colors
 "Wjets4": (229, 94, 41), #e55e29
 "Wjets5": (211, 87, 38), #d34912 
 '''
-#
- """
+
+"""
 groupPlot['Other']  = {  
                   'nameHR' : 'Other',
                   'isSignal' : 0,
