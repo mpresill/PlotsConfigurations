@@ -47,25 +47,23 @@ Colors
 "Wjets4": (229, 94, 41), #e55e29
 "Wjets5": (211, 87, 38), #d34912 
 '''
-#
- 
+# 
 
+#VBS-F missing
 groupPlot['vbfV+VV+VVV']  = {  
-                  'nameHR' : 'vbfV+VV+VVV',
+                  'nameHR' : 'VV+VVV',
                   'isSignal' : 0,
                   'color': palette["MediumBlue2"],  
-                  'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
+                  'samples'  : ['VVV', 'VZ','WW'],
                   'fill': 1001
               }
-"""
-groupPlot['Vg']  = {  
-                  'nameHR' : "V#gamma",
+groupPlot['Vg+VgS']  = {  
+                  'nameHR' : "V#gamma+V#gamma*",
                   'isSignal' : 0,
                   'color'    : 409,   # kOrange + 10
-                  'samples'  : ['Vg'],
+                  'samples'  : ['Vg','VgS'],
                   'fill': 1001
               }
-"""
 groupPlot['DY']  = {  
                 'nameHR' : "DY",
                 'isSignal' : 0,
@@ -93,7 +91,7 @@ groupPlot['WJets']  = {
                   'fill': 1001
 
               }
-
+"""
 groupPlot['VBS']  = {  
                  'nameHR' : 'VBS',
                  'isSignal' : 1,
@@ -101,7 +99,7 @@ groupPlot['VBS']  = {
                  'samples'  : ['VBS_ZV'],
                  'fill': 1001
               }
-
+"""
 
 
 #plot = {}
@@ -130,10 +128,9 @@ plot['DY']  = {
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
                 'isData'   : 0, 
-                'scale'    : 0.65,
+                #'scale'    : 0.65,
             }
 
-"""
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
                   'isSignal' : 0,
@@ -153,7 +150,7 @@ plot['VBF-V']  = {
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-
+"""
 """
 plot['Fake']  = {  
                 'color': colors['kTeal'],
@@ -167,7 +164,7 @@ plot['top'] = {
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                 'scale'    : 0.92,
+                # 'scale'    : 0.92,
                 #  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
@@ -205,14 +202,14 @@ plot['WJets']  = {
                 #       "res_topcr_mjjincl_dnnhigh_ele":1.413,
                 #   }
               }
-
+"""
 plot['VBS_ZV']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-
+"""
 # # data
 
 plot['DATA']  = { 
@@ -225,9 +222,8 @@ plot['DATA']  = {
 
 
 
-
 # additional options
 
-legend['lumi'] = 'L = 59.74/fb'
+legend['lumi'] = 'L = 35.867/fb'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'

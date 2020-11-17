@@ -32,12 +32,6 @@ HiggsXS = HiggsXSection()
 
 #### Luminosity
 
-#nuisances['lumi'] = {
-#    'name': 'lumi_13TeV_2017',
-#    'type': 'lnN',
-#    'samples': dict((skey, '1.023') for skey in mc if skey not in ['WW', 'top', 'DY'])
-#}
-
 nuisances['lumi_Uncorrelated'] = {
     'name': 'lumi_13TeV_2016',
     'type': 'lnN',
@@ -148,7 +142,7 @@ nuisances['muonpt'] = {
     'AsLnN': '1'
 }
 
-##### Jet energy scale
+##### Jet energy scale for AK4
 
 nuisances['jes'] = {
     'name': 'CMS_scale_j_2016',
@@ -162,7 +156,19 @@ nuisances['jes'] = {
     'AsLnN': '1'
 }
 
-######## !!!!JER is missing here!!!
+######## Jet energy resolution for AK4
+
+nuisances['jer'] = {
+    'name': 'CMS_resolution_j_2016',
+    'kind': 'suffix',
+    'type': 'shape',
+    'mapUp': 'JERup',
+    'mapDown': 'JERdo',
+    'samples': dict((skey, ['1', '1']) for skey in mc),
+    'folderUp': makeMCDirectory('JERup_suffix'),
+    'folderDown': makeMCDirectory('JERdo_suffix'),
+    'AsLnN': '1'
+}
 
 ##### Pileup
 nuisances['PU'] = {
@@ -223,6 +229,20 @@ nuisances['VZ'] = {
     }
 }
 
+## PDF
+
+nuisances['pdf']  = {
+               'name'  : 'pdf',
+               'type'  : 'lnN',
+               'samples'  : {
+                   #'ggWW'    : '1.05',
+                   'WW'      : '1.04',
+                   'Vg'      : '1.04',
+                   'VZ'      : '1.04',
+                   'VgS'     : '1.04',
+                   'DY'      : '1.002', # For HM category, no DY CR
+                   },
+              }
 
 
 ## rate parameters
