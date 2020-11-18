@@ -289,6 +289,8 @@ aliases['SFweight'] = {
     'samples': mc
 }
 
+####be carefull that here you are not using the proper JET PU id but the default one
+
 # variations
 aliases['SFweightEleUp'] = {
     'expr': 'LepSF2l__ele_'+eleWP+'__Up',

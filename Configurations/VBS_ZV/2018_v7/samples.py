@@ -199,9 +199,10 @@ files = nanoGetSampleFiles(mcDirectory, 'TTTo2L2Nu') + \
     nanoGetSampleFiles(mcDirectory, 'ST_t-channel_top') + \
     nanoGetSampleFiles(mcDirectory, 'ST_tW_antitop_ext1') + \
     nanoGetSampleFiles(mcDirectory, 'ST_tW_top_ext1') + \
-    nanoGetSampleFiles(mcDirectory,'TTToSemiLeptonic') + \
-    nanoGetSampleFiles(mcDirectory,'TTZjets') + \
-    nanoGetSampleFiles(mcDirectory,'TTWjets')
+    nanoGetSampleFiles(mcDirectory,'TTToSemiLeptonic') 
+    #+ \
+    #nanoGetSampleFiles(mcDirectory,'TTZjets') + \  #this one gives compilatio error with "topGenPt", need to understand why
+    #nanoGetSampleFiles(mcDirectory,'TTWjets')   #these two samples can be considered outside the category "top" to solve this issue...
 
 samples['top'] = {
     'name': files,

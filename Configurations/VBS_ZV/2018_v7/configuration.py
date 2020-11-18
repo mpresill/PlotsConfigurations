@@ -2,7 +2,7 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_29Oct2020'
+date='_18Nov2020_2018'
 
 tag = 'VBS_ZV'+date
 
@@ -45,6 +45,6 @@ outputDirDatacard = '/afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/s
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
-nuisancesFile = 'nuisances.py'
-#nuisancesFile ='nuisances_StatOnly.py'
+#nuisancesFile = 'nuisances.py'
+nuisancesFile ='nuisances_StatOnly.py'
 

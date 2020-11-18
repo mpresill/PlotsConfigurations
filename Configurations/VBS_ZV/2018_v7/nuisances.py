@@ -133,8 +133,8 @@ nuisances['muonpt'] = {
     'AsLnN': '1'
 }
 
-##### Jet energy scale
-"""
+##### Jet energy scale for AK4
+
 nuisances['jes'] = {
     'name': 'CMS_scale_j_2018',
     'kind': 'suffix',
@@ -146,8 +146,8 @@ nuisances['jes'] = {
     'folderDown': makeMCDirectory('JESdo_suffix'),
     'AsLnN': '1'
 }
-"""
-######## JER
+
+######## JER for AK4
 nuisances['jer'] = {
     'name': 'CMS_resolution_j_2018',
     'kind': 'suffix',

@@ -24,6 +24,12 @@ variables['events']  = {   'name': '1',
 #
 # leptons
 #
+variables['pt_lep']  = {   'name': 'Lepton_pt',
+                        'range' : (30,0.,200),
+                        'xaxis' : 'p_{T} lep [GeV]',
+                        'fold'  : 0
+                        }
+
 
 variables['pt1']  = {   'name': 'Alt$(Lepton_pt[0],-9999.)',
                         'range' : (20,0.,200),
@@ -124,6 +130,12 @@ variables['Vjet_mass'] = { 'name': 'Alt$(Vjet_mass,-9999.)',            #   vari
 
 # Fat Jet
 
+variables['nFatJet']  = {
+                        'name': 'nCleanFatJet',     
+                        'range' : (6,0,6),   
+                        'xaxis' : 'Number of FatJets w/ p_{T}>200 GeV',
+                        'fold' : 2   # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
+                        }
 
 
 variables['FatJet_pt']  = {
@@ -138,6 +150,12 @@ variables['FatJet_eta'] = {'name': 'CleanFatJet_eta',
                            'xaxis' : '\eta FatJet',
                            'fold'  : 0
                            }
+                                                                                                                        
+variables['FatJet_tau21'] = {   'name': 'CleanFatJet_tau21',
+                        'range' : (50,0,1),
+                        'xaxis' : '#tau_{21}',
+                        'fold' : 0
+                        }
 
 
 # new variables
@@ -174,7 +192,7 @@ variables['Zlep_2'] = {   'name': '( Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+
                         'fold' : 3
                         }
 
-"""
+
 variables['Zlep_ll'] = {   'name': '  ( Lepton_eta[0]+Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) /detajj_mjjmax',      
                         'range' : (40,-1.5,1.5),  
                         'xaxis' : 'Z^{lep}_{ll}', 
@@ -193,4 +211,14 @@ variables['Zlep_V_boosted'] = {   'name': '  ( CleanFatJet_eta[0] -0.5*(CleanJet
                         'xaxis' : 'Z^{lep}_{V} (boosted)', 
                         'fold' : 3
                         }
-"""
+
+##### invariant mass of Z and V-jet
+
+variables['M_ZV'] = { 'name': "mll+Vjet_mass",
+                             'range': ([0,250,500,750,1000,1200,1500,2000,2500,3000],),  #for 0  < mVV < 3000
+                             'xaxis': 'M_{ZV} [GeV]',
+                             'fold': 3
+                            }
+
+
+

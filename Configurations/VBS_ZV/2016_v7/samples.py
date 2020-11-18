@@ -275,36 +275,43 @@ samples['ggWW'] = {
     'FilesPerJob': 2
 }
 """
+samples['ggWW'] = {
+    'name': nanoGetSampleFiles(mcDirectory, 'GluGluWWTo2L2Nu_MCFM'),
+    'weight': mcCommonWeight + '*1.53/1.4', # updating k-factor
+    'FilesPerJob': 4
+}
 ######## Vg ########
 
-samples['Vg']  = {  'name'   :   nanoGetSampleFiles(mcDirectory,'Wg_MADGRAPHMLM'),
-                               #+ nanoGetSampleFiles(mcDirectory,'ZGToLLG'), CANNOT FIND IT NOW
-                    'weight' : mcCommonWeightNoMatch +'*(Gen_ZGstar_mass <= 0)',
-                    'FilesPerJob' : 6,
-                    'EventsPerJob' : 70000,
-                    'suppressNegative' :['all'],
-                    'suppressNegativeNuisances' :['all'],
-                  }
-#the following baseW correction is needed in v5 and should be removed in v6
-#addSampleWeight(samples,'Vg','ZGToLLG','0.448')
+files = nanoGetSampleFiles(mcDirectory, 'Wg_MADGRAPHMLM') + \
+    nanoGetSampleFiles(mcDirectory, 'Zg')
 
+samples['Vg'] = {
+    'name': files,
+    'weight': mcCommonWeightNoMatch + '*!(Gen_ZGstar_mass > 0)',
+    'FilesPerJob' : 6,
+    'EventsPerJob' : 70000,
+    'suppressNegative' :['all'],
+    'suppressNegativeNuisances' :['all'],
+}
 
-############ VgS ############
+######## VgS ########
 
-samples['VgS']  =  {  'name'   :   nanoGetSampleFiles(mcDirectory,'Wg_MADGRAPHMLM')
-                                 #+ nanoGetSampleFiles(mcDirectory,'ZGToLLG') CANNOT FIND IT NOW
-                                 + nanoGetSampleFiles(mcDirectory,'WZTo3LNu_mllmin01'),
-                      'weight' : mcCommonWeight + ' * (gstarLow * 0.94 + gstarHigh * 1.14)',
-                      'FilesPerJob' : 6,
-                      'EventsPerJob' : 70000,
-                      'suppressNegative' :['all'],
-                      'suppressNegativeNuisances' :['all'],
-                   }
+files = nanoGetSampleFiles(mcDirectory, 'Wg_MADGRAPHMLM') + \
+    nanoGetSampleFiles(mcDirectory, 'Zg') + \
+    nanoGetSampleFiles(mcDirectory, 'WZTo3LNu_mllmin01')
 
-addSampleWeight(samples,'VgS','Wg_MADGRAPHMLM', '(Gen_ZGstar_mass > 0 && Gen_ZGstar_mass < 0.1)')
-#0.448 needed in v5 and should be removed in v6
-#addSampleWeight(samples,'VgS','ZGToLLG', '(Gen_ZGstar_mass > 0)') #*0.448
-addSampleWeight(samples,'VgS','WZTo3LNu_mllmin01', '(Gen_ZGstar_mass > 0.1)')
+samples['VgS'] = {
+    'name': files,
+    'weight': mcCommonWeight + ' * (gstarLow * 0.94 + gstarHigh * 1.14)',
+    'FilesPerJob' : 6,
+    'EventsPerJob' : 70000,
+    'suppressNegative' :['all'],
+    'suppressNegativeNuisances' :['all'],
+}
+
+addSampleWeight(samples, 'VgS', 'Wg_MADGRAPHMLM', '(Gen_ZGstar_mass > 0 && Gen_ZGstar_mass < 0.1)')
+addSampleWeight(samples, 'VgS', 'Zg', '(Gen_ZGstar_mass > 0)')
+addSampleWeight(samples, 'VgS', 'WZTo3LNu_mllmin01', '(Gen_ZGstar_mass > 0.1)')
 
 ############ VZ ############
 
