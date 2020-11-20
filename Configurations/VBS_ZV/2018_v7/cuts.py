@@ -10,7 +10,7 @@ supercut = '   nLepton == 2 \
             && mjj_max > 200 && detajj_mjjmax > 2.5 \
             '
 #I have considered all CleanedJetNotFat, i.e. cleaned from AK8, since in the case in which nCleanFatJet==0 => nCleanJetNotFat = NCleanJet
-cuts['preselection'] = '1.'
+#cuts['preselection'] = '1.'
 
 #######################################
 #
@@ -28,7 +28,9 @@ cuts['Boosted_SR']  = 'vbs_category==0 && nCleanFatJet==1 && Vjet_mass > 65 && V
 
 #cuts['Boosted_DYcr_noBveto']  = 'vbs_category==0 &&  nCleanFatJet==1 && ( Vjet_mass<65 || Vjet_mass>105)  && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
 
-cuts['Boosted_SR_tight']  = 'vbs_category==0 && nCleanFatJet==1 && Vjet_mass > 65 && Vjet_mass<105  && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Lepton_pt[0]>40.&& fabs(Alt$(CleanJet_pt[vbs_jet_0],-9999.))>80. && mjj_max>350'
+cuts['Boosted_SR_tight']  = 'vbs_category==0 && nCleanFatJet==1 && Vjet_mass > 65 && Vjet_mass<105  && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Lepton_pt[0]>40.&& fabs(Alt$(CleanJet_pt[vbs_jet_0],-9999.))>80. && mjj_max>350 && bVeto'
+
+
 
 #######################################
 #
@@ -46,7 +48,7 @@ cuts['Resolved_SR']  = 'vbs_category==1  && bVeto && Vjet_mass >65 && Vjet_mass<
 
 #cuts['Resolved_DYcr_noBveto']  = 'vbs_category==1  && ( Vjet_mass<65 || Vjet_mass>105) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
 
-cuts['Resolved_SR_tight']  = 'vbs_category==1  && Vjet_mass >65 && Vjet_mass<105 && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Lepton_pt[0]>40. && fabs(Alt$(CleanJet_pt[vbs_jet_0],-9999.))>80. && mjj_max>350'
+cuts['Resolved_SR_tight']  = 'vbs_category==1  && Vjet_mass >65 && Vjet_mass<105 && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Lepton_pt[0]>40. && fabs(Alt$(CleanJet_pt[vbs_jet_0],-9999.))>80. && mjj_max>350 && bVeto'
 
 
 

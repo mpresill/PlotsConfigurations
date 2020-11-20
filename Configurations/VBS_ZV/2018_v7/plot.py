@@ -103,6 +103,12 @@ groupPlot['VBS']  = {
               }
 
 
+groupPlot['Fake']  = {
+                  'nameHR' : 'nonprompt',
+                  'isSignal' : 0,
+                  'color': 921,    # kGray + 1
+                  'samples'  : ['Fake']
+}
 
 #plot = {}
 
@@ -153,14 +159,12 @@ plot['VBF-V']  = {
                   'scale'    : 1.   ,
               }
 
-"""
 plot['Fake']  = {  
                 'color': colors['kTeal'],
                 'isSignal' : 0,
                 'isData'   : 0, 
                 'scale'    : 1.0,
             }
-"""
 
 plot['top'] = {   
                  'color': colors['kAzure']-1,

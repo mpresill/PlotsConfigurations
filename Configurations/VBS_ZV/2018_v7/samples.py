@@ -35,7 +35,8 @@ dataReco = 'Run2018_102X_nAODv7_Full2018v7'
 
 mcSteps = 'MCl1loose2018v7__MCCorr2018v7__l2loose__l2tightOR2018v7{var}'
 
-fakeSteps = 'DATAl1loose2018v6__l2loose__fakeW'
+fakeReco = 'Run2018_102X_nAODv7_Full2018v7'
+fakeSteps = 'DATAl1loose2018v7__l2loose__fakeW'
 
 dataSteps = 'DATAl1loose2018v7__l2loose__l2tightOR2018v7'
 
@@ -56,9 +57,8 @@ def makeMCDirectory(var=''):
         return os.path.join(treeBaseDir, mcProduction, mcSteps.format(var=''))
 
 mcDirectory = makeMCDirectory()
-fakeDirectory = os.path.join(treeBaseDir, dataReco, fakeSteps)
 dataDirectory = os.path.join(treeBaseDir, dataReco, dataSteps)
-
+fakeDirectory = os.path.join(treeBaseDir, fakeReco, fakeSteps)
 
 ################################################
 ############ DATA DECLARATION ##################
@@ -199,10 +199,11 @@ files = nanoGetSampleFiles(mcDirectory, 'TTTo2L2Nu') + \
     nanoGetSampleFiles(mcDirectory, 'ST_t-channel_top') + \
     nanoGetSampleFiles(mcDirectory, 'ST_tW_antitop_ext1') + \
     nanoGetSampleFiles(mcDirectory, 'ST_tW_top_ext1') + \
-    nanoGetSampleFiles(mcDirectory,'TTToSemiLeptonic') 
-    #+ \
-    #nanoGetSampleFiles(mcDirectory,'TTZjets') + \  #this one gives compilatio error with "topGenPt", need to understand why
-    #nanoGetSampleFiles(mcDirectory,'TTWjets')   #these two samples can be considered outside the category "top" to solve this issue...
+    nanoGetSampleFiles(mcDirectory,'TTToSemiLeptonic') + \
+    nanoGetSampleFiles(mcDirectory,'TTZjets') + \
+    nanoGetSampleFiles(mcDirectory,'TTWjets')
+#this one gives compilatio error with "topGenPt", need to understand why
+#these two samples can be considered outside the category "top" to solve this issue...
 
 samples['top'] = {
     'name': files,
@@ -335,17 +336,16 @@ samples['VBF-V'] = {
     'weight': mcCommonWeight,
     'FilesPerJob': 2
 }
-
 ###########################################
 ################## FAKE ###################
 ###########################################
-"""
+
 samples['Fake'] = {
   'name': [],
   'weight': 'METFilter_DATA*fakeW',
   'weights': [],
   'isData': ['all'],
-  'FilesPerJob': 80
+  'FilesPerJob': 50
 }
 
 for _, sd in DataRun:
@@ -354,12 +354,9 @@ for _, sd in DataRun:
     samples['Fake']['name'].extend(files)
     samples['Fake']['weights'].extend([DataTrig[pd]] * len(files))
 
-samples['Fake']['subsamples'] = {
-  'em': 'abs(Lepton_pdgId[0]) == 11',
-  'me': 'abs(Lepton_pdgId[0]) == 13'
-}
-"""
-###########################################
+
+
+##########################################
 ################## DATA ###################
 ###########################################
 

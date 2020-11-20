@@ -16,12 +16,10 @@ structure['WJets']  = {
                   'isSignal' : 0,
                   'isData'   : 0 
               }
-"""
 structure['Fake']  = {  
                   'isSignal' : 0,
                   'isData'   : 0 
               }
-"""
 
 structure['top'] = {   
                   'isSignal' : 0,
