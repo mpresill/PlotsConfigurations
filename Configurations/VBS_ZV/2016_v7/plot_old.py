@@ -47,17 +47,16 @@ Colors
 "Wjets4": (229, 94, 41), #e55e29
 "Wjets5": (211, 87, 38), #d34912 
 '''
-#
- 
+# 
 
+#VBS-F missing
 groupPlot['vbfV+VV+VVV']  = {  
-                  'nameHR' : 'vbfV+VV+VVV',
+                  'nameHR' : 'VV+VVV',
                   'isSignal' : 0,
                   'color': palette["MediumBlue2"],  
-                  'samples'  : ['VVV', 'VZ','WW','ggWW'], #,'VBS_VV_QCD','VBF-F', not present here
+                  'samples'  : ['VVV', 'VZ','WW'],
                   'fill': 1001
               }
-
 groupPlot['Vg+VgS']  = {  
                   'nameHR' : "V#gamma+V#gamma*",
                   'isSignal' : 0,
@@ -65,7 +64,6 @@ groupPlot['Vg+VgS']  = {
                   'samples'  : ['Vg','VgS'],
                   'fill': 1001
               }
-
 groupPlot['DY']  = {  
                 'nameHR' : "DY",
                 'isSignal' : 0,
@@ -103,12 +101,6 @@ groupPlot['VBS']  = {
               }
 """
 
-groupPlot['Fake']  = {
-                  'nameHR' : 'nonprompt',
-                  'isSignal' : 0,
-                  'color': 921,    # kGray + 1
-                  'samples'  : ['Fake']
-}
 
 #plot = {}
 
@@ -159,12 +151,14 @@ plot['VBF-V']  = {
                   'scale'    : 1.   ,
               }
 """
+"""
 plot['Fake']  = {  
                 'color': colors['kTeal'],
                 'isSignal' : 0,
                 'isData'   : 0, 
                 'scale'    : 1.0,
             }
+"""
 
 plot['top'] = {   
                  'color': colors['kAzure']-1,
@@ -225,7 +219,6 @@ plot['DATA']  = {
                  'isData'   : 1 ,
                  'isBlind'  : 0
              }
-
 
 
 

@@ -35,7 +35,8 @@ dataReco = 'Run2017_102X_nAODv7_Full2017v7'
 
 mcSteps = 'MCl1loose2017v7__MCCorr2017v7__l2loose__l2tightOR2017v7{var}'
 
-fakeSteps = 'DATAl1loose2018v6__l2loose__fakeW'
+fakeReco = 'Run2017_102X_nAODv7_Full2017v7'
+fakeSteps = 'DATAl1loose2017v7__l2loose__fakeW'
 
 dataSteps = 'DATAl1loose2017v7__l2loose__l2tightOR2017v7'
 
@@ -56,7 +57,7 @@ def makeMCDirectory(var=''):
         return os.path.join(treeBaseDir, mcProduction, mcSteps.format(var=''))
 
 mcDirectory = makeMCDirectory()
-fakeDirectory = os.path.join(treeBaseDir, dataReco, fakeSteps)
+fakeDirectory = os.path.join(treeBaseDir, fakeReco, fakeSteps)
 dataDirectory = os.path.join(treeBaseDir, dataReco, dataSteps)
 
 
@@ -361,7 +362,24 @@ samples['VBF-V'] = {
     'weight': mcCommonWeight,
     'FilesPerJob': 2
 }
+ 
+###########################################
+################## FAKE ###################
+###########################################
 
+samples['Fake'] = {
+  'name': [],
+  'weight': 'METFilter_DATA*fakeW',
+  'weights': [],
+  'isData': ['all'],
+  'FilesPerJob': 30
+}
+
+for _, sd in DataRun:
+  for pd in DataSets:
+    files = nanoGetSampleFiles(fakeDirectory, pd + '_' + sd)
+    samples['Fake']['name'].extend(files)
+    samples['Fake']['weights'].extend([DataTrig[pd]] * len(files))
 
 ###########################################
 ################## DATA ###################
@@ -379,4 +397,3 @@ for _, sd in DataRun:
     files = nanoGetSampleFiles(dataDirectory, pd + '_' + sd)
     samples['DATA']['name'].extend(files)
     samples['DATA']['weights'].extend([DataTrig[pd]] * len(files))
-

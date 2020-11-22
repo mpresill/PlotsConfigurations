@@ -24,13 +24,12 @@ variables['events']  = {   'name': '1',
 #
 # leptons
 #
-"""
 variables['pt_lep']  = {   'name': 'Lepton_pt',
                         'range' : (30,0.,200),
                         'xaxis' : 'p_{T} lep [GeV]',
                         'fold'  : 0
                         }
-"""
+
 
 variables['pt1']  = {   'name': 'Alt$(Lepton_pt[0],-9999.)',
                         'range' : (20,0.,200),
@@ -41,12 +40,6 @@ variables['pt2']  = {   'name': 'Alt$(Lepton_pt[1],-9999.)',
                         'range' : (20,0.,200),
                         'xaxis' : 'p_{T} 2nd lep [GeV]',
                         'fold' :3
-                        }
-
-variables['ptll']  = {   'name': 'ptll',     
-                        'range' : (20, 0,200),   
-                        'xaxis' : 'p_{T}^{ll} [GeV]',
-                        'fold' : 0
                         }
 
 
@@ -187,7 +180,6 @@ variables['dphijj_mjjmax']  = {   'name': 'dphijj_mjjmax',            #   variab
 
 
 #Zeppenfeld variables
-"""
 variables['Zlep_1'] = {   'name': '( Lepton_eta[0]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',      
                         'range' : (40,-1.5,1.5),  
                         'xaxis' : 'Z^{lep}_{l1}', 
@@ -199,11 +191,34 @@ variables['Zlep_2'] = {   'name': '( Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+
                         'xaxis' : 'Z^{lep}_{l2}', 
                         'fold' : 3
                         }
-"""
+
 
 variables['Zlep_ll'] = {   'name': '  ( Lepton_eta[0]+Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) /detajj_mjjmax',      
                         'range' : (40,-1.5,1.5),  
                         'xaxis' : 'Z^{lep}_{ll}', 
                         'fold' : 3
                         }
+
+
+variables['Zlep_V_res'] = {   'name': '  ( CleanJet_eta[v_jet_0]+CleanJet_eta[v_jet_1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) /detajj_mjjmax',      
+                        'range' : (40,-1.5,-1.5),  
+                        'xaxis' : 'Z^{lep}_{V} (resolved)', 
+                        'fold' : 3
+                        }
+
+variables['Zlep_V_boosted'] = {   'name': '  ( CleanFatJet_eta[0] -0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) /detajj_mjjmax',      
+                        'range' : (40,-1.5,-1.5),  
+                        'xaxis' : 'Z^{lep}_{V} (boosted)', 
+                        'fold' : 3
+                        }
+
+##### invariant mass of Z and V-jet
+
+variables['M_ZV'] = { 'name': "mll+Vjet_mass",
+                             'range': ([0,250,500,750,1000,1200,1500,2000,2500,3000],),  #for 0  < mVV < 3000
+                             'xaxis': 'M_{ZV} [GeV]',
+                             'fold': 3
+                            }
+
+
 

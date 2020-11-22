@@ -2,12 +2,14 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_17Nov2020'
+date='_22Nov2020_2016'
 
 tag = 'VBS_ZV'+date
 
 # used by mkShape to define output directory for root files
 outputDir = 'rootFile'+date
+#change path to: /eos/user/m/mpresill/www/VBS/2016_v7
+
 
 # file with TTree aliases
 aliasesFile = 'aliases.py'
@@ -45,5 +47,5 @@ outputDirDatacard = '/afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/s
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
-#nuisancesFile = 'nuisances.py'
-nuisancesFile ='nuisances_StatOnly.py'
+nuisancesFile = 'nuisances.py'
+#nuisancesFile ='nuisances_StatOnly.py'
