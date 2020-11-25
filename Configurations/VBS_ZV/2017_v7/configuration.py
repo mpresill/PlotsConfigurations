@@ -7,7 +7,7 @@ date='_22Nov2020_2017_v2'
 tag = 'VBS_ZV'+date
 
 # used by mkShape to define output directory for root files
-outputDir = '/eos/user/m/mpresill/www/VBS/2017_v7/rootFile'+date
+outputDir = 'rootFile'+date
 
 # file with TTree aliases
 aliasesFile = 'aliases.py'
