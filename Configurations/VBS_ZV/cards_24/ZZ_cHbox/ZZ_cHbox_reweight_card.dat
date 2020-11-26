@@ -1,0 +1,15 @@
+change helicity False
+change rwgt_dir rwgt
+# 24 cHbox
+launch
+    set frblock 24 7.0
+launch
+    set frblock 24 -7.0
+launch
+    set frblock 24 14.0
+launch
+    set frblock 24 -14.0
+launch
+    set frblock 24 21.0
+launch
+    set frblock 24 -21.0
