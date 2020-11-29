@@ -1,0 +1,13 @@
+change helicity False
+change rwgt_dir rwgt
+# 21 cW
+launch
+    set frblock 21 0.0
+launch
+    set frblock 21 -0.25
+launch
+    set frblock 21 0.25
+launch
+    set frblock 21 -0.5
+launch
+    set frblock 21 0.5
