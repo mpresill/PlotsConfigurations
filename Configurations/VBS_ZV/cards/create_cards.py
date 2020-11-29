@@ -148,6 +148,8 @@ if __name__ == "__main__":
                 m.write('set ms_dir ./madspingrid\n')
                 m.write('set BW_cut 15 # cut on how far the particle can be off-shell\n')
                 m.write('set max_running_process 1\n')
+                m.write('define p = g u c d s b u~ c~ d~ s~ b~\n')
+                m.write('define j = p\n')
                 m.write('define l+ = e+ mu+ ta+\n')
                 m.write('define l- = e- mu- ta-\n')
                 m.write('define vl = ve vm vt\n')
