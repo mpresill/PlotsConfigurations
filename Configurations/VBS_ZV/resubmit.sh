@@ -2,9 +2,9 @@
 #!/bin/bash
 
 set -e 
-DATE=_22June2020
+DATE=_12Nov2020
 DIR=$PWD
-JOB="/afs/cern.ch/work/m/mpresill/Latino/jobs"
+JOB="/afs/cern.ch/user/a/ahakimi/cms/HWW2015/jobs"
 QUEUE="longlunch" #
 #QUEUE="workday" 
 #QUEUE="testmatch"

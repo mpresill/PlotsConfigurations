@@ -38,21 +38,28 @@ protected:
 
 
   FloatValueReader* mll{};
-  DoubleValueReader* Zlep_1{};
-  DoubleValueReader* Zlep_2{};
-  DoubleValueReader* vbs_jet_pt1{};
-  DoubleValueReader* vbs_jet_pt2{};
-  DoubleValueReader* vbs_jet_eta1{};
-  DoubleValueReader* vbs_jet_eta2{};
-  DoubleValueReader* V_jet_pt1{};
-  DoubleValueReader* V_jet_pt2{};
-  DoubleValueReader* V_jet_eta1{};
-  DoubleValueReader* V_jet_eta2{};
+  //DoubleValueReader* Zlep_1{};
+  //DoubleValueReader* Zlep_2{};
+  //DoubleValueReader* vbs_jet_pt1{};
+  //DoubleValueReader* vbs_jet_pt2{};
+  //DoubleValueReader* vbs_jet_eta1{};
+  //DoubleValueReader* vbs_jet_eta2{};
+  //DoubleValueReader* V_jet_pt1{};
+  //DoubleValueReader* V_jet_pt2{};
+  //DoubleValueReader* V_jet_eta1{};
+  //DoubleValueReader* V_jet_eta2{};
   DoubleValueReader* mjj_max{};
   DoubleValueReader* detajj_mjjmax{};
   DoubleValueReader* V_jet_mass{};
   FloatArrayReader* Lepton_pt{};
   FloatArrayReader* Lepton_eta{};
+  DoubleValueReader* vbs_jet_0{};
+  DoubleValueReader* vbs_jet_1{};
+  FloatArrayReader* CleanJet_pt{};
+  FloatArrayReader* CleanJet_eta{};
+  DoubleValueReader* v_jet_0{};
+  DoubleValueReader* v_jet_1{};
+  DoubleValueReader* vbs_category{};
   //  IntValueReader* VBS_category{};
   //  FloatArrayReader* Lepton_pt{};
   //  FloatArrayReader* Lepton_eta{};
@@ -84,11 +91,19 @@ double
 MVAReaderResolved_v70::evaluate(unsigned)
 {
   // Run only if 
-//  if ( *(VBS_category->Get()) != category_) {
- //   return -999.;
-  //}
+int category = (int)  *(vbs_category->Get());
+if ( category != 1) {
+    return -999.;
+  }else{
+  int vbs_jet1 = (int) *(vbs_jet_0->Get()) ;
+  int vbs_jet2 = (int) *(vbs_jet_1->Get()) ;
+  int v_jet1 = (int) *(v_jet_0->Get()) ;
+  int v_jet2 = (int) *(v_jet_1->Get()) ;
+  float Zlep_1 = (Lepton_eta->At(0))-0.5*((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2))) / *(detajj_mjjmax->Get());
+  float Zlep_2 = (Lepton_eta->At(1))-0.5*((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2))) / *(detajj_mjjmax->Get());
 
-  std::vector<float> input{};
+
+ std::vector<float> input{};
 
 
   input.push_back( (Lepton_pt->At(0)) );
@@ -96,16 +111,32 @@ MVAReaderResolved_v70::evaluate(unsigned)
   input.push_back( (Lepton_eta->At(0)));
   input.push_back( (Lepton_eta->At(1)));
   input.push_back( *(mll->Get()) );
-  input.push_back( *(Zlep_1->Get()) );
-  input.push_back( *(Zlep_2->Get()) );
-  input.push_back( *(vbs_jet_pt1->Get()) );
-  input.push_back( *(vbs_jet_pt2->Get()) );
-  input.push_back( *(vbs_jet_eta1->Get()) );
-  input.push_back( *(vbs_jet_eta2->Get()) );
-  input.push_back( *(V_jet_pt1->Get()) );
-  input.push_back( *(V_jet_pt2->Get()) );
-  input.push_back( *(V_jet_eta1->Get()) );
-  input.push_back( *(V_jet_eta2->Get()) );
+  input.push_back( Zlep_1 );
+  input.push_back( Zlep_2 );
+  //input.push_back( *(vbs_jet_pt1->Get()) );
+  //input.push_back( *(vbs_jet_pt2->Get()) );
+  //input.push_back( *(vbs_jet_eta1->Get()) );
+  //input.push_back( *(vbs_jet_eta2->Get()) );
+  //input.push_back( (CleanJet_pt->At(vbs_jet_0)) );
+  //input.push_back( (CleanJet_pt->At(vbs_jet_1)) );
+  //input.push_back( (CleanJet_eta->At(vbs_jet_0)) );
+  //input.push_back( (CleanJet_eta->At(vbs_jet_1)) );
+  input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
+  input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
+  input.push_back( (CleanJet_eta -> At(vbs_jet1)) );
+  input.push_back( (CleanJet_eta -> At(vbs_jet2)) );
+//input.push_back( *(V_jet_pt1->Get()) );
+  //input.push_back( *(V_jet_pt2->Get()) );
+  //input.push_back( *(V_jet_eta1->Get()) );
+  //input.push_back( *(V_jet_eta2->Get()) );
+  //input.push_back( (CleanJet_pt->At(v_jet_0)) );
+  //input.push_back( (CleanJet_pt->At(v_jet_1)) );
+  //input.push_back( (CleanJet_eta->At(v_jet_0)) );
+  //input.push_back( (CleanJet_eta->At(v_jet_1)) );
+  input.push_back( (CleanJet_pt -> At(v_jet1)) );
+  input.push_back( (CleanJet_pt -> At(v_jet2)) );
+  input.push_back( (CleanJet_eta -> At(v_jet1)) );
+  input.push_back( (CleanJet_eta -> At(v_jet2)) );  
   input.push_back( *(mjj_max->Get()) );
   input.push_back( *(detajj_mjjmax->Get()) );
   input.push_back( *(V_jet_mass->Get()) );
@@ -124,7 +155,7 @@ MVAReaderResolved_v70::evaluate(unsigned)
   //input.push_back( TMath::Abs((float)Lepton_flavour->At(0) ));
 
   return dnn_tensorflow->analyze(input);
-  
+ }  
 }
 
 void
@@ -147,20 +178,26 @@ MVAReaderResolved_v70::bindTree_(multidraw::FunctionLibrary& _library)
   _library.bindBranch(Lepton_pt, "Lepton_pt");
   _library.bindBranch(Lepton_eta, "Lepton_eta");
   _library.bindBranch(mll, "mll");
-  _library.bindBranch(Zlep_1, "Zlep_1");
-  _library.bindBranch(Zlep_2, "Zlep_2");
-  _library.bindBranch(vbs_jet_pt1, "vbs_jet_pt1");
-  _library.bindBranch(vbs_jet_pt2, "vbs_jet_pt2");
-  _library.bindBranch(vbs_jet_eta1, "vbs_jet_eta1");
-  _library.bindBranch(vbs_jet_eta2, "vbs_jet_eta2");
-  _library.bindBranch(V_jet_pt1, "V_jet_pt1");
-  _library.bindBranch(V_jet_pt2, "V_jet_pt2");
-  _library.bindBranch(V_jet_eta1, "V_jet_eta1");
-  _library.bindBranch(V_jet_eta2, "V_jet_eta2");
+  //_library.bindBranch(Zlep_1, "Zlep_1");
+  //_library.bindBranch(Zlep_2, "Zlep_2");
+  //_library.bindBranch(vbs_jet_pt1, "vbs_jet_pt1");
+  //_library.bindBranch(vbs_jet_pt2, "vbs_jet_pt2");
+  //_library.bindBranch(vbs_jet_eta1, "vbs_jet_eta1");
+  //_library.bindBranch(vbs_jet_eta2, "vbs_jet_eta2");
+  //_library.bindBranch(V_jet_pt1, "V_jet_pt1");
+  //_library.bindBranch(V_jet_pt2, "V_jet_pt2");
+  //_library.bindBranch(V_jet_eta1, "V_jet_eta1");
+  //_library.bindBranch(V_jet_eta2, "V_jet_eta2");
+  _library.bindBranch(CleanJet_eta, "CleanJet_eta");
+  _library.bindBranch(CleanJet_pt, "CleanJet_pt");
+  _library.bindBranch(vbs_jet_0, "vbs_jet_0");
+  _library.bindBranch(vbs_jet_1, "vbs_jet_1");
+  _library.bindBranch(v_jet_0, "v_jet_0");
+  _library.bindBranch(v_jet_1, "v_jet_1");
   _library.bindBranch(mjj_max, "mjj_max");
   _library.bindBranch(detajj_mjjmax, "detajj_mjjmax");
   _library.bindBranch(V_jet_mass, "V_jet_mass");
-
+  _library.bindBranch(vbs_category, "vbs_category");
 
   // _library.addDestructorCallback([&]() {
   //       VBS_category = nullptr;
