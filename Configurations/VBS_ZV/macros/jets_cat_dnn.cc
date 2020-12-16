@@ -42,12 +42,6 @@ float deltaPhi(float phi1, float phi2){
     return 2*3.14159265-PHI;
 }
 
-//float deltaR(float phi1, float eta1, float phi2, float eta2) {
-  //return sqrt((eta2-eta1)**2+deltaPhi(phi1,phi2)**2);
-//  return sqrt( pow((eta2-eta1),2) + pow(deltaPhi(phi1,phi2),2) );
-//}
- //--- end functions Helper
-
 
 class jets_cat_dnn : public multidraw::TTreeFunction {
 public:
@@ -62,7 +56,6 @@ public:
 
 protected:
   bool verbose;
-  void bindTree_(multidraw::FunctionLibrary&) override;
   
   DNNEvaluator* dnn_tensorflow_boosted;
   DNNEvaluator* dnn_tensorflow_resolved;
@@ -110,9 +103,9 @@ protected:
   static FloatArrayReader* CleanJet_pt;
   static FloatArrayReader* CleanJet_eta;
   static FloatArrayReader* CleanJet_phi;
-  static FloatArrayReader* Lepton_pt{};
-  static FloatArrayReader* Lepton_eta{};
-  static FoatValueReader*  mll{};
+  static FloatArrayReader* Lepton_pt;
+  static FloatArrayReader* Lepton_eta;
+  static FoatValueReader*  mll;
   static std::array<double, nVarTypes> returnValues;
 
   static void setValues(UInt_t, UInt_t, ULong64_t);
@@ -148,7 +141,7 @@ std::array<double, jets_cat_dnn::nVarTypes> jets_cat_dnn::returnValues{};
 // function Helper ---
 
 
-jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year):
+jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* model_dir, bool verbose):
    TTreeFunction(){
      
     std::string type(_type);
@@ -303,9 +296,9 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
     // Now we have the njets
     // Check if boosted
     if (nFJ >= 1){
-      cout << "Boosted" << endl;
-      category = 0;
-      Vjet_mass_max = FatJet_mass->At(0);
+        cout << "Boosted" << endl;
+        category = 0;
+        Vjet_mass_max = FatJet_mass->At(0);
 
     }else if (njet>=4)
     { 
@@ -371,8 +364,8 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
       int vbs_jet1 = CleanJetNotFat_jetId->At(VBS_jets[0]);
       int vbs_jet2 = CleanJetNotFat_jetId->At(VBS_jets[1]);
 
-      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / *(detajj_mjjmax->Get());
-      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / *(detajj_mjjmax->Get());
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj_mjj_max;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj_mjj_max;
 
       std::vector<float> input{};
 
