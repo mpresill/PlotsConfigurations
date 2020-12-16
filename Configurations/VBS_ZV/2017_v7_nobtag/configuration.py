@@ -2,7 +2,7 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_10Dec2020_2018_nobtag'
+date='_10Dic2020_2017_nobtag'
 
 tag = 'VBS_ZV'+date
 
@@ -23,23 +23,19 @@ cutsFile = 'cuts.py'
 #samplesFile = 'samples_test.py'
 samplesFile = 'samples.py'
 
-
 # file with list of samples
 #plotFile = 'plot_sig.py'
 plotFile = 'plot.py'
 
-
 # luminosity to normalize to (in 1/fb)
-lumi = 59.74
+lumi = 41.53
 
 # used by mkPlot to define output directory for plots
 # different from "outputDir" to do things more tidy
-outputDirPlots = '/eos/user/m/mpresill/www/VBS/2018_v7/PlotsVBS_ZV'+date
-
+outputDirPlots = '/eos/user/m/mpresill/www/VBS/2017_v7/PlotsVBS_ZV'+date
 
 # used by mkDatacards to define output directory for datacards: common vbs-italia github folder : /afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/2017_v7/
 outputDirDatacard = '/afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/'+date
-
 
 # structure file for datacard
 structureFile = 'structure.py'
@@ -47,4 +43,3 @@ structureFile = 'structure.py'
 # nuisances file for mkDatacards and for mkShape
 nuisancesFile = 'nuisances.py'
 #nuisancesFile ='nuisances_StatOnly.py'
-

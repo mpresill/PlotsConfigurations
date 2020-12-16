@@ -54,7 +54,7 @@ groupPlot['vbfV+VV+VVV']  = {
                   'nameHR' : 'vbfV+VV+VVV',
                   'isSignal' : 0,
                   'color': palette["MediumBlue2"],  
-                  'samples'  : ['VVV', 'VZ','WW','ggWW'], #,'VBS_VV_QCD','VBF-F', not present here
+                  'samples'  : ['VVV', 'VZ','WW','ggWW','VBS_VV_QCD'], #,'VBS_VV_QCD','VBF-F', not present here
                   'fill': 1001
               }
 
@@ -93,7 +93,7 @@ groupPlot['WJets']  = {
                   'fill': 1001
 
               }
-"""
+
 groupPlot['VBS']  = {  
                  'nameHR' : 'VBS',
                  'isSignal' : 1,
@@ -101,7 +101,7 @@ groupPlot['VBS']  = {
                  'samples'  : ['VBS_ZV'],
                  'fill': 1001
               }
-"""
+
 
 groupPlot['Fake']  = {
                   'nameHR' : 'nonprompt',
@@ -136,13 +136,15 @@ plot['DY']  = {
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
                 'isData'   : 0, 
-		'cuts': {
-                        "Resolved_DYcr":1.15,
-                        "Resolved_SR":1.15,
-                        "Resolved_SR_tight":1.15,
-                }
-
-                #'scale'    : 0.65,
+                'cuts': {
+                        "Boosted_DYcr":0.93,
+                        "Boosted_SR":0.93,
+                        "Boosted_SR_tight":0.93,
+                        "Resolved_DYcr":1.14,
+                        "Resolved_SR":1.14,
+                        "Resolved_SR_tight":1.14,
+                }             
+   #'scale'    : 0.65,
             }
 
 plot['Vg']  = { 
@@ -176,7 +178,15 @@ plot['top'] = {
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                # 'scale'    : 0.92,
+                 'cuts': {
+                        "Boosted_topcr":0.8,
+                        "Boosted_SR":0.8,
+                        "Boosted_SR_tight":0.8,
+                        "Resolved_topcr":1.06,
+                        "Resolved_SR":1.06,
+                        "Resolved_SR_tight":1.06,
+                } 
+		# 'scale'    : 0.92,
                 #  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
@@ -214,14 +224,30 @@ plot['WJets']  = {
                 #       "res_topcr_mjjincl_dnnhigh_ele":1.413,
                 #   }
               }
-"""
+
 plot['VBS_ZV']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-"""
+
+
+plot['VBS_VV_QCD']  = {
+                  'color': colors["kCyan"]+4,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+plot['ggWW']  = {
+                  'color': colors["kCyan"]+4,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+
 # # data
 
 plot['DATA']  = { 

@@ -82,8 +82,7 @@ groupPlot['top']  = {
                  'color':  palette["Orange"],  
                  'samples'  : ['top'],
                  'fill': 1001
-             }
-
+}
 
 groupPlot['WJets']  = {  
                   'nameHR' : 'W+Jets',
@@ -131,11 +130,45 @@ plot['VZ']  = {
               }   
          
 
+plot['WW']  = {
+                  'color': colors['kGreen']+3,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+
+
+plot['ggWW']  = {
+                  'color': colors['kGreen']+3,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+
+
+plot['VBS_VV_QCD']  = {
+                  'color': colors['kGreen']+3,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+
 
 plot['DY']  = {  
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
-                'isData'   : 0, 
+                'isData'   : 0,
+                'cuts': {
+                        "Boosted_DYcr":0.7,
+                        "Boosted_SR":0.7,
+                        "Boosted_SR_tight":0.7,
+                        "Resolved_DYcr":1.06,
+                        "Resolved_SR":1.06,
+                        "Resolved_SR_tight":1.06,
+                } 
                 #'scale'    : 0.65,
             }
 
@@ -170,7 +203,14 @@ plot['top'] = {
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                # 'scale'    : 0.92,
+                 'cuts': {
+                        "Boosted_topcr":0.9,
+                        "Boosted_SR":0.9,
+                        "Boosted_SR_tight":0.9,
+                        "Resolved_topcr":0.9,
+                        "Resolved_SR":0.9,
+                        "Resolved_SR_tight":0.9,
+                }               # 'scale'    : 0.92,
                 #  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,

@@ -32,47 +32,49 @@ HiggsXS = HiggsXSection()
 
 #### Luminosity
 
-#nuisances['lumi'] = {
-#    'name': 'lumi_13TeV_2018',
-#    'type': 'lnN',
-#    'samples': dict((skey, '1.023') for skey in mc if skey not in ['WW', 'top', 'DY'])
-#}
-
 nuisances['lumi_Uncorrelated'] = {
-    'name': 'lumi_13TeV_2018',
+    'name': 'lumi_13TeV_2016',
     'type': 'lnN',
-    'samples': dict((skey, '1.015') for skey in mc if skey not in ['WW', 'top', 'DY'])
+    'samples': dict((skey, '1.022') for skey in mc if skey not in ['WW', 'top', 'DY'])
 }
 
 nuisances['lumi_XYFact'] = {
     'name': 'lumi_13TeV_XYFact',
     'type': 'lnN',
-    'samples': dict((skey, '1.02') for skey in mc if skey not in ['WW', 'top', 'DY'])
+    'samples': dict((skey, '1.009') for skey in mc if skey not in ['WW', 'top', 'DY'])
 }
 
-nuisances['lumi_LScale'] = {
-    'name': 'lumi_13TeV_LSCale',
+nuisances['lumi_BBDefl'] = {
+    'name': 'lumi_13TeV_BBDefl',
     'type': 'lnN',
-    'samples': dict((skey, '1.002') for skey in mc if skey not in ['WW', 'top', 'DY'])
+    'samples': dict((skey, '1.004') for skey in mc if skey not in ['WW', 'top', 'DY'])
 }
 
-nuisances['lumi_CurrCalib'] = {
-    'name': 'lumi_13TeV_CurrCalib',
+nuisances['lumi_DynBeta'] = {
+    'name': 'lumi_13TeV_DynBeta',
     'type': 'lnN',
-    'samples': dict((skey, '1.002') for skey in mc if skey not in ['WW', 'top', 'DY'])
+    'samples': dict((skey, '1.005') for skey in mc if skey not in ['WW', 'top', 'DY'])
+}
+
+nuisances['lumi_Ghosts'] = {
+    'name': 'lumi_13TeV_Ghosts',
+    'type': 'lnN',
+    'samples': dict((skey, '1.004') for skey in mc if skey not in ['WW', 'top', 'DY'])
 }
 
 #### FAKES
 nuisances['fake_syst'] = {
-    'name': 'CMS_fake_syst_em',
+    'name': 'CMS_fake_syst',
     'type': 'lnN',
     'samples': {
         'Fake': '1.3'
     },
+    #'cutspost': lambda self, cuts: [cut for cut in cuts if '20em' not in cut],
+    #'perRecoBin': True
 }
 
 nuisances['fake_ele'] = {
-    'name': 'CMS_fake_e_2018',
+    'name': 'CMS_fake_e_2016',
     'kind': 'weight',
     'type': 'shape',
     'samples': {
@@ -81,7 +83,7 @@ nuisances['fake_ele'] = {
 }
 
 nuisances['fake_ele_stat'] = {
-    'name': 'CMS_fake_stat_e_2018',
+    'name': 'CMS_fake_stat_e_2016',
     'kind': 'weight',
     'type': 'shape',
     'samples': {
@@ -90,7 +92,7 @@ nuisances['fake_ele_stat'] = {
 }
 
 nuisances['fake_mu'] = {
-    'name': 'CMS_fake_m_2018',
+    'name': 'CMS_fake_m_2016',
     'kind': 'weight',
     'type': 'shape',
     'samples': {
@@ -99,7 +101,7 @@ nuisances['fake_mu'] = {
 }
 
 nuisances['fake_mu_stat'] = {
-    'name': 'CMS_fake_stat_m_2018',
+    'name': 'CMS_fake_stat_m_2016',
     'kind': 'weight',
     'type': 'shape',
     'samples': {
@@ -114,60 +116,70 @@ nuisances['fake_mu_stat'] = {
 trig_syst = ['((TriggerEffWeight_2l_u)/(TriggerEffWeight_2l))*(TriggerEffWeight_2l>0.02) + (TriggerEffWeight_2l<=0.02)', '(TriggerEffWeight_2l_d)/(TriggerEffWeight_2l)']
 
 nuisances['trigg'] = {
-    'name': 'CMS_eff_hwwtrigger_2018',
+    'name': 'CMS_eff_hwwtrigger_2016',
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, trig_syst) for skey in mc), 
 }
 
 
+####### Pre firing 2016 syst
+prefire_syst = ['PrefireWeight_Up/PrefireWeight', 'PrefireWeight_Down/PrefireWeight']
 
-##### Electron Efficiency and energy scale   REMOVED VBS EW AND QCD FOR THE MOMENT
+nuisances['prefire'] = {
+    'name': 'CMS_eff_prefiring_2016',
+    'kind': 'weight',
+    'type': 'shape',
+    'samples': dict((skey, prefire_syst) for skey in mc), 
+
+}
+
+##### Electron Efficiency and energy scale
+
 nuisances['eff_e'] = {
-    'name': 'CMS_eff_e_2018',
+    'name': 'CMS_eff_e_2016',
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
 }
 
 nuisances['electronpt'] = {
-    'name': 'CMS_scale_e_2018',
+    'name': 'CMS_scale_e_2016',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+    'samples': dict((skey, ['1', '1']) for skey in mc),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
     'AsLnN': '1'
 }
 
-##### Muon Efficiency and energy scale  REMOVED VBS EW AND QCD FOR THE MOMENT
+##### Muon Efficiency and energy scale
 
 nuisances['eff_m'] = {
-    'name': 'CMS_eff_m_2018',
+    'name': 'CMS_eff_m_2016',
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['SFweightMuUp', 'SFweightMuDown']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
 }
 
 nuisances['muonpt'] = {
-    'name': 'CMS_scale_m_2018',
+    'name': 'CMS_scale_m_2016',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+    'samples': dict((skey, ['1', '1']) for skey in mc),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
     'AsLnN': '1'
 }
 
-
-##### Jet energy scale for AK4
+##### Jet energy scale for AK4   MANY OF THESE ARE UNDER PROCESSING AGAIN....
 """
 nuisances['jes'] = {
-    'name': 'CMS_scale_j_2018',
+    'name': 'CMS_scale_j_2016',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'JESup',
@@ -178,9 +190,10 @@ nuisances['jes'] = {
     'AsLnN': '1'
 }
 
-######## JER for AK4
+######## Jet energy resolution for AK4
+
 nuisances['jer'] = {
-    'name': 'CMS_resolution_j_2018',
+    'name': 'CMS_resolution_j_2016',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'JERup',
@@ -191,24 +204,23 @@ nuisances['jer'] = {
     'AsLnN': '1'
 }
 """
-#####missing JER/JES for AK8
-
-
 ##### Pileup
 nuisances['PU'] = {
-    'name': 'CMS_PU_2018',
+    'name': 'CMS_PU_2016',
     'kind': 'weight',
     'type': 'shape',
     'samples': {
         'DY': ['0.993259983266*(puWeightUp/puWeight)', '0.997656381501*(puWeightDown/puWeight)'],
         'top': ['1.00331969187*(puWeightUp/puWeight)', '0.999199609528*(puWeightDown/puWeight)'],
         'WW': ['1.0033022059*(puWeightUp/puWeight)', '0.997085330608*(puWeightDown/puWeight)'],
-            },
+    },
     'AsLnN': '1',
 }
 
 
-##### PS
+##### PS and UE missing
+##### PS: taken from 2017, need to update to 2016
+
 nuisances['PS_ISR']  = {
     'name': 'PS_ISR',
     'kind': 'weight',
@@ -243,14 +255,16 @@ nuisances['PS_FSR']  = {
 # An overall 1.5% UE uncertainty will cover all the UEup/UEdo variations
 # And we don't observe any dependency of UE variations on njet
 nuisances['UE']  = {
-                'name'  : 'UE_CP5',
+                'name'  : 'UE_CUET',
                 'skipCMS' : 1,
                 'type': 'lnN',
-                'samples': dict((skey, '1.015') for skey in mc), 
+                'samples': dict((skey, '1.015') for skey in mc),
 }
 
+
+
 ####### Generic "cross section uncertainties"
-"""
+""" #this one maybe can be resumed with no issues
 apply_on = {
     'top': [
         '(topGenPt * antitopGenPt <= 0.) * 1.0816 + (topGenPt * antitopGenPt > 0.)',
@@ -292,6 +306,8 @@ nuisances['VZ'] = {
     }
 }
 
+## PDF
+
 nuisances['pdf']  = {
                'name'  : 'pdf',
                'type'  : 'lnN',
@@ -306,12 +322,9 @@ nuisances['pdf']  = {
               }
 
 
-
-
 ## rate parameters
-# ##rate parameters
 nuisances['Topnorm_boosted']  = {
-               'name'  : 'Topnorm_boosted_2018',
+               'name'  : 'Topnorm_boosted_2016',
                'samples'  : {
                    'top' : '1.00',
                    },
@@ -324,7 +337,7 @@ nuisances['Topnorm_boosted']  = {
               }
 
 nuisances['Topnorm_resolved']  = {
-               'name'  : 'Topnorm_resolved_2018',
+               'name'  : 'Topnorm_resolved_2016',
                'samples'  : {
                    'top' : '1.00',
                    },
@@ -337,7 +350,7 @@ nuisances['Topnorm_resolved']  = {
               }              
 
 nuisances['DYnorm_boosted']  = {
-               'name'  : 'DYnorm_boosted_2018',
+               'name'  : 'DYnorm_boosted_2016',
                'samples'  : {
                    'DY' : '1.00',
                    },
@@ -350,18 +363,17 @@ nuisances['DYnorm_boosted']  = {
               }   
 
 nuisances['DYnorm_resolved']  = {
-               'name'  : 'DYnorm_resolved_2018',
+               'name'  : 'DYnorm_resolved_2016',
                'samples'  : {
                    'DY' : '1.00',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
                    'Resolved_SR',
-                   'Resolved_SR_tight',
                    'Resolved_DYcr',
+                   'Resolved_SR_tight',
                    ]
               }   
-
 ## Use the following if you want to apply the automatic combine MC stat nuisances.
 nuisances['stat'] = {
     'type': 'auto',
@@ -375,5 +387,5 @@ nuisances['stat'] = {
 
 #for n in nuisances.values():
 #    n['skipCMS'] = 1
-#
+
 #print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))

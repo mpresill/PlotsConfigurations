@@ -47,24 +47,43 @@ Colors
 "Wjets4": (229, 94, 41), #e55e29
 "Wjets5": (211, 87, 38), #d34912 
 '''
-#
- 
 
+"""
+groupPlot['Other']  = {  
+                  'nameHR' : 'Other',
+                  'isSignal' : 0,
+                  'color': palette["MediumBlue2"],  
+                  'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD', 'Vg', 'VgS' , 'WJets'],
+                  'fill': 1001
+              }
+
+"""
 groupPlot['vbfV+VV+VVV']  = {  
                   'nameHR' : 'vbfV+VV+VVV',
                   'isSignal' : 0,
                   'color': palette["MediumBlue2"],  
-                  'samples'  : ['VVV', 'VZ','WW','ggWW'], #,'VBS_VV_QCD','VBF-F', not present here
+                  'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
                   'fill': 1001
               }
 
 groupPlot['Vg+VgS']  = {  
-                  'nameHR' : "V#gamma+V#gamma*",
+                  'nameHR' : "V#gamma + V#gamma* ",
                   'isSignal' : 0,
                   'color'    : 409,   # kOrange + 10
-                  'samples'  : ['Vg','VgS'],
+                  'samples'  : ['Vg'],
                   'fill': 1001
               }
+
+groupPlot['WJets']  = {  
+                  'nameHR' : 'W+Jets',
+                  'isSignal' : 0,
+                  'color':   palette["Yellow"],
+                  'samples'  : ['WJets'],
+                  'fill': 1001
+
+              }
+
+
 
 groupPlot['DY']  = {  
                 'nameHR' : "DY",
@@ -85,15 +104,7 @@ groupPlot['top']  = {
              }
 
 
-groupPlot['WJets']  = {  
-                  'nameHR' : 'W+Jets',
-                  'isSignal' : 0,
-                  'color':   palette["Yellow"],
-                  'samples'  : ['WJets'],
-                  'fill': 1001
 
-              }
-"""
 groupPlot['VBS']  = {  
                  'nameHR' : 'VBS',
                  'isSignal' : 1,
@@ -101,14 +112,8 @@ groupPlot['VBS']  = {
                  'samples'  : ['VBS_ZV'],
                  'fill': 1001
               }
-"""
 
-groupPlot['Fake']  = {
-                  'nameHR' : 'nonprompt',
-                  'isSignal' : 0,
-                  'color': 921,    # kGray + 1
-                  'samples'  : ['Fake']
-}
+
 
 #plot = {}
 
@@ -132,19 +137,6 @@ plot['VZ']  = {
          
 
 
-plot['DY']  = {  
-                'color': colors['kMagenta']+1,
-                'isSignal' : 0,
-                'isData'   : 0, 
-		'cuts': {
-                        "Resolved_DYcr":1.15,
-                        "Resolved_SR":1.15,
-                        "Resolved_SR_tight":1.15,
-                }
-
-                #'scale'    : 0.65,
-            }
-
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
                   'isSignal' : 0,
@@ -157,13 +149,13 @@ plot['VgS'] = {
                   'isData'   : 0,
                   'scale'    : 1.0
                   }
-"""
 plot['VBF-V']  = {
                   'color': colors['kYellow']+3,  
                   'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
+
 """
 plot['Fake']  = {  
                 'color': colors['kTeal'],
@@ -171,13 +163,18 @@ plot['Fake']  = {
                 'isData'   : 0, 
                 'scale'    : 1.0,
             }
+"""
 
 plot['top'] = {   
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                # 'scale'    : 0.92,
-                #  'cuts': {
+                 #'scale'    : 1.,
+                 'cuts':{
+			#"Boosted_topcr": 2.6,
+			#"Resolved_topcr": 1.81,
+		}
+		#  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
                 #     "res_wjetcr_mjjincl_dnnhigh_mu":1.065,
@@ -214,16 +211,27 @@ plot['WJets']  = {
                 #       "res_topcr_mjjincl_dnnhigh_ele":1.413,
                 #   }
               }
-"""
+
 plot['VBS_ZV']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-"""
-# # data
 
+plot['DY']  = {
+                'isSignal' : 0,
+                'color': palette["Green2"],
+            	'isData'   : 0,
+		#'scale'    : 1.018,
+		 'cuts':{
+                       # "Boosted_DYcr": 1.17,
+                       # "Resolved_DYcr": 1.98,
+                }
+		}
+
+
+# # data
 plot['DATA']  = { 
                  'nameHR' : 'Data',
                  'color': 1 ,  
@@ -234,9 +242,8 @@ plot['DATA']  = {
 
 
 
-
 # additional options
 
-legend['lumi'] = 'L = 35.867/fb'
+legend['lumi'] = 'L = 41.53/fb'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'

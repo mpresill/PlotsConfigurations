@@ -136,7 +136,15 @@ plot['DY']  = {
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
                 'isData'   : 0, 
-                #'scale'    : 0.65,
+                'cuts': {
+                        "Boosted_DYcr":0.65,
+                        "Boosted_SR":0.65,
+                        "Boosted_SR_tight":0.65,
+                        "Resolved_DYcr":0.87,
+                        "Resolved_SR":0.87,
+                        "Resolved_SR_tight":0.87,
+                }
+       #'scale'    : 0.65,
             }
 
 plot['Vg']  = { 
@@ -170,7 +178,16 @@ plot['top'] = {
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                # 'scale'    : 0.92,
+                 'cuts': {
+                        "Boosted_topcr":0.9,
+                        "Boosted_SR":0.9,
+                        "Boosted_SR_tight":0.9,
+                        "Resolved_topcr":0.9,
+                        "Resolved_SR":0.9,
+                        "Resolved_SR_tight":0.9,
+                }               # 'scale'    : 0.92,
+
+		# 'scale'    : 0.92,
                 #  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
