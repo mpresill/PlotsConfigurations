@@ -105,7 +105,7 @@ protected:
   static FloatArrayReader* CleanJet_phi;
   static FloatArrayReader* Lepton_pt;
   static FloatArrayReader* Lepton_eta;
-  static FoatValueReader*  mll;
+  static FloatValueReader*  mll;
   static std::array<double, nVarTypes> returnValues;
 
   static void setValues(UInt_t, UInt_t, ULong64_t);
@@ -189,6 +189,80 @@ double
 jets_cat_dnn::evaluate(unsigned)
 {
   setValues(*run->Get(), *luminosityBlock->Get(), *event->Get());
+
+  //if returnVar_ = dnnoutput, run dnn
+
+  if (returnVar_ == dnn_output){
+  int category = (int) returnValues[vbs_category];
+  int vbs_jet1 = (int) returnValues[vbs_jet_0];
+  int vbs_jet2 = (int) returnValues[vbs_jet_1];
+  int v_jet1 = (int) returnValues[v_jet_0];
+  int v_jet2 = (int) returnValues[v_jet_1];
+  float Vjetmass = (float) returnValues[Vjet_mass];
+  float mjj = (float) returnValues[mjj_max];
+  float detajj = (float)returnValues[detajj_mjjmax];
+
+  //Boosted
+  if (category ==0){
+          cout << "Boosted DNN " << endl;
+
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+
+      std::vector<float> input{};
+
+      input.push_back((Lepton_pt->At(0)));
+      input.push_back((Lepton_pt->At(1)));
+      input.push_back((Lepton_eta->At(0)));
+      input.push_back((Lepton_eta->At(1)));
+      input.push_back(*(mll->Get()));
+      input.push_back((FatJet_pt->At(0)));
+      input.push_back((FatJet_eta->At(0)));
+      input.push_back(Zlep_1);
+      input.push_back(Zlep_2);
+      input.push_back((CleanJet_pt->At(vbs_jet1)));
+      input.push_back((CleanJet_pt->At(vbs_jet2)));
+      input.push_back((CleanJet_eta->At(vbs_jet1)));
+      input.push_back((CleanJet_eta->At(vbs_jet2)));
+      input.push_back(mjj);
+      input.push_back(detajj);
+
+      returnValues[dnn_output]= dnn_tensorflow_boosted->analyze(input);
+
+//Resolved
+  }else if (category == 1){
+
+
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+
+
+        std::vector<float> input{};
+
+
+        input.push_back( (Lepton_pt->At(0)) );
+        input.push_back( (Lepton_pt->At(1)));
+        input.push_back( (Lepton_eta->At(0)));
+        input.push_back( (Lepton_eta->At(1)));
+        input.push_back( *(mll->Get()) );
+        input.push_back( Zlep_1 );
+        input.push_back( Zlep_2 );
+        input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
+        input.push_back( (CleanJet_eta -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_eta -> At(vbs_jet2)) );
+        input.push_back( (CleanJet_pt -> At(v_jet1)) );
+        input.push_back( (CleanJet_pt -> At(v_jet2)) );
+        input.push_back( (CleanJet_eta -> At(v_jet1)) );
+        input.push_back( (CleanJet_eta -> At(v_jet2)) );  
+        input.push_back( mjj);
+        input.push_back( detajj);
+        input.push_back( Vjetmass);
+
+        returnValues[dnn_output]= dnn_tensorflow_resolved->analyze(input);
+
+    }
+  }
   return returnValues[returnVar_];
 }
 
@@ -231,6 +305,9 @@ jets_cat_dnn::bindTree_(multidraw::FunctionLibrary& _library)
                                      Jet_mass = nullptr;
                                      CleanJet_jetId = nullptr;
                                      CleanJetNotFat_jetId = nullptr;
+                                     Lepton_pt = nullptr;
+                                     Lepton_eta = nullptr;
+                                     mll = nullptr;
                                    });
 }
 
@@ -348,84 +425,11 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   returnValues[dphijj_mjjmax] = dphijj_mjj_max;
   returnValues[Vjet_mass] = Vjet_mass_max;
   returnValues[vbs_category] = category;
-
+  returnValues[dnn_output] = -0.2;
 
   //run DNN 
   
-  if (category == -1) {
-      returnValues[dnn_output] = -0.2;
-
-  //Boosted
-  }else if (category ==0){
-
-
-
-
-      int vbs_jet1 = CleanJetNotFat_jetId->At(VBS_jets[0]);
-      int vbs_jet2 = CleanJetNotFat_jetId->At(VBS_jets[1]);
-
-      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj_mjj_max;
-      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj_mjj_max;
-
-      std::vector<float> input{};
-
-      input.push_back((Lepton_pt->At(0)));
-      input.push_back((Lepton_pt->At(1)));
-      input.push_back((Lepton_eta->At(0)));
-      input.push_back((Lepton_eta->At(1)));
-      input.push_back(*(mll->Get()));
-      input.push_back((FatJet_pt->At(0)));
-      input.push_back((FatJet_eta->At(0)));
-      input.push_back(Zlep_1);
-      input.push_back(Zlep_2);
-      input.push_back((CleanJet_pt->At(vbs_jet1)));
-      input.push_back((CleanJet_pt->At(vbs_jet2)));
-      input.push_back((CleanJet_eta->At(vbs_jet1)));
-      input.push_back((CleanJet_eta->At(vbs_jet2)));
-      input.push_back(Mjj_max);
-      input.push_back(detajj_mjj_max);
-
-      returnValues[dnn_output]= dnn_tensorflow_boosted->analyze(input);
-
-//Resolved
-  }else if (category == 1){
-
-
-
-        int vbs_jet1 = CleanJetNotFat_jetId->At(VBS_jets[0]);
-        int vbs_jet2 = CleanJetNotFat_jetId->At(VBS_jets[1]);
-        int v_jet1 = CleanJetNotFat_jetId->At(V_jets[0]);
-        int v_jet2 = CleanJetNotFat_jetId->At(V_jets[1]);
-        float Zlep_1 = (Lepton_eta->At(0))-0.5*((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2))) / *(detajj_mjjmax->Get());
-        float Zlep_2 = (Lepton_eta->At(1))-0.5*((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2))) / *(detajj_mjjmax->Get());
-
-
-        std::vector<float> input{};
-
-
-        input.push_back( (Lepton_pt->At(0)) );
-        input.push_back( (Lepton_pt->At(1)));
-        input.push_back( (Lepton_eta->At(0)));
-        input.push_back( (Lepton_eta->At(1)));
-        input.push_back( *(mll->Get()) );
-        input.push_back( Zlep_1 );
-        input.push_back( Zlep_2 );
-        input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
-        input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
-        input.push_back( (CleanJet_eta -> At(vbs_jet1)) );
-        input.push_back( (CleanJet_eta -> At(vbs_jet2)) );
-        input.push_back( (CleanJet_pt -> At(v_jet1)) );
-        input.push_back( (CleanJet_pt -> At(v_jet2)) );
-        input.push_back( (CleanJet_eta -> At(v_jet1)) );
-        input.push_back( (CleanJet_eta -> At(v_jet2)) );  
-        input.push_back( Mjj_max );
-        input.push_back( detajj_mjj_max);
-        input.push_back( Vjet_mass_max );
-
-        returnValues[dnn_output]= dnn_tensorflow_resolved->analyze(input);
-
-
   }
 
-}
+
 
