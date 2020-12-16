@@ -5,9 +5,7 @@ This macrol computes the AK4 jets categorization in the VBS event:
     - their detajj
     - the indices of these VBS-jets
     - in the resolved case (4jets and no FJ), the inv mass of the other two jets (Vjets_mass)
-
 Note that according to the definition in ll. 147, 149 we use the CleanJetNotFat indecing 
-
 */
 
 
@@ -70,19 +68,6 @@ protected:
     detajj_mjjmax, 
     dphijj_mjjmax,
     Vjet_mass, 
-    Zepp_ll,
-    Zlep_1,
-    Zlep_2,
-    eta1,
-    eta2,
-    vbs_jet_pt1,
-    vbs_jet_pt2,
-    vbs_jet_eta1,
-    vbs_jet_eta2,
-    V_jet_eta1,
-    V_jet_eta2,
-    V_jet_pt1,
-    V_jet_pt2,
     nVarTypes
   };
   
@@ -114,11 +99,7 @@ protected:
   static FloatArrayReader* CleanJet_eta;
   static FloatArrayReader* CleanJet_phi;
 
-  static UIntValueReader* nLepton; 
-  static FloatArrayReader* Lepton_eta;
-  
-
-  static std::array<float, nVarTypes> returnValues;
+  static std::array<double, nVarTypes> returnValues;
 
   static void setValues(UInt_t, UInt_t, ULong64_t);
 };
@@ -140,13 +121,9 @@ FloatArrayReader* jets_cat::CleanJet_pt{};
 FloatArrayReader* jets_cat::CleanJet_eta{};
 FloatArrayReader* jets_cat::CleanJet_phi{};
 
-UIntValueReader* jets_cat::nLepton{}; 
-FloatArrayReader* jets_cat::Lepton_eta{};
-
-
 string jets_cat::year_{};
 
-std::array<float, jets_cat::nVarTypes> jets_cat::returnValues{};
+std::array<double, jets_cat::nVarTypes> jets_cat::returnValues{};
 
 
 // function Helper ---
@@ -174,32 +151,6 @@ jets_cat::jets_cat( char const* _type, const char* year):
       returnVar_ = detajj_mjjmax;
     else if (type == "dphijj_mjjmax")
       returnVar_ = dphijj_mjjmax;
-    else if (type == "Zepp_ll")
-      returnVar_ = Zepp_ll;
-    else if (type == "Zlep_1")
-      returnVar_ = Zlep_1;
-    else if (type == "Zlep_2")
-      returnVar_ = Zlep_2;
-    else if (type == "eta1")
-      returnVar_ = eta1;
-    else if (type == "eta2")
-      returnVar_ = eta2;
-    else if (type == "vbs_jet_pt1")
-      returnVar_ = vbs_jet_pt1;
-    else if (type == "vbs_jet_pt2")
-      returnVar_ = vbs_jet_pt2;
-    else if (type == "vbs_jet_eta1")
-      returnVar_ = vbs_jet_eta1;
-    else if (type == "vbs_jet_eta2")
-      returnVar_ = vbs_jet_eta2;
-    else if (type == "V_jet_pt1")
-      returnVar_ = V_jet_pt1;
-    else if (type == "V_jet_pt2")
-      returnVar_ = V_jet_pt2;
-    else if (type == "V_jet_eta1")
-      returnVar_ = V_jet_eta1;
-    else if (type == "V_jet_eta2")
-      returnVar_ = V_jet_eta2;
     else
       throw std::runtime_error("unknown return type " + type);
 
@@ -213,7 +164,8 @@ TTreeFunction(), returnVar_(type){
 }
 
 
-double jets_cat::evaluate(unsigned)
+double
+jets_cat::evaluate(unsigned)
 {
   setValues(*run->Get(), *luminosityBlock->Get(), *event->Get());
   return returnValues[returnVar_];
@@ -240,10 +192,6 @@ jets_cat::bindTree_(multidraw::FunctionLibrary& _library)
     _library.bindBranch(CleanJet_eta, "CleanJet_eta");
     _library.bindBranch(CleanJet_phi, "CleanJet_phi");
 
-    _library.bindBranch(nLepton, "nLepton");
-    _library.bindBranch(Lepton_eta, "Lepton_eta");
-
-
     currentEvent = std::make_tuple(0, 0, 0);
 
     _library.addDestructorCallback([]() {
@@ -260,8 +208,6 @@ jets_cat::bindTree_(multidraw::FunctionLibrary& _library)
                                      Jet_mass = nullptr;
                                      CleanJet_jetId = nullptr;
                                      CleanJetNotFat_jetId = nullptr;
-                                     nLepton = nullptr;
-                                     Lepton_eta = nullptr;
                                    });
 }
 
@@ -284,28 +230,26 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   float detajj_mjj_max=0;
   float dphijj_mjj_max=0;
   float Vjet_mass_max = 0.;
-  float mean_eta_vbs=0;
-  float sum_eta_lep=0;
   unsigned int njet{*nCleanJetNotFat->Get()};
   unsigned int nFJ{*nFatJet->Get()};
-  unsigned int nlep{*nLepton->Get()};   //need to clarify if the request on the number of leptons is really necessary
-  
   // Index in the collection of CleanJetNotFat
   int VBS_jets[2] = {999,999};
   int V_jets[2]   = {999,999};
   int category = 999;  // 0 fatjet, 1 resolved, -1 none
-  float pt_cut = 30.;
+  float pt_cut = 30;
+
+
   // Load all the quadrivectors for performance reason
   std::vector<TLorentzVector> vectors; 
   for (unsigned int ijet=0 ; ijet<njet ; ijet++){
     TLorentzVector jet0; 
     jet0.SetPtEtaPhiM(CleanJet_pt->At(CleanJetNotFat_jetId->At(ijet)), CleanJet_eta->At(CleanJetNotFat_jetId->At(ijet)),
                       CleanJet_phi->At(CleanJetNotFat_jetId->At(ijet)),Jet_mass->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(ijet)))); 
-    if (jet0.Pt() > pt_cut){vectors.push_back(jet0);}
-  }
+    if(jet0.Pt()>pt_cut){vectors.push_back(jet0);} //this is for the minimal threhsold in the jet ak4 pt => vetoing ak4 with pt>30 GeV
+    //vectors.push_back(jet0);
+   }
   njet=vectors.size();
-  if (njet>=2 && nlep==2){
-    sum_eta_lep=abs(Lepton_eta->At(0)+Lepton_eta->At(1));
+  if (njet>=2){
     // Calculate max mjj invariant pair on CleanJetNotFat to exclude the correct jets
     for (unsigned int ijet=0 ; ijet<njet ; ijet++){
       for (unsigned int jjet= ijet+1 ; jjet<njet ; jjet++){
@@ -319,7 +263,6 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
           Mjj_max=Mjj_tmp;
           detajj_mjj_max=deltaEta(CleanJet_eta->At(CleanJetNotFat_jetId->At(ijet)),CleanJet_eta->At(CleanJetNotFat_jetId->At(jjet)));
           dphijj_mjj_max=deltaPhi(CleanJet_phi->At(CleanJetNotFat_jetId->At(ijet)),CleanJet_phi->At(CleanJetNotFat_jetId->At(jjet)));
-          mean_eta_vbs=abs(CleanJet_eta->At(CleanJetNotFat_jetId->At(ijet)) + CleanJet_eta->At(CleanJetNotFat_jetId->At(jjet)))*0.5;
           // Index in the collection of CleanJetNotFat
           VBS_jets[0]= ijet;
           VBS_jets[1]= jjet;
@@ -331,6 +274,7 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
     // Check if boosted
     if (nFJ >= 1){
       category = 0;
+cout << " jets cat boosted: " << category <<endl;
       Vjet_mass_max = FatJet_mass->At(0);
 
     }else if (njet>=4)
@@ -380,26 +324,7 @@ jets_cat::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   returnValues[detajj_mjjmax] = detajj_mjj_max;
   returnValues[dphijj_mjjmax] = dphijj_mjj_max;
   returnValues[Vjet_mass] = Vjet_mass_max;
-
-  returnValues[Zepp_ll] = abs(sum_eta_lep-mean_eta_vbs)/detajj_mjj_max;
-  returnValues[Zlep_1] = (Lepton_eta->At(0)-mean_eta_vbs)/detajj_mjj_max;
-  returnValues[Zlep_2] = (Lepton_eta->At(1)-mean_eta_vbs)/detajj_mjj_max;
-
-  returnValues[vbs_jet_pt1]= CleanJet_pt->At(vbs_jet_0);
-  returnValues[vbs_jet_pt2]= CleanJet_pt->At(vbs_jet_1);
-  returnValues[vbs_jet_eta1]= CleanJet_eta->At(vbs_jet_0);
-  returnValues[vbs_jet_eta2]= CleanJet_eta->At(vbs_jet_1);
-  returnValues[eta1]=Lepton_eta->At(0);
-  returnValues[eta2]=Lepton_eta->At(1);  
-  if(category == 1){
-    returnValues[V_jet_pt1]= CleanJet_pt->At(v_jet_0);
-    returnValues[V_jet_pt2]= CleanJet_pt->At(v_jet_1);
-    returnValues[V_jet_eta1]= CleanJet_eta->At(v_jet_0);
-    returnValues[V_jet_eta2]= CleanJet_eta->At(v_jet_1);
-  }
-
   returnValues[vbs_category] = category;
 
 }
-
 
