@@ -142,8 +142,8 @@ std::array<double, jets_cat_dnn::nVarTypes> jets_cat_dnn::returnValues{};
 
 
 jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* model_dir, bool verbose):
-   TTreeFunction(){
-     
+   TTreeFunction(), model_dir_(model_dir), verbose(verbose){
+    //cout << "model dir 1 : " << model_dir_ << endl;    
     std::string type(_type);
     if (type ==  "vbs_category")
       returnVar_ = vbs_category;
@@ -175,13 +175,19 @@ jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* mod
 jets_cat_dnn::jets_cat_dnn( unsigned type, const char* year, const char* model_dir, bool verbose):
 TTreeFunction(), returnVar_(type), 
 model_dir_(model_dir), verbose(verbose){
+  //cout << "model dir 2 : " << model_dir_ << endl;
+  cout<<"verbose : " << verbose <<endl;
   jets_cat_dnn::year_ = year;
   //jets_cat_dnn::model_dir_ = model_dir;
   //jets_cat_dnn::verbose = verbose;
   std::string boosted_path_ = model_dir_ + year_ + "_SR/Boosted_SR/DNN/";
+  //cout << boosted_path_ << endl;
+  cout<<"test1" <<endl;
   dnn_tensorflow_boosted = new DNNEvaluator(boosted_path_, verbose);
+  cout<<"test2"<<endl;
   std::string resolved_path_ = model_dir_ + year_ + "_SR/Resolved_SR/DNN/";
-  dnn_tensorflow_boosted = new DNNEvaluator(resolved_path_, verbose);
+  //cout << resolved_path_ << endl;
+  dnn_tensorflow_resolved = new DNNEvaluator(resolved_path_, verbose);
 }
 
 
