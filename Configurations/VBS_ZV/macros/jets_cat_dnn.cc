@@ -75,6 +75,7 @@ protected:
     njet30,
     nbtag,
     dnn_output, 
+    tZqVeto,
     nVarTypes
   };
   
@@ -112,6 +113,10 @@ protected:
   static FloatArrayReader* Lepton_eta;
   static FloatValueReader*  mll;
   static FloatArrayReader*  Jet_btagDeepB;
+  static IntArrayReader *GenJetAK8_partonFlavour;
+  static IntArrayReader *GenJet_partonFlavour;
+  static IntArrayReader *FatJet_genJetAK8Idx;
+  static IntArrayReader *Jet_genJetIdx;
   static std::array<double, nVarTypes> returnValues;
 
   static void setValues(UInt_t, UInt_t, ULong64_t);
@@ -139,6 +144,10 @@ FloatArrayReader* jets_cat_dnn::Lepton_pt{};
 FloatArrayReader* jets_cat_dnn::Lepton_eta{};
 FloatValueReader*  jets_cat_dnn::mll{};
 FloatArrayReader* jets_cat_dnn::Jet_btagDeepB{};
+IntArrayReader *jets_cat_dnn::GenJetAK8_partonFlavour{};
+IntArrayReader *jets_cat_dnn::GenJet_partonFlavour{};
+IntArrayReader *jets_cat_dnn::FatJet_genJetAK8Idx{};
+IntArrayReader *jets_cat_dnn::Jet_genJetIdx{};
 
 string jets_cat_dnn::year_{};
 //string jets_cat_dnn::model_dir_{};
@@ -176,6 +185,8 @@ jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* mod
       returnVar_ = njet30;
     else if (type == "nbtag")
       returnVar_ = nbtag;
+    else if (type == "tZqVeto")
+      returnVar_ = tZqVeto;
     else if (type == "dnn_output")
       returnVar_ = dnn_output;
     else
@@ -321,6 +332,10 @@ jets_cat_dnn::bindTree_(multidraw::FunctionLibrary& _library)
     _library.bindBranch(Lepton_eta, "Lepton_eta");
     _library.bindBranch(mll, "mll");
     _library.bindBranch(Jet_btagDeepB, "Jet_btagDeepB");
+    _library.bindBranch(FatJet_genJetAK8Idx, "FatJet_genJetAK8Idx");
+    _library.bindBranch(Jet_genJetIdx, "Jet_genJetIdx");
+    _library.bindBranch(GenJetAK8_partonFlavour, "GenJetAK8_partonFlavour");
+    _library.bindBranch(GenJet_partonFlavour, "GenJet_partonFlavour");
     currentEvent = std::make_tuple(0, 0, 0);
 
     _library.addDestructorCallback([]() {
@@ -343,6 +358,10 @@ jets_cat_dnn::bindTree_(multidraw::FunctionLibrary& _library)
                                      Lepton_eta = nullptr;
                                      mll = nullptr;
                                      Jet_btagDeepB = nullptr;
+                                     FatJet_genJetAK8Idx = nullptr;
+                                     Jet_genJetIdx = nullptr;
+                                     GenJetAK8_partonFlavour = nullptr;
+                                     GenJet_partonFlavour = nullptr;
                                    });
 }
 
@@ -373,6 +392,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   int category = 999;  // 0 fatjet, 1 resolved, -1 none
   float pt_cut = 30;
   int _nbtag = 0;
+  bool _tZqVeto = 0;
   std::vector<int> vectors_id;
 
   // Load all the quadrivectors for performance reason
@@ -421,7 +441,9 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
             //cout << "Boosted" << endl;
             category = 0;
             Vjet_mass_max = FatJet_mass->At(0); //does it need to be the first FatJet?
-
+            //tZqVeto boosted
+           //cout << "Boosted : FatJet gen_partonFlav: " <<GenJetAK8_partonFlavour->At(FatJet_genJetAK8Idx->At(CleanFatJet_jetId->At(0))) << endl;
+            if (abs(GenJetAK8_partonFlavour->At(FatJet_genJetAK8Idx->At(CleanFatJet_jetId->At(0))))==6) _tZqVeto = 1;
         }else if (njet>=4) { 
             category = 1;
            // cout << "resolved , njet = " << njet << endl;
@@ -442,10 +464,17 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
                             V_jets[1] = jjet;
                             deltamass_Vjet = dmass;
                             Vjet_mass_max = mvjet;
+
+
+                        
                         }
                     }
                 }
             }
+         //tZqVeto
+         //cout << "Resolved VBS 1 / 2 genparton flavour : " << GenJet_partonFlavour->At(Jet_genJetIdx->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(vectors_id.at(VBS_jets[0]))))) << " / " << GenJet_partonFlavour->At(Jet_genJetIdx->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(vectors_id.at(VBS_jets[1]))))) << endl;
+         if ((abs(GenJet_partonFlavour->At(Jet_genJetIdx->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(vectors_id.at(VBS_jets[0]))))))==6) || (abs(GenJet_partonFlavour->At(Jet_genJetIdx->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(vectors_id.at(VBS_jets[1])))))))==6) {
+        _tZqVeto = 1;}
         }else{
             category = 3;
         }
@@ -465,7 +494,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
 
   // Now go back to CleanJet indexes for easy use of the collection
     if (category != 3) {
-         cout << "event " << _event << endl;
+         //cout << "event " << _event << endl;
         if (VBS_jets[0] != 999) returnValues[vbs_jet_0] = CleanJetNotFat_jetId->At(vectors_id.at(VBS_jets[0]));
         else   cout << "error : Boosted or resolved category but VBS_jets[0] = 999"       << endl;     
 
@@ -492,6 +521,9 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   ;
   //cout << _event << " cat : " << category << endl;
   returnValues[vbs_category] = category;
+  returnValues[tZqVeto] = _tZqVeto;
+  //cout << _event << " Category : " << category << " return Value : " << returnValues[vbs_category] << endl;
+  if (_tZqVeto ==1) cout << "tZqVeto = " << _tZqVeto << endl;
   //cout << _event << " vbs cat : " << returnValues[vbs_category]  << endl;
    /* if (category != 3){
         cout << " values set, category = " << category <<" returnValues[category] = " << returnValues[vbs_category] << " vbs1, vbs2, v1, v2 = " <<VBS_jets[0] << VBS_jets[1]<< V_jets[0]<< V_jets[1] <<endl;
@@ -503,7 +535,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
 */
 //cout << "njet "<< njet <<" retval "  << returnValues[njet30] << endl;
 //cout << "nbtag" << nbtag << " retval " << returnValues[nbtag] << endl;
-
+  
   if (category != returnValues[vbs_category]){
 
     cout << _event<< " category : " << category << endl;
