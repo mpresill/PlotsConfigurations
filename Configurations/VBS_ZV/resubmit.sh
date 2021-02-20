@@ -2,7 +2,7 @@
 #!/bin/bash
 
 set -e 
-DATE=_22June2020
+DATE=_2Feb2021_2017_nobtag
 DIR=$PWD
 JOB="/afs/cern.ch/work/m/mpresill/Latino/jobs"
 QUEUE="longlunch" #
@@ -14,18 +14,19 @@ QUEUE="longlunch" #
 #    YEAR=`echo $year | awk -F "Full" '{print $2}' | awk -F "nano" '{print $1}'`
 #    echo " --> $year"
 #    cd $DIR; cd $year
-    cd $JOB/mkShapes__VBS_ZV${DATE} 
-
-    for i in *jid
+    #cd $JOB/mkShapes__VBS_ZV${DATE} 
+    #cd $JOB/NanoGardening__Summer16_102X_nAODv7_Full2016v7
+    for i in /afs/cern.ch/work/m/mpresill/Latino/jobs/mkShapes__VBS_ZV_15Feb021_2016_btag/*jid
+    #for i in *jid
     do 
 	CHECK=`echo "$i" | awk -F "/" '{print $NF}'`
         if [ ${CHECK} == "*jid" ]
         then
             echo "CONGRATULATION ALL JOB FINISHED"
         else    
-	    echo "sed -i \"s/${QUEUE}/workday/g\" ${i/jid/jds}"
-	    #sed -i "s/${QUEUE}/workday/g" ${i/jid/jds}
-	    #condor_submit ${i/jid/jds}
+	    echo "sed -i \"s/${QUEUE}/longlunch/g\" ${i/jid/jds}"
+	    sed -i "s/${QUEUE}/longlunch/g" ${i/jid/jds}
+	    condor_submit ${i/jid/jds}
 	fi
     done
 #done

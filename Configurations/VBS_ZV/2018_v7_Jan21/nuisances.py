@@ -141,7 +141,7 @@ nuisances['eff_e'] = {
     'name': 'CMS_eff_e_2018',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']), # if skey not in ['VBS_ZV','VBS_VV_QCD']
+    'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc), # if skey not in ['VBS_ZV','VBS_VV_QCD']
 }
 
 nuisances['electronpt'] = {
@@ -150,7 +150,7 @@ nuisances['electronpt'] = {
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),# if skey not in ['VBS_ZV','VBS_VV_QCD']
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_VV_QCD']),# if skey not in ['VBS_ZV','VBS_VV_QCD']
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
     'AsLnN': '1'
@@ -161,7 +161,7 @@ nuisances['eff_m'] = {
     'name': 'CMS_eff_m_2018',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, ['SFweightMuUp', 'SFweightMuDown']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),# if skey not in ['VBS_ZV','VBS_VV_QCD']
+    'samples': dict((skey, ['SFweightMuUp', 'SFweightMuDown']) for skey in mc),# if skey not in ['VBS_ZV','VBS_VV_QCD']
 }
 
 nuisances['muonpt'] = {
@@ -170,7 +170,7 @@ nuisances['muonpt'] = {
     'type': 'shape',
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),# if skey not in ['VBS_ZV','VBS_VV_QCD']
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_VV_QCD']),# if skey not in ['VBS_ZV','VBS_VV_QCD']
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
     'AsLnN': '1'
@@ -209,7 +209,7 @@ for js in jes_systs:
       'type': 'shape',
       'mapUp': js+'up',
       'mapDown': js+'do',
-      'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+      'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_VV_QCD']),
       'folderUp': folderup,
       'folderDown': folderdo,
 #      'AsLnN': '1'
@@ -223,7 +223,7 @@ nuisances['JER'] = {
     'type': 'shape',
     'mapUp': 'JERup',
     'mapDown': 'JERdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_VV_QCD']),
     'folderUp': makeMCDirectory('JERup_suffix'),
     'folderDown': makeMCDirectory('JERdo_suffix'),
 #    'AsLnN': '1'
@@ -339,6 +339,20 @@ nuisances['pdf']  = {
                    'DY'      : '1.002', # For HM category, no DY CR
                    },
               }
+
+# ######################
+# # Theory nuisance: QCD scale
+## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
+qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
+
+for sample in mc :
+    if sample != 'VBS_VV_QCD':
+        nuisances['QCD_scale_VBS'] = {
+            'name'  : 'QCDscale_'+sample,
+            'kind'  : 'weight',
+            'type'  : 'shape',
+            'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
+        }
 
 
 

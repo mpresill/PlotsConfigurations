@@ -29,6 +29,7 @@ cuts['Boosted_DYcr']  = 'bVeto && vbs_category==0 &&  nCleanFatJet==1 &&  ( Vjet
 #cuts['Boosted_DYcr_noBveto']  = 'vbs_category==0 &&  nCleanFatJet==1 && ( Vjet_mass<65 || Vjet_mass>105)  && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
 
 cuts['Boosted_SR_tight']  = 'bVeto && vbs_category==0 &&  nCleanFatJet==1 && Vjet_mass > 65 && Vjet_mass<105  && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Lepton_pt[0]>40.&& fabs(Alt$(CleanJet_pt[vbs_jet_0],-9999.))>80. && mjj_max>350'
+cuts['Boosted_SR_Ram']  = 'bVeto && vbs_category==0 &&  nCleanFatJet==1 && Vjet_mass > 65 && Vjet_mass<105  && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Lepton_pt[0]>40.&& fabs(Alt$(CleanJet_pt[vbs_jet_0],-9999.))>50. && fabs(Alt$(CleanJet_pt[vbs_jet_1],-9999.))>50. && mjj_max>500 && detajj_mjjmax > 2.5'
 
 
 
@@ -49,6 +50,7 @@ cuts['Resolved_DYcr']  = 'bVeto && vbs_category==1 &&  nCleanFatJet==0 && ( Vjet
 #cuts['Resolved_DYcr_noBveto']  = 'vbs_category==1  && ( Vjet_mass<65 || Vjet_mass>105) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
 
 cuts['Resolved_SR_tight']  = 'bVeto && vbs_category==1 && nCleanFatJet==0 && Vjet_mass >65 && Vjet_mass<105 && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Lepton_pt[0]>40. && fabs(Alt$(CleanJet_pt[vbs_jet_0],-9999.))>80. && mjj_max>350 '
+cuts['Resolved_SR_Ram']  = 'bVeto && vbs_category==1 && nCleanFatJet==0 && Vjet_mass >65 && Vjet_mass<105 && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Lepton_pt[0]>40. && fabs(Alt$(CleanJet_pt[vbs_jet_0],-9999.))>50. && fabs(Alt$(CleanJet_pt[vbs_jet_1],-9999.))>50. && mjj_max>500 && detajj_mjjmax > 2.5'
 
  
 

@@ -49,6 +49,7 @@ if    'iihe' in SITE:
   treeBaseDir = '/pnfs/iihe/cms/store/user/xjanssen/HWW2015'
 elif  'cern' in SITE:
   treeBaseDir = '/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano'
+  treeBaseDirSMPeos = '/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses'
 
 def makeMCDirectory(var=''):
     if var:
@@ -56,9 +57,16 @@ def makeMCDirectory(var=''):
     else:
         return os.path.join(treeBaseDir, mcProduction, mcSteps.format(var=''))
 
+def makeMCDirectorySMPeos(var=''):
+    if var:
+        return os.path.join(treeBaseDirSMPeos, mcProduction, mcSteps.format(var='__' + var))
+    else:
+        return os.path.join(treeBaseDirSMPeos, mcProduction, mcSteps.format(var=''))
+
 mcDirectory = makeMCDirectory()
 dataDirectory = os.path.join(treeBaseDir, dataReco, dataSteps)
 fakeDirectory = os.path.join(treeBaseDir, fakeReco, fakeSteps)
+mcDirectorySMPeos = makeMCDirectorySMPeos() #this was added just for signals 
 
 ################################################
 ############ DATA DECLARATION ##################
@@ -94,15 +102,15 @@ mcCommonWeight = 'XSWeight*SFweight*PromptGenLepMatch2l*METFilter_MC'
 #######VBS EW: only ZV processes
 
 samples['VBS_ZV'] = {
-    'name':   nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L') 
+    'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J') 
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L') 
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L'),
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L'),
     'weight':  mcCommonWeight,
     'FilesPerJob': 7
 }
@@ -176,7 +184,7 @@ else:
         'EventsPerJob' : 70000,
     }
 
-    addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_ext2', 'DY_NLO_pTllrw * (LHE_HT < 70)')
+    addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_ext2', 'DY_NLO_pTllrw * (LHE_HT < 100)')
     addSampleWeight(samples, 'DY', 'DYJetsToLL_M-10to50-LO', 'DY_LO_pTllrw * (LHE_HT < 100)')
     addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_HT-100to200',  'DY_LO_pTllrw * 1.000')
     addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_HT-200to400',  'DY_LO_pTllrw * 0.999')

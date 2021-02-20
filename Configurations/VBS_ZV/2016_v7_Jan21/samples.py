@@ -42,8 +42,8 @@ mcSteps = 'MCl1loose2016v7__MCCorr2016v7__l2loose__l2tightOR2016v7{var}'
 dataSteps = 'DATAl1loose2016v7__l2loose__l2tightOR2016v7'
 
 ###############skims for 2018 signals, since 2016 are currently not available
-mcProduction18 = 'Autumn18_102X_nAODv7_Full2018v7'
-mcSteps18 = 'MCl1loose2018v7__MCCorr2018v7__l2loose__l2tightOR2018v7{var}'
+#mcProduction18 = 'Autumn18_102X_nAODv7_Full2018v7'
+#mcSteps18 = 'MCl1loose2018v7__MCCorr2018v7__l2loose__l2tightOR2018v7{var}'
 
 ##############################################
 ###### Tree base directory for the site ######
@@ -114,15 +114,15 @@ mcCommonWeight = 'XSWeight*SFweight*PromptGenLepMatch2l*METFilter_MC'
 
 #######VBS EW: only ZV processes  
 samples['VBS_ZV'] = {
-    'name':   nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L') 
+    'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J') 
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L') 
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L'),
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L'),
     'weight':  mcCommonWeight,
     'FilesPerJob': 1
 }

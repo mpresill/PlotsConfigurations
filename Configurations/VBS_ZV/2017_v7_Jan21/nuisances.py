@@ -128,19 +128,19 @@ nuisances['fake_mu_stat'] = {
 
 ##### B-tagger
 
-#for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2', 'cferr1', 'cferr2']:
-#    btag_syst = ['(btagSF%sup)/(btagSF)' % shift, '(btagSF%sdown)/(btagSF)' % shift]
+for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2', 'cferr1', 'cferr2']:
+    btag_syst = ['(btagSF%sup)/(btagSF)' % shift, '(btagSF%sdown)/(btagSF)' % shift]
 
-#    name = 'CMS_btag_%s' % shift
-#    if 'stats' in shift:
-#        name += '_2017'
+    name = 'CMS_btag_%s' % shift
+    if 'stats' in shift:
+        name += '_2017'
 
-#    nuisances['btag_shape_%s' % shift] = {
- #       'name': name,
-  #      'kind': 'weight',
-   #     'type': 'shape',
-   #      'samples': dict((skey, btag_syst) for skey in mc), 
-   # }
+    nuisances['btag_shape_%s' % shift] = {
+        'name': name,
+        'kind': 'weight',
+        'type': 'shape',
+         'samples': dict((skey, btag_syst) for skey in mc), 
+    }
 
 ##### Trigger Efficiency
 
@@ -150,7 +150,7 @@ nuisances['trigg'] = {
     'name': 'CMS_eff_hwwtrigger_2017',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, trig_syst) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']), 
+    'samples': dict((skey, trig_syst) for skey in mc), 
 }
 
 
@@ -161,7 +161,7 @@ nuisances['prefire'] = {
     'name': 'CMS_eff_prefiring_2017',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, prefire_syst) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']), 
+    'samples': dict((skey, prefire_syst) for skey in mc), 
 
 }
 
@@ -171,7 +171,7 @@ nuisances['eff_e'] = {
     'name': 'CMS_eff_e_2017',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+    'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc),
 }
 
 nuisances['electronpt'] = {
@@ -180,7 +180,7 @@ nuisances['electronpt'] = {
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_VV_QCD']),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
     'AsLnN': '1'
@@ -192,7 +192,7 @@ nuisances['eff_m'] = {
     'name': 'CMS_eff_m_2017',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, ['SFweightMuUp', 'SFweightMuDown']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+    'samples': dict((skey, ['SFweightMuUp', 'SFweightMuDown']) for skey in mc),
 }
 
 nuisances['muonpt'] = {
@@ -201,7 +201,7 @@ nuisances['muonpt'] = {
     'type': 'shape',
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_VV_QCD']),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
     'AsLnN': '1'
@@ -243,7 +243,7 @@ for js in jes_systs:
                     'type': 'shape',
                     'mapUp': js+'up',
                     'mapDown': js+'do',
-                    'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_ZV','VBS_VV_QCD']),
+                    'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_VV_QCD']),
                     'folderUp' : folderup,
                     'folderDown' : folderdo,
                     'AsLnN'      : '1',
@@ -258,7 +258,7 @@ nuisances['JER']  = {
                 'type': 'shape',
                 'mapUp': 'JERup',
                 'mapDown': 'JERdo',
-                'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_ZV','VBS_VV_QCD']),
+                'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_VV_QCD']),
                 'folderUp' : makeMCDirectory('JERup_suffix'),
                 'folderDown' : makeMCDirectory('JERdo_suffix'),
                 'AsLnN'      : '1',
@@ -360,6 +360,20 @@ nuisances['VZ'] = {
     }
 }
 
+# ######################
+# # Theory nuisance:QCD scale
+## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
+qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
+
+for sample in mc :
+    if sample != 'VBS_VV_QCD':
+        nuisances['QCD_scale_VBS'] = {
+            'name'  : 'QCDscale_'+sample,
+            'kind'  : 'weight',
+            'type'  : 'shape',
+            'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
+        }
+
 
 ################
 # for the rateparam is better to add them manually              
@@ -440,7 +454,7 @@ nuisances['stat'] = {
 }
 
 
-for n in nuisances.values():
-    n['skipCMS'] = 1
+#for n in nuisances.values():
+#    n['skipCMS'] = 1
 
 #print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))

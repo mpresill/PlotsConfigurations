@@ -233,7 +233,7 @@ for js in jes_systs:
       'type': 'shape',
       'mapUp': js+'up',
       'mapDown': js+'do',
-      'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['DY']),
+      'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['DY']),  ###CHECK IF THIS IS STILL TRUE: Do we have all the DY samples shapes UP/DOWN for this available?
       'folderUp': folderup,
       'folderDown': folderdo,
       'AsLnN': '1'
@@ -364,14 +364,22 @@ nuisances['pdf']  = {
                    },
               }
 
-# # Theory nuisance  
-#for sample in mc :
-#    nuisances['QCD_scale_'+sample] = {
-#        'name'  : 'QCDscale_'+sample,
-#        'kind'  : 'weight',
-#        'type'  : 'shape',
-#        'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
-#    }
+
+# ######################
+# # Theory nuisance: QCD scale
+## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
+qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
+
+for sample in mc :
+    if sample != 'VBS_VV_QCD':
+        nuisances['QCD_scale_VBS'] = {
+            'name'  : 'QCDscale_'+sample,
+            'kind'  : 'weight',
+            'type'  : 'shape',
+            'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
+        }
+
+
 
 
 ## rate parameters

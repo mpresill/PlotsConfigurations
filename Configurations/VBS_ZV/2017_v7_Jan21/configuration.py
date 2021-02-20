@@ -2,7 +2,7 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_2Feb2021_2017_nobtag'
+date='_20Feb2021_2017_btag'
 
 tag = 'VBS_ZV'+date
 
@@ -13,11 +13,11 @@ outputDir = 'rootFile'+date
 aliasesFile = 'aliases.py'
 
 # file with list of variables
-variablesFile = 'variables_reduced.py'
+variablesFile = 'variables.py'
 #variablesFile = 'variables_test.py'
 
 # file with list of cuts
-cutsFile = 'cuts.py'
+cutsFile = 'cuts_btag.py'
 
 # file with list of samples
 #samplesFile = 'samples_test.py'
