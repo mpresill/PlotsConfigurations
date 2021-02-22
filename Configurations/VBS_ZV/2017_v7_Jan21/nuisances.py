@@ -180,9 +180,21 @@ nuisances['electronpt'] = {
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_VV_QCD']),
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
+    'AsLnN': '1'
+}
+#this is for the signals since they are in a different eos folder
+nuisances['electronpt_VBS_ZV'] = {
+    'name': 'CMS_scale_e_2017',
+    'kind': 'suffix',
+    'type': 'shape',
+    'mapUp': 'ElepTup',
+    'mapDown': 'ElepTdo',
+    'samples': {"VBS_ZV":[1.,1.]},
+    'folderUp': DirectorySMPeos+'__ElepTup_suffix',
+    'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
     'AsLnN': '1'
 }
 
@@ -201,12 +213,23 @@ nuisances['muonpt'] = {
     'type': 'shape',
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_VV_QCD']),
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
     'AsLnN': '1'
 }
-
+#this is for the signals
+nuisances['muonpt_VBS_ZV'] = {
+    'name': 'CMS_scale_m_2017',
+    'kind': 'suffix',
+    'type': 'shape',
+    'mapUp': 'MupTup',
+    'mapDown': 'MupTdo',
+    'samples': {"VBS_ZV":[1.,1.]},
+    'folderUp': DirectorySMPeos+'__MupTup_suffix',
+    'folderDown': DirectorySMPeos+'__MupTdo_suffix',
+    'AsLnN': '1'
+}
 
 ##### Jet energy scale
 jes_systs = ['JESAbsolute','JESAbsolute_2017','JESBBEC1','JESBBEC1_2017','JESEC2',
@@ -215,6 +238,9 @@ jes_systs = ['JESAbsolute','JESAbsolute_2017','JESBBEC1','JESBBEC1_2017','JESEC2
 
 folderup = ""
 folderdo = ""
+folderup_signal = ""
+folderdo_signal = ""
+
 
 for js in jes_systs:
   if 'Absolute' in js:
@@ -243,13 +269,45 @@ for js in jes_systs:
                     'type': 'shape',
                     'mapUp': js+'up',
                     'mapDown': js+'do',
-                    'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_VV_QCD']),
+                    'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_ZV','VBS_VV_QCD']),
                     'folderUp' : folderup,
                     'folderDown' : folderdo,
                     'AsLnN'      : '1',
                     
     }
 
+#this is for signals
+for js_VBS_ZV in jes_systs:
+  if 'Absolute' in js_VBS_ZV: 
+    folderup_signal = DirectorySMPeos+'__JESAbsoluteup_suffix'
+    folderdo_signal = DirectorySMPeos+'__JESAbsolutedo_suffix'
+  elif 'BBEC1' in js_VBS_ZV:
+    folderup_signal = DirectorySMPeos+'__JESBBEC1up_suffix'
+    folderdo_signal = DirectorySMPeos+'__JESBBEC1do_suffix'
+  elif 'EC2' in js_VBS_ZV:
+    folderup_signal = DirectorySMPeos+'__JESEC2up_suffix'
+    folderdo_signal = DirectorySMPeos+'__JESEC2do_suffix'
+  elif 'HF' in js_VBS_ZV:
+    folderup_signal = DirectorySMPeos+'__JESHFup_suffix'
+    folderdo_signal = DirectorySMPeos+'__JESHFdo_suffix'
+  elif 'Relative' in js_VBS_ZV:
+    folderup_signal = DirectorySMPeos+'__JESRelativeup_suffix'
+    folderdo_signal = DirectorySMPeos+'__JESRelativedo_suffix'
+  elif 'FlavorQCD' in js_VBS_ZV:
+    folderup_signal = DirectorySMPeos+'__JESFlavorQCDup_suffix'
+    folderdo_signal = DirectorySMPeos+'__JESFlavorQCDdo_suffix'
+
+  nuisances[js_VBS_ZV] = {
+      'name': 'CMS_scale_'+js_VBS_ZV,
+      'kind': 'suffix',
+      'type': 'shape',
+      'mapUp': js_VBS_ZV+'up',
+      'mapDown': js_VBS_ZV+'do',
+      'samples': {"VBS_ZV":[1.,1.]},
+      'folderUp': folderup_signal,
+      'folderDown': folderdo_signal,
+#      'AsLnN': '1'
+  }
 
 ##### Jet energy resolution
 nuisances['JER']  = {
@@ -258,11 +316,24 @@ nuisances['JER']  = {
                 'type': 'shape',
                 'mapUp': 'JERup',
                 'mapDown': 'JERdo',
-                'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_VV_QCD']),
+                'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_ZV','VBS_VV_QCD']),
                 'folderUp' : makeMCDirectory('JERup_suffix'),
                 'folderDown' : makeMCDirectory('JERdo_suffix'),
                 'AsLnN'      : '1',
 }
+#this is for the signal
+nuisances['JER_VBS_ZV'] = {
+    'name': 'CMS_res_j_2017',
+    'kind': 'suffix',
+    'type': 'shape',
+    'mapUp': 'JERup',
+    'mapDown': 'JERdo',
+    'samples': {"VBS_ZV":[1.,1.]},
+    'folderUp': DirectorySMPeos+'__JERup_suffix',
+    'folderDown': DirectorySMPeos+'__JERdo_suffix',
+#    'AsLnN': '1'
+}
+
 
 ##### Pileup
 
