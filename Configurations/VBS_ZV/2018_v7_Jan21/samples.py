@@ -68,6 +68,8 @@ dataDirectory = os.path.join(treeBaseDir, dataReco, dataSteps)
 fakeDirectory = os.path.join(treeBaseDir, fakeReco, fakeSteps)
 mcDirectorySMPeos = makeMCDirectorySMPeos() #this was added just for signals 
 
+DirectorySMPeos = '/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/Autumn18_102X_nAODv7_Full2018v7/MCl1loose2018v7__MCCorr2018v7__l2loose__l2tightOR2018v7'
+
 ################################################
 ############ DATA DECLARATION ##################
 ################################################
@@ -102,19 +104,19 @@ mcCommonWeight = 'XSWeight*SFweight*PromptGenLepMatch2l*METFilter_MC'
 #######VBS EW: only ZV processes
 
 samples['VBS_ZV'] = {
-    'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L') 
+    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
+             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L') 
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L'),
+             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
     'weight':  mcCommonWeight,
-    'FilesPerJob': 7
+    'FilesPerJob': 1
 }
-
+"""
 
 ###########################################
 #############  BACKGROUNDS  ###############
@@ -380,3 +382,4 @@ for _, sd in DataRun:
     files = nanoGetSampleFiles(dataDirectory, pd + '_' + sd)
     samples['DATA']['name'].extend(files)
     samples['DATA']['weights'].extend([DataTrig[pd]] * len(files))
+"""

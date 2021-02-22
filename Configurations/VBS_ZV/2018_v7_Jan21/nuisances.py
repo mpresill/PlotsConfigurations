@@ -150,12 +150,25 @@ nuisances['electronpt'] = {
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_VV_QCD']),# if skey not in ['VBS_ZV','VBS_VV_QCD']
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),# if skey not in ['VBS_ZV','VBS_VV_QCD']
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
     'AsLnN': '1'
 }
 
+nuisances['electronpt_VBS_ZV'] = {
+    'name': 'CMS_scale_e_2018',
+    'kind': 'suffix',
+    'type': 'shape',
+    'mapUp': 'ElepTup',
+    'mapDown': 'ElepTdo',
+    'samples': {"VBS_ZV"},# if skey not in ['VBS_ZV','VBS_VV_QCD']
+    'folderUp': DirectorySMPeos+'__ElepTup_suffix',
+    'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
+    'AsLnN': '1'
+}
+
+"""
 ##### Muon Efficiency and energy scale  
 nuisances['eff_m'] = {
     'name': 'CMS_eff_m_2018',
@@ -426,3 +439,4 @@ nuisances['stat'] = {
 #    n['skipCMS'] = 1
 #
 #print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))
+"""
