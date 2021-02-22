@@ -114,9 +114,9 @@ samples['VBS_ZV'] = {
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
              +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
     'weight':  mcCommonWeight,
-    'FilesPerJob': 1
+    'FilesPerJob': 7
 }
-"""
+
 
 ###########################################
 #############  BACKGROUNDS  ###############
@@ -382,4 +382,3 @@ for _, sd in DataRun:
     files = nanoGetSampleFiles(dataDirectory, pd + '_' + sd)
     samples['DATA']['name'].extend(files)
     samples['DATA']['weights'].extend([DataTrig[pd]] * len(files))
-"""
