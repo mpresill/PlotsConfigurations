@@ -191,9 +191,9 @@ model_dir_(model_dir), verbose(verbose){
   jets_cat_dnn::year_ = year;
   //jets_cat_dnn::model_dir_ = model_dir;
   //jets_cat_dnn::verbose = verbose;
-  std::string boosted_path_ = model_dir_ + year_ + "_SR/Boosted_SR/DNN/";
+  std::string boosted_path_ = model_dir_ + "/Boosted_SR/DNN/";
   dnn_tensorflow_boosted = new DNNEvaluator(boosted_path_, verbose);
-  std::string resolved_path_ = model_dir_ + year_ + "_SR/Resolved_SR/DNN/";
+  std::string resolved_path_ = model_dir_ + "/Resolved_SR/DNN/";
   dnn_tensorflow_resolved = new DNNEvaluator(resolved_path_, verbose);
 }
 
@@ -373,8 +373,14 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   int category = 999;  // 0 fatjet, 1 resolved, -1 none
   float pt_cut = 30;
   int _nbtag = 0;
+  float btag_cut = 0.;
   std::vector<int> vectors_id;
-
+  //btag cut values
+  //cout << jets_cat_dnn::year_ <<endl;
+  if (jets_cat_dnn::year_ == "2018") btag_cut=0.1241;
+  else if (jets_cat_dnn::year_ == "2017") btag_cut = 0.1522;
+  else if (jets_cat_dnn::year_ == "2016") btag_cut = 0.2217;
+  //cout << btag_cut <<endl;
   // Load all the quadrivectors for performance reason
   std::vector<TLorentzVector> vectors; 
   for (unsigned int ijet=0 ; ijet<njet ; ijet++){
@@ -384,7 +390,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
     if(jet0.Pt()>pt_cut){
         vectors.push_back(jet0);
         vectors_id.push_back(ijet);
-        if(Jet_btagDeepB->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(ijet)))>=0.1241){
+        if(Jet_btagDeepB->At(CleanJet_jetId->At(CleanJetNotFat_jetId->At(ijet)))>=btag_cut && std::abs(jet0.Eta())<2.5){
             _nbtag ++;
             }
         } 
@@ -465,7 +471,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
 
   // Now go back to CleanJet indexes for easy use of the collection
     if (category != 3) {
-         cout << "event " << _event << endl;
+         //cout << "event " << _event << endl;
         if (VBS_jets[0] != 999) returnValues[vbs_jet_0] = CleanJetNotFat_jetId->At(vectors_id.at(VBS_jets[0]));
         else   cout << "error : Boosted or resolved category but VBS_jets[0] = 999"       << endl;     
 

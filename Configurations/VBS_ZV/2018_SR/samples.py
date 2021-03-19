@@ -116,8 +116,21 @@ samples['VBS_ZV'] = {
     'weight':  mcCommonWeight,
     'FilesPerJob': 7
 }
-
-
+"""
+samples['VBS_ZV_old'] = {
+    'name':   nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J')
+             +nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L')
+             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
+             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
+             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
+             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
+             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
+             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
+             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L'),
+    'weight':  mcCommonWeight,
+    'FilesPerJob': 7
+}
+"""
 ###########################################
 #############  BACKGROUNDS  ###############
 ###########################################

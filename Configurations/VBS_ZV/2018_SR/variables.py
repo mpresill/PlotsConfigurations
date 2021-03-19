@@ -55,11 +55,12 @@ variables['mll-peak']  = {   'name': 'mll',            #   variable name
                         'xaxis' : 'm_{ll} [GeV]',  #   x axis name
                         'fold' :3
                         }
-
+"""
 """
 #
 # VBS jet AK4
 #
+"""
 """
 variables['nCleanJetNotFat']  = {
                         'name': 'nCleanJetNotFat',     
@@ -131,13 +132,13 @@ variables['nFatJet']  = {
 
 
 variables['FatJet_pt']  = {
-                        'name': 'CleanFatJet_pt',     
+                        'name': 'Alt$(CleanFatJet_pt, -999)',     
                         'range' : (30,150,800),   
                         'xaxis' : 'FatJet p_{T}',
                         'fold' : 0   # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
                         }
 
-variables['FatJet_eta'] = {'name': 'CleanFatJet_eta',
+variables['FatJet_eta'] = {'name': 'Alt$(CleanFatJet_eta, -999)',
                            'range' : (25,-2.7,2.7),
                            'xaxis' : '\eta FatJet',
                            'fold'  : 0
@@ -170,18 +171,18 @@ variables['dphijj_mjjmax']  = {   'name': 'dphijj_mjjmax',            #   variab
                            'fold' :3
                            }
 variables['njet30']  = {   'name': 'njet30',            #   variable name
-                           'range' : (11,0,10),    #   variable range
+                           'range' : (10,0,10),    #   variable range
                            'xaxis' : 'number of Clean Jets over 30 GeV',  #   x axis name
                            'fold' :3
                            }
 variables['nbtag']  = {   'name': 'nbtag',            #   variable name
-                           'range' : (11,0,10),    #   variable range
+                           'range' : (10,0,10),    #   variable range
                            'xaxis' : 'number of btagged Clean jets',  #   x axis name
                            'fold' :3
                            }
 
 
-variables['Zvjet'] = {   'name': '( Alt(CleanFatJet_eta[0], -999)-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',
+variables['Zvjet'] = {   'name': '( Alt$(CleanFatJet_eta[0], -999)-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',
                         'range' : (40,-1.5,1.5),
                         'xaxis' : 'Z^{lep}_{l2}',
                         'fold' : 3

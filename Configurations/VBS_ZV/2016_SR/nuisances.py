@@ -145,6 +145,7 @@ nuisances['prefire'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, prefire_syst) for skey in mc)
+    'AsLnN': '1',
 }
 
 
@@ -166,7 +167,7 @@ nuisances['electronpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 
 ##### Muon Efficiency and energy scale
@@ -187,7 +188,7 @@ nuisances['muonpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 
 
@@ -236,7 +237,7 @@ for js in jes_systs:
       'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['DY']),  ###CHECK IF THIS IS STILL TRUE: Do we have all the DY samples shapes UP/DOWN for this available?
       'folderUp': folderup,
       'folderDown': folderdo,
-      'AsLnN': '1'
+      #'AsLnN': '1'
   }
 
 ######## Jet energy resolution for AK4
@@ -260,7 +261,7 @@ nuisances['PU']  = {
                 'kind'  : 'weight',
                 'type'  : 'shape',
                 'samples'  : dict ( (skey, [ '(puWeightUp/puWeight)','(puWeightDown/puWeight)']) for skey in mc ),
-                'AsLnN'      : '1',
+                #'AsLnN'      : '1',
 }
 
 
@@ -371,7 +372,7 @@ nuisances['pdf']  = {
 qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
 
 for sample in mc :
-    if sample != 'VBS_VV_QCD':
+    if sample not in ['VBS_VV_QCD']:
         nuisances['QCD_scale_VBS'] = {
             'name'  : 'QCDscale_'+sample,
             'kind'  : 'weight',

@@ -82,8 +82,7 @@ groupPlot['top']  = {
                  'color':  palette["Orange"],  
                  'samples'  : ['top'],
                  'fill': 1001
-             }
-
+}
 
 groupPlot['WJets']  = {  
                   'nameHR' : 'W+Jets',
@@ -102,13 +101,26 @@ groupPlot['VBS']  = {
                  'fill': 1001
               }
 
-
-
+"""
+groupPlot['Fake']  = {
+                  'nameHR' : 'nonprompt',
+                  'isSignal' : 0,
+                  'color': 921,    # kGray + 1
+                  'samples'  : ['Fake']
+}
+"""
+groupPlot['VBS_old']  = {
+                 'nameHR' : 'VBS_old',
+                 'isSignal' : 0,
+                 'color': colors["kBlue"]+1,
+                 'samples'  : ['VBS_ZV_old'],
+                 'fill': 1001
+              }
 #plot = {}
 
 # keys here must match keys in samples.py    
 # 
-"""
+
 plot['VVV']  = { 
                   'color': colors["kAzure"] -3,    
                   'isSignal' : 0,
@@ -125,11 +137,45 @@ plot['VZ']  = {
               }   
          
 
+plot['WW']  = {
+                  'color': colors['kGreen']+3,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+
+
+plot['ggWW']  = {
+                  'color': colors['kGreen']+3,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+
+
+plot['VBS_VV_QCD']  = {
+                  'color': colors['kGreen']+3,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+
 
 plot['DY']  = {  
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
-                'isData'   : 0, 
+                'isData'   : 0,
+                'cuts': {
+                        "Boosted_DYcr":0.7,
+                        "Boosted_SR":0.7,
+                        "Boosted_SR_tight":0.7,
+                        "Resolved_DYcr":1.06,
+                        "Resolved_SR":1.06,
+                        "Resolved_SR_tight":1.06,
+                } 
                 #'scale'    : 0.65,
             }
 
@@ -152,21 +198,26 @@ plot['VBF-V']  = {
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-"""
-"""
+
 plot['Fake']  = {  
                 'color': colors['kTeal'],
                 'isSignal' : 0,
                 'isData'   : 0, 
                 'scale'    : 1.0,
             }
-"""
-"""
+
 plot['top'] = {   
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                # 'scale'    : 0.92,
+                 'cuts': {
+                        "Boosted_topcr":0.9,
+                        "Boosted_SR":0.9,
+                        "Boosted_SR_tight":0.9,
+                        "Resolved_topcr":0.9,
+                        "Resolved_SR":0.9,
+                        "Resolved_SR_tight":0.9,
+                }               # 'scale'    : 0.92,
                 #  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
@@ -204,14 +255,20 @@ plot['WJets']  = {
                 #       "res_topcr_mjjincl_dnnhigh_ele":1.413,
                 #   }
               }
-"""
+
 plot['VBS_ZV']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-"""
+plot['VBS_ZV_old']  = {
+                  'color': colors["kCyan"]+1,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
 # # data
 
 plot['DATA']  = { 
@@ -224,7 +281,7 @@ plot['DATA']  = {
 
 
 
-"""
+
 # additional options
 
 legend['lumi'] = 'L = 59.74/fb'

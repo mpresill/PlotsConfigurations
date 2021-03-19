@@ -163,7 +163,7 @@ nuisances['prefire'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, prefire_syst) for skey in mc), 
-
+    'AsLnN': '1',
 }
 
 ##### Electron Efficiency and energy scale REMOVED VBS EW AND QCD FOR THE MOMENT
@@ -184,7 +184,7 @@ nuisances['electronpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 #this is for the signals since they are in a different eos folder
 nuisances['electronpt_VBS_ZV'] = {
@@ -194,9 +194,9 @@ nuisances['electronpt_VBS_ZV'] = {
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
     'samples': {"VBS_ZV":[1.,1.]},
-    'folderUp': DirectorySMPeos+'__ElepTup_suffix',
-    'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
-    'AsLnN': '1'
+    'folderUp': makeMCDirectorySMPeos('ElepTup_suffix'),
+    'folderDown': makeMCDirectorySMPeos('ElepTdo_suffix'),
+    #'AsLnN': '1'
 }
 
 ##### Muon Efficiency and energy scale REMOVED VBS EW AND QCD FOR THE MOMENT
@@ -217,7 +217,7 @@ nuisances['muonpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 #this is for the signals
 nuisances['muonpt_VBS_ZV'] = {
@@ -227,9 +227,9 @@ nuisances['muonpt_VBS_ZV'] = {
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
     'samples': {"VBS_ZV":[1.,1.]},
-    'folderUp': DirectorySMPeos+'__MupTup_suffix',
-    'folderDown': DirectorySMPeos+'__MupTdo_suffix',
-    'AsLnN': '1'
+    'folderUp': makeMCDirectorySMPeos('MupTup_suffix'),
+    'folderDown': makeMCDirectorySMPeos('MupTdo_suffix'),
+    #'AsLnN': '1'
 }
 
 ##### Jet energy scale
@@ -273,7 +273,7 @@ for js in jes_systs:
                     'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_ZV','VBS_VV_QCD']),
                     'folderUp' : folderup,
                     'folderDown' : folderdo,
-                    'AsLnN'      : '1',
+                    #'AsLnN'      : '1',
                     
     }
 
@@ -311,6 +311,7 @@ for js_VBS_ZV in jes_systs:
   }
 
 ##### Jet energy resolution
+"""
 nuisances['JER']  = {
                 'name': 'CMS_res_j_2017',
                 'kind': 'suffix',
@@ -330,11 +331,11 @@ nuisances['JER_VBS_ZV'] = {
     'mapUp': 'JERup',
     'mapDown': 'JERdo',
     'samples': {"VBS_ZV":[1.,1.]},
-    'folderUp': DirectorySMPeos+'__JERup_suffix',
-    'folderDown': DirectorySMPeos+'__JERdo_suffix',
+    'folderUp': makeMCDirectorySMPeos('JERup_suffix'),
+    'folderDown': makeMCDirectorySMPeos('JERdo_suffix'),
     'AsLnN': '1'
 }
-
+"""
 
 ##### Pileup
 
@@ -348,7 +349,7 @@ nuisances['PU'] = {
 #        'top': ['1.00331969187*(puWeightUp/puWeight)', '0.999199609528*(puWeightDown/puWeight)'],
 #        'WW': ['1.0033022059*(puWeightUp/puWeight)', '0.997085330608*(puWeightDown/puWeight)'],
 #    },
-    'AsLnN': '1',
+    #'AsLnN': '1',
 }
 
 
@@ -436,7 +437,7 @@ nuisances['VZ'] = {
 # # Theory nuisance:QCD scale
 ## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
 qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
-
+"""
 for sample in mc :
     if sample != 'VBS_VV_QCD':
         nuisances['QCD_scale_VBS'] = {
@@ -445,7 +446,7 @@ for sample in mc :
             'type'  : 'shape',
             'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
         }
-
+"""
 
 ################
 # for the rateparam is better to add them manually              

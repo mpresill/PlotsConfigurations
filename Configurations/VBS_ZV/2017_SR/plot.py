@@ -103,6 +103,12 @@ groupPlot['VBS']  = {
               }
 
 
+groupPlot['Fake']  = {
+                  'nameHR' : 'nonprompt',
+                  'isSignal' : 0,
+                  'color': 921,    # kGray + 1
+                  'samples'  : ['Fake']
+}
 
 #plot = {}
 
@@ -124,6 +130,26 @@ plot['VZ']  = {
                   'scale'    : 1.   ,
               }   
          
+plot['WW']  = {
+                  'color': colors['kGreen']+3,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+plot['ggWW']  = {
+                  'color': colors['kGreen']+3,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+plot['VBS_VV_QCD']  = {
+                  'color': colors['kGreen']+3,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
 
 
 plot['DY']  = {  
@@ -131,6 +157,14 @@ plot['DY']  = {
                 'isSignal' : 0,
                 'isData'   : 0, 
                 #'scale'    : 0.65,
+		'cuts': {
+			"Boosted_DYcr":0.84,
+			"Boosted_SR":0.84,
+			"Boosted_SR_tight":0.84,
+			"Resolved_DYcr":1.14,
+			"Resolved_SR":1.14,
+			"Resolved_SR_tight":1.14,
+		}
             }
 
 plot['Vg']  = { 
@@ -153,20 +187,25 @@ plot['VBF-V']  = {
                   'scale'    : 1.   ,
               }
 
-"""
 plot['Fake']  = {  
                 'color': colors['kTeal'],
                 'isSignal' : 0,
                 'isData'   : 0, 
                 'scale'    : 1.0,
             }
-"""
 
 plot['top'] = {   
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                # 'scale'    : 0.92,
+                 'cuts': {
+                        "Boosted_topcr":0.8,
+                        "Boosted_SR":0.8,
+                        "Boosted_SR_tight":0.8,
+                        "Resolved_topcr":0.95,
+                        "Resolved_SR":0.95,
+                        "Resolved_SR_tight":0.95,
+                }               # 'scale'    : 0.92,
                 #  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
@@ -227,6 +266,6 @@ plot['DATA']  = {
 
 # additional options
 
-legend['lumi'] = 'L = 59.74/fb'
+legend['lumi'] = 'L = 41.53/fb'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'

@@ -54,18 +54,18 @@ groupPlot['vbfV+VV+VVV']  = {
                   'nameHR' : 'vbfV+VV+VVV',
                   'isSignal' : 0,
                   'color': palette["MediumBlue2"],  
-                  'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
+                  'samples'  : ['VVV', 'VZ','WW','ggWW','VBS_VV_QCD'], #,'VBS_VV_QCD','VBF-F', not present here
                   'fill': 1001
               }
-"""
-groupPlot['Vg']  = {  
-                  'nameHR' : "V#gamma",
+
+groupPlot['Vg+VgS']  = {  
+                  'nameHR' : "V#gamma+V#gamma*",
                   'isSignal' : 0,
                   'color'    : 409,   # kOrange + 10
-                  'samples'  : ['Vg'],
+                  'samples'  : ['Vg','VgS'],
                   'fill': 1001
               }
-"""
+
 groupPlot['DY']  = {  
                 'nameHR' : "DY",
                 'isSignal' : 0,
@@ -103,6 +103,12 @@ groupPlot['VBS']  = {
               }
 
 
+groupPlot['Fake']  = {
+                  'nameHR' : 'nonprompt',
+                  'isSignal' : 0,
+                  'color': 921,    # kGray + 1
+                  'samples'  : ['Fake']
+}
 
 #plot = {}
 
@@ -130,10 +136,17 @@ plot['DY']  = {
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
                 'isData'   : 0, 
-                'scale'    : 0.65,
+                'cuts': {
+                        "Boosted_DYcr":0.93,
+                        "Boosted_SR":0.93,
+                        "Boosted_SR_tight":0.93,
+                        "Resolved_DYcr":1.14,
+                        "Resolved_SR":1.14,
+                        "Resolved_SR_tight":1.14,
+                }             
+   #'scale'    : 0.65,
             }
 
-"""
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
                   'isSignal' : 0,
@@ -153,7 +166,6 @@ plot['VBF-V']  = {
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-
 """
 plot['Fake']  = {  
                 'color': colors['kTeal'],
@@ -161,13 +173,20 @@ plot['Fake']  = {
                 'isData'   : 0, 
                 'scale'    : 1.0,
             }
-"""
 
 plot['top'] = {   
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                 'scale'    : 0.92,
+                 'cuts': {
+                        "Boosted_topcr":0.8,
+                        "Boosted_SR":0.8,
+                        "Boosted_SR_tight":0.8,
+                        "Resolved_topcr":1.06,
+                        "Resolved_SR":1.06,
+                        "Resolved_SR_tight":1.06,
+                } 
+		# 'scale'    : 0.92,
                 #  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
@@ -213,6 +232,22 @@ plot['VBS_ZV']  = {
                   'scale'    : 1.   ,
               }
 
+
+plot['VBS_VV_QCD']  = {
+                  'color': colors["kCyan"]+4,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+plot['ggWW']  = {
+                  'color': colors["kCyan"]+4,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+
+
 # # data
 
 plot['DATA']  = { 
@@ -228,6 +263,6 @@ plot['DATA']  = {
 
 # additional options
 
-legend['lumi'] = 'L = 59.74/fb'
+legend['lumi'] = 'L = 35.867/fb'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'

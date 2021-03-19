@@ -153,7 +153,7 @@ nuisances['electronpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 #this is for the signals since they are in a different eos folder
 nuisances['electronpt_VBS_ZV'] = {
@@ -165,7 +165,7 @@ nuisances['electronpt_VBS_ZV'] = {
     'samples': {"VBS_ZV":[1.,1.]},
     'folderUp': DirectorySMPeos+'__ElepTup_suffix',
     'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 
 
@@ -186,7 +186,7 @@ nuisances['muonpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 #this is for the signals
 nuisances['muonpt_VBS_ZV'] = {
@@ -198,7 +198,7 @@ nuisances['muonpt_VBS_ZV'] = {
     'samples': {"VBS_ZV":[1.,1.]},
     'folderUp': DirectorySMPeos+'__MupTup_suffix',
     'folderDown': DirectorySMPeos+'__MupTdo_suffix',
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 
 
@@ -279,6 +279,7 @@ for js_VBS_ZV in jes_systs:
 
 
 ##### Jet energy resolution
+"""
 nuisances['JER'] = {
     'name': 'CMS_res_j_2018',
     'kind': 'suffix',
@@ -302,7 +303,7 @@ nuisances['JER_VBS_ZV'] = {
     'folderDown': DirectorySMPeos+'__JERdo_suffix',
 #    'AsLnN': '1'
 }
-
+"""
 
 # ##### Pileup
 pu_syst = '(puWeightUp/puWeight)', '(puWeightDown/puWeight)'
@@ -417,7 +418,7 @@ nuisances['pdf']  = {
 # # Theory nuisance: QCD scale
 ## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
 qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
-
+"""
 for sample in mc :
     if sample != 'VBS_VV_QCD':
         nuisances['QCD_scale_VBS'] = {
@@ -426,7 +427,7 @@ for sample in mc :
             'type'  : 'shape',
             'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
         }
-
+"""
 
 
 
@@ -434,7 +435,7 @@ for sample in mc :
 nuisances['Topnorm_boosted']  = {
                'name'  : 'Topnorm_boosted_2018',
                'samples'  : {
-                   'top' : '0.9',
+                   'top' : '1.0',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
@@ -447,7 +448,7 @@ nuisances['Topnorm_boosted']  = {
 nuisances['Topnorm_resolved']  = {
                'name'  : 'Topnorm_resolved_2018',
                'samples'  : {
-                   'top' : '0.9',
+                   'top' : '1.0',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
@@ -460,7 +461,7 @@ nuisances['Topnorm_resolved']  = {
 nuisances['DYnorm_boosted']  = {
                'name'  : 'DYnorm_boosted_2018',
                'samples'  : {
-                   'DY' : '0.7',
+                   'DY' : '1.0',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
@@ -473,7 +474,7 @@ nuisances['DYnorm_boosted']  = {
 nuisances['DYnorm_resolved']  = {
                'name'  : 'DYnorm_resolved_2018',
                'samples'  : {
-                   'DY' : '1.06',
+                   'DY' : '1.00',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
