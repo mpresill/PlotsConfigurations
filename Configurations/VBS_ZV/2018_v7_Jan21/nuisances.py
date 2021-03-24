@@ -153,7 +153,7 @@ nuisances['electronpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 #this is for the signals since they are in a different eos folder
 nuisances['electronpt_VBS_ZV'] = {
@@ -165,7 +165,7 @@ nuisances['electronpt_VBS_ZV'] = {
     'samples': {"VBS_ZV":[1.,1.]},
     'folderUp': DirectorySMPeos+'__ElepTup_suffix',
     'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 
 
@@ -186,7 +186,7 @@ nuisances['muonpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 #this is for the signals
 nuisances['muonpt_VBS_ZV'] = {
@@ -198,7 +198,7 @@ nuisances['muonpt_VBS_ZV'] = {
     'samples': {"VBS_ZV":[1.,1.]},
     'folderUp': DirectorySMPeos+'__MupTup_suffix',
     'folderDown': DirectorySMPeos+'__MupTdo_suffix',
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
 
 
@@ -317,6 +317,7 @@ nuisances['PU'] = {
 
 
 ##### PS: all these Psweights need to be updated 
+
 nuisances['PS_ISR']  = {
     'name': 'PS_ISR',
     'kind': 'weight',
@@ -330,6 +331,7 @@ nuisances['PS_ISR']  = {
         'DY'     : ['0.9998177685645392*(nCleanGenJet==0) + 1.0080838149428026*(nCleanGenJet==1) + 1.0057948912950987*(nCleanGenJet==2) + 0.9721358221196619*(nCleanGenJet>=3)', '1.0003244155266309*(nCleanGenJet==0) + 0.9897992135367016*(nCleanGenJet==1) + 0.9928782069009531*(nCleanGenJet==2) + 1.0348902921423981*(nCleanGenJet>=3)'],
         'VVV'    : ['1.0270826786253018*(nCleanGenJet==0) + 1.0198703447307862*(nCleanGenJet==1) + 1.0109191915514344*(nCleanGenJet==2) + 0.9838184220287978*(nCleanGenJet>=3)', '0.9661665482954546*(nCleanGenJet==0) + 0.9751744967838527*(nCleanGenJet==1) + 0.9859624782745712*(nCleanGenJet==2) + 1.0202995039288625*(nCleanGenJet>=3)'],
     },
+    'AsLnN'      : '1',
 }
 
 nuisances['PS_FSR']  = {
@@ -345,6 +347,7 @@ nuisances['PS_FSR']  = {
         'DY'     : ['0.9958763409773141*(nCleanGenJet==0) + 1.0041335498093422*(nCleanGenJet==1) + 1.0163363150953029*(nCleanGenJet==2) + 1.0296733670670226*(nCleanGenJet>=3)', '1.0066775262249232*(nCleanGenJet==0) + 0.9945601465681602*(nCleanGenJet==1) + 0.9662459619335311*(nCleanGenJet==2) + 0.9479423453563661*(nCleanGenJet>=3)'],
         'VVV'    : ['0.9809047855490748*(nCleanGenJet==0) + 0.9823641498350338*(nCleanGenJet==1) + 0.9976414629808243*(nCleanGenJet==2) + 1.0077953569413387*(nCleanGenJet>=3)', '1.035388723727876*(nCleanGenJet==0) + 1.0347339790465233*(nCleanGenJet==1) + 1.0017058788771533*(nCleanGenJet==2) + 0.9829344116371653*(nCleanGenJet>=3)'],
     },
+    'AsLnN'      : '1',
 }
 
 
@@ -416,6 +419,7 @@ nuisances['pdf']  = {
 # ######################
 # # Theory nuisance: QCD scale
 ## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
+"""
 qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
 
 for sample in mc :
@@ -427,19 +431,19 @@ for sample in mc :
             'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
         }
 
-
+"""
 
 
 ## rate parameters
 nuisances['Topnorm_boosted']  = {
                'name'  : 'Topnorm_boosted_2018',
                'samples'  : {
-                   'top' : '0.9',
+                   'top' : '1',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
                    'Boosted_topcr',
-                   'Boosted_SR',
+                   'Boosted_SR_Ram',
                    'Boosted_SR_tight',
                    ]
               }
@@ -447,12 +451,12 @@ nuisances['Topnorm_boosted']  = {
 nuisances['Topnorm_resolved']  = {
                'name'  : 'Topnorm_resolved_2018',
                'samples'  : {
-                   'top' : '0.9',
+                   'top' : '1',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
                    'Resolved_topcr',
-                   'Resolved_SR',
+                   'Resolved_SR_Ram',
                    'Resolved_SR_tight',
                    ]
               }              
@@ -460,11 +464,11 @@ nuisances['Topnorm_resolved']  = {
 nuisances['DYnorm_boosted']  = {
                'name'  : 'DYnorm_boosted_2018',
                'samples'  : {
-                   'DY' : '0.7',
+                   'DY' : '1',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
-                   'Boosted_SR',
+                   'Boosted_SR_Ram',
                    'Boosted_SR_tight',
                    'Boosted_DYcr',
                    ]
@@ -473,11 +477,11 @@ nuisances['DYnorm_boosted']  = {
 nuisances['DYnorm_resolved']  = {
                'name'  : 'DYnorm_resolved_2018',
                'samples'  : {
-                   'DY' : '1.06',
+                   'DY' : '1',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
-                   'Resolved_SR',
+                   'Resolved_SR_Ram',
                    'Resolved_SR_tight',
                    'Resolved_DYcr',
                    ]
