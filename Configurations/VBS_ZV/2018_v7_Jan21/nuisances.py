@@ -166,7 +166,7 @@ nuisances['electronpt_VBS_ZV'] = {
     'folderUp': DirectorySMPeos+'__ElepTup_suffix',
     'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
     #'AsLnN': '1'
-}
+}#add QCD_VV when ready
 
 
 ##### Muon Efficiency and energy scale  
@@ -199,7 +199,7 @@ nuisances['muonpt_VBS_ZV'] = {
     'folderUp': DirectorySMPeos+'__MupTup_suffix',
     'folderDown': DirectorySMPeos+'__MupTdo_suffix',
     #'AsLnN': '1'
-}
+}#add QCD_VV when ready
 
 
 
@@ -274,7 +274,7 @@ for js_VBS_ZV in jes_systs:
       'folderUp': folderup_signal,
       'folderDown': folderdo_signal,
 #      'AsLnN': '1'
-  }
+  }#add QCD_VV when ready
 
 
 
@@ -290,6 +290,7 @@ nuisances['JER'] = {
     'folderDown': makeMCDirectory('JERdo_suffix'),
 #    'AsLnN': '1'
 }
+
 #this is for the signal
 nuisances['JER_VBS_ZV'] = {
     'name': 'CMS_res_j_2018',
@@ -301,7 +302,7 @@ nuisances['JER_VBS_ZV'] = {
     'folderUp': DirectorySMPeos+'__JERup_suffix',
     'folderDown': DirectorySMPeos+'__JERdo_suffix',
 #    'AsLnN': '1'
-}
+}#add QCD_VV when ready
 
 
 # ##### Pileup
@@ -316,8 +317,33 @@ nuisances['PU'] = {
 }
 
 
-##### PS: all these Psweights need to be updated 
 
+
+
+#####################
+##### PS, QCD scale, UE 
+#####################
+samples_PS = ['VBS_ZV','top','DY','VV','VVV','Vg','VgS','VBF-V','ggWW']  #add VBS_QCD_VV when ready on SMP eos
+
+for sample in samples_PS:
+    nuisances['PS_ISR_'+sample]  = {
+                    'name'  : 'CMS_PS_ISR_'+sample,
+                    'kind'  : 'weight',
+                    'type'  : 'shape',
+                    'samples'  : {
+                        sample : ['PSWeight[2]', 'PSWeight[0]'],
+                    }
+                }
+    nuisances['PS_FSR_'+sample]  = {
+                    'name'  : 'CMS_PS_FSR_'+sample,
+                    'kind'  : 'weight',
+                    'type'  : 'shape',
+                    'samples'  : {
+                        sample :  ['PSWeight[3]', 'PSWeight[1]'], 
+                    }
+                }
+"""
+#outdated ones.
 nuisances['PS_ISR']  = {
     'name': 'PS_ISR',
     'kind': 'weight',
@@ -349,16 +375,37 @@ nuisances['PS_FSR']  = {
     },
     'AsLnN'      : '1',
 }
-
+"""
+# # Theory nuisance: QCD scale
+## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
+#qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
+#for sample in mc :
+#    if sample == 'VBS_ZV' :
+#        nuisances['QCD_scale_VBS'] = {
+#            'name'  : 'QCDscale_'+sample,
+#            'kind'  : 'weight',
+#            'type'  : 'shape',
+#            'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
+#        }
+for sample in mc :
+    if sample == "ggWW": continue   #this sample apparently doesn't have LHE weights...
+    if sample == "VBS_VV_QCD": continue   ##once SMP eos VBS_VV_QCD are ready comment out 
+    nuisances['QCD_scale_'+sample] = {
+            'name'  : 'QCDscale_'+sample,
+            'kind'  : 'weight',
+            'type'  : 'shape',
+            'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
+        }
 
 # An overall 1.5% UE uncertainty will cover all the UEup/UEdo variations
-# And we don't observe any dependency of UE variations on njet
+# And we don't observe any dependency of UE variations on njet 
 nuisances['UE']  = {
-                'name'  : 'UE_CP5',
+                'name'  : 'UE_CUET',
                 'skipCMS' : 1,
                 'type': 'lnN',
-                'samples': dict((skey, '1.015') for skey in mc), 
+                'samples': dict((skey, '1.015') for skey in mc),
 }
+
 
 ####### Generic "cross section uncertainties"
 """
@@ -403,6 +450,8 @@ nuisances['VZ'] = {
     }
 }
 
+
+####PDF syst, needs to be updated for signals
 nuisances['pdf']  = {
                'name'  : 'pdf',
                'type'  : 'lnN',
@@ -416,22 +465,7 @@ nuisances['pdf']  = {
                    },
               }
 
-# ######################
-# # Theory nuisance: QCD scale
-## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
-"""
-qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
 
-for sample in mc :
-    if sample != 'VBS_VV_QCD':
-        nuisances['QCD_scale_VBS'] = {
-            'name'  : 'QCDscale_'+sample,
-            'kind'  : 'weight',
-            'type'  : 'shape',
-            'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
-        }
-
-"""
 
 
 ## rate parameters
@@ -498,7 +532,7 @@ nuisances['stat'] = {
 }
 
 
-#for n in nuisances.values():
-#    n['skipCMS'] = 1
-#
-#print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))
+for n in nuisances.values():
+    n['skipCMS'] = 1
+
+print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))
