@@ -48,7 +48,17 @@ Colors
 "Wjets5": (211, 87, 38), #d34912 
 '''
 #
+
+
+DY_palette = ['#DD2C00', '#FF3D00',  '#FF6D00','#F57C00', '#FFAB00', '#FFC400','#DD2C00', '#FF3D00',  '#FF6D00','#F57C00', '#FFAB00', ]
  
+DY_bins =[]
+for bin in range(1,7):
+	DY_bins.append("DY_R_bin" + str(bin))
+for bin in range(1,6):
+        DY_bins.append("DY_B_bin" + str(bin))
+
+
 
 groupPlot['vbfV+VV+VVV']  = {  
                   'nameHR' : 'vbfV+VV+VVV',
@@ -65,7 +75,7 @@ groupPlot['Vg+VgS']  = {
                   'samples'  : ['Vg','VgS'],
                   'fill': 1001
               }
-
+"""
 groupPlot['DY']  = {  
                 'nameHR' : "DY",
                 'isSignal' : 0,
@@ -73,7 +83,17 @@ groupPlot['DY']  = {
                 'samples'  : ['DY'],
                 'fill': 1001
             }
+"""
+for i,DYbin in enumerate(DY_bins):
+	groupPlot[DYbin] = {
+			'nameHR': DYbin,
+			'isSignal' : 0,
+			'color' : DY_palette[i],
+			'samples' : [DY_bin],
+			'fill' : 1001,
 
+
+}
 
 
 groupPlot['top']  = {  
@@ -110,6 +130,14 @@ groupPlot['VBS']  = {
                  'samples'  : ['VBS_ZV'],
                  'fill': 1001
               }
+
+groupPlot['WGJJ'] =  {
+                 'nameHR' : 'WGJJ',
+                 'isSignal' : 0,
+                 'color': palette['DarkBlue'],
+                 'samples'  : ['WGJJ'],
+                 'fill': 1001
+              }
 groupPlot['Fake']  = {
                   'nameHR' : 'nonprompt',
                   'isSignal' : 0,
@@ -139,13 +167,23 @@ plot['VZ']  = {
               }   
          
 
-
+"""
 plot['DY']  = {  
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
                 'isData'   : 0, 
                 #'scale'    : 0.6
             }
+"""
+
+for DYbin in DY_bins:
+	plot[DYbin] =  {   
+                    'color': colors['kAzure']-1,
+                    'isSignal' : 0,
+                    'isData'   : 0, 
+                    'scale'    : 1.0 
+                    }
+
 
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
@@ -232,6 +270,12 @@ plot['tZq']  = {
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
+
+plot['WGJJ']= { 'color': colors["kCyan"]+4,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
 # # data
 
 plot['DATA']  = { 
@@ -239,7 +283,17 @@ plot['DATA']  = {
                  'color': 1 ,  
                  'isSignal' : 0,
                  'isData'   : 1 ,
-                 'isBlind'  : 0
+                 'isBlind'  : 0,
+		 'scale' :1.0,
+			'cuts': {
+			"Preselection" : 0,
+			"Resolved_SR_bVeto" : 0,	
+			"Resolved_SR_nobVeto" :0,
+			"Boosted_SR_bVeto" : 0,
+			"Boosted_SR_nobVeto" :0,
+			"Boosted_SR" : 0,
+			"Resolved_SR" :0 
+		}	
              }
 
 

@@ -205,6 +205,16 @@ aliases['nbtag'] = {
     'class': 'jets_cat_dnn',
     'args': ('nbtag','2018', models_path, True)
 }
+
+aliases['Zleppt'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        'gSystem->Load("libDNNEvaluator.so")',
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+    ],
+    'class': 'jets_cat_dnn',
+    'args': ('Zleppt','2018', models_path, True)
+}
  
 aliases['V_jet_mass'] = {
     'expr': 'Vjet_mass'
@@ -354,7 +364,7 @@ aliases['PUJetIdSF'] = {
 """
 #nobtag sf test
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF']),
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF' ]),
     'samples': mc
 }
 # variations
