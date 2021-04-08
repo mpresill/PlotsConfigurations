@@ -55,8 +55,8 @@ DY_palette = ['#DD2C00', '#FF3D00',  '#FF6D00','#F57C00', '#FFAB00', '#FFC400','
 DY_bins =[]
 for bin in range(1,7):
 	DY_bins.append("DY_R_bin" + str(bin))
-for bin in range(1,6):
-        DY_bins.append("DY_B_bin" + str(bin))
+#for bin in range(1,6):
+#        DY_bins.append("DY_B_bin" + str(bin))
 
 
 

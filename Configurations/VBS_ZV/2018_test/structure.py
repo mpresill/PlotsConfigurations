@@ -1,15 +1,41 @@
-
+from itertools import product, chain
 # structure configuration for datacard
 
 #structure = {}
 
 # keys here must match keys in samples.py    
 #                    
-
+"""
 structure['DY']  = {  
                   'isSignal' : 0,
                   'isData'   : 0
               }
+"""
+
+phase_spaces_boost = [c for c in cuts if "Boosted" in c]
+phase_spaces_res = [c for c in cuts if "Resolved" in c]
+
+DY_bins = []
+for bin in range(1,7):
+    DY_bins.append("DY_R_bin"+str(bin))
+for bin in range(1,6):
+     DY_bins.append("DY_B_bin"+str(bin))
+
+for DYbin in DY_bins:
+	if 'B' in DYbin:
+		structure[DYbin] = {
+			'isSignal':0,
+			'isData' : 0,
+			'removeFromCuts': phase_spaces_res
+		}
+    	else:
+         	structure[DYbin] = {
+                        'isSignal':0,
+                        'isData' : 0,
+                        'removeFromCuts': phase_spaces_boost
+                }
+	
+
 
 
 structure['WJets']  = {  
@@ -84,7 +110,10 @@ structure['tZq'] = {
                   'isSignal' : 0,
                   'isData'   : 0
                   }
-
+structure['WGJJ'] = {
+                  'isSignal' : 0,
+                  'isData'   : 0
+                  }
 
 # data
 

@@ -26,7 +26,7 @@ samplesFile = 'samples.py'
 
 # file with list of samples
 #plotFile = 'plot_sig.py'
-plotFile = 'plot.py'
+plotFile = 'plot_boost.py'
 
 
 # luminosity to normalize to (in 1/fb)
@@ -38,7 +38,7 @@ outputDirPlots = '/eos/home-a/ahakimi/www/ZV_analysis/Plots'+date
 
 
 # used by mkDatacards to define output directory for datacards: common vbs-italia github folder : /afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/2017_v7/
-outputDirDatacard = '/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/2018_nobtag/Datacards'+date
+outputDirDatacard = '/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/2018_test/Datacards'+date
 
 
 # structure file for datacard
