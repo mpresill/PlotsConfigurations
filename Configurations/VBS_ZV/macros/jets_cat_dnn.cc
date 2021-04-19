@@ -67,13 +67,13 @@ protected:
     vbs_jet_1, 
     v_jet_0,
     v_jet_1,
-
     mjj_max, 
     detajj_mjjmax, 
     dphijj_mjjmax,
     Vjet_mass,
     njet30,
     nbtag,
+    Zleppt,
     dnn_output, 
     nVarTypes
   };
@@ -110,6 +110,8 @@ protected:
   static FloatArrayReader* CleanJet_phi;
   static FloatArrayReader* Lepton_pt;
   static FloatArrayReader* Lepton_eta;
+  static FloatArrayReader* Lepton_phi;
+  static UIntValueReader* nLepton;
   static FloatValueReader*  mll;
   static FloatArrayReader*  Jet_btagDeepB;
   static std::array<double, nVarTypes> returnValues;
@@ -137,6 +139,8 @@ FloatArrayReader* jets_cat_dnn::CleanJet_eta{};
 FloatArrayReader* jets_cat_dnn::CleanJet_phi{};
 FloatArrayReader* jets_cat_dnn::Lepton_pt{};
 FloatArrayReader* jets_cat_dnn::Lepton_eta{};
+FloatArrayReader* jets_cat_dnn::Lepton_phi{};
+UIntValueReader* jets_cat_dnn::nLepton;
 FloatValueReader*  jets_cat_dnn::mll{};
 FloatArrayReader* jets_cat_dnn::Jet_btagDeepB{};
 
@@ -152,7 +156,7 @@ std::array<double, jets_cat_dnn::nVarTypes> jets_cat_dnn::returnValues{};
 
 jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* model_dir, bool verbose):
    TTreeFunction(), model_dir_(model_dir), verbose(verbose){
-     
+      
     std::string type(_type);
     if (type ==  "vbs_category")
       returnVar_ = vbs_category;
@@ -176,6 +180,8 @@ jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* mod
       returnVar_ = njet30;
     else if (type == "nbtag")
       returnVar_ = nbtag;
+    else if (type== "Zleppt")
+      returnVar_ = Zleppt;
     else if (type == "dnn_output")
       returnVar_ = dnn_output;
     else
@@ -319,6 +325,8 @@ jets_cat_dnn::bindTree_(multidraw::FunctionLibrary& _library)
     _library.bindBranch(CleanJet_phi, "CleanJet_phi");
     _library.bindBranch(Lepton_pt, "Lepton_pt");
     _library.bindBranch(Lepton_eta, "Lepton_eta");
+    _library.bindBranch(Lepton_phi, "Lepton_phi");
+    _library.bindBranch(nLepton, "nLepton");
     _library.bindBranch(mll, "mll");
     _library.bindBranch(Jet_btagDeepB, "Jet_btagDeepB");
     currentEvent = std::make_tuple(0, 0, 0);
@@ -341,7 +349,9 @@ jets_cat_dnn::bindTree_(multidraw::FunctionLibrary& _library)
                                      CleanJetNotFat_jetId = nullptr;
                                      Lepton_pt = nullptr;
                                      Lepton_eta = nullptr;
-                                     mll = nullptr;
+				     Lepton_phi = nullptr;
+                                     nLepton = nullptr;
+				     mll = nullptr;
                                      Jet_btagDeepB = nullptr;
                                    });
 }
@@ -367,6 +377,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   float Vjet_mass_max = 0.;
   unsigned int njet{*nCleanJetNotFat->Get()};
   unsigned int nFJ{*nFatJet->Get()};
+  unsigned int nLep{*nLepton->Get()};
   // Index in the collection of CleanJetNotFat
   int VBS_jets[2] = {999,999};
   int V_jets[2]   = {999,999};
@@ -375,6 +386,20 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   int _nbtag = 0;
   float btag_cut = 0.;
   std::vector<int> vectors_id;
+  float _Zleppt =0.;
+  returnValues[Zleppt] = -999;
+  //cout <<  returnValues[Zleppt] << endl;
+  //calculate leptonic Z pt
+  if (nLep == 2) {
+	//cout << " 2 Leptons " << endl;
+  	TLorentzVector lep0;
+  	TLorentzVector lep1;
+  	lep0.SetPtEtaPhiM(Lepton_pt->At(0), Lepton_eta->At(0), Lepton_phi->At(0), 0);
+  	lep1.SetPtEtaPhiM(Lepton_pt->At(1), Lepton_eta->At(1), Lepton_phi->At(1), 0);
+  	_Zleppt = (lep0+lep1).Pt();
+  	//cout << _Zleppt <<endl;
+  }
+
   //btag cut values
   //cout << jets_cat_dnn::year_ <<endl;
   if (jets_cat_dnn::year_ == "2018") btag_cut=0.1241;
@@ -492,10 +517,11 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   returnValues[dphijj_mjjmax] = dphijj_mjj_max;
   returnValues[Vjet_mass] = Vjet_mass_max;
   returnValues[njet30] = njet;
-  
+  //cout << "test" <<endl;
+  returnValues[Zleppt] = _Zleppt;
+  //cout << returnValues[Zleppt]<<endl;
   //cout << "nbtag = " << nbtag << endl;
   returnValues[nbtag] = _nbtag;
-  ;
   //cout << _event << " cat : " << category << endl;
   returnValues[vbs_category] = category;
   //cout << _event << " vbs cat : " << returnValues[vbs_category]  << endl;
