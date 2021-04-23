@@ -480,13 +480,13 @@ for bin in range(1,7):
         DY_bins.append("DY_R_bin" + str(bin))
 for bin in range(1,6):
         DY_bins.append("DY_B_bin" + str(bin))
+DYrates=[0.899,0.874,0.774,0.631,0.69,0.514,1,1,1,1,1]
 
-
-for DYbin in DY_bins:
+for i,DYbin in enumerate(DY_bins):
 	if "_B_" in DYbin:
 		nuisances["{}_norm_boost_bVeto_2018".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_boost_bVeto_2018'.format(DYbin),
-                'samples'  : {DYbin: '1.00'},
+                'samples'  : {DYbin: DYrates[i]},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Boosted_DYcr_bVeto',
@@ -498,7 +498,7 @@ for DYbin in DY_bins:
             }
 		nuisances["{}_norm_boost_nobVeto_2018".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_boost_nobVeto_2018'.format(DYbin),
-                'samples'  : {DYbin: '1.00'},
+                'samples'  : {DYbin: DYrates[i]},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    #'Boosted_DYcr_bVeto',

@@ -50,7 +50,7 @@ Colors
 #
 
 
-DY_palette = ['#DD2C00', '#FF3D00',  '#FF6D00','#F57C00', '#FFAB00', '#FFC400','#DD2C00', '#FF3D00',  '#FF6D00','#F57C00', '#FFAB00', ]
+DY_palette = ['#006400', '#008000',  '#32CD32','#00FF00', '#ADFF2F', '#FFFF00','#006400', '#008000',  '#32CD32','#00FF00', '#ADFF2F', ]
  
 DY_bins =[]
 for bin in range(1,7):
@@ -60,56 +60,11 @@ for bin in range(1,7):
 
 
 
-groupPlot['vbfV+VV+VVV']  = {  
-                  'nameHR' : 'vbfV+VV+VVV',
-                  'isSignal' : 0,
-                  'color': palette["MediumBlue2"],  
-                  'samples'  : ['VBF-V','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
-                  'fill': 1001
-              }
-
-groupPlot['Vg+VgS']  = {  
-                  'nameHR' : "V#gamma+V#gamma*",
-                  'isSignal' : 0,
-                  'color'    : 409,   # kOrange + 10
-                  'samples'  : ['Vg','VgS'],
-                  'fill': 1001
-              }
-"""
-groupPlot['DY']  = {  
-                'nameHR' : "DY",
-                'isSignal' : 0,
-                'color': palette["Green2"],    
-                'samples'  : ['DY'],
-                'fill': 1001
-            }
-"""
-for i,DYbin in enumerate(DY_bins):
-	groupPlot[DYbin] = {
-			'nameHR': DYbin,
-			'isSignal' : 0,
-			'color' : DY_palette[i],
-			'samples' : DYbin,
-			'fill' : 1001,
-
-
-}
-
-
-groupPlot['top']  = {  
-                 'nameHR' : 'top',
-                 'isSignal' : 0,
-                 'color':  palette["Orange"],  
-                 'samples'  : ['top'],
-                 'fill': 1001
-             }
-
-
 groupPlot['WJets']  = {  
                   'nameHR' : 'W+Jets',
                   'isSignal' : 0,
-                  'color':   palette["Yellow"],
-                  'samples'  : ['WJets'],
+                  'color':   901, #kpink+1
+                  'samples'  : ['WJets','WGJJ' ],
                   'fill': 1001
 
               }
@@ -123,21 +78,13 @@ groupPlot['tZq']  = {
 
               }
 
-groupPlot['VBS']  = {  
-                 'nameHR' : 'VBS',
-                 'isSignal' : 1,
-                 'color': colors["kRed"]+1,   
-                 'samples'  : ['VBS_ZV'],
-                 'fill': 1001
-              }
-
-groupPlot['WGJJ'] =  {
-                 'nameHR' : 'WGJJ',
+groupPlot['top']  = {
+                 'nameHR' : 'top',
                  'isSignal' : 0,
-                 'color': palette['DarkBlue'],
-                 'samples'  : ['WGJJ'],
+                 'color':  palette["Orange"],
+                 'samples'  : ['top'],
                  'fill': 1001
-              }
+             }
 groupPlot['Fake']  = {
                   'nameHR' : 'nonprompt',
                   'isSignal' : 0,
@@ -145,6 +92,40 @@ groupPlot['Fake']  = {
                   'samples'  : ['Fake']
 }
 
+groupPlot['Vg+VgS']  = {
+                  'nameHR' : "V#gamma+V#gamma*",
+                  'isSignal' : 0,
+                  'color'    : palette['LightBlue'],   # kOrange - 3
+                  'samples'  : ['Vg','VgS'],
+                  'fill': 1001
+              }
+
+groupPlot['vbfV+VV+VVV']  = {
+                  'nameHR' : 'vbfV+VV+VVV',
+                  'isSignal' : 0,
+                  'color': palette["DarkBlue"],
+                  'samples'  : ['VBF-V','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
+                  'fill': 1001
+              }
+
+for i,DYbin in enumerate(DY_bins):
+        groupPlot[DYbin] = {
+                        'nameHR': DYbin,
+                        'isSignal' : 0,
+                        'color' : DY_palette[i],
+                        'samples' : DYbin,
+                        'fill' : 1001,
+
+
+}
+
+groupPlot['VBS']  = {
+                 'nameHR' : 'VBS',
+                 'isSignal' : 1,
+                 'color': colors["kRed"]+1,
+                 'samples'  : ['VBS_ZV'],
+                 'fill': 1001
+              }
 
 #plot = {}
 

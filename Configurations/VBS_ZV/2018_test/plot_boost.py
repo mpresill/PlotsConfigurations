@@ -104,7 +104,7 @@ groupPlot['top']  = {
                  'fill': 1001
              }
 
-
+"""
 groupPlot['WJets']  = {  
                   'nameHR' : 'W+Jets',
                   'isSignal' : 0,
@@ -113,7 +113,7 @@ groupPlot['WJets']  = {
                   'fill': 1001
 
               }
-
+"""
 groupPlot['tZq']  = {
                   'nameHR' : 'tZq',
                   'isSignal' : 0,
@@ -130,7 +130,7 @@ groupPlot['VBS']  = {
                  'samples'  : ['VBS_ZV'],
                  'fill': 1001
               }
-
+"""
 groupPlot['WGJJ'] =  {
                  'nameHR' : 'WGJJ',
                  'isSignal' : 0,
@@ -138,6 +138,7 @@ groupPlot['WGJJ'] =  {
                  'samples'  : ['WGJJ'],
                  'fill': 1001
               }
+"""
 groupPlot['Fake']  = {
                   'nameHR' : 'nonprompt',
                   'isSignal' : 0,
@@ -235,7 +236,7 @@ plot['top'] = {
                 #  }
         }
 
-
+"""
 plot['WJets']  = {
                   'color':  colors['kRed']-3,
                   'isSignal' : 0,
@@ -256,7 +257,7 @@ plot['WJets']  = {
                 #       "res_topcr_mjjincl_dnnhigh_ele":1.413,
                 #   }
               }
-
+"""
 plot['VBS_ZV']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
@@ -270,12 +271,13 @@ plot['tZq']  = {
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-
+"""
 plot['WGJJ']= { 'color': colors["kCyan"]+4,
                   'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
+"""
 # # data
 
 plot['DATA']  = { 

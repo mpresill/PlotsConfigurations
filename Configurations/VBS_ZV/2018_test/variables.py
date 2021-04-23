@@ -46,6 +46,16 @@ variables['Zleppt'] = { 'name' : 'Alt$(Zleppt, -999)',
 
 }
 
+variables['DYbin_res'] = { 'name' : 'Alt$(Zleppt, -999)',
+                        'range' : ([0,100,200,300,400,500,800],),
+                        'xaxis' : 'p_{T} leptonic Z [GeV](binned)',
+                        'fold' : 3,
+}
+variables['DYbin_boost'] = { 'name' : 'Alt$(Zleppt, -999)',
+                        'range' : ([0,75,150,250,400, 800],),
+                        'xaxis' : 'p_{T} leptonic Z [GeV](binned)',
+                        'fold' : 3,
+}
 
 variables['eta1']  = {   'name': 'Alt$(Lepton_eta[0],-9999.)',
                         'range' : (30,-3,3),
@@ -194,6 +204,7 @@ variables['FatJet_eta'] = {'name': 'Alt$(CleanFatJet_eta, -9999)',
                            'fold'  : 0,
                         
                            }
+
 
 """
 variables['FatJet_tau21'] = {   'name': 'CleanFatJet_tau21',
