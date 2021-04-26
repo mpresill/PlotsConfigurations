@@ -74,6 +74,7 @@ protected:
     njet30,
     nbtag,
     Zleppt,
+    Vpt,
     dnn_output, 
     nVarTypes
   };
@@ -182,6 +183,8 @@ jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* mod
       returnVar_ = nbtag;
     else if (type== "Zleppt")
       returnVar_ = Zleppt;
+    else if (type== "Vpt")
+      returnVar_ = Vpt;
     else if (type == "dnn_output")
       returnVar_ = dnn_output;
     else
@@ -387,6 +390,8 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   float btag_cut = 0.;
   std::vector<int> vectors_id;
   float _Zleppt =0.;
+  float _Vpt = 0.;
+  returnValues[Vpt]=-999;
   returnValues[Zleppt] = -999;
   //cout <<  returnValues[Zleppt] << endl;
   //calculate leptonic Z pt
@@ -451,7 +456,8 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
         if (nFJ >= 1){
             //cout << "Boosted" << endl;
             category = 0;
-            Vjet_mass_max = FatJet_mass->At(0); //does it need to be the first FatJet?
+            Vjet_mass_max = FatJet_mass->At(0);
+	    _Vpt = FatJet_pt->At(0);  //does it need to be the first FatJet?
 
         }else if (njet>=4) { 
             category = 1;
@@ -473,6 +479,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
                             V_jets[1] = jjet;
                             deltamass_Vjet = dmass;
                             Vjet_mass_max = mvjet;
+			    _Vpt=(jet0+jet1).Pt();
                         }
                     }
                 }
@@ -487,6 +494,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
 
         
     //set default values
+    returnValues[Vpt]=_Vpt;
     returnValues[vbs_jet_0] = 999;
     returnValues[vbs_jet_1] = 999;
     returnValues[v_jet_0] = 999;
