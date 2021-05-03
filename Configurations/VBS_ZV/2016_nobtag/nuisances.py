@@ -356,32 +356,71 @@ nuisances['Topnorm_resolved']  = {
                    'Resolved_topcr',
                    'Resolved_SR',
                    ]
-              }              
+              }
 
-nuisances['DYnorm_boosted']  = {
-               'name'  : 'DYnorm_boosted_2016',
-               'samples'  : {
-                   'DY' : '1.00',
-                   },
-               'type'  : 'rateParam',
-               'cuts'  : [
-                   'Boosted_SR',
-                   'Boosted_DYcr',
-                   ]
-              }   
+DY_bins = []
+for bin in range(1,7):
+        DY_bins.append("DY_R_bin" + str(bin))
+for bin in range(1,6):
+        DY_bins.append("DY_B_bin" + str(bin))
+DYrates=[0.899,0.874,0.774,0.631,0.69,0.514,1,1,1,1,1]
 
-nuisances['DYnorm_resolved']  = {
-               'name'  : 'DYnorm_resolved_2016',
-               'samples'  : {
-                   'DY' : '1.00',
-                   },
-               'type'  : 'rateParam',
-               'cuts'  : [
-                   'Resolved_SR',
-                   'Resolved_DYcr',
+for i,DYbin in enumerate(DY_bins):
+        if "_B_" in DYbin:
+                nuisances["{}_norm_boost_bVeto_2016".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_boost_bVeto_2016'.format(DYbin),
+                'samples'  : {DYbin: DYrates[i]},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Boosted_DYcr_bVeto',
+                   #'Boosted_DYcr_nobVeto',
+                   'Boosted_SR_bVeto',
+                   #'Boosted_SR_nobVeto'
+
                    ]
-              }   
-## Use the following if you want to apply the automatic combine MC stat nuisances.
+            }
+                nuisances["{}_norm_boost_nobVeto_2016".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_boost_nobVeto_2016'.format(DYbin),
+                'samples'  : {DYbin: DYrates[i]},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   #'Boosted_DYcr_bVeto',
+                   'Boosted_DYcr_nobVeto',
+                   #'Boosted_SR_bVeto',
+                   'Boosted_SR_nobVeto'
+
+                   ]
+            }
+
+
+
+	elif "_R_" in DYbin:
+                nuisances["{}_norm_res_bVeto_2016".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_res_bVeto_2016'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Resolved_DYcr_bVeto',
+                   #'Resolved_DYcr_nobVeto',
+                   'Resolved_SR_bVeto',
+                   #'Resolved_SR_nobVeto'
+
+                   ]
+            }
+                nuisances["{}_norm_res_nobVeto_2016".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_res_nobVeto_2016'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   #'Resolved_DYcr_bVeto',
+                   'Resolved_DYcr_nobVeto',
+                   #'Resolved_SR_bVeto',
+                   'Resolved_SR_nobVeto'
+
+                   ]
+            }
+              
+# Use the following if you want to apply the automatic combine MC stat nuisances.
 nuisances['stat'] = {
     'type': 'auto',
     'maxPoiss': '10',

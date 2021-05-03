@@ -100,38 +100,24 @@ mcCommonWeight = 'XSWeight*SFweight*PromptGenLepMatch2l*METFilter_MC'
 ###########################################
 
 #######VBS EW: only ZV processes  ->SIGNALS AND BACKGROUNDS ARE NOT AVAILABLE SO FAR IN /eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv7_Full2016v7/MCl1loose2016v7__MCCorr2016v7__l2loose__l2tightOR2016v7
-
-samples['VBS_ZZ'] = {
-    'name':   nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J'), 
-             #+nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L') 
+samples['VBS_ZV'] = {
+    'name':   nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J')
+             +nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L')
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L'),
+             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L'),
     'weight':  mcCommonWeight,
-    'FilesPerJob': 1
+    'FilesPerJob': 7
 }
-samples['VBS_ZW'] = {
-    'name':   #nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J')
-             nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L')
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L'),
-    'weight':  mcCommonWeight + '* !istZq',
-    'FilesPerJob': 1
-}
+addSampleWeight(samples,'VBS_ZV','WmTo2J_ZTo2','(Sum$(abs(GenPart_pdgId)==6)==0')
+addSampleWeight(samples,'VBS_ZV','WpTo2J_ZTo2','(Sum$(abs(GenPart_pdgId)==6)==0')
 
-#tZq bkg
 samples['tZq'] = {
-    'name':  # nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J')
-             nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L')
+    'name':  nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L')
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
@@ -139,11 +125,19 @@ samples['tZq'] = {
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
              +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L'),
-    'weight':  mcCommonWeight + '* istZq',
-    'FilesPerJob': 1
+    'weight':  mcCommonWeight + '*(Sum$(abs(GenPart_pdgId)==6)>=1)',
+    'FilesPerJob': 7
 }
 
 
+
+"""
+samples['tZq'] = {
+        'name' : nanoGetSampleFiles(mcDirectory, 'tZq_ll_4f'),
+        'weight' : mcCommonWeight,
+        'FilesPerJob': 7,
+}
+"""
 ###########################################
 #############  BACKGROUNDS  ###############
 ###########################################
@@ -196,6 +190,19 @@ samples['DY'] = {
         'weight': mcCommonWeight + "*( !(Sum$(PhotonGen_isPrompt==1 && PhotonGen_pt>15 && abs(PhotonGen_eta)<2.6) > 0 &&\
                                          Sum$(LeptonGen_isPrompt==1 && LeptonGen_pt>15)>=2) )",
         'FilesPerJob': 4,
+	 'subsamples' :{
+                "R_bin1" : '(vbs_category == 1) && (Zleppt <= 100)',
+                "R_bin2" : '(vbs_category == 1) && (Zleppt > 100 && Zleppt <=200)',
+                "R_bin3" : '(vbs_category == 1) && (Zleppt > 200 && Zleppt <=300)',
+                "R_bin4" : '(vbs_category == 1) && (Zleppt > 300 && Zleppt <=400)',
+                "R_bin5" : '(vbs_category == 1) && (Zleppt > 400 && Zleppt <=500)',
+                "R_bin6" : '(vbs_category == 1) && (Zleppt > 500)',
+                "B_bin1" : '(vbs_category == 0) && (Zleppt > 0 && Zleppt <=75)',
+                "B_bin2" : '(vbs_category == 0) && (Zleppt > 75 && Zleppt <=150)',
+                "B_bin3" : '(vbs_category == 0) && (Zleppt > 150 && Zleppt <=250)',
+                "B_bin4" : '(vbs_category == 0) && (Zleppt > 250 && Zleppt <=400)',
+                "B_bin5" : '(vbs_category == 0) && (Zleppt > 400)',
+	},
 	'EventsPerJob' : 70000,
     }
 
@@ -297,19 +304,21 @@ samples['ggWW'] = {
     'FilesPerJob': 4
 }
 
+
 ######## Vg ########
-"""
+
 files = nanoGetSampleFiles(mcDirectory, 'Wg_MADGRAPHMLM') + \
     nanoGetSampleFiles(mcDirectory, 'Zg')
 
 samples['Vg'] = {
     'name': files,
-    'weight': mcCommonWeightNoMatch + '*(Gen_ZGstar_mass <= 0)',
-    'FilesPerJob': 4
+    'weight': mcCommonWeightNoMatch + '*!(Gen_ZGstar_mass > 0)',
+    'FilesPerJob' : 6,
+    'EventsPerJob' : 70000,
+    'suppressNegative' :['all'],
+    'suppressNegativeNuisances' :['all'],
 }
-# the following is needed in both v5 and v6
-addSampleWeight(samples, 'Vg', 'Zg', '0.448')
-"""
+
 ######## VgS ########
 
 files = nanoGetSampleFiles(mcDirectory, 'Wg_MADGRAPHMLM') + \
@@ -319,17 +328,15 @@ files = nanoGetSampleFiles(mcDirectory, 'Wg_MADGRAPHMLM') + \
 samples['VgS'] = {
     'name': files,
     'weight': mcCommonWeight + ' * (gstarLow * 0.94 + gstarHigh * 1.14)',
-    'FilesPerJob': 4,
-    'subsamples': {
-      'L': 'gstarLow',
-      'H': 'gstarHigh'
-    }
+    'FilesPerJob' : 6,
+    'EventsPerJob' : 70000,
+    'suppressNegative' :['all'],
+    'suppressNegativeNuisances' :['all'],
 }
+
 addSampleWeight(samples, 'VgS', 'Wg_MADGRAPHMLM', '(Gen_ZGstar_mass > 0 && Gen_ZGstar_mass < 0.1)')
-addSampleWeight(samples, 'VgS', 'Zg', '(Gen_ZGstar_mass > 0)*0.448')
+addSampleWeight(samples, 'VgS', 'Zg', '(Gen_ZGstar_mass > 0)')
 addSampleWeight(samples, 'VgS', 'WZTo3LNu_mllmin01', '(Gen_ZGstar_mass > 0.1)')
-
-
 ############ VZ ############
 
 files = nanoGetSampleFiles(mcDirectory, 'ZZTo2L2Nu') + \
@@ -378,6 +385,8 @@ samples['Fake'] = {
   'weight': 'METFilter_DATA*fakeW',
   'weights': [],
   'isData': ['all'],
+  'suppressNegative' :['all'],
+  'suppressNegativeNuisances' :['all'],
   'FilesPerJob': 80
 }
 

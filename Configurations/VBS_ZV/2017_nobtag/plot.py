@@ -54,7 +54,7 @@ groupPlot['vbfV+VV+VVV']  = {
                   'nameHR' : 'vbfV+VV+VVV',
                   'isSignal' : 0,
                   'color': palette["MediumBlue2"],  
-                  'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
+                  'samples'  : ['VBF-V','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
                   'fill': 1001
               }
 
@@ -110,7 +110,21 @@ groupPlot['VBS']  = {
                  'samples'  : ['VBS_ZV'],
                  'fill': 1001
               }
-
+"""
+groupPlot['WGJJ'] =  {
+                 'nameHR' : 'WGJJ',
+                 'isSignal' : 0,
+                 'color': palette['DarkBlue'],
+                 'samples'  : ['WGJJ'],
+                 'fill': 1001
+              }
+"""
+groupPlot['Fake']  = {
+                  'nameHR' : 'nonprompt',
+                  'isSignal' : 0,
+                  'color': 921,    # kGray + 1
+                  'samples'  : ['Fake']
+}
 
 
 #plot = {}
@@ -139,7 +153,7 @@ plot['DY']  = {
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
                 'isData'   : 0, 
-                #'scale'    : 0.65,
+                #'scale'    : 0.6
             }
 
 plot['Vg']  = { 
@@ -162,20 +176,20 @@ plot['VBF-V']  = {
                   'scale'    : 1.   ,
               }
 
-"""
+
 plot['Fake']  = {  
                 'color': colors['kTeal'],
                 'isSignal' : 0,
                 'isData'   : 0, 
                 'scale'    : 1.0,
             }
-"""
+
 
 plot['top'] = {   
                  'color': colors['kAzure']-1,
                  'isSignal' : 0,
                  'isData'   : 0, 
-                # 'scale'    : 0.92,
+                 'scale'    : 1,
                 #  'cuts': {
                 #     "res_wjetcr_mjjincl_mu": 1.065,
                 #     "res_wjetcr_mjjincl_ele": 1.122,
@@ -227,6 +241,13 @@ plot['tZq']  = {
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
+"""
+plot['WGJJ']= { 'color': colors["kCyan"]+4,
+                  'isSignal' : 0,
+                  'isData'   : 0,
+                  'scale'    : 1.   ,
+              }
+"""
 # # data
 
 plot['DATA']  = { 
@@ -234,7 +255,17 @@ plot['DATA']  = {
                  'color': 1 ,  
                  'isSignal' : 0,
                  'isData'   : 1 ,
-                 'isBlind'  : 0
+                 'isBlind'  : 0,
+		 'scale' :1.0,
+			'cuts': {
+			"Preselection" : 0,
+			"Resolved_SR_bVeto" : 0,	
+			"Resolved_SR_nobVeto" :0,
+			"Boosted_SR_bVeto" : 0,
+			"Boosted_SR_nobVeto" :0,
+			"Boosted_SR" : 0,
+			"Resolved_SR" :0 
+		}	
              }
 
 
@@ -242,6 +273,6 @@ plot['DATA']  = {
 
 # additional options
 
-legend['lumi'] = 'L = 59.74/fb'
+legend['lumi'] = 'L = 41.53/fb'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'

@@ -143,7 +143,7 @@ samples['VBS_ZV'] = {
 }
 addSampleWeight(samples,'VBS_ZV','WmTo2J_ZTo2','(Sum$(abs(GenPart_pdgId)==6)==0')
 addSampleWeight(samples,'VBS_ZV','WpTo2J_ZTo2','(Sum$(abs(GenPart_pdgId)==6)==0')
-
+"""
 samples['tZq'] = {
     'name':  nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
@@ -156,6 +156,18 @@ samples['tZq'] = {
     'weight':  mcCommonWeight + '*(Sum$(abs(GenPart_pdgId)==6)>=1)',
     'FilesPerJob': 7
 }
+"""
+
+
+samples['tZq'] = {
+        'name' : nanoGetSampleFiles(mcDirectory, 'tZq_ll'),
+        'weight' : mcCommonWeight,
+        'FilesPerJob': 7,
+}
+
+
+
+
 ###########################################
 #############  BACKGROUNDS  ###############
 ###########################################
@@ -163,15 +175,15 @@ samples['tZq'] = {
 ########## irreducible VBS QCD 
 
 samples['VBS_VV_QCD'] = {
-    'name':   nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J_QCD') 
-             +nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L_QCD'),
+    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WpToLNu_ZTo2J_QCD') 
+             +nanoGetSampleFiles(DirectorySMPeos, 'WpToLNu_WpTo2J_QCD')
+             +nanoGetSampleFiles(DirectorySMPeos, 'WpToLNu_WmTo2J_QCD')
+             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_QCD')
+             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_WmToLNu_QCD')
+             +nanoGetSampleFiles(DirectorySMPeos, 'WmToLNu_ZTo2J_QCD')
+             +nanoGetSampleFiles(DirectorySMPeos, 'WmToLNu_WmTo2J_QCD')
+             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_QCD')
+             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_QCD'),
     'weight':  mcCommonWeight,
     'FilesPerJob': 1
 }
@@ -216,6 +228,19 @@ else:
         'weight': (mcCommonWeight + "*( !(Sum$(PhotonGen_isPrompt==1 && PhotonGen_pt>15 && abs(PhotonGen_eta)<2.6) > 0 &&\
                                          Sum$(LeptonGen_isPrompt==1 && LeptonGen_pt>15)>=2) )"),#.replace("PUJetIdSF", "1."), ##DY_photons_filter 
         'FilesPerJob': 4,
+	 'subsamples' :{
+                "R_bin1" : '(vbs_category == 1) && (Zleppt <= 100)',
+                "R_bin2" : '(vbs_category == 1) && (Zleppt > 100 && Zleppt <=200)',
+                "R_bin3" : '(vbs_category == 1) && (Zleppt > 200 && Zleppt <=300)',
+                "R_bin4" : '(vbs_category == 1) && (Zleppt > 300 && Zleppt <=400)',
+                "R_bin5" : '(vbs_category == 1) && (Zleppt > 400 && Zleppt <=500)',
+                "R_bin6" : '(vbs_category == 1) && (Zleppt > 500)',
+                "B_bin1" : '(vbs_category == 0) && (Zleppt > 0 && Zleppt <=75)',
+                "B_bin2" : '(vbs_category == 0) && (Zleppt > 75 && Zleppt <=150)',
+                "B_bin3" : '(vbs_category == 0) && (Zleppt > 150 && Zleppt <=250)',
+                "B_bin4" : '(vbs_category == 0) && (Zleppt > 250 && Zleppt <=400)',
+                "B_bin5" : '(vbs_category == 0) && (Zleppt > 400)',
+},
         'EventsPerJob' : 70000,
         #  'suppressNegative' :['all'],
         #  'suppressNegativeNuisances' :['all'],

@@ -2,7 +2,7 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-date='_09Feb2021_2016nobtag_Allyears'
+date='_02May2021_2016'
 
 tag = 'VBS_ZV'+date
 
@@ -26,7 +26,7 @@ samplesFile = 'samples.py'
 
 # file with list of samples
 #plotFile = 'plot_sig.py'
-plotFile = 'plot.py'
+plotFile = 'plot_res.py'
 
 
 # luminosity to normalize to (in 1/fb)

@@ -1,9 +1,9 @@
 
 # DO NOT DELETE
 
-/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /afs/cern.ch/user/a/ahakimi/CMSSW_10_6_11/src/LatinoAnalysis/MultiDraw/interface/TTreeFunction.h
-/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /afs/cern.ch/user/a/ahakimi/CMSSW_10_6_11/src/LatinoAnalysis/MultiDraw/interface/FunctionLibrary.h
-/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /afs/cern.ch/user/a/ahakimi/CMSSW_10_6_11/src/LatinoAnalysis/MultiDraw/interface/TTreeFunction.h
+/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /afs/cern.ch/work/a/ahakimi/cmslatino/CMSSW_10_6_11/src/LatinoAnalysis/MultiDraw/interface/TTreeFunction.h
+/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /afs/cern.ch/work/a/ahakimi/cmslatino/CMSSW_10_6_11/src/LatinoAnalysis/MultiDraw/interface/FunctionLibrary.h
+/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /afs/cern.ch/work/a/ahakimi/cmslatino/CMSSW_10_6_11/src/LatinoAnalysis/MultiDraw/interface/TTreeFunction.h
 /afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc820/lcg/root/6.14.09-pafccj3/include/TTreeReader.h
 /afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc820/lcg/root/6.14.09-pafccj3/include/THashTable.h
 /afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc820/lcg/root/6.14.09-pafccj3/include/TCollection.h
@@ -77,7 +77,7 @@
 /afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc820/lcg/root/6.14.09-pafccj3/include/TRef.h
 /afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc820/lcg/root/6.14.09-pafccj3/include/TTreeReaderValue.h
 /afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc820/lcg/root/6.14.09-pafccj3/include/TTreeReaderArray.h
-/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /afs/cern.ch/user/a/ahakimi/CMSSW_10_6_11/src/NNEvaluation/DNNTensorflow/interface/DNNEvaluator.hh
+/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /afs/cern.ch/work/a/ahakimi/cmslatino/CMSSW_10_6_11/src/NNEvaluation/DNNTensorflow/interface/DNNEvaluator.hh
 /afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc820/cms/cmssw/CMSSW_10_6_11/src/PhysicsTools/TensorFlow/interface/TensorFlow.h
 /afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc820/external/tensorflow/1.6.0-pafccj4/include/tensorflow/core/public/session.h
 /afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/macros/jets_cat_dnn_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc820/external/tensorflow/1.6.0-pafccj4/include/tensorflow/core/framework/device_attributes.pb.h

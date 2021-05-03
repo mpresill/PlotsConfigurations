@@ -94,55 +94,56 @@ aliases['fakeWStatMuDown'] = {
 mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
 models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/All_years_nobtag'
 #models_path = '/eos/user/m/mpresill/www/VBS/Numpy/Alex/'
+models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_nobtag'
 
 aliases['vbs_category'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations 
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations 
     ],
     'class': 'jets_cat_dnn',
-    'args': ('vbs_category','2017',models_path, True)
+    'args': ('vbs_category','2017',models_path,models_path_pruned, False)
 }
 
 aliases['vbs_jet_0'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('vbs_jet_0','2017', models_path, True)
+    'args': ('vbs_jet_0','2017', models_path,models_path_pruned, False)
 }
 
 aliases['vbs_jet_1'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('vbs_jet_1','2017', models_path, True)
+    'args': ('vbs_jet_1','2017', models_path,models_path_pruned, False)
 }
 
 aliases['v_jet_0'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('v_jet_0','2017', models_path, True)
+    'args': ('v_jet_0','2017', models_path,models_path_pruned, False)
 }
 
 aliases['v_jet_1'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('v_jet_1','2017', models_path, True)
+    'args': ('v_jet_1','2017', models_path,models_path_pruned, False)
 }
 
 
@@ -150,50 +151,80 @@ aliases['mjj_max'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('mjj_max','2017', models_path, True)
+    'args': ('mjj_max','2017', models_path,models_path_pruned, False)
 }
 
 aliases['detajj_mjjmax'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
 	],
     'class': 'jets_cat_dnn',
-    'args': ('detajj_mjjmax','2017', models_path, True)
+    'args': ('detajj_mjjmax','2017', models_path,models_path_pruned, False)
 }
 
 aliases['dphijj_mjjmax'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('dphijj_mjjmax','2017', models_path, True)
+    'args': ('dphijj_mjjmax','2017', models_path,models_path_pruned, False)
 }
 
 aliases['Vjet_mass'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('Vjet_mass','2017', models_path, True)
+    'args': ('Vjet_mass','2017', models_path,models_path_pruned, False)
 }
 
 aliases['njet30'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
         'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('njet30','2017', models_path, True)
+    'args': ('njet30','2017', models_path, models_path_pruned,False)
+}
+
+aliases['nbtag'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        'gSystem->Load("libDNNEvaluator.so")',
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
+    ],
+    'class': 'jets_cat_dnn',
+    'args': ('nbtag','2017', models_path,models_path_pruned, False)
+}
+
+aliases['Zleppt'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        'gSystem->Load("libDNNEvaluator.so")',
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
+    ],
+    'class': 'jets_cat_dnn',
+    'args': ('Zleppt','2017', models_path,models_path_pruned, False)
+}
+
+aliases['Vpt'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        'gSystem->Load("libDNNEvaluator.so")',
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
+    ],
+    'class': 'jets_cat_dnn',
+    'args': ('Vpt','2017', models_path,models_path_pruned, False)
 }
  
 aliases['V_jet_mass'] = {
@@ -257,7 +288,7 @@ aliases['bReqTight'] = {
 }
 
 aliases['bVetoSF'] = {
-    'expr': 'TMath::Exp(Sum$(TMath::Log((CleanJet_pt>20 && abs(CleanJet_eta)<2.5)*Jet_btagSF_deepcsv_shape[CleanJet_jetIdx]+1*(CleanJet_pt<=20 || abs(CleanJet_eta)>=2.5))))',
+    'expr': 'TMath::Exp(Sum$(TMath::Log((CleanJet_pt>30 && abs(CleanJet_eta)<2.5)*Jet_btagSF_deepcsv_shape[CleanJet_jetIdx]+1*(CleanJet_pt<=30 || abs(CleanJet_eta)>=2.5))))',
     'samples': mc
 }
 
@@ -337,11 +368,16 @@ aliases['PUJetIdSF'] = {
 }
 
 # data/MC scale factors
-aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP,'PrefireWeight', 'LepWPCut','PUJetIdSF']),
+"""aliases['SFweight'] = {
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF','PUJetIdSF']),
     'samples': mc
 }
-
+"""
+#nobtag sf test
+aliases['SFweight'] = {
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF', 'btagSF' ]),
+    'samples': mc
+}
 # variations
 aliases['SFweightEleUp'] = {
     'expr': 'LepSF2l__ele_'+eleWP+'__Up',
@@ -360,54 +396,29 @@ aliases['SFweightMuDown'] = {
     'samples': mc
 }
 
-#mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
-#models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/'
-#models_path = '/eos/user/m/mpresill/www/VBS/Numpy/Alex/'
 
-"""
-aliases['DNNoutput_boosted'] = {
-    'class': 'MVAReaderBoosted_v70',
-   'args': ( models_path +'2018_SR/Boosted_SR/DNN/', True, 0),
-    'linesToAdd':[
-      'gSystem->Load("libLatinoAnalysisMultiDraw.so")',
-        'gSystem->Load("libDNNEvaluator.so")',
-        '.L ' + mva_reader_path + 'mva_Boosted.cc+',
-    ],
-}
-
-aliases['DNNoutput_resolved'] = {
-    'class': 'MVAReaderResolved_v70',
-    'args': ( models_path+ '2018_SR/Resolved_SR/DNN/', False, 1),
-    'linesToAdd':[
-        'gSystem->Load("libLatinoAnalysisMultiDraw.so")',
-        'gSystem->Load("libDNNEvaluator.so")',
-        '.L ' + mva_reader_path + 'mva_Resolved.cc+',
-    ],
-}
-
-aliases['DNNoutput'] = {
-    'expr': '(vbs_category==0)*(DNNoutput_boosted) + (vbs_category==1)*(DNNoutput_resolved)'
-
-}
-"""
-
-aliases['DNNoutput_All_years'] = {
+aliases['DNNoutput_allvar'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
         'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('dnn_output','2017', models_path, False)
+    'args': ('dnn_output','2017', models_path,models_path_pruned, False)
 }
-"""
-aliases['DNNoutput'] = {
+
+
+mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
+models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_nobtag'
+
+aliases['DNNoutput_pruned'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn.cc+' % configurations
+        'gSystem->Load("libDNNEvaluator.so")',
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('dnn_output','2018_allfeats', models_path, False)
+    'args': ('dnn_output_pruned','2017', models_path,models_path_pruned, False)
 }
-"""
+
+

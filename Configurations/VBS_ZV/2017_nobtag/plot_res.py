@@ -48,48 +48,23 @@ Colors
 "Wjets5": (211, 87, 38), #d34912 
 '''
 #
+
+
+DY_palette = ['#006400', '#008000',  '#32CD32','#00FF00', '#ADFF2F', '#FFFF00','#006400', '#008000',  '#32CD32','#00FF00', '#ADFF2F', ]
  
+DY_bins =[]
+for bin in range(1,7):
+	DY_bins.append("DY_R_bin" + str(bin))
+#for bin in range(1,6):
+#        DY_bins.append("DY_B_bin" + str(bin))
 
-groupPlot['vbfV+VV+VVV']  = {  
-                  'nameHR' : 'vbfV+VV+VVV',
-                  'isSignal' : 0,
-                  'color': palette["MediumBlue2"],  
-                  'samples'  : ['VBF-V','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
-                  'fill': 1001
-              }
-
-groupPlot['Vg+VgS']  = {  
-                  'nameHR' : "V#gamma+V#gamma*",
-                  'isSignal' : 0,
-                  'color'    : 409,   # kOrange + 10
-                  'samples'  : ['Vg','VgS'],
-                  'fill': 1001
-              }
-
-groupPlot['DY']  = {  
-                'nameHR' : "DY",
-                'isSignal' : 0,
-                'color': palette["Green2"],    
-                'samples'  : ['DY'],
-                'fill': 1001
-            }
-
-
-
-groupPlot['top']  = {  
-                 'nameHR' : 'top',
-                 'isSignal' : 0,
-                 'color':  palette["Orange"],  
-                 'samples'  : ['top'],
-                 'fill': 1001
-             }
 
 
 groupPlot['WJets']  = {  
                   'nameHR' : 'W+Jets',
                   'isSignal' : 0,
-                  'color':   palette["Yellow"],
-                  'samples'  : ['WJets'],
+                  'color':   901, #kpink+1
+                  'samples'  : ['WJets' ],
                   'fill': 1001
 
               }
@@ -103,21 +78,13 @@ groupPlot['tZq']  = {
 
               }
 
-groupPlot['VBS']  = {  
-                 'nameHR' : 'VBS',
-                 'isSignal' : 1,
-                 'color': colors["kRed"]+1,   
-                 'samples'  : ['VBS_ZV'],
-                 'fill': 1001
-              }
-
-groupPlot['WGJJ'] =  {
-                 'nameHR' : 'WGJJ',
+groupPlot['top']  = {
+                 'nameHR' : 'top',
                  'isSignal' : 0,
-                 'color': palette['DarkBlue'],
-                 'samples'  : ['WGJJ'],
+                 'color':  palette["Orange"],
+                 'samples'  : ['top'],
                  'fill': 1001
-              }
+             }
 groupPlot['Fake']  = {
                   'nameHR' : 'nonprompt',
                   'isSignal' : 0,
@@ -125,6 +92,40 @@ groupPlot['Fake']  = {
                   'samples'  : ['Fake']
 }
 
+groupPlot['Vg+VgS']  = {
+                  'nameHR' : "V#gamma+V#gamma*",
+                  'isSignal' : 0,
+                  'color'    : palette['LightBlue'],   # kOrange - 3
+                  'samples'  : ['Vg','VgS'],
+                  'fill': 1001
+              }
+
+groupPlot['vbfV+VV+VVV']  = {
+                  'nameHR' : 'vbfV+VV+VVV',
+                  'isSignal' : 0,
+                  'color': palette["DarkBlue"],
+                  'samples'  : ['VBF-V','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
+                  'fill': 1001
+              }
+
+for i,DYbin in enumerate(DY_bins):
+        groupPlot[DYbin] = {
+                        'nameHR': DYbin,
+                        'isSignal' : 0,
+                        'color' : DY_palette[i],
+                        'samples' : DYbin,
+                        'fill' : 1001,
+
+
+}
+
+groupPlot['VBS']  = {
+                 'nameHR' : 'VBS',
+                 'isSignal' : 1,
+                 'color': colors["kRed"]+1,
+                 'samples'  : ['VBS_ZV'],
+                 'fill': 1001
+              }
 
 #plot = {}
 
@@ -147,13 +148,23 @@ plot['VZ']  = {
               }   
          
 
-
+"""
 plot['DY']  = {  
                 'color': colors['kMagenta']+1,
                 'isSignal' : 0,
                 'isData'   : 0, 
                 #'scale'    : 0.6
             }
+"""
+
+for DYbin in DY_bins:
+	plot[DYbin] =  {   
+                    'color': colors['kAzure']-1,
+                    'isSignal' : 0,
+                    'isData'   : 0, 
+                    'scale'    : 1.0 
+                    }
+
 
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
@@ -240,14 +251,14 @@ plot['tZq']  = {
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-
+"""
 plot['WGJJ']= { 'color': colors["kCyan"]+4,
                   'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
 # # data
-
+"""
 plot['DATA']  = { 
                  'nameHR' : 'Data',
                  'color': 1 ,  

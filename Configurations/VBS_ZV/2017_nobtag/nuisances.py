@@ -27,6 +27,12 @@ except NameError:
 from LatinoAnalysis.Tools.HiggsXSection import HiggsXSection
 HiggsXS = HiggsXSection()
 
+mc = [ "DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","VBF-V","VBS_ZV", "tZq", "VBS_VV_QCD" ]
+mc_common = [ "DY","tZq", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","VBF-V"]
+mc_eos = ["VBS_ZV",  "VBS_VV_QCD"]
+
+
+
 DirectorySMPeos = '/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/Fall2017_102X_nAODv7_Full2017v7/MCl1loose2017v7__MCCorr2017v7__l2loose__l2tightOR2017v7'
 
 ################################ EXPERIMENTAL UNCERTAINTIES  #################################
@@ -128,7 +134,7 @@ nuisances['fake_mu_stat'] = {
 
 
 ##### B-tagger
-"""
+
 for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2', 'cferr1', 'cferr2']:
     btag_syst = ['(btagSF%sup)/(btagSF)' % shift, '(btagSF%sdown)/(btagSF)' % shift]
 
@@ -142,7 +148,7 @@ for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2',
         'type': 'shape',
          'samples': dict((skey, btag_syst) for skey in mc), 
     }
-"""
+
 ##### Trigger Efficiency
 
 trig_syst = ['((TriggerEffWeight_2l_u)/(TriggerEffWeight_2l))*(TriggerEffWeight_2l>0.02) + (TriggerEffWeight_2l<=0.02)', '(TriggerEffWeight_2l_d)/(TriggerEffWeight_2l)']
@@ -181,19 +187,19 @@ nuisances['electronpt'] = {
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD', 'tZq']),
+    'samples': dict((skey, ['1', '1']) for skey in mc_common),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
     #'AsLnN': '1'
 }
 #this is for the signals since they are in a different eos folder
-nuisances['electronpt_VBS_ZV'] = {
+nuisances['electronpt_SMPeos'] = {
     'name': 'CMS_scale_e_2017',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': {"VBS_ZV":[1.,1.], 'tZq': [1.,1.]},
+    'samples': dict((skey, ['1','1']) for skey in mc_eos),
     'folderUp': makeMCDirectorySMPeos('ElepTup_suffix'),
     'folderDown': makeMCDirectorySMPeos('ElepTdo_suffix'),
     #'AsLnN': '1'
@@ -214,19 +220,19 @@ nuisances['muonpt'] = {
     'type': 'shape',
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD', 'tZq']),
+    'samples': dict((skey, ['1', '1']) for skey in mc_common),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
     #'AsLnN': '1'
 }
 #this is for the signals
-nuisances['muonpt_VBS_ZV'] = {
+nuisances['muonpt_SMPeos'] = {
     'name': 'CMS_scale_m_2017',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
-    'samples': {"VBS_ZV":[1.,1.], 'tZq':[1.,1.]},
+    'samples': dict((skey, ['1','1']) for skey in mc_eos),
     'folderUp': makeMCDirectorySMPeos('MupTup_suffix'),
     'folderDown': makeMCDirectorySMPeos('MupTdo_suffix'),
     #'AsLnN': '1'
@@ -270,7 +276,7 @@ for js in jes_systs:
                     'type': 'shape',
                     'mapUp': js+'up',
                     'mapDown': js+'do',
-                    'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_ZV','VBS_VV_QCD', 'tZq']),
+                    'samples': dict((skey, ['1.','1.']) for skey in mc_common),
                     'folderUp' : folderup,
                     'folderDown' : folderdo,
                     #'AsLnN'      : '1',
@@ -304,38 +310,38 @@ for js_VBS_ZV in jes_systs:
       'type': 'shape',
       'mapUp': js_VBS_ZV+'up',
       'mapDown': js_VBS_ZV+'do',
-      'samples': {"VBS_ZV":[1.,1.],"tZq":[1.,1.] },
+      'samples': dict((skey, ['1','1']) for skey in mc_eos),
       'folderUp': folderup_signal,
       'folderDown': folderdo_signal,
 #      'AsLnN': '1'
   }
 
 ##### Jet energy resolution
-"""
+
 nuisances['JER']  = {
                 'name': 'CMS_res_j_2017',
                 'kind': 'suffix',
                 'type': 'shape',
                 'mapUp': 'JERup',
                 'mapDown': 'JERdo',
-                'samples': dict((skey, ['1.','1.']) for skey in mc if skey not in ['Vg', 'VgS','VBS_ZV','VBS_VV_QCD']),
+                'samples': dict((skey, ['1.','1.']) for skey in mc_common),
                 'folderUp' : makeMCDirectory('JERup_suffix'),
                 'folderDown' : makeMCDirectory('JERdo_suffix'),
-                'AsLnN'      : '1',
+                #'AsLnN'      : '1',
 }
 #this is for the signal
-nuisances['JER_VBS_ZV'] = {
+nuisances['JER_SMPeos'] = {
     'name': 'CMS_res_j_2017',
     'kind': 'suffix',
     'type': 'shape',
     'mapUp': 'JERup',
     'mapDown': 'JERdo',
-    'samples': {"VBS_ZV":[1.,1.]},
+    'samples': dict((skey, ['1','1']) for skey in mc_eos),
     'folderUp': makeMCDirectorySMPeos('JERup_suffix'),
     'folderDown': makeMCDirectorySMPeos('JERdo_suffix'),
-    'AsLnN': '1'
+    #'AsLnN': '1'
 }
-"""
+#pb with tZq here? (memory leak)
 
 ##### Pileup
 
@@ -436,8 +442,9 @@ nuisances['VZ'] = {
 # ######################
 # # Theory nuisance:QCD scale
 ## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
-qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
 """
+qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
+
 for sample in mc :
     if sample != 'VBS_VV_QCD':
         nuisances['QCD_scale_VBS'] = {
@@ -447,6 +454,16 @@ for sample in mc :
             'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
         }
 """
+for sample in mc :
+    if sample == "ggWW": continue   #this sample apparently doesn't have LHE weights...
+    #if sample == "VBS_VV_QCD": continue   ##once SMP eos VBS_VV_QCD are ready comment out 
+    nuisances['QCD_scale_'+sample] = {
+            'name'  : 'QCDscale_'+sample,
+            'kind'  : 'weight',
+            'type'  : 'shape',
+            'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
+        }
+
 
 ################
 # for the rateparam is better to add them manually              
@@ -454,7 +471,7 @@ for sample in mc :
 nuisances['Topnorm_boosted']  = {
                'name'  : 'Topnorm_boosted_2017',
                'samples'  : {
-                   'top' : '0.80',
+                   'top' : '1.0',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
@@ -467,7 +484,7 @@ nuisances['Topnorm_boosted']  = {
 nuisances['Topnorm_resolved']  = {
                'name'  : 'Topnorm_resolved_2017',
                'samples'  : {
-                   'top' : '0.95',
+                   'top' : '1.',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
@@ -476,11 +493,11 @@ nuisances['Topnorm_resolved']  = {
                    'Resolved_SR_tight',
                    ]
               }              
-
+"""
 nuisances['DYnorm_boosted']  = {
                'name'  : 'DYnorm_boosted_2017',
                'samples'  : {
-                   'DY' : '0.84',
+                   'DY' : '1.',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
@@ -493,7 +510,7 @@ nuisances['DYnorm_boosted']  = {
 nuisances['DYnorm_resolved']  = {
                'name'  : 'DYnorm_resolved_2017',
                'samples'  : {
-                   'DY' : '1.12',
+                   'DY' : '1.',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
@@ -502,6 +519,69 @@ nuisances['DYnorm_resolved']  = {
                    'Resolved_DYcr',
                    ]
               }    
+"""
+
+DY_bins = []
+for bin in range(1,7):
+        DY_bins.append("DY_R_bin" + str(bin))
+for bin in range(1,6):
+        DY_bins.append("DY_B_bin" + str(bin))
+DYrates=[0.899,0.874,0.774,0.631,0.69,0.514,1,1,1,1,1]
+
+for i,DYbin in enumerate(DY_bins):
+        if "_B_" in DYbin:
+                nuisances["{}_norm_boost_bVeto_2017".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_boost_bVeto_2017'.format(DYbin),
+                'samples'  : {DYbin: DYrates[i]},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Boosted_DYcr_bVeto',
+                   #'Boosted_DYcr_nobVeto',
+                   'Boosted_SR_bVeto',
+                   #'Boosted_SR_nobVeto'
+
+                   ]
+            }
+                nuisances["{}_norm_boost_nobVeto_2017".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_boost_nobVeto_2017'.format(DYbin),
+                'samples'  : {DYbin: DYrates[i]},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   #'Boosted_DYcr_bVeto',
+                   'Boosted_DYcr_nobVeto',
+                   #'Boosted_SR_bVeto',
+                   'Boosted_SR_nobVeto'
+
+                   ]
+            }
+
+        elif "_R_" in DYbin:
+                nuisances["{}_norm_res_bVeto_2017".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_res_bVeto_2017'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Resolved_DYcr_bVeto',
+                   #'Resolved_DYcr_nobVeto',
+                   'Resolved_SR_bVeto',
+                   #'Resolved_SR_nobVeto'
+
+                   ]
+            }
+                nuisances["{}_norm_res_nobVeto_2017".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_res_nobVeto_2017'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   #'Resolved_DYcr_bVeto',
+                   'Resolved_DYcr_nobVeto',
+                   #'Resolved_SR_bVeto',
+                   'Resolved_SR_nobVeto'
+
+                   ]
+            }
+
+
 
 nuisances['pdf']  = {
                'name'  : 'pdf',
@@ -527,7 +607,7 @@ nuisances['stat'] = {
 }
 
 
-#for n in nuisances.values():
-#    n['skipCMS'] = 1
+for n in nuisances.values():
+    n['skipCMS'] = 1
 
-#print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))
+print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))
