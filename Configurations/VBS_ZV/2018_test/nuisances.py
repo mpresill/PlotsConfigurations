@@ -477,9 +477,9 @@ nuisances['Topnorm_resolved']  = {
               
 DY_bins = []
 for bin in range(1,11):
-        DY_bins.append("DY_R_bin" + str(bin))
+        DY_bins.append("DY_Resolved_" + str(bin))
 for bin in range(1,6):
-        DY_bins.append("DY_B_bin" + str(bin))
+        DY_bins.append("DY_Boosted_" + str(bin))
 
 
 for DYbin in DY_bins:

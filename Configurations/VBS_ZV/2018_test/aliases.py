@@ -239,12 +239,12 @@ aliases['V_jet_mass'] = {
 
 aliases['fit_bin_Resolved'] = {
     'expr': '(vbs_category==1)*( \
-            1*( (Zleppt < 100) && (vbs_jet_0 < 80) ) +\
-            2*( (Zleppt < 100) && (vbs_jet_0 >= 80) && (vbs_jet_0 < 130) ) +\
-            3*( (Zleppt < 100) && (vbs_jet_0 >= 130) ) +\
-            4*( (Zleppt >= 100 && Zleppt < 200) && (vbs_jet_0 < 80) )+\
-            5*( (Zleppt >= 100 && Zleppt < 200) && (vbs_jet_0 >= 80) && (vbs_jet_0 < 130) )+\
-            6*( (Zleppt >= 100 && Zleppt < 200) && (vbs_jet_0 >= 130) )+\
+            1*( (Zleppt < 100) && (CleanJet_pt[v_jet_0] < 80) ) +\
+            2*( (Zleppt < 100) && (CleanJet_pt[v_jet_0] >= 80) && (CleanJet_pt[v_jet_0] < 130) ) +\
+            3*( (Zleppt < 100) && (CleanJet_pt[v_jet_0] >= 130) ) +\
+            4*( (Zleppt >= 100 && Zleppt < 200) && (CleanJet_pt[v_jet_0] < 80) )+\
+            5*( (Zleppt >= 100 && Zleppt < 200) && (CleanJet_pt[v_jet_0] >= 80) && (CleanJet_pt[v_jet_0] < 130) )+\
+            6*( (Zleppt >= 100 && Zleppt < 200) && (CleanJet_pt[v_jet_0] >= 130) )+\
             7*(  Zleppt >= 200 && Zleppt < 300)+\
             8*(  Zleppt >= 300 && Zleppt < 400)+\
             9*(  Zleppt >= 400 && Zleppt < 500)+\
