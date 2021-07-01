@@ -236,32 +236,87 @@ aliases['V_jet_mass'] = {
 ###########################################################
 ##############  fitting phase space
 ###########################################################
+# jet PU id based
+#aliases['LowZ'] = {
+#    'expr':  '0.5*abs((Lepton_eta[0] + Lepton_eta[1]) - (CleanJet_eta[0] + CleanJet_eta[1])) < 1'        
+#}
+#
+#aliases['HighZ'] = {
+#    'expr':  '0.5*abs((Lepton_eta[0] + Lepton_eta[1]) - (CleanJet_eta[0] + CleanJet_eta[1])) >= 1'
+#}
+##SYNTAX TO BE CHECKED WRT OUR JETS PAIRING
+aliases['hardJets'] = {
+    'expr':  'Jet_genJetIdx[CleanJet_jetIdx[0]] >= 0 && Jet_genJetIdx[CleanJet_jetIdx[1]] >= 0 && GenJet_pt[CleanJet_jetIdx[0]] > 25 && GenJet_pt[CleanJet_jetIdx[1]] > 25',
+    'samples': ['DY']
+}
 
-aliases['fit_bin_Resolved'] = {
+aliases['PUJets'] = {
+    'expr':  '!(Jet_genJetIdx[CleanJet_jetIdx[0]] >= 0 && Jet_genJetIdx[CleanJet_jetIdx[1]] >= 0 && GenJet_pt[CleanJet_jetIdx[0]] > 25 && GenJet_pt[CleanJet_jetIdx[1]] > 25)',
+    'samples': ['DY']
+}
+
+
+
+#fitting with Z pt binning
+aliases['fit_Z_bin_Resolved'] = {
     'expr': '(vbs_category==1)*( \
-            1*( (Zleppt < 100) && (CleanJet_pt[v_jet_0] < 80) ) +\
-            2*( (Zleppt < 100) && (CleanJet_pt[v_jet_0] >= 80) && (CleanJet_pt[v_jet_0] < 130) ) +\
-            3*( (Zleppt < 100) && (CleanJet_pt[v_jet_0] >= 130) ) +\
-            4*( (Zleppt >= 100 && Zleppt < 200) && (CleanJet_pt[v_jet_0] < 80) )+\
-            5*( (Zleppt >= 100 && Zleppt < 200) && (CleanJet_pt[v_jet_0] >= 80) && (CleanJet_pt[v_jet_0] < 130) )+\
-            6*( (Zleppt >= 100 && Zleppt < 200) && (CleanJet_pt[v_jet_0] >= 130) )+\
-            7*(  Zleppt >= 200 && Zleppt < 300)+\
-            8*(  Zleppt >= 300 && Zleppt < 400)+\
-            9*(  Zleppt >= 400 && Zleppt < 500)+\
-            10*( Zleppt >= 500)\
+            1*(  Zleppt < 50                           ) +\
+            2*(  Zleppt >= 50   &&  Zleppt < 100       ) +\
+            3*(  Zleppt >= 100  &&  Zleppt < 150       ) +\
+            4*(  Zleppt >= 150  && Zleppt < 250        ) +\
+            5*(  Zleppt >= 250  && Zleppt < 500        ) +\
+            6*(  Zleppt >= 500                         ) \
+            ) + (vbs_category==0)*(-1)'
+}
+
+#fitting using laeding VBS jet pt 
+aliases['fit_vbs0_bin_Resolved'] = {
+    'expr': '(vbs_category==1)*( \
+            1*(  CleanJet_pt[vbs_jet_0] < 50                                            ) +\
+            2*(  CleanJet_pt[vbs_jet_0] >= 50   &&  CleanJet_pt[vbs_jet_0] < 120        ) +\
+            3*(  CleanJet_pt[vbs_jet_0] >= 120  &&  CleanJet_pt[vbs_jet_0] < 200        ) +\
+            4*(  CleanJet_pt[vbs_jet_0] >= 200  &&  CleanJet_pt[vbs_jet_0] < 300        ) +\
+            5*(  CleanJet_pt[vbs_jet_0] >= 300  &&  CleanJet_pt[vbs_jet_0] < 400        ) +\
+            6*(  CleanJet_pt[vbs_jet_0] >= 400                                          ) \
+            ) + (vbs_category==0)*(-1)'
+}
+
+#fitting using sub-leading VBS jet pt 
+aliases['fit_vbs1_bin_Resolved'] = {
+    'expr': '(vbs_category==1)*( \
+            1*(  CleanJet_pt[vbs_jet_1] < 50                                            ) +\
+            2*(  CleanJet_pt[vbs_jet_1] >= 50   &&  CleanJet_pt[vbs_jet_1] < 120        ) +\
+            3*(  CleanJet_pt[vbs_jet_1] >= 120  &&  CleanJet_pt[vbs_jet_1] < 150        ) +\
+            4*(  CleanJet_pt[vbs_jet_1] >= 150  &&  CleanJet_pt[vbs_jet_1] < 200        ) +\
+            5*(  CleanJet_pt[vbs_jet_1] >= 200  &&  CleanJet_pt[vbs_jet_1] < 250        ) +\
+            6*(  CleanJet_pt[vbs_jet_1] >= 250                                          ) \
+            ) + (vbs_category==0)*(-1)'
+}
+
+#fitting using Delta Eta VBS jets
+aliases['fit_detajj_bin_Resolved'] = {
+    'expr': '(vbs_category==1)*( \
+            1*(  detajj_mjjmax < 3.5                                             ) +\
+            2*(  detajj_mjjmax >= 3.5 &&  detajj_mjjmax < 4.5                    ) +\
+            3*(  detajj_mjjmax >= 4.5 &&  detajj_mjjmax < 5.5                    ) +\
+            4*(  detajj_mjjmax >= 5.5 &&  detajj_mjjmax < 6.5                    ) +\
+            5*(  detajj_mjjmax >= 6.5 &&  detajj_mjjmax < 7.5                    ) +\
+            6*(  detajj_mjjmax >= 7.5                                            ) \
             ) + (vbs_category==0)*(-1)'
 }
 
 
-aliases['fit_bin_Boosted'] = {
-    'expr': '(vbs_category==0)*( \
-            1*( (Zleppt < 75) ) +\
-            2*( (Zleppt >= 75 && Zleppt < 150) ) +\
-            3*( (Zleppt >= 150 && Zleppt < 250) ) +\
-            4*( (Zleppt >= 250 && Zleppt < 400) )+\
-            5*( (Zleppt >= 400) )\
-            ) + (vbs_category==1)*(-1)'
-}
+
+#
+#
+#aliases['fit_bin_Boosted'] = {
+#    'expr': '(vbs_category==0)*( \
+#            1*( (Zleppt < 75) ) +\
+#            2*( (Zleppt >= 75 && Zleppt < 150) ) +\
+#            3*( (Zleppt >= 150 && Zleppt < 300) ) +\
+#            4*( Zleppt >= 300  )\
+#            ) + (vbs_category==1)*(-1)'
+#}
 
 
 #aliases['fit_bin_boost'] = {
@@ -319,9 +374,10 @@ aliases['Top_pTrw'] = {
 # using Alt$(CleanJet_pt[n], 0) instead of Sum$(CleanJet_pt >= 30) because jet pt ordering is not strictly followed in JES-varied samples
 
 ############b tag
-# B tagging
+# B tagging 2018:
 #loose 0.1241
 #tight 0.7527
+
 aliases['bVeto'] = {
     'expr': '(Sum$(CleanJet_pt > 30. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.1241) == 0)'
 }
@@ -344,32 +400,44 @@ aliases['bReqSF'] = {
     'samples': mc
 }
 
+aliases['bReqTightSF'] = {
+    'expr': 'TMath::Exp(Sum$(TMath::Log((CleanJet_pt>30 && abs(CleanJet_eta)<2.5)*Jet_btagSF_deepcsv_shape[CleanJet_jetIdx]+1*(CleanJet_pt<=30 || abs(CleanJet_eta)>=2.5))))',
+    'samples': mc
+}
+
 aliases['btagSF'] = {
     'expr': 'bVeto*bVetoSF + bReqTight *bReqSF',
     'samples': mc
 }
 
+systs = ['jes','lf','hf','lfstats1','lfstats2','hfstats1','hfstats2','cferr1','cferr2']
+
+for s in systs:
+  aliases['btagSF'+s+'up'] = { 'expr': '(bVeto*'+aliases['bVetoSF']['expr'].replace('shape','shape_up_'+s)+'+bReqTight*'+aliases['bReqSF']['expr'].replace('shape','shape_up_'+s)+'+ ( (!bVeto) && (!bReqTight) ))', 'samples':mc  }
+  aliases['btagSF'+s+'down'] = { 'expr': '(bVeto*'+aliases['bVetoSF']['expr'].replace('shape','shape_down_'+s)+'+bReqTight*'+aliases['bReqSF']['expr'].replace('shape','shape_down_'+s)+'+ ( (!bVeto) && (!bReqTight) ))', 'samples':mc }
 
 
-for shift in ['jes','lf','hf','lfstats1','lfstats2','hfstats1','hfstats2','cferr1','cferr2']:
+#for shift in ['jes','lf','hf','lfstats1','lfstats2','hfstats1','hfstats2','cferr1','cferr2']:
+#
+#    for targ in ['bVeto', 'bReq']:
+#        alias = aliases['%sSF%sup' % (targ, shift)] = copy.deepcopy(aliases['%sSF' % targ])
+#        alias['expr'] = alias['expr'].replace('btagSF_shape', 'btagSF_shape_up_%s' % shift)
+#
+#        alias = aliases['%sSF%sdown' % (targ, shift)] = copy.deepcopy(aliases['%sSF' % targ])
+#        alias['expr'] = alias['expr'].replace('btagSF_shape', 'btagSF_shape_down_%s' % shift)
+#
+#    aliases['btagSF%sup' % shift] = {
+#        'expr': aliases['btagSF']['expr'].replace('SF', 'SF' + shift + 'up'),
+#        'samples': mc
+#    }
+#
+#    aliases['btagSF%sdown' % shift] = {
+#        'expr': aliases['btagSF']['expr'].replace('SF', 'SF' + shift + 'down'),
+#        'samples': mc
+#    }
 
-    for targ in ['bVeto', 'bReq']:
-        alias = aliases['%sSF%sup' % (targ, shift)] = copy.deepcopy(aliases['%sSF' % targ])
-        alias['expr'] = alias['expr'].replace('btagSF_shape', 'btagSF_shape_up_%s' % shift)
-
-        alias = aliases['%sSF%sdown' % (targ, shift)] = copy.deepcopy(aliases['%sSF' % targ])
-        alias['expr'] = alias['expr'].replace('btagSF_shape', 'btagSF_shape_down_%s' % shift)
-
-    aliases['btagSF%sup' % shift] = {
-        'expr': aliases['btagSF']['expr'].replace('SF', 'SF' + shift + 'up'),
-        'samples': mc
-    }
-
-    aliases['btagSF%sdown' % shift] = {
-        'expr': aliases['btagSF']['expr'].replace('SF', 'SF' + shift + 'down'),
-        'samples': mc
-    }
-
+#########################################################################################
+##### DY pt reweigthing: what is the source of this correctin? EW/QCD NLO? not sure
 #########################################################################################
 
 aliases['nCleanGenJet'] = {
@@ -399,9 +467,7 @@ aliases['DY_LO_pTllrw'] = {
 
 ###########################################################################################
 # PU jet Id SF
-
-# PU jet Id SF
-
+###########################################################################################
 puidSFSource = '{}/Configurations/patches/PUID_81XTraining_EffSFandUncties.root'.format(configurations)
 
 aliases['PUJetIdSF'] = {
@@ -413,19 +479,32 @@ aliases['PUJetIdSF'] = {
     'args': (puidSFSource, "2018", "loose"),
     'samples': mc
 }
+# PU jet Id SF ALTERNATIVE IMPLEMENTATION
+aliases['Jet_PUIDSF'] = { 
+  'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2)*TMath::Log(Jet_PUIDSF_loose)))',
+  'samples': mc
+}
+
+aliases['Jet_PUIDSF_up'] = {
+  'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2)*TMath::Log(Jet_PUIDSF_loose_up)))',
+  'samples': mc
+}
+
+aliases['Jet_PUIDSF_down'] = {
+  'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2)*TMath::Log(Jet_PUIDSF_loose_down)))',
+  'samples': mc
+}
+
+
+
 
 # data/MC scale factors
-"""aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF','PUJetIdSF']),
-    'samples': mc
-}
-"""
-#nobtag sf test
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF','btagSF']),
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF','Jet_PUIDSF']),
     'samples': mc
 }
-# variations
+
+# SF variations
 aliases['SFweightEleUp'] = {
     'expr': 'LepSF2l__ele_'+eleWP+'__Up',
     'samples': mc

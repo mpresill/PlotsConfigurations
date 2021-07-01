@@ -5,37 +5,37 @@ from itertools import product, chain
 
 # keys here must match keys in samples.py    
 #                    
-"""
-structure['DY']  = {  
-                  'isSignal' : 0,
-                  'isData'   : 0
-              }
-"""
 
-phase_spaces_boost = [c for c in cuts if "Boosted" in c]
-phase_spaces_res = [c for c in cuts if "Resolved" in c]
+
+#phase_spaces_boost = [c for c in cuts if "Boosted" in c]
+#phase_spaces_res = [c for c in cuts if "Resolved" in c]
 
 DY_bins = []
-for bin in range(1,11):
-    DY_bins.append("DY_Resolved_"+str(bin))
-for bin in range(1,6):
-     DY_bins.append("DY_Boosted_"+str(bin))
+for bin in range(1,7):
+    DY_bins.append("DY_Z_"+str(bin))
+#for bin in range(1,7):
+#    DY_bins.append("DY_vbs0_"+str(bin))
+#for bin in range(1,7):
+#    DY_bins.append("DY_vbs1_"+str(bin))
+#for bin in range(1,7):
+#    DY_bins.append("DY_detajj_"+str(bin))
+
+#####for bin in range(1,6):
+#####    DY_bins.append("DY_Resolved_"+str(bin))
+#####for bin in range(1,5):
+#####     DY_bins.append("DY_Boosted_"+str(bin))
 
 for DYbin in DY_bins:
-	if 'B' in DYbin:
-		structure[DYbin] = {
+    structure[DYbin] = {
 			'isSignal':0,
 			'isData' : 0,
-			'removeFromCuts': phase_spaces_res
-		}
-        else:
-            structure[DYbin] = {
-                        'isSignal':0,
-                        'isData' : 0,
-                        'removeFromCuts': phase_spaces_boost
-            }
-	
+			#'removeFromCuts': phase_spaces_res
+    }
 
+#structure['DY']  = {  
+#                  'isSignal' : 0,
+#                  'isData'   : 0
+#              }
 
 
 structure['WJets']  = {  
@@ -43,10 +43,10 @@ structure['WJets']  = {
                   'isData'   : 0 
               }
 
-structure['Fake']  = {  
-                  'isSignal' : 0,
-                  'isData'   : 0 
-              }
+#structure['Fake']  = {  
+#                  'isSignal' : 0,
+#                  'isData'   : 0 
+#              }
 
 
 structure['top'] = {   
@@ -106,10 +106,10 @@ structure['VBS_ZV'] = {
                   'isSignal' : 1,
                   'isData'   : 0    
                   }
-structure['tZq'] = {
-                  'isSignal' : 0,
-                  'isData'   : 0
-                  }
+#structure['tZq'] = {
+#                  'isSignal' : 0,
+#                  'isData'   : 0
+#                  }
 structure['WGJJ'] = {
                   'isSignal' : 0,
                   'isData'   : 0

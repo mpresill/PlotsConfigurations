@@ -17,60 +17,87 @@ variables['VARIABLE']  = {
 #res_cuts = [ c for c in cuts if 'Resolved' in c]
 #boost_cuts = [ c for c in cuts if 'Boosted' in c]
 
-
-
+#######################
+#####fitting variables
+#######################
 variables['events']  = {   'name': '1',      
                         'range' : (1,0,2),  
                         'xaxis' : 'events', 
                         'fold' : 3
                         }
 
+#fitting with Z pt binning
+variables['DYfit_Z_bin_Resolved'] ={  'name' : 'fit_Z_bin_Resolved',
+                            'range' : (6,1,7), #(n.bins, 1, n.bins+1)
+                            'xaxis' : 'fitting variable Resolved Z pt', 
+                            'fold' : 3,
+}  
+#fitting using laeding VBS jet pt 
+variables['DYfit_vbs0_bin_Resolved'] ={  'name' : 'fit_vbs0_bin_Resolved',
+                            'range' : (6,1,7), #(n.bins, 1, n.bins+1)
+                            'xaxis' : 'fitting variable Resolved VBS lead pt', 
+                            'fold' : 3,
+}  
+#fitting using sub laeding VBS jet pt 
+variables['DYfit_vbs1_bin_Resolved'] ={  'name' : 'fit_vbs1_bin_Resolved',
+                            'range' : (6,1,7), #(n.bins, 1, n.bins+1)
+                            'xaxis' : 'fitting variable Resolved VBS sub-lead pt', 
+                            'fold' : 3,
+}  
+#fitting using Delta Eta VBS jets
+variables['DYfit_detajj_bin_Resolved'] ={  'name' : 'fit_detajj_bin_Resolved',
+                            'range' : (6,1,7), #(n.bins, 1, n.bins+1)
+                            'xaxis' : 'fitting variable Resolved #Delta #eta jj', 
+                            'fold' : 3,
+}  
+
+
 #
 # leptons
 #
 
-variables['pt1']  = {   'name': 'Alt$(Lepton_pt[0],-9999.)',
-                        'range' : (20,0.,400),
-                        'xaxis' : 'p_{T} 1st lep [GeV]',
-                        'fold' :3,
-                        
-                        }
-
-variables['pt2']  = {   'name': 'Alt$(Lepton_pt[1],-9999.)',
-                        'range' : (20,0.,400),
-                        'xaxis' : 'p_{T} 2nd lep [GeV]',
-                        'fold' :3,
-                        
-                        }
+#variables['pt1']  = {   'name': 'Alt$(Lepton_pt[0],-9999.)',
+#                        'range' : (20,0.,400),
+#                        'xaxis' : 'p_{T} 1st lep [GeV]',
+#                        'fold' :3,
+#                        
+#                        }
+#
+#variables['pt2']  = {   'name': 'Alt$(Lepton_pt[1],-9999.)',
+#                        'range' : (20,0.,400),
+#                        'xaxis' : 'p_{T} 2nd lep [GeV]',
+#                        'fold' :3,
+#                        
+#                        }
 
 variables['Zleppt'] = { 'name' : 'Alt$(Zleppt, -999)',
-			'range' : (20,0.,800),
+			'range' : (25,0.,500),
 			'xaxis' : 'p_{T} leptonic Z [GeV]',
 			'fold' : 3,
 
 }
 
 
-variables['eta1']  = {   'name': 'Alt$(Lepton_eta[0],-9999.)',
-                        'range' : (30,-3,3),
-                        'xaxis' : '#eta 1st lep',
-                        'fold' :3,
-                        
-                        }
+#variables['eta1']  = {   'name': 'Alt$(Lepton_eta[0],-9999.)',
+#                        'range' : (30,-3,3),
+#                        'xaxis' : '#eta 1st lep',
+#                        'fold' :3,
+#                        
+#                        }
 
-variables['eta2']  = {   'name': 'Alt$(Lepton_eta[1],-9999.)',
-                        'range' : (30,-3,3),
-                        'xaxis' : '#eta 2nd lep',
-                        'fold' : 3,
-                        
-                        }
+#variables['eta2']  = {   'name': 'Alt$(Lepton_eta[1],-9999.)',
+#                        'range' : (30,-3,3),
+#                        'xaxis' : '#eta 2nd lep',
+#                        'fold' : 3,
+#                        
+#                        }
 
-variables['mll-peak']  = {   'name': 'mll',            #   variable name    
-                        'range' : (30,60,120),    #   variable range
-                        'xaxis' : 'm_{ll} [GeV]',  #   x axis name
-                        'fold' :3,
-                        
-                        }
+#variables['mll-peak']  = {   'name': 'mll',            #   variable name    
+#                        'range' : (30,60,120),    #   variable range
+#                        'xaxis' : 'm_{ll} [GeV]',  #   x axis name
+#                        'fold' :3,
+#                        
+#                        }
 
 
 #
@@ -86,118 +113,118 @@ variables['nCleanJetNotFat']  = {
                         }
 """
 
-variables['VBS_jet_eta1'] = {  'name': 'Alt$(CleanJet_eta[vbs_jet_0],-9999.)',
-                        'range': (30,-5,5),
-                        'xaxis': '#eta 1st VBS jet',
-                        'fold' : 3,
-                        
-                        }
-variables['VBS_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[vbs_jet_1],-9999.)',
-                        'range': (30,-5,5),
-                        'xaxis': '#eta 2nd VBS jet',
-                        'fold' : 3,
-                        
-                        }
+#variables['VBS_jet_eta1'] = {  'name': 'Alt$(CleanJet_eta[vbs_jet_0],-9999.)',
+#                        'range': (30,-5,5),
+#                        'xaxis': '#eta 1st VBS jet',
+#                        'fold' : 3,
+#                        
+#                        }
+#variables['VBS_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[vbs_jet_1],-9999.)',
+#                        'range': (30,-5,5),
+#                        'xaxis': '#eta 2nd VBS jet',
+#                        'fold' : 3,
+#                        
+#                        }
 
 variables['VBS_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_0],-9999.)',            #   variable name    
-                        'range' : (30,0,400),    #   variable range
+                        'range' : (25,0,500),    #   variable range
                         'xaxis' : 'p_{T} 1st VBS jet [GeV]',  #   x axis name
                         'fold' : 3,
                         
                         }
 variables['VBS_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_1],-9999.)',            #   variable name    
-                        'range' : (30,0,400),    #   variable range
+                        'range' : (20,0,250),    #   variable range
                         'xaxis' : 'p_{T} 2nd VBS jet [GeV]',  #   x axis name
                         'fold' : 3,
                         
                         }
-
-variables['VBS_jet_qgl1'] = { 'name' : 'Alt$(Jet_qgl->At(CleanJet_jetId->At(vbs_jet_1)), -9999)',
-			'range' : (20,0,1),
-			'xaxis' : 'QGL 1st VBS jet',
-			'fold' : 3,
-                        }
-variables['VBS_jet_qgl2'] = { 'name' : 'Alt$(Jet_qgl->At(CleanJet_jetId->At(vbs_jet_2)), -9999)',
-                        'range' : (20,0,1),
-                        'xaxis' : 'QGL 2nd VBS jet',
-                        'fold' : 3,
-                   
-}
+#
+#variables['VBS_jet_qgl1'] = { 'name' : 'Alt$(Jet_qgl[vbs_jet_0]), -9999)',
+#			'range' : (20,0,1),
+#			'xaxis' : 'QGL 1st VBS jet',
+#			'fold' : 3,
+#                        }
+#variables['VBS_jet_qgl2'] = { 'name' : 'Alt$(Jet_qgl[vbs_jet_1]), -9999)',
+#                        'range' : (20,0,1),
+#                        'xaxis' : 'QGL 2nd VBS jet',
+#                        'fold' : 3,
+#                   
+#}
 
 
 #
 # V- jet(s) #
 
-variables['V_jet_eta1'] = {  'name': 'Alt$(CleanJet_eta[v_jet_0],-9999.)',
-                        'range': (30,-5,5),
-                        'xaxis': '#eta 1st V jet',
-                        'fold' : 3,
-                        
-                        }
-variables['V_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[v_jet_1],-9999.)',
-                        'range': (30,-5,5),
-                        'xaxis': '#eta 2nd V jet',
-                        'fold' : 3,
-                        
-                        }
+#variables['V_jet_eta1'] = {  'name': 'Alt$(CleanJet_eta[v_jet_0],-9999.)',
+#                        'range': (30,-5,5),
+#                        'xaxis': '#eta 1st V jet',
+#                        'fold' : 3,
+#                        
+#                        }
+#variables['V_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[v_jet_1],-9999.)',
+#                        'range': (30,-5,5),
+#                        'xaxis': '#eta 2nd V jet',
+#                        'fold' : 3,
+#                        
+#                        }
 
 variables['V_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[v_jet_0],-9999.)',            #   variable name    
-                        'range' : (60,0,800),    #   variable range
+                        'range' : (25,0,300),    #   variable range
                         'xaxis' : 'p_{T} 1st V jet [GeV]',  #   x axis name
                         'fold' : 3,
                         
                         }
 variables['V_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[v_jet_1],-9999.)',            #   variable name    
-                        'range' : (30,0,400),    #   variable range
+                        'range' : (20,0,100),    #   variable range
                         'xaxis' : 'p_{T} 2nd V jet [GeV]',  #   x axis name
                         'fold' : 3,
                         
                         }
 
-variables['V_jet_qgl1'] = { 'name' : 'Alt$(Jet_qgl->At(CleanJet_jetId->At(v_jet_1)), -9999)',
-                        'range' : (20,0,1),
-                        'xaxis' : 'QGL 1st V jet',
-                        'fold' : 3,
-                        
-}
-variables['V_jet_qgl2'] = { 'name' : 'Alt$(Jet_qgl->At(CleanJet_jetId->At(v_jet_2)), -9999)',
-                        'range' : (20,0,1),
-                        'xaxis' : 'QGL 2nd VBS jet',
-                        'fold' : 3,
-                        
+#variables['V_jet_qgl1'] = { 'name' : 'Alt$(Jet_qgl->At(CleanJet_jetId->At(v_jet_1)), -9999)',
+#                        'range' : (20,0,1),
+#                        'xaxis' : 'QGL 1st V jet',
+#                        'fold' : 3,
+#                        
+#}
+#variables['V_jet_qgl2'] = { 'name' : 'Alt$(Jet_qgl->At(CleanJet_jetId->At(v_jet_2)), -9999)',
+#                        'range' : (20,0,1),
+#                        'xaxis' : 'QGL 2nd VBS jet',
+#                        'fold' : 3,
+#                        
+#
+#}
 
-}
-
-variables['Vjet_mass'] = { 'name': 'Alt$(Vjet_mass,-9999.)',            #   variable name    
-                        'range' : (50,40,160),    #   variable range
-                        'xaxis' : 'V-jet mass [GeV]',  #   x axis name
-                        'fold' : 3,
-                        
-                        }
+#variables['Vjet_mass'] = { 'name': 'Alt$(Vjet_mass,-9999.)',            #   variable name    
+#                        'range' : (50,40,160),    #   variable range
+#                        'xaxis' : 'V-jet mass [GeV]',  #   x axis name
+#                        'fold' : 3,
+#                        
+#                        }
 # Fat Jet
-variables['nFatJet']  = {
-                        'name': 'nCleanFatJet',     
-                        'range' : (6,0,6),   
-                        'xaxis' : 'Number of FatJets w/ p_{T}>200 GeV',
-                        'fold' : 2,
-                           # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
-                        }
+#variables['nFatJet']  = {
+#                        'name': 'nCleanFatJet',     
+#                        'range' : (6,0,6),   
+#                        'xaxis' : 'Number of FatJets w/ p_{T}>200 GeV',
+#                        'fold' : 2,
+#                           # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
+#                        }
 
 
-variables['FatJet_pt']  = {
-                        'name': 'Alt$(CleanFatJet_pt, -9999)',     
-                        'range' : (30,150,800),   
-                        'xaxis' : 'FatJet p_{T}',
-                        'fold' : 0,
-                          # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
-                        }
+#variables['FatJet_pt']  = {
+#                        'name': 'Alt$(CleanFatJet_pt, -9999)',     
+#                        'range' : (30,150,800),   
+#                        'xaxis' : 'FatJet p_{T}',
+#                        'fold' : 0,
+#                          # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
+#                        }
 
-variables['FatJet_eta'] = {'name': 'Alt$(CleanFatJet_eta, -9999)',
-                           'range' : (25,-2.7,2.7),
-                           'xaxis' : '\eta FatJet',
-                           'fold'  : 0,
-                        
-                           }
+#variables['FatJet_eta'] = {'name': 'Alt$(CleanFatJet_eta, -9999)',
+#                           'range' : (25,-2.7,2.7),
+#                           'xaxis' : '\eta FatJet',
+#                           'fold'  : 0,
+#                        
+#                           }
 
 """
 variables['FatJet_tau21'] = {   'name': 'CleanFatJet_tau21',
@@ -229,27 +256,27 @@ variables['detajj_mjjmax']  = {   'name': 'detajj_mjjmax',            #   variab
                         
                            }
 
-variables['dphijj_mjjmax']  = {   'name': 'dphijj_mjjmax',            #   variable name    
-                           'range' : (8,0,3.14),    #   variable range
-                           'xaxis' : '#Delta #phi jj',  #   x axis name
-                           'fold' :3,
-                        
-                           }
+#variables['dphijj_mjjmax']  = {   'name': 'dphijj_mjjmax',            #   variable name    
+#                           'range' : (8,0,3.14),    #   variable range
+#                           'xaxis' : '#Delta #phi jj',  #   x axis name
+#                           'fold' :3,
+#                        
+#                           }
 
 
 #Zeppenfeld variables
-variables['Zlep_1'] = {   'name': '( Lepton_eta[0]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',      
-                        'range' : (40,-1.5,1.5),  
-                        'xaxis' : 'Z^{lep}_{l1}', 
-                        'fold' : 3,
-			       }
-
-variables['Zlep_2'] = {   'name': '( Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',      
-                        'range' : (40,-1.5,1.5),  
-                        'xaxis' : 'Z^{lep}_{l2}', 
-                        'fold' : 3,
-   			
-                 }
+#variables['Zlep_1'] = {   'name': '( Lepton_eta[0]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',      
+#                        'range' : (40,-1.5,1.5),  
+#                        'xaxis' : 'Z^{lep}_{l1}', 
+#                        'fold' : 3,
+#			       }
+#
+#variables['Zlep_2'] = {   'name': '( Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) )/detajj_mjjmax',      
+#                        'range' : (40,-1.5,1.5),  
+#                        'xaxis' : 'Z^{lep}_{l2}', 
+#                        'fold' : 3,
+#   			
+#                 }
 
 """
 variables['Zlep_ll'] = {   'name': '  ( Lepton_eta[0]+Lepton_eta[1]-0.5*(CleanJet_eta[vbs_jet_0]+CleanJet_eta[vbs_jet_1]) ) /detajj_mjjmax',      
@@ -276,17 +303,17 @@ variables['Zlep_V_boosted'] = {   'name': '  ( CleanFatJet_eta[0] -0.5*(CleanJet
 
 ### DNN variables
 
-variables['DNNoutput_All_years'] = {
-    'name': 'DNNoutput_All_years',
-    'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],),
-    'xaxis': 'DNN output (all years training)',
-    'fold': 3 ,
-    'blind': {
-        "Resolved_SR_bVeto": [0.8,1],
-        "Boosted_SR_bVeto": [0.8,1],
-        "Resolved_SR_nobVeto": [0.8,1],
-        "Boosted_SR_nobVeto": [0.8,1],
-
-    }
-}
+#variables['DNNoutput_All_years'] = {
+#    'name': 'DNNoutput_All_years',
+#    'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],),
+#    'xaxis': 'DNN output (all years training)',
+#    'fold': 3 ,
+#    'blind': {
+#        "Resolved_SR_bVeto": [0.8,1],
+#        "Boosted_SR_bVeto": [0.8,1],
+#        "Resolved_SR_nobVeto": [0.8,1],
+#        "Boosted_SR_nobVeto": [0.8,1],
+#
+#    }
+#}
 

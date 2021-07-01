@@ -8,7 +8,8 @@ configurations = os.path.dirname(configurations) # Differential
 configurations = os.path.dirname(configurations) # Configurations
 configurations = os.path.dirname(configurations) # Configurations
 
-from LatinoAnalysis.Tools.commonTools import getSampleFiles, getBaseW, addSampleWeight
+#from LatinoAnalysis.Tools.commonTools import getSampleFiles, getBaseW, addSampleWeight
+from LatinoAnalysis.Tools.commonTools import getSampleFiles, getBaseW, getBaseWnAOD, addSampleWeight
 
 def nanoGetSampleFiles(inputDir, sample):
     try:
@@ -89,6 +90,14 @@ DataTrig = {
             'EGamma'         : '!Trigger_ElMu && !Trigger_dblMu && !Trigger_sngMu && (Trigger_sngEl || Trigger_dblEl)' ,
            }
 
+############################################
+############ MORE MC STAT ##################
+############################################
+
+def CombineBaseW(samples, proc, samplelist):
+    newbaseW = getBaseWnAOD(mcDirectory, mcProduction, samplelist)
+    for s in samplelist:
+        addSampleWeight(samples, proc, s, newbaseW+'/baseW')
 
 #########################################
 ############ MC COMMON ##################
@@ -118,28 +127,29 @@ samples['VBS_ZV'] = {
 }
 addSampleWeight(samples,'VBS_ZV','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
 addSampleWeight(samples,'VBS_ZV','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-"""
-samples['tZq'] = {
-    'name':  nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight':  mcCommonWeight + '*(Sum$(abs(GenPart_pdgId)==6)>=1)',
-    'FilesPerJob': 7
-}
-"""
 
+#samples['tZq'] = {
+#    'name':  nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
+#             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
+#             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
+#             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
+#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
+#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
+#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight':  mcCommonWeight + '*(Sum$(abs(GenPart_pdgId)==6)>=1)',
+#    'FilesPerJob': 7
+#}
+
+
+"""
 #changed tZq to specific bkg
 samples['tZq'] = {
 	'name' : nanoGetSampleFiles(mcDirectory, 'tZq_ll'),
 	'weight' : mcCommonWeight,
-	'FilesPerJob': 7,
+	'FilesPerJob': 5,
 }
-
+"""
 
 
 """
@@ -162,15 +172,12 @@ samples['VBS_ZV_old'] = {
 ###########################################
 #####NEW BACKGROUNDS (24/03)
 
-
 samples['WGJJ']={
 	'name': nanoGetSampleFiles(mcDirectory, 'WGJJ'),
 	'weight' : mcCommonWeight,
 	'FilesPerJob' : 5,
 	
 }
-
-
 
 ########## irreducible VBS QCD 
 
@@ -182,14 +189,13 @@ samples['VBS_VV_QCD'] = {
              +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_WmToLNu_QCD')
              +nanoGetSampleFiles(DirectorySMPeos, 'WmToLNu_ZTo2J_QCD')
              +nanoGetSampleFiles(DirectorySMPeos, 'WmToLNu_WmTo2J_QCD')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_QCD')              	 +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_QCD'),
+             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_QCD')
+             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_QCD'),
     'weight':  mcCommonWeight,
     'FilesPerJob': 7
 }
 
-########## DY #### consider using HT binned after Davide's studies.
-#Beware! we have to correct the cross section here
-###### DY #######
+########## DY #### 
 
 useDYtt = False
 #weights updated to 2018
@@ -224,37 +230,54 @@ else:
         nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-4to50_HT-400to600') + \
         nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-4to50_HT-600toInf') + \
         nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-50_ext2') + \
-        nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-10to50-LO')
-        #nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-50_HT-70to100') + \ available
-#here M-10to50-LO_ext1 are available
+        nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-10to50-LO') + \
+        nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-10to50-LO_ext1')
 
     samples['DY'] = {
         'name': files,
         'weight': mcCommonWeight + "*( !(Sum$(PhotonGen_isPrompt==1 && PhotonGen_pt>15 && abs(PhotonGen_eta)<2.6) > 0 &&\
-                                         Sum$(LeptonGen_isPrompt==1 && LeptonGen_pt>15)>=2) )",
-        'FilesPerJob': 4,
-        'EventsPerJob' : 70000,
+                                            Sum$(LeptonGen_isPrompt==1 && LeptonGen_pt>15)>=2) )",
+        'FilesPerJob': 1,
+#        'EventsPerJob' : 70000,
+#       'subsamples': {
+#           'hardJets'  : 'hardJets',
+#           'PUJets'    : 'PUJets'
+#       }
         'subsamples' :{
-            "Resolved_1": 'fit_bin_Resolved==1',
-            "Resolved_2": 'fit_bin_Resolved==2',
-            "Resolved_3": 'fit_bin_Resolved==3',
-            "Resolved_4": 'fit_bin_Resolved==4',
-            "Resolved_5": 'fit_bin_Resolved==5',
-            "Resolved_6": 'fit_bin_Resolved==6',
-            "Resolved_7": 'fit_bin_Resolved==7',
-            "Resolved_8": 'fit_bin_Resolved==8',
-            "Resolved_9": 'fit_bin_Resolved==9',
-            "Resolved_10":'fit_bin_Resolved==10',
-            "Boosted_1": 'fit_bin_Boosted==1',
-            "Boosted_2": 'fit_bin_Boosted==2',
-            "Boosted_3": 'fit_bin_Boosted==3',
-            "Boosted_4": 'fit_bin_Boosted==4',
-            "Boosted_5": 'fit_bin_Boosted==5',
+            "Z_1": 'fit_Z_bin_Resolved==1',
+            "Z_2": 'fit_Z_bin_Resolved==2',
+            "Z_3": 'fit_Z_bin_Resolved==3',
+            "Z_4": 'fit_Z_bin_Resolved==4',
+            "Z_5": 'fit_Z_bin_Resolved==5',
+            "Z_6": 'fit_Z_bin_Resolved==6',
+#           "vbs0_1": 'fit_vbs0_bin_Resolved==1',
+#           "vbs0_2": 'fit_vbs0_bin_Resolved==2',
+#           "vbs0_3": 'fit_vbs0_bin_Resolved==3',
+#           "vbs0_4": 'fit_vbs0_bin_Resolved==4',
+#           "vbs0_5": 'fit_vbs0_bin_Resolved==5',
+#           "vbs0_6": 'fit_vbs0_bin_Resolved==6',
+#           "vbs1_1": 'fit_vbs1_bin_Resolved==1',
+#           "vbs1_2": 'fit_vbs1_bin_Resolved==2',
+#           "vbs1_3": 'fit_vbs1_bin_Resolved==3',
+#           "vbs1_4": 'fit_vbs1_bin_Resolved==4',
+#           "vbs1_5": 'fit_vbs1_bin_Resolved==5',
+#           "vbs1_6": 'fit_vbs1_bin_Resolved==6',
+#           "detajj_1": 'fit_detajj_bin_Resolved==1',
+#           "detajj_2": 'fit_detajj_bin_Resolved==2',
+#           "detajj_3": 'fit_detajj_bin_Resolved==3',
+#           "detajj_4": 'fit_detajj_bin_Resolved==4',
+#           "detajj_5": 'fit_detajj_bin_Resolved==5',
+#           "detajj_6": 'fit_detajj_bin_Resolved==6',
         }
     }
 
-    addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_ext2', 'DY_NLO_pTllrw * (LHE_HT < 100)')
+    CombineBaseW(samples, 'DY', ['DYJetsToLL_M-10to50-LO',                  'DYJetsToLL_M-10to50-LO_ext1']) #this is to maximize statistics for this inclusive
+
+#stitching weights taken from: https://indico.cern.ch/event/781231/contributions/3263952/subcontributions/274982/attachments/1795600/2926947/190213_mc_discrep_ppd.pdf 
+    addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_ext2', 'DY_NLO_pTllrw * (LHE_HT < 70)')
     addSampleWeight(samples, 'DY', 'DYJetsToLL_M-10to50-LO', 'DY_LO_pTllrw * (LHE_HT < 100)')
+    addSampleWeight(samples, 'DY', 'DYJetsToLL_M-10to50-LO_ext1', 'DY_LO_pTllrw * (LHE_HT < 100)')
+    addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_HT-70to100',   'DY_LO_pTllrw')
     addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_HT-100to200',  'DY_LO_pTllrw * 1.000')
     addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_HT-200to400',  'DY_LO_pTllrw * 0.999')
     addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_HT-400to600',  'DY_LO_pTllrw * 0.990')
@@ -278,8 +301,6 @@ files = nanoGetSampleFiles(mcDirectory, 'TTTo2L2Nu') + \
     nanoGetSampleFiles(mcDirectory,'TTToSemiLeptonic') + \
     nanoGetSampleFiles(mcDirectory,'TTZjets') + \
     nanoGetSampleFiles(mcDirectory,'TTWjets')
-#this one gives compilatio error with "topGenPt", need to understand why
-#these two samples can be considered outside the category "top" to solve this issue...
 
 samples['top'] = {
     'name': files,
@@ -307,7 +328,7 @@ files = nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT70_100') + \
 samples['WJets'] = {
     'name': files,
     'weight': mcCommonWeight, 
-    'FilesPerJob': 2
+    'FilesPerJob': 1
 }
 
 #addSampleWeight(samples,'WJets', 'WJetsToLNu-LO', '(LHE_HT < 70)')
@@ -424,19 +445,19 @@ samples['VBF-V'] = {
 ################## FAKE ###################
 ###########################################
 
-samples['Fake'] = {
-  'name': [],
-  'weight': 'METFilter_DATA*fakeW',
-  'weights': [],
-  'isData': ['all'],
-  'FilesPerJob': 50
-}
-
-for _, sd in DataRun:
-  for pd in DataSets:
-    files = nanoGetSampleFiles(fakeDirectory, pd + '_' + sd)
-    samples['Fake']['name'].extend(files)
-    samples['Fake']['weights'].extend([DataTrig[pd]] * len(files))
+#samples['Fake'] = {
+#  'name': [],
+#  'weight': 'METFilter_DATA*fakeW',
+#  'weights': [],
+#  'isData': ['all'],
+#  'FilesPerJob': 50
+#}
+#
+#for _, sd in DataRun:
+#  for pd in DataSets:
+#    files = nanoGetSampleFiles(fakeDirectory, pd + '_' + sd)
+#    samples['Fake']['name'].extend(files)
+#    samples['Fake']['weights'].extend([DataTrig[pd]] * len(files))
 
 
 

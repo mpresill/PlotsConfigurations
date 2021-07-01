@@ -1,17 +1,17 @@
 #!/bin/bash
 folder=2018_test
 cd ${folder}
-date=30Apr2021_2018bin_test
+date=29June2021_2018_bin1D
 
 #  fitting variable
-VAR1=DYfit_bin_Resolved
+VAR1=DYfit_Z_bin_Resolved
 CUT1=Resolved_DYcr_bVeto
 DATACARD_FIT=Datacards/_${date}/${CUT1}/${VAR1}/datacard
 echo "${DATACARD_FIT}"
 
 #  plotting variable 
-PLOTVAR=DYfit_bin_Resolved
-CUT2=Resolved_DYcr_bVeto #Resolved_SR_bVeto
+PLOTVAR=Zleppt
+CUT2=Resolved_SR_bVeto #Boosted_SR_bVeto
 DATACARD_PLOT=Datacards/_${date}/${CUT2}/${PLOTVAR}/datacard
 echo "${DATACARD_PLOT}"
 #
@@ -29,7 +29,9 @@ text2workspace.py combined.txt -o combined.root
 ##mkdir fitDiagnosticsCombined
 ## -t -1 --expectSignal 0   -> this is for t0 Asimov, b-only
 ## -t -1 --expectSignal 1   -> this is for t1 Asimov, s+b
-combine -M FitDiagnostics combined.root  --out fitDiagnosticsCombined -t -1 --robustFit=1 --cminDefaultMinimizerStrategy 0 --rMin -10 #-v 2 # --saveWithUncertainties --saveOverallShapes --numToysForShapes 200 --plots #--algo impact -P parameter #--cminDefaultMinimizerStrategy 1 # --robustHesse 1 #--X-rtd MINIMIZER_analytic #--robustHesse 1 # --forceRecreateNLL --saveNormalizations --saveShapes --saveWithUncertainties --saveNLL #--robustFit=1 --cminDefaultMinimizerStrategy 0 #--minos all #--cminDefaultMinimizerTolerance 0.1 --minos poi 
+#combine -M FitDiagnostics combined.root  --out fitDiagnosticsCombined -t -1 --robustFit=1 --cminDefaultMinimizerStrategy 0 --rMin -20 --saveWithUncertainties --saveOverallShapes --numToysForShapes 200 --plots #-v 2 # --saveWithUncertainties --saveOverallShapes --numToysForShapes 200 --plots #--algo impact -P parameter #--cminDefaultMinimizerStrategy 1 # --robustHesse 1 #--X-rtd MINIMIZER_analytic #--robustHesse 1 # --forceRecreateNLL --saveNormalizations --saveShapes --saveWithUncertainties --saveNLL #--robustFit=1 --cminDefaultMinimizerStrategy 0 #--minos all #--cminDefaultMinimizerTolerance 0.1 --minos poi 
+#python ../../../../HiggsAnalysis/CombinedLimit/test/diffNuisances.py --all --abs --format html fitDiagnosticsCombined/fitDiagnosticsTest.root > fit_${date}.html
+#cp fit_${date}.html /eos/user/m/mpresill/www/VBS/diffNuisances/. 
 
 #########PostfitfromWorkspace
 PostFitShapesFromWorkspace \
@@ -44,11 +46,11 @@ PostFitShapesFromWorkspace \
 mkPostFitCombinedPlot.py \
     --inputFilePostFitShapesFromWorkspace output_histograms.root \
     --outputFile output_postfit.root \
-    --kind p \
+    --kind P \
     --cutName ${CUT2} \
     --variable ${PLOTVAR} \
     --structureFile structure.py \
-    --plotFile plot_res.py \
+    --plotFile plot.py \
     --lumiText '59.74/fb' #\
     #--nonFitVariable
        # --listOfFilesOriginal rootFile_${date}/plots_VBS_ZV_${data}.root \
@@ -58,15 +60,15 @@ mkPostFitCombinedPlot.py \
 rm -rf plot_combined
 mkPlot.py --pycfg=configuration_combined.py --inputFile=output_postfit.root --onlyPlot=cratio --logOnly --showIntegralLegend=1 --minLogCratio=0.01 --maxLogCratio=10000
 #
-mkdir /eos/user/m/mpresill/www/VBS/postfit/PlotsVBS_ZV_${date}
-mkdir -p /eos/user/m/mpresill/www/VBS/prefit/PlotsVBS_ZV_${date}
+mkdir /eos/user/m/mpresill/www/VBS/postfit/PlotsVBS_ZV_${date}_${VAR1}
+mkdir -p /eos/user/m/mpresill/www/VBS/prefit/PlotsVBS_ZV_${date}_${VAR1}
 
 ###postfit
-#cp /eos/user/m/mpresill/www/VBS/2018_v7/index.php /eos/user/m/mpresill/www/VBS/postfit/PlotsVBS_ZV_${date}/.
-#cp -r plot_combined/*png /eos/user/m/mpresill/www/VBS/postfit/PlotsVBS_ZV_${date}/.
+cp /eos/user/m/mpresill/www/VBS/2018_v7/index.php /eos/user/m/mpresill/www/VBS/postfit/PlotsVBS_ZV_${date}_${VAR1}/.
+cp -r plot_combined/*png /eos/user/m/mpresill/www/VBS/postfit/PlotsVBS_ZV_${date}_${VAR1}/.
 ###prefit
-cp /eos/user/m/mpresill/www/VBS/2018_v7/index.php /eos/user/m/mpresill/www/VBS/prefit/PlotsVBS_ZV_${date}/.
-cp -r plot_combined/*png /eos/user/m/mpresill/www/VBS/prefit/PlotsVBS_ZV_${date}/.
+#cp /eos/user/m/mpresill/www/VBS/2018_v7/index.php /eos/user/m/mpresill/www/VBS/prefit/PlotsVBS_ZV_${date}_${VAR1}/.
+#cp -r plot_combined/*png /eos/user/m/mpresill/www/VBS/prefit/PlotsVBS_ZV_${date}_${VAR1}/.
 
 
 #rm -r postfit_${CUT}_${FITVAR}fit

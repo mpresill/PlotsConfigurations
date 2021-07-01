@@ -1,32 +1,33 @@
 # example of configuration file
 treeName= 'Events'
 
-#date='_Nov252018_ptll'
-#date='_18Jan2021_18_AllyearsSR'
-date='_30Apr2021_2018bin_test'
+date='_29June2021_2018_bin1D'
 tag = 'VBS_ZV'+date
 
 # used by mkShape to define output directory for root files
 outputDir = 'rootFile'+date
 
 # file with TTree aliases
+#aliasesFile = 'aliases_PUjet.py'
 aliasesFile = 'aliases.py'
 
 # file with list of variables
-#variablesFile = 'variables.py'
-variablesFile = 'variables_test.py'
+#variablesFile = 'variables_test.py'
+variablesFile = 'variables.py'
 
 # file with list of cuts
 cutsFile = 'cuts.py'
 
 # file with list of samples
-#samplesFile = 'samples_test.py'
+#samplesFile = 'samples_dipoleRecoil.py'
+#samplesFile = 'samples_PUjet.py'
 samplesFile = 'samples.py'
 
 
 # file with list of samples
-#plotFile = 'plot.py'
-plotFile = 'plot_res.py'#this has same color palette in Alexander's
+#plotFile = 'plot_dipoleRecoil.py'
+#plotFile = 'plot_PUjet.py'#this has same color palette in Alexander's, for PUjet based splitting
+plotFile = 'plot.py'#this is for bin splitting
 
 
 # luminosity to normalize to (in 1/fb)
@@ -37,14 +38,16 @@ lumi = 59.74
 outputDirPlots = '/eos/user/m/mpresill/www/VBS/2018_v7/PlotsVBS_ZV'+date
 
 
-# used by mkDatacards to define output directory for datacards: common vbs-italia github folder : /afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/2017_v7/
+# used by mkDatacards to define output directory for datacards: 
 outputDirDatacard = './Datacards/'+date
 
 
 # structure file for datacard
+#structureFile = 'structure_PUjet.py'
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
-nuisancesFile = 'nuisances.py'
+#nuisancesFile = 'nuisances_PUjet.py'
 #nuisancesFile ='nuisances_StatOnly.py'
+nuisancesFile ='nuisances.py'
 

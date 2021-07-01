@@ -114,7 +114,7 @@ nuisances['fake_mu_stat'] = {
 }
 
 ##### B-tagger
-"""
+
 for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2', 'cferr1', 'cferr2']:
     btag_syst = ['(btagSF%sup)/(btagSF)' % shift, '(btagSF%sdown)/(btagSF)' % shift]
 
@@ -128,7 +128,7 @@ for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2',
         'type': 'shape',
         'samples': dict((skey, btag_syst) for skey in mc),
     }
-"""
+
 ##### Trigger Efficiency
 
 trig_syst = ['((TriggerEffWeight_2l_u)/(TriggerEffWeight_2l))*(TriggerEffWeight_2l>0.02) + (TriggerEffWeight_2l<=0.02)', '(TriggerEffWeight_2l_d)/(TriggerEffWeight_2l)']
@@ -156,7 +156,7 @@ nuisances['electronpt'] = {
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc_common),
+    'samples': dict((skey, ['1', '1']) for skey in mc_common if skey not in ['WJets']),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
     #'AsLnN': '1'
@@ -189,7 +189,7 @@ nuisances['muonpt'] = {
     'type': 'shape',
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc_common),
+    'samples': dict((skey, ['1', '1']) for skey in mc_common if skey not in ['WJets']),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
     #'AsLnN': '1'
@@ -326,9 +326,20 @@ nuisances['PU'] = {
 #    'AsLnN': '1',
 }
 
+### PU ID SF uncertainty
+
+puid_syst = ['Jet_PUIDSF_up/Jet_PUIDSF', 'Jet_PUIDSF_down/Jet_PUIDSF']
+
+nuisances['jetPUID'] = {
+    'name': 'CMS_PUID_2018',
+    'kind': 'weight',
+    'type': 'shape',
+    'samples': dict((skey, puid_syst) for skey in mc)
+}
+
 
 ##### PS: all these Psweights need to be updated 
-samples_PS = ['VBS_ZV','VBS_QCD_VV','top','VV','VVV','Vg','VgS','VBF-V','ggWW']  #add VBS_QCD_VV when ready on SMP eos
+samples_PS = ['VBS_ZV','VBS_QCD_VV','top','VV','VVV','Vg','VgS','VBF-V','ggWW'] 
 #DY removed for binning for now
 
 for sample in samples_PS:
@@ -444,98 +455,142 @@ nuisances['pdf']  = {
                    #'DY_B_bin1'      : '1.002', 
                    },
               }
-
+#this neeeds to be updated
 
 
 ## rate parameters
+###tor control region is not included at the moment
+#nuisances['Topnorm_boosted']  = {
+#               'name'  : 'Topnorm_boosted_2018',
+#               'samples'  : {
+#                   'top' : '1.0',
+#                   },
+#               'type'  : 'rateParam',
+#               'cuts'  : [
+#                   'Boosted_topcr',
+#                   'Boosted_SR_bVeto',
+#                   'Boosted_SR_nobVeto',
+#                   ]
+#              }
+#
+#nuisances['Topnorm_resolved']  = {
+#               'name'  : 'Topnorm_resolved_2018',
+#               'samples'  : {
+#                   'top' : '1.0',
+#                   },
+#               'type'  : 'rateParam',
+#               'cuts'  : [
+#                   'Resolved_topcr',
+#                   'Resolved_SR_bVeto',
+#                   'Resolved_SR_nobVeto',
+#                   ]
+#              }              
 
-nuisances['Topnorm_boosted']  = {
-               'name'  : 'Topnorm_boosted_2018',
-               'samples'  : {
-                   'top' : '1.0',
-                   },
-               'type'  : 'rateParam',
-               'cuts'  : [
-                   'Boosted_topcr',
-                   'Boosted_SR_bVeto',
-                   'Boosted_SR_nobVeto',
-                   ]
-              }
 
-nuisances['Topnorm_resolved']  = {
-               'name'  : 'Topnorm_resolved_2018',
-               'samples'  : {
-                   'top' : '1.0',
-                   },
-               'type'  : 'rateParam',
-               'cuts'  : [
-                   'Resolved_topcr',
-                   'Resolved_SR_bVeto',
-                   'Resolved_SR_nobVeto',
-                   ]
-              }              
-              
+
+####DY data driven estimation rateparam
 DY_bins = []
-for bin in range(1,11):
-        DY_bins.append("DY_Resolved_" + str(bin))
-for bin in range(1,6):
-        DY_bins.append("DY_Boosted_" + str(bin))
+for bin in range(1,7):
+    DY_bins.append("DY_Z_"+str(bin))
+#for bin in range(1,7):
+#    DY_bins.append("DY_vbs0_"+str(bin))
+#for bin in range(1,7):
+#    DY_bins.append("DY_vbs1_"+str(bin))
+#for bin in range(1,7):
+#    DY_bins.append("DY_detajj_"+str(bin))
+
+###this is for Boosted cat, not considered rn
+#for bin in range(1,7):
+#        DY_bins.append("DY_Resolved_" + str(bin))
+#for bin in range(1,7):
+#        DY_bins.append("DY_Boosted_" + str(bin))
 
 
 for DYbin in DY_bins:
-	if "_B_" in DYbin:
-		nuisances["{}_norm_boost_bVeto_2018".format(DYbin)]  = {
-                'name'  : 'CMS_{}_norm_boost_bVeto_2018'.format(DYbin),
-                'samples'  : {DYbin: '1.00'},
-                'type'  : 'rateParam',
-                'cuts'  : [
-                   'Boosted_DYcr_bVeto',
-                   'Boosted_DYcr_nobVeto',
-		           'Boosted_SR_bVeto',
-		           'Boosted_SR_nobVeto'
-		
-                   ]
-            }
-		nuisances["{}_norm_boost_nobVeto_2018".format(DYbin)]  = {
-                'name'  : 'CMS_{}_norm_boost_nobVeto_2018'.format(DYbin),
-                'samples'  : {DYbin: '1.00'},
-                'type'  : 'rateParam',
-                'cuts'  : [
-                   'Boosted_DYcr_bVeto',
-                   'Boosted_DYcr_nobVeto',
-                   'Boosted_SR_bVeto',
-                   'Boosted_SR_nobVeto'
-
-                   ]
-            }
-
-
-
-	elif "_R_" in DYbin:
-		nuisances["{}_norm_res_bVeto_2018".format(DYbin)]  = {
-                'name'  : 'CMS_{}_norm_res_bVeto_2018'.format(DYbin),
+	if "_Z_" in DYbin:
+		nuisances["{}_norm_Z_bVeto_2018".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_Z_bVeto_2018'.format(DYbin),
                 'samples'  : {DYbin: '1.00'},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Resolved_DYcr_bVeto',
-                   'Resolved_DYcr_nobVeto',
-                   'Resolved_SR_bVeto',
-                   'Resolved_SR_nobVeto'
-
+		           'Resolved_SR_bVeto',		
                    ]
             }
-                nuisances["{}_norm_res_nobVeto_2018".format(DYbin)]  = {
-                'name'  : 'CMS_{}_norm_res_nobVeto_2018'.format(DYbin),
+		nuisances["{}_norm_Z_nobVeto_2018".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_Z_nobVeto_2018'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Resolved_DYcr_nobVeto',
+                   'Resolved_SR_nobVeto',
+                   ]
+            }
+	elif "_vbs0_" in DYbin:
+		nuisances["{}_norm_vbs0_bVeto_2018".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_vbs0_bVeto_2018'.format(DYbin),
                 'samples'  : {DYbin: '1.00'},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Resolved_DYcr_bVeto',
-                   'Resolved_DYcr_nobVeto',
-                   'Resolved_SR_bVeto',
-                   'Resolved_SR_nobVeto'
-
+		           'Resolved_SR_bVeto',		
                    ]
             }
+		nuisances["{}_norm_vbs0_nobVeto_2018".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_vbs0_nobVeto_2018'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Resolved_DYcr_nobVeto',
+                   'Resolved_SR_nobVeto',
+                   ]
+            }
+
+	elif "_vbs1_" in DYbin:
+		nuisances["{}_norm_vbs1_bVeto_2018".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_vbs1_bVeto_2018'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Resolved_DYcr_bVeto',
+		           'Resolved_SR_bVeto',		
+                   ]
+            }
+		nuisances["{}_norm_vbs1_nobVeto_2018".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_vbs1_nobVeto_2018'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Resolved_DYcr_nobVeto',
+                   'Resolved_SR_nobVeto',
+                   ]
+            }
+
+	elif "_detajj_" in DYbin:
+		nuisances["{}_norm_detajj_bVeto_2018".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_detajj_bVeto_2018'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Resolved_DYcr_bVeto',
+		           'Resolved_SR_bVeto',		
+                   ]
+            }
+		nuisances["{}_norm_detajj_nobVeto_2018".format(DYbin)]  = {
+                'name'  : 'CMS_{}_norm_detajj_nobVeto_2018'.format(DYbin),
+                'samples'  : {DYbin: '1.00'},
+                'type'  : 'rateParam',
+                'cuts'  : [
+                   'Resolved_DYcr_nobVeto',
+                   'Resolved_SR_nobVeto',
+                   ]
+            }
+
+
+
+
+
+
 
 ## Use the following if you want to apply the automatic combine MC stat nuisances.
 nuisances['stat'] = {
@@ -550,4 +605,4 @@ nuisances['stat'] = {
 for n in nuisances.values():
     n['skipCMS'] = 1
 
-print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))
+#print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))
