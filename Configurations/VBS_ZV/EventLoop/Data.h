@@ -17,7 +17,7 @@ public:
   /**
   * @brief Tree variables
   */
-  Double event;
+  int event;
 
 
 

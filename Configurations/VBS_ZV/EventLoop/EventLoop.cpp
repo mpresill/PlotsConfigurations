@@ -12,8 +12,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <filesystem>
 using namespace std;
-
+using std::filesystem::current_path;
 
 
 
@@ -30,6 +31,7 @@ void EventLoop::initialize()
   // loop through the input files and add them to the chain
   for (auto inputFile : inputFiles)
   {
+
     m_chain->Add(inputFile);
     std::cout << "Added file: " << inputFile << std::endl;
   }
@@ -47,14 +49,15 @@ void EventLoop::execute()
   {
     throw std::runtime_error("Calling execute while the event loop was not initialized.");
   }
+  
   // here we do the actual event loop
-  ofstream out("outputFile.dat");
+  ofstream out("/afs/cern.ch/user/a/ahakimi/git_matteo/PlotsConfigurations/Configurations/VBS_ZV/EventLoop/outputFile.txt");
   for (int i = 0; i < m_chain->GetEntries(); ++i)
   {
     // event number printout
-    if (i % 1000 == 0){
-      std::cout << "Event " << i << std::endl;
-    }
+    //if (i % 1000 == 0){
+    //  std::cout << "Event " << i << std::endl;
+    //}
     // read the data for i-th event
     m_chain->GetEntry(i);
 
@@ -67,10 +70,10 @@ void EventLoop::execute()
     //test: printin "event" variable
     //every 1000 entries of the input dataset
  
-    if (i % 1000 == 0){
+   
       std::cout << "event = " << m_data->event << std::endl;
       out << m_chain->GetEntry(i) << "\t" << m_data->event  << "\n";
-    }
+   
   }
 
   out.close();
