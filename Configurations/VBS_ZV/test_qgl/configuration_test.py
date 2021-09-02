@@ -10,7 +10,7 @@ tag = 'VBS_ZV'+date
 outputDir = 'rootFile'+date
 
 # file with TTree aliases
-aliasesFile = 'aliases.py'
+aliasesFile = 'aliases_old.py'
 
 # file with list of variables
 variablesFile = 'variables_qgl.py'

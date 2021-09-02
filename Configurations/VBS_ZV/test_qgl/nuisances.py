@@ -30,7 +30,7 @@ HiggsXS = HiggsXSection()
 # redefine sampels
 mc = ["WGJJ", "DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","VBF-V","VBS_ZV", "tZq", "VBS_VV_QCD" ]
 mc_common = ["WGJJ","tZq", "DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","VBF-V"] 
-mc_eos = ["VBS_ZV", "VBS_VV_QCD"]
+mc_eos = [ "VBS_VV_QCD"]
 
 
 

@@ -449,45 +449,54 @@ m_quark_higheta_pt1 = "j0_higheta_pt1_quark"
 
 ###############
 aliases['vbs_0_qglmorphed_res'] = {
-    'linesToAdd': [
-        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_qgl.cc+' % configurations
-    ],
-    'class': 'jets_cat_qgl',
-    'args': ('vbs_0_qglmorphed_res','2018', models_path, models_path_pruned,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'class': 'QglVarsMorphing',
+    'args': ('vbs_0_qglmorphed_res', morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1, 
+                                                       m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1),
+     'linesToAdd' : [
+        'gSystem->Load("libLatinoAnalysisMultiDraw.so")',
+        '.L {}/Configurations/VBS_ZV/test_qgl/qgl_vars_morphing.cc+'.format(configurations)
+        ] 
 } 
- 
 
-aliases['vbs_1_qglmorphed_res'] =  {
-'class': 'jets_cat_qgl',
-    'args': ('vbs_1_qglmorphed_res','2018', models_path, models_path_pruned,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
-}
+aliases['vbs_1_qglmorphed_res'] = {
+     'class': 'QglVarsMorphing',
+     'args': ('vbs_1_qglmorphed_res', morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1, 
+                                                        m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1 )
+ } 
 
 aliases['vjet_0_qglmorphed_res'] = {
-'class': 'jets_cat_qgl',
-    'args': ('vjet_0_qglmorphed_res','2018', models_path, models_path_pruned,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
-}
+    'class': 'QglVarsMorphing',
+    'args': ('vjet_0_qglmorphed_res', morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1, 
+                                                       m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1 )
+} 
+
 aliases['vjet_1_qglmorphed_res'] = {
-'class': 'jets_cat_qgl',
-    'args': ('vjet_1_qglmorphed_res','2018', models_path, models_path_pruned,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'class': 'QglVarsMorphing',
+    'args': ('vjet_1_qglmorphed_res', morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1, 
+                                                       m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1 )
+} 
+
+aliases['vbs_0_qgl_res'] = {
+    'class': 'QglVarsMorphing',
+    'args': ('vbs_0_qgl_res', morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,
+                                                       m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1),
+    
 }
 
-aliases['vbs_0_qgl_res'] =  {
-'class': 'jets_cat_qgl',
-    'args': ('vbs_0_qgl_res','2018', models_path, models_path_pruned,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
-}
-
-aliases['vbs_1_qgl_res'] =  {
-'class': 'jets_cat_qgl',
-    'args': ('vbs_1_qgl_res','2018', models_path, models_path_pruned,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
-}
+aliases['vbs_1_qgl_res'] = {
+     'class': 'QglVarsMorphing',
+     'args': ('vbs_1_qgl_res', morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,
+                                                        m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1 )
+ }
 
 aliases['vjet_0_qgl_res'] = {
-'class': 'jets_cat_qgl',
-    'args': ('vjet_0_qgl_res','2018', models_path, models_path_pruned,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'class': 'QglVarsMorphing',
+    'args': ('vjet_0_qgl_res', morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,
+                                                       m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1 )
 }
+
 aliases['vjet_1_qgl_res'] = {
-'class': 'jets_cat_qgl',
-    'args': ('vjet_1_qgl_res','2018', models_path, models_path_pruned,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'class': 'QglVarsMorphing',
+    'args': ('vjet_1_qgl_res', morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,
+                                                       m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1 )
 }

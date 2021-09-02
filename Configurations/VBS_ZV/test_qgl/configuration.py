@@ -3,14 +3,14 @@ treeName= 'Events'
 
 #date='_Nov252018_ptll'
 #date='_18Jan2021_18_AllyearsSR'
-date='_29Jul2021_2018_qglmorphtest'
+date='_02Sep2021_2018_qglmorphtest'
 tag = 'VBS_ZV'+date
 
 # used by mkShape to define output directory for root files
 outputDir = 'rootFile'+date
 
 # file with TTree aliases
-aliasesFile = 'aliases.py'
+aliasesFile = 'aliases_old.py'
 
 # file with list of variables
 variablesFile = 'variables_qgl.py'
@@ -45,6 +45,6 @@ outputDirDatacard = '/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
-nuisancesFile = 'nuisances_StatOnly.py'
+nuisancesFile = 'nuisances.py'
 #nuisancesFile ='nuisances_StatOnly.py'
 
