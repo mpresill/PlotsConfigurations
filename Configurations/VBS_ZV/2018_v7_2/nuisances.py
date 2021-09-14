@@ -28,9 +28,9 @@ from LatinoAnalysis.Tools.HiggsXSection import HiggsXSection
 HiggsXS = HiggsXSection()
 
 # redefine sampels
-mc = ["WGJJ", "DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","VBF-V","VBS_ZV", "tZq", "VBS_VV_QCD" ]
+mc        = ["WGJJ", "DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","VBF-V","tZq", "VBS_ZV", "VBS_VV_QCD" ,"VBS_ZV_aQGCs"]
 mc_common = ["WGJJ", "DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","VBF-V","tZq"] 
-mc_eos = ["VBS_ZV", "VBS_VV_QCD","VBS_ZV_aQGCs"]
+mc_eos    = ["VBS_ZV", "VBS_VV_QCD","VBS_ZV_aQGCs"]
 
 
 
@@ -285,9 +285,6 @@ for js_VBS_ZV in jes_systs:
 
 
 ##### Jet energy resolution
-
-##### Jet energy resolution
-
 nuisances['JER'] = {
     'name': 'CMS_res_j_2018',
     'kind': 'suffix',
@@ -326,6 +323,7 @@ nuisances['PU'] = {
 #    'AsLnN': '1',
 }
 
+
 ### PU ID SF uncertainty
 puid_syst = ['Jet_PUIDSF_up/Jet_PUIDSF', 'Jet_PUIDSF_down/Jet_PUIDSF']
 
@@ -337,8 +335,9 @@ nuisances['jetPUID'] = {
 }
 
 
+
 ##### PS: all these Psweights need to be updated 
-samples_PS = ['VBS_ZV','VBS_QCD_VV','top','VV','VVV','Vg','VgS','VBF-V','ggWW'] 
+samples_PS = ['VBS_ZV','VBS_VV_QCD','top','VV','VVV','Vg','VgS','VBF-V','ggWW'] 
 #DY removed for binning for now
 
 for sample in samples_PS:
@@ -359,7 +358,6 @@ for sample in samples_PS:
                     }
                 }
 
-
 # # Theory nuisance: QCD scale
 ## This should work for samples with either 8 or 9 LHE scale weights (Length$(LHEScaleWeight) == 8 or 9)
 #qcdscale_variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
@@ -375,8 +373,6 @@ for sample in mc :
         }
 
 
-
-
 # An overall 1.5% UE uncertainty will cover all the UEup/UEdo variations
 # And we don't observe any dependency of UE variations on njet
 nuisances['UE']  = {
@@ -386,23 +382,8 @@ nuisances['UE']  = {
                 'samples': dict((skey, '1.015') for skey in mc), 
 }
 
-####### Generic "cross section uncertainties"
-"""
-apply_on = {
-    'top': [
-        '(topGenPt * antitopGenPt <= 0.) * 1.0816 + (topGenPt * antitopGenPt > 0.)',
-        '(topGenPt * antitopGenPt <= 0.) * 0.9184 + (topGenPt * antitopGenPt > 0.)'
-    ]
-}
 
-nuisances['singleTopToTTbar'] = {
-    'name': 'singleTopToTTbar',
-    'skipCMS': 1,
-    'kind': 'weight',
-    'type': 'shape',
-    'samples': apply_on
-}
-"""
+####### Generic "cross section uncertainties"
 ## Top pT reweighting uncertainty
 
 nuisances['TopPtRew'] = {
@@ -441,6 +422,10 @@ nuisances['pdf']  = {
                    },
               }
 #this neeeds to be updated
+
+
+
+
 
 
 ## rate parameters
@@ -503,12 +488,12 @@ for DYbin in DY_bins:
                    ]
             }
 		nuisances["{}_norm_Z_nobVeto_2018".format(DYbin)]  = {
-                'name'  : 'CMS_{}_norm_Z_bReqTight_2018'.format(DYbin),
+                'name'  : 'CMS_{}_norm_Z_bReq_2018'.format(DYbin),
                 'samples'  : {DYbin: '1.00'},
                 'type'  : 'rateParam',
                 'cuts'  : [
-                   'Boosted_DYcr_bReqTight',
-                   'Boosted_SR_bReqTight',
+                   'Boosted_DYcr_bReq',
+                   'Boosted_SR_bReq',
                    ]
             }
 #	elif "_vbs0_" in DYbin:

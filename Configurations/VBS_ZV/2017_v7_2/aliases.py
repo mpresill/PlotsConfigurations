@@ -15,9 +15,10 @@ configurations = os.path.dirname(configurations) # Configurations
 # samples, signals
 mc = [skey for skey in samples if skey not in ('Fake', 'DATA')]
 
+
 eleWP='mvaFall17V1Iso_WP90'
-muWP='cut_Tight_HWWW' #old muon WP?
-#muWP='cut_Tight_HWWW_tthmva_80' 
+muWP='cut_Tight_HWWW' 
+
 
 aliases['LepWPCut'] = {
     'expr': 'LepCut2l__ele_'+eleWP+'__mu_'+muWP,
@@ -46,7 +47,9 @@ aliases['gstarHigh'] = {
     'samples': 'VgS'
 }
 
-#################################fakes
+###########################################################
+################fakes
+###########################################################
 # Fake leptons transfer factor
 aliases['fakeW'] = {
     'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP,
@@ -94,7 +97,7 @@ aliases['fakeWStatMuDown'] = {
 ############################################################
 mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
 models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/All_years_nobtag'
-#models_path = '/eos/user/m/mpresill/www/VBS/Numpy/Alex/'
+
 
 
 aliases['vbs_category'] = {
@@ -252,28 +255,28 @@ aliases['fit_Z_bin_Boosted'] = {
 
 
 #fitting using laeding VBS jet pt 
-aliases['fit_vbs0_bin_Resolved'] = {
-    'expr': '(vbs_category==1)*( \
-            1*(  CleanJet_pt[vbs_jet_0] < 50                                            ) +\
-            2*(  CleanJet_pt[vbs_jet_0] >= 50   &&  CleanJet_pt[vbs_jet_0] < 120        ) +\
-            3*(  CleanJet_pt[vbs_jet_0] >= 120  &&  CleanJet_pt[vbs_jet_0] < 200        ) +\
-            4*(  CleanJet_pt[vbs_jet_0] >= 200  &&  CleanJet_pt[vbs_jet_0] < 300        ) +\
-            5*(  CleanJet_pt[vbs_jet_0] >= 300  &&  CleanJet_pt[vbs_jet_0] < 400        ) +\
-            6*(  CleanJet_pt[vbs_jet_0] >= 400                                          ) \
-            ) + (vbs_category==0)*(-1)'
-}
+#aliases['fit_vbs0_bin_Resolved'] = {
+#    'expr': '(vbs_category==1)*( \
+#            1*(  CleanJet_pt[vbs_jet_0] < 50                                            ) +\
+#            2*(  CleanJet_pt[vbs_jet_0] >= 50   &&  CleanJet_pt[vbs_jet_0] < 120        ) +\
+#            3*(  CleanJet_pt[vbs_jet_0] >= 120  &&  CleanJet_pt[vbs_jet_0] < 200        ) +\
+#            4*(  CleanJet_pt[vbs_jet_0] >= 200  &&  CleanJet_pt[vbs_jet_0] < 300        ) +\
+#            5*(  CleanJet_pt[vbs_jet_0] >= 300  &&  CleanJet_pt[vbs_jet_0] < 400        ) +\
+#            6*(  CleanJet_pt[vbs_jet_0] >= 400                                          ) \
+#            ) + (vbs_category==0)*(-1)'
+#}
 
 #fitting using sub-leading VBS jet pt 
-aliases['fit_vbs1_bin_Resolved'] = {
-    'expr': '(vbs_category==1)*( \
-            1*(  CleanJet_pt[vbs_jet_1] < 50                                            ) +\
-            2*(  CleanJet_pt[vbs_jet_1] >= 50   &&  CleanJet_pt[vbs_jet_1] < 120        ) +\
-            3*(  CleanJet_pt[vbs_jet_1] >= 120  &&  CleanJet_pt[vbs_jet_1] < 150        ) +\
-            4*(  CleanJet_pt[vbs_jet_1] >= 150  &&  CleanJet_pt[vbs_jet_1] < 200        ) +\
-            5*(  CleanJet_pt[vbs_jet_1] >= 200  &&  CleanJet_pt[vbs_jet_1] < 250        ) +\
-            6*(  CleanJet_pt[vbs_jet_1] >= 250                                          ) \
-            ) + (vbs_category==0)*(-1)'
-}
+#aliases['fit_vbs1_bin_Resolved'] = {
+#    'expr': '(vbs_category==1)*( \
+#            1*(  CleanJet_pt[vbs_jet_1] < 50                                            ) +\
+#            2*(  CleanJet_pt[vbs_jet_1] >= 50   &&  CleanJet_pt[vbs_jet_1] < 120        ) +\
+#            3*(  CleanJet_pt[vbs_jet_1] >= 120  &&  CleanJet_pt[vbs_jet_1] < 150        ) +\
+#            4*(  CleanJet_pt[vbs_jet_1] >= 150  &&  CleanJet_pt[vbs_jet_1] < 200        ) +\
+#            5*(  CleanJet_pt[vbs_jet_1] >= 200  &&  CleanJet_pt[vbs_jet_1] < 250        ) +\
+#            6*(  CleanJet_pt[vbs_jet_1] >= 250                                          ) \
+#            ) + (vbs_category==0)*(-1)'
+#}
 
 
 
@@ -305,35 +308,6 @@ aliases['antitopGenPtOTF'] = {
 aliases['Top_pTrw'] = {
     'expr': '(topGenPtOTF * antitopGenPtOTF > 0.) * (TMath::Sqrt((0.103*TMath::Exp(-0.0118*topGenPtOTF) - 0.000134*topGenPtOTF + 0.973) * (0.103*TMath::Exp(-0.0118*antitopGenPtOTF) - 0.000134*antitopGenPtOTF + 0.973))) + (topGenPtOTF * antitopGenPtOTF <= 0.)',
     'samples': ['top']
-}
-
-#########################################################################################
-##### DY pt reweigthing: what is the source of this correctin? EW/QCD NLO? not sure
-#########################################################################################
-
-#### DY Z pT reweighting
-aliases['getGenZpt_OTF'] = {
-    'linesToAdd':['.L %s/src/PlotsConfigurations/Configurations/patches/getGenZpt.cc+' % os.getenv('CMSSW_BASE')],
-    'class': 'getGenZpt',
-    'samples': ['DY']
-}
-
-aliases['nCleanGenJet'] = {
-    'linesToAdd': ['.L %s/Configurations/Differential/ngenjet.cc+' % configurations],
-    'class': 'CountGenJet',
-    'samples': mc
-}
-
-handle = open('%s/src/PlotsConfigurations/Configurations/patches/DYrew30.py' % os.getenv('CMSSW_BASE'),'r')
-exec(handle)
-handle.close()
-aliases['DY_NLO_pTllrw'] = {
-    'expr': '('+DYrew['2017']['NLO'].replace('x', 'getGenZpt_OTF')+')*(nGenJet == 0)+1.0*(nCleanGenJet > 0)',
-    'samples': ['DY']
-}
-aliases['DY_LO_pTllrw'] = {
-    'expr': '('+DYrew['2017']['LO'].replace('x', 'getGenZpt_OTF')+')*(nGenJet == 0)+1.0*(nCleanGenJet > 0)',
-    'samples': ['DY']
 }
 
 #########################################################################################
@@ -399,6 +373,35 @@ for s in systs:
 #        'expr': aliases['btagSF']['expr'].replace('SF', 'SF' + shift + 'down'),
 #        'samples': mc
 #    }
+
+#########################################################################################
+##### DY pt reweigthing: what is the source of this correctin? EW/QCD NLO? not sure
+#########################################################################################
+
+#### DY Z pT reweighting
+aliases['getGenZpt_OTF'] = {
+    'linesToAdd':['.L %s/src/PlotsConfigurations/Configurations/patches/getGenZpt.cc+' % os.getenv('CMSSW_BASE')],
+    'class': 'getGenZpt',
+    'samples': ['DY']
+}
+
+aliases['nCleanGenJet'] = {
+    'linesToAdd': ['.L %s/Configurations/Differential/ngenjet.cc+' % configurations],
+    'class': 'CountGenJet',
+    'samples': mc
+}
+
+handle = open('%s/src/PlotsConfigurations/Configurations/patches/DYrew30.py' % os.getenv('CMSSW_BASE'),'r')
+exec(handle)
+handle.close()
+aliases['DY_NLO_pTllrw'] = {
+    'expr': '('+DYrew['2017']['NLO'].replace('x', 'getGenZpt_OTF')+')*(nGenJet == 0)+1.0*(nCleanGenJet > 0)',
+    'samples': ['DY']
+}
+aliases['DY_LO_pTllrw'] = {
+    'expr': '('+DYrew['2017']['LO'].replace('x', 'getGenZpt_OTF')+')*(nGenJet == 0)+1.0*(nCleanGenJet > 0)',
+    'samples': ['DY']
+}
 
 
 ###########################################################################################

@@ -106,34 +106,15 @@ def CombineBaseW(samples, proc, samplelist):
 ############ MC COMMON ##################
 #########################################
 
-# SFweight, defined in Alias, does not includ: PUJetIdSF, BoostedWtagSF_nominal.
-#About PUJetIdSF: it needs to be added in some "patches" macro
-#SFweight      = 'SFweight'
-#SFweight += '* PrefireWeight * PUJetIdSF * btagSF * BoostedWtagSF_nominal'
-
 mcCommonWeightNoMatch = 'XSWeight*SFweight*METFilter_MC'
 mcCommonWeight = 'XSWeight*SFweight*PromptGenLepMatch2l*METFilter_MC'
 
 #########################################
 ############# EFT SIGNALS ###################
-########VBS aQGC - SMP-18-006 model: all signals givin aQGC with Z to 2L and V to 2J
-# WpTo2J_ZTo2L_aQGC
-# WmTo2J_ZTo2L_aQGC
-# ZTo2L_ZTo2J_aQGC
-#N.B. no processing campaign v6/7 is present for aQGC samples
-########################################
-
-#samples['VBS_ZV_aQGC'] = {
-#    'name':   nanoGetSampleFiles(mcDirectorySig, 'ZTo2L_ZTo2J_aQGC')
-#             +nanoGetSampleFiles(mcDirectorySig, 'WpTo2J_ZTo2L_aQGC')
-#             +nanoGetSampleFiles(mcDirectorySig, 'WmTo2J_ZTo2L_aQGC'),
-#    'weight':  XSWeight+'*'+SFweight+'*'+GenLepMatch+'*'+METFilter_MC ,
-#    'FilesPerJob': 1
-#}
 
 
 ###########################################
-#############   SIGNALS  ##################
+#############  SM  SIGNALS  ##################
 ###########################################
 
 #######VBS EW: only ZV processes
@@ -150,8 +131,8 @@ samples['VBS_ZV'] = {
     'weight':  mcCommonWeight,
     'FilesPerJob': 7
 }
-addSampleWeight(samples,'VBS_ZV','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'VBS_ZV','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+addSampleWeight(samples,'VBS_ZV','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
+addSampleWeight(samples,'VBS_ZV','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
 
 ###########################################
 #############  BACKGROUNDS  ###############

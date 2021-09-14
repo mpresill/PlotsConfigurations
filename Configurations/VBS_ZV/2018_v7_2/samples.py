@@ -129,39 +129,30 @@ addSampleWeight(samples,'VBS_ZV_aQGC','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdg
 ############### SM Signals #################
 #######VBS EW: only ZV processes
 samples['VBS_ZV'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L') 
+    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_dipoleRecoil') 
+             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil') 
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil'),
     'weight':  mcCommonWeight,
     'FilesPerJob': 7
 }
-addSampleWeight(samples,'VBS_ZV','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'VBS_ZV','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+addSampleWeight(samples,'VBS_ZV','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
+addSampleWeight(samples,'VBS_ZV','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
 
 
 
-################### SM Backgrounds ################
-
-#samples['tZq'] = {
-#    'name':  nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-#             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
-#             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
-#             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
-#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
-#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
-#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-#    'weight':  mcCommonWeight + '*(Sum$(abs(GenPart_pdgId)==6)>=1)',
-#    'FilesPerJob': 7
-#}
 
 
+
+###########################################
+#############  BACKGROUNDS  ###############
+###########################################
+#####NEW BACKGROUNDS (24/03)
 
 #changed tZq to specific bkg
 samples['tZq'] = {
@@ -169,28 +160,6 @@ samples['tZq'] = {
 	'weight' : mcCommonWeight,
 	'FilesPerJob': 1,
 }
-
-
-
-"""
-#samples['VBS_ZV_old'] = {
-#    'name':   nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J')
-#             +nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L')
-#             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
-#             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
-#             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
-#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
-#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
-#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-#             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L'),
-#    'weight':  mcCommonWeight,
-#    'FilesPerJob': 7
-#}
-"""
-###########################################
-#############  BACKGROUNDS  ###############
-###########################################
-#####NEW BACKGROUNDS (24/03)
 
 samples['WGJJ']={
 	'name': nanoGetSampleFiles(mcDirectory, 'WGJJ'),
@@ -238,7 +207,7 @@ if useDYtt:
 
 else:
     files = nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-50_HT-70to100') + \
-	nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-50_HT-100to200') + \
+	    nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-50_HT-100to200') + \
         nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-50_HT-200to400') + \
         nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-50_HT-400to600') + \
         nanoGetSampleFiles(mcDirectory, 'DYJetsToLL_M-50_HT-600to800') + \
