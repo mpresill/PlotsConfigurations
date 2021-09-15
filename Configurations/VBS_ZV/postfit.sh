@@ -63,10 +63,10 @@ mkPlot.py --pycfg=configuration_combined.py --inputFile=output_postfit.root --on
 mkdir /eos/user/m/mpresill/www/VBS/postfit/PlotsVBS_ZV_${date}_${VAR1}
 mkdir -p /eos/user/m/mpresill/www/VBS/prefit/PlotsVBS_ZV_${date}_${VAR1}
 
-###postfit
+###uncomment for postfit
 cp /eos/user/m/mpresill/www/VBS/2018_v7/index.php /eos/user/m/mpresill/www/VBS/postfit/PlotsVBS_ZV_${date}_${VAR1}/.
 cp -r plot_combined/*png /eos/user/m/mpresill/www/VBS/postfit/PlotsVBS_ZV_${date}_${VAR1}/.
-###prefit
+###uncomment for prefit
 #cp /eos/user/m/mpresill/www/VBS/2018_v7/index.php /eos/user/m/mpresill/www/VBS/prefit/PlotsVBS_ZV_${date}_${VAR1}/.
 #cp -r plot_combined/*png /eos/user/m/mpresill/www/VBS/prefit/PlotsVBS_ZV_${date}_${VAR1}/.
 
