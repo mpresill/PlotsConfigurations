@@ -1,7 +1,7 @@
 # example of configuration file
 treeName= 'Events'
 
-date='_16Giu2018_SM'
+date='_28Aug_BSM_EWKQCD'
 #date='_20Feb2021_2018_btag'
 
 tag = 'VBS_ZV'+date
@@ -38,13 +38,12 @@ outputDirPlots = '/eos/user/r/ribrusa/www/2018_v7/PlotsVBS_ZV'+date
 
 
 # used by mkDatacards to define output directory for datacards: common vbs-italia github folder : /afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/2017_v7/
-outputDirDatacard = '/afs/cern.ch/user/r/ribrusa/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/'+date
+outputDirDatacard = '/afs/cern.ch/user/r/ribrusa/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/datacards'+date
 
 
 # structure file for datacard
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
-#nuisancesFile = 'nuisances.py'
-nuisancesFile ='nuisances_StatOnly.py'
+nuisancesFile = 'nuisances_corr.py'
 

@@ -17,7 +17,9 @@ def nanoGetSampleFiles(inputDir, Sample):
 
 try:
     mc = [skey for skey in samples if skey != 'DATA' and not skey.startswith('Fake')]
+    mc_private = [skey for skey in samples if 'quad_' in skey] + ['VBS_VV_QCD', 'sm']
 except NameError:
+    mc_private = []
     mc = []
     cuts = {}
     nuisances = {}
@@ -150,23 +152,11 @@ nuisances['electronpt'] = {
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
-    'folderUp': makeMCDirectory('ElepTup_suffix'),
-    'folderDown': makeMCDirectory('ElepTdo_suffix'),
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['WJets']),
+    'folderUp': mcDirectory_private+'__ElepTup_suffix',
+    'folderDown': mcDirectory_private+'__ElepTdo_suffix',
     #'AsLnN': '1'
 }
-#this is for the signals since they are in a different eos folder
-nuisances['electronpt_VBS_ZV'] = {
-    'name': 'CMS_scale_e_2018',
-    'kind': 'suffix',
-    'type': 'shape',
-    'mapUp': 'ElepTup',
-    'mapDown': 'ElepTdo',
-    'samples': {"VBS_ZV":[1.,1.]},
-    'folderUp': DirectorySMPeos+'__ElepTup_suffix',
-    'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
-    #'AsLnN': '1'
-}#add QCD_VV when ready
 
 
 ##### Muon Efficiency and energy scale  
@@ -183,25 +173,12 @@ nuisances['muonpt'] = {
     'type': 'shape',
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
-    'folderUp': makeMCDirectory('MupTup_suffix'),
-    'folderDown': makeMCDirectory('MupTdo_suffix'),
+    #'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['WJets']),
+    'folderUp': mcDirectory_private+'__MupTup_suffix',
+    'folderDown': mcDirectory_private+'__MupTdo_suffix',
     #'AsLnN': '1'
 }
-#this is for the signals
-nuisances['muonpt_VBS_ZV'] = {
-    'name': 'CMS_scale_m_2018',
-    'kind': 'suffix',
-    'type': 'shape',
-    'mapUp': 'MupTup',
-    'mapDown': 'MupTdo',
-    'samples': {"VBS_ZV":[1.,1.]},
-    'folderUp': DirectorySMPeos+'__MupTup_suffix',
-    'folderDown': DirectorySMPeos+'__MupTdo_suffix',
-    #'AsLnN': '1'
-}#add QCD_VV when ready
-
-
 
 ##### Jet energy scale and reso for AK4
 ##### Jet energy scale
@@ -237,46 +214,23 @@ for js in jes_systs:
       'type': 'shape',
       'mapUp': js+'up',
       'mapDown': js+'do',
-      'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
+      'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['WJets']+mc_private),
       'folderUp': folderup,
       'folderDown': folderdo,
 #      'AsLnN': '1'
   }
 
 #this is for signals
-for js_VBS_ZV in jes_systs:
-  if 'Absolute' in js_VBS_ZV: 
-    folderup_signal = DirectorySMPeos+'__JESAbsoluteup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESAbsolutedo_suffix'
-  elif 'BBEC1' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESBBEC1up_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESBBEC1do_suffix'
-  elif 'EC2' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESEC2up_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESEC2do_suffix'
-  elif 'HF' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESHFup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESHFdo_suffix'
-  elif 'Relative' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESRelativeup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESRelativedo_suffix'
-  elif 'FlavorQCD' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESFlavorQCDup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESFlavorQCDdo_suffix'
-
-  nuisances[js_VBS_ZV] = {
-      'name': 'CMS_scale_'+js_VBS_ZV,
-      'kind': 'suffix',
-      'type': 'shape',
-      'mapUp': js_VBS_ZV+'up',
-      'mapDown': js_VBS_ZV+'do',
-      'samples': {"VBS_ZV":[1.,1.]},
-      'folderUp': folderup_signal,
-      'folderDown': folderdo_signal,
-#      'AsLnN': '1'
-  }#add QCD_VV when ready
-
-
+nuisances['JESTotal_VBS_ZV'] = {
+    'name': 'CMS_scale_JESTotal_VBS_ZV',
+    'kind': 'suffix',
+    'type': 'shape',
+    'mapUp': 'JESup',
+    'mapDown': 'JESdo',
+    'samples': dict((skey, ['1', '1']) for skey in mc_private),
+    'folderUp': mcDirectory_private+'__JESTotalup_suffix',
+    'folderDown': mcDirectory_private+'__JESTotaldo_suffix',
+}
 
 ##### Jet energy resolution
 nuisances['JER'] = {
@@ -285,25 +239,11 @@ nuisances['JER'] = {
     'type': 'shape',
     'mapUp': 'JERup',
     'mapDown': 'JERdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['VBS_ZV','VBS_VV_QCD']),
-    'folderUp': makeMCDirectory('JERup_suffix'),
-    'folderDown': makeMCDirectory('JERdo_suffix'),
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ['WJets']),
+    'folderUp': mcDirectory_private+'__JERup_suffix',
+    'folderDown': mcDirectory_private+'__JERdo_suffix',
 #    'AsLnN': '1'
 }
-
-#this is for the signal
-nuisances['JER_VBS_ZV'] = {
-    'name': 'CMS_res_j_2018',
-    'kind': 'suffix',
-    'type': 'shape',
-    'mapUp': 'JERup',
-    'mapDown': 'JERdo',
-    'samples': {"VBS_ZV":[1.,1.]},
-    'folderUp': DirectorySMPeos+'__JERup_suffix',
-    'folderDown': DirectorySMPeos+'__JERdo_suffix',
-#    'AsLnN': '1'
-}#add QCD_VV when ready
-
 
 # ##### Pileup
 pu_syst = '(puWeightUp/puWeight)', '(puWeightDown/puWeight)'
@@ -316,14 +256,11 @@ nuisances['PU'] = {
 #    'AsLnN': '1',
 }
 
-
-
-
-
 #####################
 ##### PS, QCD scale, UE 
 #####################
-samples_PS = ['VBS_ZV','top','DY','VV','VVV','Vg','VgS','VBF-V','ggWW']  #add VBS_QCD_VV when ready on SMP eos
+#samples_PS = ['VBS_ZV','top','DY','VV','VVV','Vg','VgS','VBF-V','ggWW']  #add VBS_QCD_VV when ready on SMP eos
+samples_PS = ['top','DY','VV','VVV','Vg','VgS','VBF-V','ggWW']
 
 for sample in samples_PS:
     nuisances['PS_ISR_'+sample]  = {
@@ -387,9 +324,10 @@ nuisances['PS_FSR']  = {
 #            'type'  : 'shape',
 #            'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
 #        }
-for sample in mc :
+for sample in mc:
     if sample == "ggWW": continue   #this sample apparently doesn't have LHE weights...
-    if sample == "VBS_VV_QCD": continue   ##once SMP eos VBS_VV_QCD are ready comment out 
+    if sample in mc_private: continue
+    #if sample == "VBS_VV_QCD": continue   ##once SMP eos VBS_VV_QCD are ready comment out 
     nuisances['QCD_scale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
             'kind'  : 'weight',
@@ -451,21 +389,18 @@ nuisances['VZ'] = {
 }
 
 
-####PDF syst, needs to be updated for signals
 nuisances['pdf']  = {
                'name'  : 'pdf',
                'type'  : 'lnN',
-               'samples'  : {
+               'samples'  : dict({
                    'ggWW'    : '1.05',
                    'WW'      : '1.04',
                    'Vg'      : '1.04',
                    'VZ'      : '1.04',
                    'VgS'     : '1.04',
                    'DY'      : '1.002', 
-                   },
+                   }.items() + dict((skey, '1.03') for skey in mc_private).items()),
               }
-
-
 
 
 ## rate parameters
@@ -477,7 +412,7 @@ nuisances['Topnorm_boosted']  = {
                'type'  : 'rateParam',
                'cuts'  : [
                    'Boosted_topcr',
-                   'Boosted_SR_Ram',
+                   #'Boosted_SR_Ram',
                    'Boosted_SR_tight',
                    ]
               }
@@ -490,7 +425,7 @@ nuisances['Topnorm_resolved']  = {
                'type'  : 'rateParam',
                'cuts'  : [
                    'Resolved_topcr',
-                   'Resolved_SR_Ram',
+                   #'Resolved_SR_Ram',
                    'Resolved_SR_tight',
                    ]
               }              
@@ -502,7 +437,7 @@ nuisances['DYnorm_boosted']  = {
                    },
                'type'  : 'rateParam',
                'cuts'  : [
-                   'Boosted_SR_Ram',
+                   #'Boosted_SR_Ram',
                    'Boosted_SR_tight',
                    'Boosted_DYcr',
                    ]
@@ -515,7 +450,7 @@ nuisances['DYnorm_resolved']  = {
                    },
                'type'  : 'rateParam',
                'cuts'  : [
-                   'Resolved_SR_Ram',
+                   #'Resolved_SR_Ram',
                    'Resolved_SR_tight',
                    'Resolved_DYcr',
                    ]

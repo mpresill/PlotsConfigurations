@@ -49,12 +49,12 @@ Colors
 '''
 #
  
-"""
+
 groupPlot['vbfV+VV+VVV']  = {  
                   'nameHR' : 'vbfV+VV+VVV',
                   'isSignal' : 0,
                   'color': palette["MediumBlue2"],  
-                  'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
+                  'samples'  : ['VBF-V','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
                   'fill': 1001
               }
 
@@ -92,36 +92,28 @@ groupPlot['WJets']  = {
                   'fill': 1001
 
               }
-"""
-groupPlot['VBS-official']  = {  
-                 'nameHR' : 'VBS-official',
+
+groupPlot['ZV+2j (EW VBS)']  = {  
+                 'nameHR' : 'ZV+2j (EW VBS)',
                  'isSignal' : 1,
                  'color': colors["kRed"]+1,   
-                 'samples'  : ['VBS_ZV'],
+                 'samples'  : ['sm'],
                  'fill': 1001
               }
 
-groupPlot['VBS-private']  = {  
-                 'nameHR' : 'VBS-private',
-                 'isSignal' : 2,
-                 'color': colors["kBlue"],   
-                 'samples'  : ['EWK_private'],
-                 'fill': 1001
-              }
 
-"""
 groupPlot['Fake']  = {
                   'nameHR' : 'nonprompt',
                   'isSignal' : 0,
                   'color': 921,    # kGray + 1
                   'samples'  : ['Fake']
 }
-"""
+
 #plot = {}
 
 # keys here must match keys in samples.py    
 # 
-"""
+
 plot['VVV']  = { 
                   'color': colors["kAzure"] -3,    
                   'isSignal' : 0,
@@ -256,17 +248,10 @@ plot['WJets']  = {
                 #       "res_topcr_mjjincl_dnnhigh_ele":1.413,
                 #   }
               }
-"""
-plot['VBS_ZV']  = {
+
+plot['sm']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
-                  'isData'   : 0,
-                  'scale'    : 1.   ,
-              }
-
-plot['EWK_private']  = {
-                  'color': colors["kBlue"], 
-                  'isSignal' : 2,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
@@ -279,7 +264,7 @@ plot['DATA']  = {
                  'color': 1 ,  
                  'isSignal' : 0,
                  'isData'   : 1 ,
-                 'isBlind'  : 1
+                 'isBlind'  : 0
              }
 
 

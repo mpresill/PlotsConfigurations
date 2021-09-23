@@ -54,7 +54,7 @@ groupPlot['vbfV+VV+VVV']  = {
                   'nameHR' : 'vbfV+VV+VVV',
                   'isSignal' : 0,
                   'color': palette["MediumBlue2"],  
-                  'samples'  : ['VBF-F','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
+                  'samples'  : ['VBF-V','VVV', 'VZ','WW','ggWW'], #,'VBS_VV_QCD'],
                   'fill': 1001
               }
 
@@ -93,19 +93,11 @@ groupPlot['WJets']  = {
 
               }
 
-groupPlot['VBS-official']  = {  
+groupPlot['VBS']  = {  
                  'nameHR' : 'VBS-official',
                  'isSignal' : 1,
                  'color': colors["kRed"]+1,   
-                 'samples'  : ['VBS_ZV'],
-                 'fill': 1001
-              }
-
-groupPlot['VBS-private']  = {  
-                 'nameHR' : 'VBS-private',
-                 'isSignal' : 2,
-                 'color': colors["kBlue"],   
-                 'samples'  : ['EWK_private'],
+                 'samples'  : ['sm'],
                  'fill': 1001
               }
 
@@ -155,14 +147,14 @@ plot['ggWW']  = {
               }
 
 
-
+"""
 plot['VBS_VV_QCD']  = {
                   'color': colors['kGreen']+3,
                   'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
-
+"""
 
 
 plot['DY']  = {  
@@ -257,19 +249,13 @@ plot['WJets']  = {
                 #   }
               }
 
-plot['VBS_ZV']  = {
+plot['sm']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
                   'isData'   : 0,
                   'scale'    : 1.   ,
               }
 
-plot['EWK_private']  = {
-                  'color': colors["kBlue"], 
-                  'isSignal' : 2,
-                  'isData'   : 0,
-                  'scale'    : 1.   ,
-              }
 
 
 # # data

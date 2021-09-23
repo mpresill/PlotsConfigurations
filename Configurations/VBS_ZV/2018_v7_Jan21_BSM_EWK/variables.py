@@ -33,30 +33,30 @@ variables['pt_lep']  = {   'name': 'Lepton_pt',
 """
 
 variables['pt1']  = {   'name': 'Alt$(Lepton_pt[0],-9999.)',
-                        'range' : (20,0.,200),
+                        'range' : (20,25.,200),
                         'xaxis' : 'p_{T} 1st lep [GeV]',
                         'fold' :3
                         }
 variables['pt2']  = {   'name': 'Alt$(Lepton_pt[1],-9999.)',
-                        'range' : (20,0.,200),
+                        'range' : (20,20.,200),
                         'xaxis' : 'p_{T} 2nd lep [GeV]',
                         'fold' :3
                         }
 
 variables['eta1']  = {   'name': 'Alt$(Lepton_eta[0],-9999.)',
-                        'range' : (30,-3,3),
+                        'range' : (30,-2.5,2.5),
                         'xaxis' : '#eta 1st lep',
                         'fold' :3
                         }
 
 variables['eta2']  = {   'name': 'Alt$(Lepton_eta[1],-9999.)',
-                        'range' : (30,-3,3),
+                        'range' : (30,-2.5,2.5),
                         'xaxis' : '#eta 2nd lep',
                         'fold' : 3
                         }
 
 variables['mll-peak']  = {   'name': 'mll',            #   variable name    
-                        'range' : (30,60,120),    #   variable range
+                        'range' : (30,76.,106.),    #   variable range
                         'xaxis' : 'm_{ll} [GeV]',  #   x axis name
                         'fold' :3
                         }
@@ -85,12 +85,12 @@ variables['VBS_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[vbs_jet_1],-9999.)',
                         }
 
 variables['VBS_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_0],-9999.)',            #   variable name    
-                        'range' : (30,0,400),    #   variable range
+                        'range' : (30,80,400),    #   variable range
                         'xaxis' : 'p_{T} 1st VBS jet [GeV]',  #   x axis name
                         'fold' : 3
                         }
 variables['VBS_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_1],-9999.)',            #   variable name    
-                        'range' : (30,0,200),    #   variable range
+                        'range' : (30,30,200),    #   variable range
                         'xaxis' : 'p_{T} 2nd VBS jet [GeV]',  #   x axis name
                         'fold' : 3
                         }
@@ -110,18 +110,18 @@ variables['V_jet_eta2'] = {  'name': 'Alt$(CleanJet_eta[v_jet_1],-9999.)',
                         }
 
 variables['V_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[v_jet_0],-9999.)',            #   variable name    
-                        'range' : (50,0,200),    #   variable range
+                        'range' : (50,30,200),    #   variable range
                         'xaxis' : 'p_{T} 1st V jet [GeV]',  #   x axis name
                         'fold' : 3
                         }
 variables['V_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[v_jet_1],-9999.)',            #   variable name    
-                        'range' : (30,0,100),    #   variable range
+                        'range' : (30,30,100),    #   variable range
                         'xaxis' : 'p_{T} 2nd V jet [GeV]',  #   x axis name
                         'fold' : 3
                         }
 
 variables['Vjet_mass'] = { 'name': 'Alt$(Vjet_mass,-9999.)',            #   variable name    
-                        'range' : (50,40,160),    #   variable range
+                        'range' : (30,65,105),    #   variable range
                         'xaxis' : 'V-jet mass [GeV]',  #   x axis name
                         'fold' : 3
                         }
@@ -140,15 +140,15 @@ variables['nFatJet']  = {
 
 variables['FatJet_pt']  = {
                         'name': 'CleanFatJet_pt',     
-                        'range' : (30,150,800),   
-                        'xaxis' : 'FatJet p_{T}',
-                        'fold' : 0   # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
+                        'range' : (30,200,800),   
+                        'xaxis' : 'FatJet p_{T} [GeV]',
+                        'fold' : 3   # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
                         }
 
 variables['FatJet_eta'] = {'name': 'CleanFatJet_eta',
-                           'range' : (25,-2.7,2.7),
+                           'range' : (25,-2.5,2.5),
                            'xaxis' : '\eta FatJet',
-                           'fold'  : 0
+                           'fold'  : 3
                            }
                                                                                                                         
 variables['FatJet_tau21'] = {   'name': 'CleanFatJet_tau21',
@@ -161,13 +161,13 @@ variables['FatJet_tau21'] = {   'name': 'CleanFatJet_tau21',
 # new variables
 
 variables['mjj_max']  = {   'name': 'mjj_max',            #   variable name    
-                        'range' : (20,200,4000),    #   variable range
+                        'range' : (20,350,4000),    #   variable range
                         'xaxis' : 'm_{jj} [GeV]',  #   x axis name
                         'fold' :3
                         }
 
 variables['detajj_mjjmax']  = {   'name': 'detajj_mjjmax',            #   variable name    
-                           'range' : (12,2.0,8.0),    #   variable range
+                           'range' : (12,1.0,8.0),    #   variable range
                            'xaxis' : '#Delta #eta jj',  #   x axis name
                            'fold' :3
                            }
@@ -180,7 +180,7 @@ variables['dphijj_mjjmax']  = {   'name': 'dphijj_mjjmax',            #   variab
 
 
 variables['mjj_binned']  = {   'name': 'mjj_max',            #   variable name    
-                        'range' : ([200.,500., 750., 1000., 1250., 1500., 1750., 2000., 2500., 3000., 3500., 4000.],),    #   variable range
+                        'range' : ([350.,500., 750., 1000., 1250., 1500., 1750., 2000., 2500., 3000., 3500., 4000.],),    #   variable range
                         'xaxis' : 'm_{jj} [GeV]',  #   x axis name
                         'fold' :3
                         }

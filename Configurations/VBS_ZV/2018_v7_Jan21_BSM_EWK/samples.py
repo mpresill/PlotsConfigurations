@@ -101,6 +101,7 @@ DataTrig = {
 
 mcCommonWeightNoMatch = 'XSWeight*SFweight*METFilter_MC'
 mcCommonWeight = 'XSWeight*SFweight*PromptGenLepMatch2l*METFilter_MC'
+quadReweight = '0.5*(LHEReweightingWeight[1]+LHEReweightingWeight[2]-2*LHEReweightingWeight[0])'
 
 ###########################################
 #############   SIGNALS  ##################
@@ -108,28 +109,253 @@ mcCommonWeight = 'XSWeight*SFweight*PromptGenLepMatch2l*METFilter_MC'
 
 #######VBS EW: only ZV processes
 
-samples['VBS_ZV'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L') 
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight':  mcCommonWeight,
-    'FilesPerJob': 7
+### SM EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_SM') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_SM') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_SM')
+
+samples['sm'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 20,
 }
 
-### private signal
+### EFTNeg cHDD EWK
 
-samples['EWK_private'] = {
-    'name':   nanoGetSampleFiles(mcDirectory_private, 'ZZ_SM') 
-             +nanoGetSampleFiles(mcDirectory_private, 'ZWm_SM') 
-             +nanoGetSampleFiles(mcDirectory_private, 'ZWp_SM'),
-    'weight':  mcCommonWeight,
-    'FilesPerJob': 7
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cHDD_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cHDD_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cHDD_SM_LI_QU')
+
+samples['sm_lin_quad_cHDD'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cHDD'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cHWB EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cHWB_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cHWB_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cHWB_SM_LI_QU')
+
+samples['sm_lin_quad_cHWB'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cHWB'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cll1 EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cll1_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cll1_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cll1_SM_LI_QU')
+
+samples['sm_lin_quad_cll1'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cll1'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cHl1 EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cHl1_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cHl1_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cHl1_SM_LI_QU')
+
+samples['sm_lin_quad_cHl1'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cHl1'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cHl3 EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cHl3_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cHl3_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cHl3_SM_LI_QU')
+
+samples['sm_lin_quad_cHl3'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cHl3'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cHq1 EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cHq1_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cHq1_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cHq1_SM_LI_QU')
+
+samples['sm_lin_quad_cHq1'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cHq1'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cHq3 EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cHq3_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cHq3_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cHq3_SM_LI_QU')
+
+samples['sm_lin_quad_cHq3'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cHq3'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cW EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cW_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cW_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cW_SM_LI_QU')
+
+samples['sm_lin_quad_cW'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cW'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cHW EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cHW_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cHW_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cHW_SM_LI_QU')
+
+samples['sm_lin_quad_cHW'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cHW'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cHbox EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cHbox_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cHbox_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cHbox_SM_LI_QU')
+
+samples['sm_lin_quad_cHbox'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cHbox'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cqq1 EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cqq1_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cqq1_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cqq1_SM_LI_QU')
+
+samples['sm_lin_quad_cqq1'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cqq1'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cqq11 EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cqq11_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cqq11_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cqq11_SM_LI_QU')
+
+samples['sm_lin_quad_cqq11'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cqq11'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+
+### EFTNeg cqq31 EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cqq31_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cqq31_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cqq31_SM_LI_QU')
+
+samples['sm_lin_quad_cqq31'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cqq31'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
+}
+### EFTNeg cqq3 EWK
+
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWm_cqq3_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWp_cqq3_SM_LI_QU') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZ_cqq3_SM_LI_QU')
+
+samples['sm_lin_quad_cqq3'] = {
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 10,
+}
+samples['quad_cqq3'] = {
+   'name': files,
+   'weight': mcCommonWeight + '*' + quadReweight,
+   'FilesPerJob': 10,
 }
 
 ###########################################
@@ -138,19 +364,29 @@ samples['EWK_private'] = {
 
 ########## irreducible VBS QCD 
 
+files = nanoGetSampleFiles(mcDirectory_private, 'ZWmQCD_SM') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZWpQCD_SM') + \
+        nanoGetSampleFiles(mcDirectory_private, 'ZZQCD_SM')
+
 samples['VBS_VV_QCD'] = {
-    'name':   nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J_QCD') 
-             +nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J_QCD')
-             +nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J_QCD')              
-             +nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L_QCD'),
-    'weight':  mcCommonWeight,
-    'FilesPerJob': 7
+   'name': files,
+   'weight': mcCommonWeight,
+   'FilesPerJob': 20
 }
+
+#samples['VBS_VV_QCD'] = {
+#    'name':   nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J_QCD') 
+#             +nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J_QCD')
+#             +nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J_QCD')
+#             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L_QCD')
+#             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu_QCD')
+#             +nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J_QCD')
+#             +nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J_QCD')
+#             +nanoGetSampleFiles(mcDirectory, 'ZTo2L_ZTo2J_QCD')              
+#             +nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L_QCD'),
+#    'weight':  mcCommonWeight,
+#    'FilesPerJob': 7
+#}
 
 ########## DY #### consider using HT binned after Davide's studies.
 #Beware! we have to correct the cross section here
