@@ -378,7 +378,7 @@ aliases['DY_LO_pTllrw'] = {
 # PU jet Id SF
 
 puidSFSource = '{}/Configurations/patches/PUID_81XTraining_EffSFandUncties.root'.format(configurations)
-"""
+
 aliases['PUJetIdSF'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
@@ -402,30 +402,6 @@ aliases['Jet_PUIDSF_up'] = {
 
 aliases['Jet_PUIDSF_down'] = {
   'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2)*TMath::Log(Jet_PUIDSF_loose_down)))',
-  'samples': mc
-}
-"""
-
-aliases['PUJetIdSF'] = {
-  'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2 && ( (Jet_electronIdx1 != Lepton_electronIdx[0]) || Jet_electronIdx1 < 0 )  \
-                                          && ( (Jet_muonIdx1 != Lepton_muonIdx[0] ) || Jet_muonIdx1 < 0 ) \
-                            )*TMath::Log(Jet_PUIDSF_loose)))',
-  'samples': mc
-}
-
-
-aliases['PUJetIdSF_up'] = {
-  'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2 && ( (Jet_electronIdx1 != Lepton_electronIdx[0]) || Jet_electronIdx1 < 0 )  \
-                                          && ( (Jet_muonIdx1 != Lepton_muonIdx[0] ) || Jet_muonIdx1 < 0 ) \
-                            )*TMath::Log(Jet_PUIDSF_loose_up)))',
-  'samples': mc
-}
-
-
-aliases['PUJetIdSF_down'] = {
-  'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2 && ( (Jet_electronIdx1 != Lepton_electronIdx[0]) || Jet_electronIdx1 < 0 )  \
-                                          && ( (Jet_muonIdx1 != Lepton_muonIdx[0] ) || Jet_muonIdx1 < 0 ) \
-                            )*TMath::Log(Jet_PUIDSF_loose_down)))',
   'samples': mc
 }
 
@@ -461,8 +437,8 @@ aliases['SFweightMuDown'] = {
 }
 
 
-models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_newSR'
-models_path_full = '/eos/home-a/ahakimi/www/ZV_analysis/Models/full_SR'
+models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_oldSR'
+models_path_full = '/eos/home-a/ahakimi/www/ZV_analysis/Models/full_oldSR'
 aliases['DNNoutput_full'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
@@ -475,7 +451,7 @@ aliases['DNNoutput_full'] = {
 
 
 mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
-models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_newSR'
+models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_SR'
 
 aliases['DNNoutput_pruned'] = {
     'linesToAdd': [

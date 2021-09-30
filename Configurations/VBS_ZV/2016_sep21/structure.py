@@ -23,19 +23,21 @@ for bin in range(1,7):
 #     DY_bins.append("DY_B_bin"+str(bin))
 
 for DYbin in DY_bins:
-	if 'Boosted' in DYbin:
-		structure[DYbin] = {
-			'isSignal':0,
-			'isData' : 0,
-			'removeFromCuts': phase_spaces_res
-		}
-    	elif 'Resolved' in DYbin:
-         	structure[DYbin] = {
+        if 'Boosted' in DYbin:
+                structure[DYbin] = {
+                        'isSignal':0,
+                        'isData' : 0,
+                        'removeFromCuts': phase_spaces_res
+                }
+        elif 'Resolved' in DYbin:
+                structure[DYbin] = {
                         'isSignal':0,
                         'isData' : 0,
                         'removeFromCuts': phase_spaces_boost
                 }
-	
+
+
+
 
 
 

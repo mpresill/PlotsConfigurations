@@ -3,21 +3,21 @@ treeName= 'Events'
 
 #date='_Nov252018_ptll'
 #date='_18Jan2021_18_AllyearsSR'
-date='_23Sep2021_2018'
+date='_21Sep2021_2018'
 tag = 'VBS_ZV'+date
 
 # used by mkShape to define output directory for root files
 outputDir = 'rootFile'+date
 
 # file with TTree aliases
-aliasesFile = 'aliases.py'
+aliasesFile = 'aliases_oldSR.py'
 
 # file with list of variables
 variablesFile = 'variables.py'
 #variablesFile = 'variables_test.py'
 
 # file with list of cuts
-cutsFile = 'cuts.py'
+cutsFile = 'cuts_oldSR.py'
 
 # file with list of samples
 #samplesFile = 'samples_test.py'

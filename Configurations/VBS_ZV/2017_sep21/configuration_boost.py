@@ -2,8 +2,8 @@
 treeName= 'Events'
 
 #date='_Nov252018_ptll'
-#date='_18Jan2021_18_AllyearsSR'
-date='_23Sep2021_2018'
+date='_14Sep2021_2017'
+
 tag = 'VBS_ZV'+date
 
 # used by mkShape to define output directory for root files
@@ -17,7 +17,7 @@ variablesFile = 'variables.py'
 #variablesFile = 'variables_test.py'
 
 # file with list of cuts
-cutsFile = 'cuts.py'
+cutsFile = 'cuts_boost.py'
 
 # file with list of samples
 #samplesFile = 'samples_test.py'
@@ -26,7 +26,7 @@ samplesFile = 'samples.py'
 
 # file with list of samples
 #plotFile = 'plot_sig.py'
-plotFile = 'plot_res.py'
+plotFile = 'plot_boost.py'
 
 
 # luminosity to normalize to (in 1/fb)
@@ -38,7 +38,7 @@ outputDirPlots = '/eos/home-a/ahakimi/www/ZV_analysis/Plots'+date
 
 
 # used by mkDatacards to define output directory for datacards: common vbs-italia github folder : /afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/2017_v7/
-outputDirDatacard = '/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/2018_sep21/Datacards'+date
+outputDirDatacard = '/afs/cern.ch/work/a/ahakimi/latinos_NN/PlotsConfigurations/Configurations/VBS_ZV/2017_sep21/Datacards'+date
 
 
 # structure file for datacard

@@ -115,7 +115,7 @@ groupPlot['vbfV+VV+VVV']  = {
 
 
 
-"""
+
 for i,DYbin in enumerate(DY_bins_boost):
         groupPlot[DYbin] = {
                         'nameHR': DYbin,
@@ -138,7 +138,7 @@ for i,DYbin in enumerate(DY_bins_res):
                 
 }
 
-
+"""
 
 groupPlot['VBS']  = {
                  'nameHR' : 'VBS',
@@ -180,7 +180,7 @@ plot['DY']  = {
                 #'scale'    : 0.6
             }
 """
-"""
+
 for DYbin in DY_bins_boost:
 	plot[DYbin] =  {   
                     'color': colors['kAzure']-1,
@@ -198,6 +198,7 @@ for DYbin in DY_bins_res:
                     'scale'    : 1.0,
                     'removeFromCuts' : phase_spaces_boost, 
                     }
+"""
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
                   'isSignal' : 0,
@@ -287,5 +288,3 @@ plot['DATA']  = {
 legend['lumi'] = 'L = 59.74/fb'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'
-legend['lumi'] = 'L = 59.74/fb'  
-

@@ -115,7 +115,7 @@ groupPlot['vbfV+VV+VVV']  = {
 
 
 
-"""
+
 for i,DYbin in enumerate(DY_bins_boost):
         groupPlot[DYbin] = {
                         'nameHR': DYbin,
@@ -126,7 +126,6 @@ for i,DYbin in enumerate(DY_bins_boost):
                         'removeFromCuts': phase_spaces_res
                 
 }
-"""
 for i,DYbin in enumerate(DY_bins_res):
         groupPlot[DYbin] = {
                         'nameHR': DYbin,
@@ -142,7 +141,7 @@ for i,DYbin in enumerate(DY_bins_res):
 
 groupPlot['VBS']  = {
                  'nameHR' : 'VBS',
-                 'isSignal' : 1,
+                 'isSignal' : 0,
                  'color': colors["kRed"]+1,
                  'samples'  : ['VBS_ZV'],
                  'fill': 1001
@@ -180,7 +179,7 @@ plot['DY']  = {
                 #'scale'    : 0.6
             }
 """
-"""
+
 for DYbin in DY_bins_boost:
 	plot[DYbin] =  {   
                     'color': colors['kAzure']-1,
@@ -189,7 +188,7 @@ for DYbin in DY_bins_boost:
                     'scale'    : 1.0,
                     'removeFromCuts' : phase_spaces_res, 
                     }
-"""
+
 for DYbin in DY_bins_res:
 	plot[DYbin] =  {   
                     'color': colors['kAzure']-1,
@@ -236,10 +235,18 @@ plot['WJets']  = {
 
 plot['VBS_ZV']  = {
                   'color': colors["kCyan"]+1, 
-                  'isSignal' : 1,
+                  'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.   
               }
+
+
+plot['VBS_ZV_aQGC']  = {
+                    'color': colors["kCyan"]+1, 
+                    'isSignal' : 1,
+                    'isData'   : 0,
+                    'scale'    : 1.   
+                }
 
 
 plot['tZq']  = {
@@ -274,7 +281,7 @@ plot['DATA']  = {
 #		#	"Preselection" : 0,
 			"Boosted_SR_bVeto" : 0,
 			"Boosted_SR_bReqTight" :0,
-			"Resolved_SR_bVeto" : 0,
+#			"Resolved_SR_bVeto" : 0,
 #			"Resolved_SR_bReqTight" :0 
 		}	
              }
@@ -284,8 +291,6 @@ plot['DATA']  = {
 
 # additional options
 
-legend['lumi'] = 'L = 59.74/fb'
+legend['lumi'] = 'L = 41.53/fb'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'
-legend['lumi'] = 'L = 59.74/fb'  
-

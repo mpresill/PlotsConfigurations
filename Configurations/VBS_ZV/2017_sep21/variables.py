@@ -58,19 +58,19 @@ variables['Vpt'] = { 'name' : 'Alt$(Vpt, -999)',
 
 
 #fitting with Z+vbs jet2 pt binning
-#variables['fit_Z_vbs1_bin_Resolved'] ={  'name' : 'fit_Z_vbs1_bin_Resolved',
-#                            'range' : (6,1,7), #(n.bins, 1, n.bins+1)
-#                            'xaxis' : 'fitting variable Resolved Z pt, VBS jet pt2', 
-#                            'fold' : 3,
-#}  
+variables['DYfit_Z_bin_Resolved'] ={  'name' : 'fit_Z_bin_Resolved',
+                            'range' : (6,1,7), #(n.bins, 1, n.bins+1)
+                            'xaxis' : 'fitting variable Resolved Z pt, VBS jet pt2', 
+                            'fold' : 3,
+}  
 
 
 #fitting with Z pt binning
-variables['DYfit_Z_bin_Resolved'] ={  'name' : 'fit_Z_bin_Resolved',
-                            'range' : (6,1,7), #(n.bins, 1, n.bins+1)
-                            'xaxis' : 'fitting variable Resolved Z pt', 
-                            'fold' : 3,
-}  
+#variables['DYfit_Z_bin_Resolved'] ={  'name' : 'fit_Z_bin_Resolved',
+#                            'range' : (6,1,7), #(n.bins, 1, n.bins+1)
+#                            'xaxis' : 'fitting variable Resolved Z pt', 
+#                            'fold' : 3,
+#}  
 variables['DYfit_Z_bin_Boosted'] ={  'name' : 'fit_Z_bin_Boosted',
                             'range' : (6,1,7), #(n.bins, 1, n.bins+1)
                             'xaxis' : 'fitting variable Boosted Z pt', 
@@ -106,7 +106,7 @@ variables['mll-peak']  = {   'name': 'mll',            #   variable name
 """
 variables['nCleanJetNotFat']  = {
                         'name': 'nCleanJetNotFat',     
-                        'range' : (15,0,15),   
+                        'range' : (10,0,10),   
                         'xaxis' : 'Number of jets (cleaned)',
                         'fold' : 3   # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
                         }
@@ -227,15 +227,23 @@ variables['FatJet_eta'] = {'name': 'Alt$(CleanFatJet_eta, -9999)',
                         
                            }
 
+"""
 
 variables['FatJet_tau21'] = {   'name': 'CleanFatJet_tau21',
                         'range' : (50,0,1),
                         'xaxis' : '#tau_{21}',
                         'fold' : 0,
-                       }
+                        'blind': {
+                                "Resolved_SR_bVeto",
+                                "Boosted_SR_bVeto",
+                                "Resolved_SR_nobVeto",
+                                "Boosted_SR_nobVeto",
+
+                                }
+                        }
 
 # new variables
-
+"""
 variables['mjj_max']  = {   'name': 'mjj_max',            #   variable name    
                         'range' : (20,200,4000),    #   variable range
                         'xaxis' : 'm_{jj} [GeV]',  #   x axis name
@@ -298,35 +306,6 @@ variables['Zlep_V_boosted'] = {   'name': '  ( CleanFatJet_eta[0] -0.5*(CleanJet
 
 
 ### DNN variables
-"""
-variables['DNNoutput_allvar1'] = {
-    'name': 'DNNoutput_pruned',
-    'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],),
-    'xaxis': 'DNN output (all vars training)',
-    'fold': 3 ,
-    'blind': {
-        "Resolved_SR_bVeto": [0.8,1],
-        "Boosted_SR_bVeto": [0.8,1],
-        "Resolved_SR_nobVeto": [0.8,1],
-        "Boosted_SR_nobVeto": [0.8,1],
-
-    }
-}
-
-variables['DNNoutput_allvar2'] = {
-    'name': 'DNNoutput_pruned',
-    'range': ([0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],),
-    'xaxis': 'DNN output (all vars training)',
-    'fold': 3 ,
-    'blind': {
-        "Resolved_SR_bVeto": [0.8,1],
-        "Boosted_SR_bVeto": [0.8,1],
-        "Resolved_SR_nobVeto": [0.8,1],
-        "Boosted_SR_nobVeto": [0.8,1],
-
-    }
-}
-"""
 variables['DNNoutput_pruned_morebins'] = {
     'name': 'DNNoutput_pruned',
     'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.82,0.84,0.86,0.88,0.90,0.92,0.94,0.96,0.98,1.],),
@@ -366,6 +345,7 @@ variables['DNNoutput_full'] = {
 
     }
 }
+
 
 variables['DNNoutput_full_morebins'] = {
     'name': 'DNNoutput_full',

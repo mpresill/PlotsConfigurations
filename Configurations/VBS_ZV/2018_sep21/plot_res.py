@@ -142,7 +142,7 @@ for i,DYbin in enumerate(DY_bins_res):
 
 groupPlot['VBS']  = {
                  'nameHR' : 'VBS',
-                 'isSignal' : 0,
+                 'isSignal' : 1,
                  'color': colors["kRed"]+1,
                  'samples'  : ['VBS_ZV'],
                  'fill': 1001
@@ -236,7 +236,7 @@ plot['WJets']  = {
 
 plot['VBS_ZV']  = {
                   'color': colors["kCyan"]+1, 
-                  'isSignal' : 0,
+                  'isSignal' : 1,
                   'isData'   : 0,
                   'scale'    : 1.   
               }

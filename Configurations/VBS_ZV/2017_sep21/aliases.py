@@ -103,78 +103,80 @@ aliases['vbs_category'] = {
         '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations 
     ],
     'class': 'jets_cat_dnn',
-    'args': ('vbs_category','2018',models_path,models_path_pruned, False)
+    'args': ('vbs_category','2017',models_path,models_path_pruned, False)
 }
 
 aliases['vbs_jet_0'] = {
    'class': 'jets_cat_dnn',
-    'args': ('vbs_jet_0','2018', models_path,models_path_pruned, False)
+    'args': ('vbs_jet_0','2017', models_path,models_path_pruned, False)
 }
 
 aliases['vbs_jet_1'] = {
-    'class': 'jets_cat_dnn',
-    'args': ('vbs_jet_1','2018', models_path,models_path_pruned, False)
+   'class': 'jets_cat_dnn',
+    'args': ('vbs_jet_1','2017', models_path,models_path_pruned, False)
 }
 
 aliases['v_jet_0'] = {
    'class': 'jets_cat_dnn',
-    'args': ('v_jet_0','2018', models_path,models_path_pruned, False)
+    'args': ('v_jet_0','2017', models_path,models_path_pruned, False)
 }
 
 aliases['v_jet_1'] = {
    'class': 'jets_cat_dnn',
-    'args': ('v_jet_1','2018', models_path,models_path_pruned, False)
+    'args': ('v_jet_1','2017', models_path,models_path_pruned, False)
 }
 
 
 aliases['mjj_max'] = {
    'class': 'jets_cat_dnn',
-    'args': ('mjj_max','2018', models_path,models_path_pruned, False)
+    'args': ('mjj_max','2017', models_path,models_path_pruned, False)
 }
 
 aliases['detajj_mjjmax'] = {
    'class': 'jets_cat_dnn',
-    'args': ('detajj_mjjmax','2018', models_path,models_path_pruned, False)
+    'args': ('detajj_mjjmax','2017', models_path,models_path_pruned, False)
 }
 
 aliases['dphijj_mjjmax'] = {
    'class': 'jets_cat_dnn',
-    'args': ('dphijj_mjjmax','2018', models_path,models_path_pruned, False)
+    'args': ('dphijj_mjjmax','2017', models_path,models_path_pruned, False)
 }
 
 aliases['Vjet_mass'] = {
    'class': 'jets_cat_dnn',
-    'args': ('Vjet_mass','2018', models_path,models_path_pruned, False)
+    'args': ('Vjet_mass','2017', models_path,models_path_pruned, False)
 }
 
 aliases['njet30'] = {
    'class': 'jets_cat_dnn',
-    'args': ('njet30','2018', models_path, models_path_pruned,False)
+    'args': ('njet30','2017', models_path, models_path_pruned,False)
 }
 
 aliases['nbtag'] = {
    'class': 'jets_cat_dnn',
-    'args': ('nbtag','2018', models_path,models_path_pruned, False)
+    'args': ('nbtag','2017', models_path,models_path_pruned, False)
 }
 
 aliases['Zleppt'] = {
    'class': 'jets_cat_dnn',
-    'args': ('Zleppt','2018', models_path,models_path_pruned, False)
+    'args': ('Zleppt','2017', models_path,models_path_pruned, False)
 }
 
 aliases['Vpt'] = {
    'class': 'jets_cat_dnn',
-    'args': ('Vpt','2018', models_path,models_path_pruned, False)
+    'args': ('Vpt','2017', models_path,models_path_pruned, False)
 }
  
 aliases['V_jet_mass'] = {
     'expr': 'Vjet_mass'
 }
+
+
 ###########################################################
 ##############  fitting phase space
 ###########################################################
+#fitting with Z pt binning
 
-#fitting 2D with VBS pt2 and Z pt binning
 aliases['fit_Z_vbs1_bin_Resolved'] = {
     'expr': '(vbs_category==1)*( \
             1*(  CleanJet_pt[vbs_jet_1] < 50                                          && Zleppt < 350  ) +\
@@ -186,8 +188,6 @@ aliases['fit_Z_vbs1_bin_Resolved'] = {
             ) + (vbs_category==0)*(-1)'
 }
 
-
-#fitting with Z pt binning
 aliases['fit_Z_bin_Resolved'] = {
     'expr': '(vbs_category==1)*( \
             1*(  Zleppt < 50                           ) +\
@@ -232,18 +232,6 @@ aliases['fit_vbs1_bin_Resolved'] = {
             4*(  CleanJet_pt[vbs_jet_1] >= 150  &&  CleanJet_pt[vbs_jet_1] < 200        ) +\
             5*(  CleanJet_pt[vbs_jet_1] >= 200  &&  CleanJet_pt[vbs_jet_1] < 250        ) +\
             6*(  CleanJet_pt[vbs_jet_1] >= 250                                          ) \
-            ) + (vbs_category==0)*(-1)'
-}
-
-#fitting using Delta Eta VBS jets
-aliases['fit_detajj_bin_Resolved'] = {
-    'expr': '(vbs_category==1)*( \
-            1*(  detajj_mjjmax < 3.5                                             ) +\
-            2*(  detajj_mjjmax >= 3.5 &&  detajj_mjjmax < 4.5                    ) +\
-            3*(  detajj_mjjmax >= 4.5 &&  detajj_mjjmax < 5.5                    ) +\
-            4*(  detajj_mjjmax >= 5.5 &&  detajj_mjjmax < 6.5                    ) +\
-            5*(  detajj_mjjmax >= 6.5 &&  detajj_mjjmax < 7.5                    ) +\
-            6*(  detajj_mjjmax >= 7.5                                            ) \
             ) + (vbs_category==0)*(-1)'
 }
 
@@ -292,19 +280,19 @@ aliases['Top_pTrw'] = {
 #loose 0.1241
 #tight 0.7527
 aliases['bVeto'] = {
-    'expr': '(Sum$(CleanJet_pt > 30. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.1241) == 0)'
+    'expr': '(Sum$(CleanJet_pt > 30. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.1522) == 0)'
 }
 
 aliases['bReq'] = {
-    'expr': '(Sum$(CleanJet_pt > 30. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.1241) >= 1)'
+    'expr': '(Sum$(CleanJet_pt > 30. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.1522) >= 1)'
 }
 
 aliases['bReqTight'] = {
-    'expr': '(Sum$(CleanJet_pt > 30. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.7527) >= 1)'
+    'expr': '(Sum$(CleanJet_pt > 30. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.8001) >= 1)'
 }
 
 aliases['bVetoSF'] = {
-    'expr': 'TMath::Exp(Sum$(TMath::Log((CleanJet_pt>20 && abs(CleanJet_eta)<2.5)*Jet_btagSF_deepcsv_shape[CleanJet_jetIdx]+1*(CleanJet_pt<=20 || abs(CleanJet_eta)>=2.5))))',
+    'expr': 'TMath::Exp(Sum$(TMath::Log((CleanJet_pt>30 && abs(CleanJet_eta)<2.5)*Jet_btagSF_deepcsv_shape[CleanJet_jetIdx]+1*(CleanJet_pt<=30 || abs(CleanJet_eta)>=2.5))))',
     'samples': mc
 }
 
@@ -325,7 +313,10 @@ for s in systs:
   aliases['btagSF'+s+'up'] = { 'expr': '(bVeto*'+aliases['bVetoSF']['expr'].replace('shape','shape_up_'+s)+'+bReq*'+aliases['bReqSF']['expr'].replace('shape','shape_up_'+s)+'+ ( (!bVeto) && (!bReq) ))', 'samples':mc  }
   aliases['btagSF'+s+'down'] = { 'expr': '(bVeto*'+aliases['bVetoSF']['expr'].replace('shape','shape_down_'+s)+'+bReq*'+aliases['bReqSF']['expr'].replace('shape','shape_down_'+s)+'+ ( (!bVeto) && (!bReq) ))', 'samples':mc }
 
+
+
 """
+
 for shift in ['jes','lf','hf','lfstats1','lfstats2','hfstats1','hfstats2','cferr1','cferr2']:
 
     for targ in ['bVeto', 'bReq']:
@@ -363,11 +354,11 @@ handle = open('%s/src/PlotsConfigurations/Configurations/patches/DYrew30.py' % o
 exec(handle)
 handle.close()
 aliases['DY_NLO_pTllrw'] = {
-    'expr': '('+DYrew['2018']['NLO'].replace('x', 'getGenZpt_OTF')+')*(nCleanGenJet == 0)+1.0*(nCleanGenJet > 0)',
+    'expr': '('+DYrew['2017']['NLO'].replace('x', 'getGenZpt_OTF')+')*(nCleanGenJet == 0)+1.0*(nCleanGenJet > 0)',
     'samples': ['DY']
 }
 aliases['DY_LO_pTllrw'] = {
-    'expr': '('+DYrew['2018']['LO'].replace('x', 'getGenZpt_OTF')+')*(nCleanGenJet == 0)+1.0*(nCleanGenJet > 0)',
+    'expr': '('+DYrew['2017']['LO'].replace('x', 'getGenZpt_OTF')+')*(nCleanGenJet == 0)+1.0*(nCleanGenJet > 0)',
     'samples': ['DY']
 }
 
@@ -378,17 +369,18 @@ aliases['DY_LO_pTllrw'] = {
 # PU jet Id SF
 
 puidSFSource = '{}/Configurations/patches/PUID_81XTraining_EffSFandUncties.root'.format(configurations)
-"""
+
 aliases['PUJetIdSF'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
         '.L %s/Configurations/VBS_ZV/patches/pujetidsf_event_new.cc+' % configurations
     ],
     'class': 'PUJetIdEventSF',
-    'args': (puidSFSource, "2018", "loose"),
+    'args': (puidSFSource, "2017", "loose"),
     'samples': mc
 }
 
+"""
 # PU jet Id SF ALTERNATIVE IMPLEMENTATION
 aliases['Jet_PUIDSF'] = { 
   'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2)*TMath::Log(Jet_PUIDSF_loose)))',
@@ -405,6 +397,8 @@ aliases['Jet_PUIDSF_down'] = {
   'samples': mc
 }
 """
+
+
 
 aliases['PUJetIdSF'] = {
   'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2 && ( (Jet_electronIdx1 != Lepton_electronIdx[0]) || Jet_electronIdx1 < 0 )  \
@@ -429,8 +423,6 @@ aliases['PUJetIdSF_down'] = {
   'samples': mc
 }
 
-
-
 # data/MC scale factors
 """aliases['SFweight'] = {
     'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF','PUJetIdSF']),
@@ -439,7 +431,7 @@ aliases['PUJetIdSF_down'] = {
 """
 #nobtag sf test
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF', 'btagSF' ]),
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP,'PrefireWeight', 'LepWPCut','PUJetIdSF', 'btagSF' ]),
     'samples': mc
 }
 # variations
@@ -460,9 +452,7 @@ aliases['SFweightMuDown'] = {
     'samples': mc
 }
 
-
-models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_newSR'
-models_path_full = '/eos/home-a/ahakimi/www/ZV_analysis/Models/full_SR'
+models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/full_SR'
 aliases['DNNoutput_full'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
@@ -470,7 +460,7 @@ aliases['DNNoutput_full'] = {
         '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('dnn_output','2018', models_path_full,models_path_pruned, False)
+    'args': ('dnn_output','2017', models_path,models_path_pruned, False)
 }
 
 
@@ -484,7 +474,7 @@ aliases['DNNoutput_pruned'] = {
         '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
     'class': 'jets_cat_dnn',
-    'args': ('dnn_output_pruned','2018', models_path,models_path_pruned, False)
+    'args': ('dnn_output_pruned','2017', models_path,models_path_pruned, False)
 }
 
 
