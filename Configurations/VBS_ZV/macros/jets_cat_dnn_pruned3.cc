@@ -29,13 +29,12 @@ Note that according to the definition in ll. 147, 149 we use the CleanJetNotFat 
 
 using namespace std;
 using namespace NNEvaluation;
-
 // --- functions Helper
-float deltaEta(float eta1, float eta2) {
+float deltaEta3(float eta1, float eta2) {
   return std::abs(eta1 - eta2);
 }
 
-float deltaPhi(float phi1, float phi2){
+float deltaPhi3(float phi1, float phi2){
   float PHI = std::abs(phi1-phi2);
   if (PHI<=3.14159265)
     return PHI;
@@ -44,13 +43,13 @@ float deltaPhi(float phi1, float phi2){
 }
 
 
-class jets_cat_dnn : public multidraw::TTreeFunction {
+class jets_cat_dnn3 : public multidraw::TTreeFunction {
 public:
-  jets_cat_dnn( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose);
-  jets_cat_dnn( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose);
+  jets_cat_dnn3( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose);
+  jets_cat_dnn3( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose);
 
-  char const* getName() const override { return "jets_cat_dnn"; }
-  TTreeFunction* clone() const override { return new jets_cat_dnn(returnVar_,year_.c_str(), model_dir_.c_str(),model_dir_pruned_.c_str(), verbose ); }
+  char const* getName() const override { return "jets_cat_dnn3"; }
+  TTreeFunction* clone() const override { return new jets_cat_dnn3(returnVar_,year_.c_str(), model_dir_.c_str(),model_dir_pruned_.c_str(), verbose ); }
   std::string model_dir_;
   std::string model_dir_pruned_;
   unsigned getNdata() override { return 1; }
@@ -124,42 +123,42 @@ protected:
   static void setValues(UInt_t, UInt_t, ULong64_t);
 };
 
-std::tuple<UInt_t, UInt_t, ULong64_t> jets_cat_dnn::currentEvent{};
+std::tuple<UInt_t, UInt_t, ULong64_t> jets_cat_dnn3::currentEvent{};
 
-UIntValueReader* jets_cat_dnn::nFatJet{}; 
-FloatArrayReader* jets_cat_dnn::FatJet_pt{};
-FloatArrayReader* jets_cat_dnn::FatJet_eta{};
-FloatArrayReader* jets_cat_dnn::FatJet_phi{};
-FloatArrayReader* jets_cat_dnn::FatJet_mass{};
-FloatArrayReader* jets_cat_dnn::Jet_qgl{};
+UIntValueReader* jets_cat_dnn3::nFatJet{}; 
+FloatArrayReader* jets_cat_dnn3::FatJet_pt{};
+FloatArrayReader* jets_cat_dnn3::FatJet_eta{};
+FloatArrayReader* jets_cat_dnn3::FatJet_phi{};
+FloatArrayReader* jets_cat_dnn3::FatJet_mass{};
+FloatArrayReader* jets_cat_dnn3::Jet_qgl{};
 
 
-IntArrayReader*   jets_cat_dnn::CleanJet_jetId{};
-IntArrayReader*   jets_cat_dnn::CleanFatJet_jetId{};
-IntArrayReader*   jets_cat_dnn::CleanJetNotFat_jetId{};
-FloatArrayReader* jets_cat_dnn::Jet_mass{};
-UIntValueReader*  jets_cat_dnn::nCleanJetNotFat; 
-FloatArrayReader* jets_cat_dnn::CleanJet_pt{};
-FloatArrayReader* jets_cat_dnn::CleanJet_eta{};
-FloatArrayReader* jets_cat_dnn::CleanJet_phi{};
-FloatArrayReader* jets_cat_dnn::Lepton_pt{};
-FloatArrayReader* jets_cat_dnn::Lepton_eta{};
-FloatArrayReader* jets_cat_dnn::Lepton_phi{};
-UIntValueReader* jets_cat_dnn::nLepton;
-FloatValueReader*  jets_cat_dnn::mll{};
-FloatArrayReader* jets_cat_dnn::Jet_btagDeepB{};
+IntArrayReader*   jets_cat_dnn3::CleanJet_jetId{};
+IntArrayReader*   jets_cat_dnn3::CleanFatJet_jetId{};
+IntArrayReader*   jets_cat_dnn3::CleanJetNotFat_jetId{};
+FloatArrayReader* jets_cat_dnn3::Jet_mass{};
+UIntValueReader*  jets_cat_dnn3::nCleanJetNotFat; 
+FloatArrayReader* jets_cat_dnn3::CleanJet_pt{};
+FloatArrayReader* jets_cat_dnn3::CleanJet_eta{};
+FloatArrayReader* jets_cat_dnn3::CleanJet_phi{};
+FloatArrayReader* jets_cat_dnn3::Lepton_pt{};
+FloatArrayReader* jets_cat_dnn3::Lepton_eta{};
+FloatArrayReader* jets_cat_dnn3::Lepton_phi{};
+UIntValueReader* jets_cat_dnn3::nLepton;
+FloatValueReader*  jets_cat_dnn3::mll{};
+FloatArrayReader* jets_cat_dnn3::Jet_btagDeepB{};
 
-string jets_cat_dnn::year_{};
-//string jets_cat_dnn::model_dir_{};
-//bool jets_cat_dnn::verbose{};
+string jets_cat_dnn3::year_{};
+//string jets_cat_dnn3::model_dir_{};
+//bool jets_cat_dnn3::verbose{};
 
-std::array<double, jets_cat_dnn::nVarTypes> jets_cat_dnn::returnValues{};
+std::array<double, jets_cat_dnn3::nVarTypes> jets_cat_dnn3::returnValues{};
 
 
 // function Helper ---
 
 
-jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose):
+jets_cat_dnn3::jets_cat_dnn3( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose):
    TTreeFunction(), model_dir_(model_dir), model_dir_pruned_(model_dir_pruned), verbose(verbose){
       
     std::string type(_type);
@@ -195,17 +194,17 @@ jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* mod
       returnVar_ = dnn_output_pruned;
     else
       throw std::runtime_error("unknown return type " + type);
-    jets_cat_dnn::year_ = year;
-    // jets_cat_dnn::model_dir_ = model_dir;
-    // jets_cat_dnn::verbose = verbose;
+    jets_cat_dnn3::year_ = year;
+    // jets_cat_dnn3::model_dir_ = model_dir;
+    // jets_cat_dnn3::verbose = verbose;
 }
 
-jets_cat_dnn::jets_cat_dnn( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned,bool verbose):
+jets_cat_dnn3::jets_cat_dnn3( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned,bool verbose):
 TTreeFunction(), returnVar_(type), 
 model_dir_(model_dir),model_dir_pruned_(model_dir_pruned) ,verbose(verbose){
-  jets_cat_dnn::year_ = year;
-  //jets_cat_dnn::model_dir_ = model_dir;
-  //jets_cat_dnn::verbose = verbose;
+  jets_cat_dnn3::year_ = year;
+  //jets_cat_dnn3::model_dir_ = model_dir;
+  //jets_cat_dnn3::verbose = verbose;
   std::string boosted_path_ = model_dir_ + "/Boosted_SR/DNN/";
   dnn_tensorflow_boosted = new DNNEvaluator(boosted_path_, verbose);
   std::string resolved_path_ = model_dir_ + "/Resolved_SR/DNN/";
@@ -219,7 +218,7 @@ model_dir_(model_dir),model_dir_pruned_(model_dir_pruned) ,verbose(verbose){
 
 
 double
-jets_cat_dnn::evaluate(unsigned)
+jets_cat_dnn3::evaluate(unsigned)
 {
   setValues(*run->Get(), *luminosityBlock->Get(), *event->Get());
 
@@ -241,7 +240,7 @@ jets_cat_dnn::evaluate(unsigned)
   //Boosted
   if (category ==0 ){
           //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
-
+//	cout << "jetscat3 full" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -330,7 +329,7 @@ jets_cat_dnn::evaluate(unsigned)
   //carefull, inputs must be in same order than in scaler.txt
   if (category ==0 ){
           //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
-
+	//cout <<"jets_cat3 pruned" <<endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -414,7 +413,7 @@ jets_cat_dnn::evaluate(unsigned)
 
 
 
-        input.push_back(btag);
+ //       input.push_back(btag);
         returnValues[dnn_output_pruned]= dnn_tensorflow_resolved_pruned->analyze(input);
 
     }
@@ -423,7 +422,7 @@ jets_cat_dnn::evaluate(unsigned)
 }
 
 void
-jets_cat_dnn::bindTree_(multidraw::FunctionLibrary& _library)
+jets_cat_dnn3::bindTree_(multidraw::FunctionLibrary& _library)
 {   
     _library.bindBranch(run, "run");
     _library.bindBranch(luminosityBlock, "luminosityBlock");
@@ -480,7 +479,7 @@ jets_cat_dnn::bindTree_(multidraw::FunctionLibrary& _library)
 
 /*static*/
 void
-jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
+jets_cat_dnn3::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
 {
 
   if (std::get<0>(currentEvent) == _run && \
@@ -525,10 +524,10 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   }
 
   //btag cut values
-  //cout << jets_cat_dnn::year_ <<endl;
-  if (jets_cat_dnn::year_ == "2018") btag_cut=0.1241;
-  else if (jets_cat_dnn::year_ == "2017") btag_cut = 0.1522;
-  else if (jets_cat_dnn::year_ == "2016") btag_cut = 0.2217;
+  //cout << jets_cat_dnn3::year_ <<endl;
+  if (jets_cat_dnn3::year_ == "2018") btag_cut=0.1241;
+  else if (jets_cat_dnn3::year_ == "2017") btag_cut = 0.1522;
+  else if (jets_cat_dnn3::year_ == "2016") btag_cut = 0.2217;
   //cout << btag_cut <<endl;
   // Load all the quadrivectors for performance reason
   std::vector<TLorentzVector> vectors; 
@@ -561,8 +560,8 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
                 
                 if( Mjj_tmp >= Mjj_max ){
                     Mjj_max=Mjj_tmp;
-                    detajj_mjj_max=deltaEta((vectors.at(ijet)).Eta(),(vectors.at(jjet)).Eta());
-                    dphijj_mjj_max=deltaPhi((vectors.at(ijet)).Phi(),(vectors.at(jjet)).Phi());
+                    detajj_mjj_max=deltaEta3((vectors.at(ijet)).Eta(),(vectors.at(jjet)).Eta());
+                    dphijj_mjj_max=deltaPhi3((vectors.at(ijet)).Phi(),(vectors.at(jjet)).Phi());
                     // Index in vectors
                     VBS_jets[0]= ijet;
                     VBS_jets[1]= jjet;

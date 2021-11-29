@@ -835,6 +835,8 @@ returnValues[vjet_1_partfl_res] = 0;
 
         }else if (njet>=4) { 
             category = 1;
+	    int v_jet_0 =999;
+            int v_jet_1 =999;
             //cout << "resolved " << endl;
            // cout << "vbs1 "<< VBS_jets[0] <<" vbs2 "<< VBS_jets[1]<< endl;
             for (unsigned int ijet=0 ; ijet<(njet-1) ; ijet++){
@@ -851,8 +853,9 @@ returnValues[vjet_1_partfl_res] = 0;
                             // Index in the collection of vectors
                             V_jets[0] = ijet;
                             V_jets[1] = jjet;
-                            int v_jet_0 =CleanJetNotFat_jetId->At(vectors_id.at(V_jets[0]));
-                            int v_jet_1 =CleanJetNotFat_jetId->At(vectors_id.at(V_jets[1]));
+                            v_jet_0 =CleanJetNotFat_jetId->At(vectors_id.at(V_jets[0]));
+                            v_jet_1 =CleanJetNotFat_jetId->At(vectors_id.at(V_jets[1]));
+			    //cout << "v_jet_1"<< v_jet_1 <<endl;
                             deltamass_Vjet = dmass;
                             Vjet_mass_max = mvjet;
 			    _Vpt=(jet0+jet1).Pt();
@@ -860,34 +863,49 @@ returnValues[vjet_1_partfl_res] = 0;
                     }
                 }
             }
+	    //cout << "isrunningondata" << jets_cat_qgl::isRunningOnData <<endl;
+	    //cout << "vectors size " << vectors.size() <<endl;
+            //cout << "vectors_id.size " << vectors_id.size() <<endl;
+	    //cout << "ncleanjet" << endl;
+	    //cout << "V_jets[1] " << V_jets[1] <<endl;
+	    //cout << "vectors_id.at(V_jets[1]) " << vectors_id.at(V_jets[1]) << endl;
+	    //cout << "v_jet_1"<< v_jet_1 <<endl;
+	    //cout << "v_jet_1 =CleanJetNotFat_jetId->At(vectors_id.at(V_jets[1])) " << CleanJetNotFat_jetId->At(vectors_id.at(V_jets[1])) << endl;
+	    //cout << "v_jet_1"<< v_jet_1 <<endl;
+	    //cout << "Vjet 2 cleanJet jet Idx" << CleanJet_jetId->At(v_jet_1 ) << endl;
 
             //Resolved morph qgl
             returnValues[vbs_0_qgl_boost] = -1;
             returnValues[vbs_1_qgl_boost] = -1;
             returnValues[vbs_0_qgl_res] = Jet_qgl->At(CleanJet_jetId->At(vbs_jet_0));
             //cout << "vbs 1 " << returnValues[vbs_0_qgl_res]<< endl;
-	      //  cout << "Vbs 1 index" << vbs_jet_0<< endl;
+	     //   cout << "Vbs 1 index" << vbs_jet_0<< endl;
             //cout << "Vbs 1 cleanJet jet Idx" << CleanJet_jetId->At(vbs_jet_0) << endl;
             //cout << "Vbs1 qgl" << Jet_qgl->At(CleanJet_jetId->At(vbs_jet_0)) << endl;
+	    //cout << "vectors size " << vectors.size() <<endl;
+	    //cout << "vectors_id.size " << vectors_id.size() <<endl;
             returnValues[vbs_1_qgl_res] = Jet_qgl->At(CleanJet_jetId->At(vbs_jet_1));
-            //cout << "vbs 2 " << returnValues[vbs_1_qgl_res]<< endl;
-            //cout << "Vjet 1 index" << v_jet_0<< endl;
-            //cout << "Vjet 1 cleanJet jet Idx" << CleanJet_jetId->At(v_jet_0) << endl;
-            //cout << "Vjet1 qgl" << Jet_qgl->At(CleanJet_jetId->At(v_jet_0)) << endl;
+            //cout << "vbs 1 qgl " << returnValues[vbs_1_qgl_res]<< endl;
+            //cout << "Vjet 2 index" << v_jet_1<< endl;
+	    //cout << "v_jet_1"<< v_jet_1 <<endl;
+            //cout << "Vjet 2 cleanJet jet Idx" << CleanJet_jetId->At(v_jet_1 ) << endl;
+            //cout << "vjet2 pf"<< Jet_partonFlavour->At(CleanJet_jetId->At(v_jet_1 ))<<endl;
+	    //cout << "Vjet2 qgl" << Jet_qgl->At(CleanJet_jetId->At(v_jet_1)) << endl;
             returnValues[vjet_0_qgl_res] = Jet_qgl->At(CleanJet_jetId->At(v_jet_0));
             //cout << "V 1 " << returnValues[vjet_0_qgl_res]<< endl;
             returnValues[vjet_1_qgl_res] = Jet_qgl->At(CleanJet_jetId->At(v_jet_1));
             //cout << "V 2 " << returnValues[vjet_1_qgl_res]<< endl;
 
             if (!jets_cat_qgl::isRunningOnData){
-
+		//cout << "running on MC" <<endl;
                 returnValues[vbs_0_partfl_boost] = 0;
                 returnValues[vbs_1_partfl_boost] = 0;
+		//cout << "looking at pf" <<endl;
                 returnValues[vbs_0_partfl_res] = Jet_partonFlavour->At(CleanJet_jetId->At(vbs_jet_0));
                 returnValues[vbs_1_partfl_res] = Jet_partonFlavour->At(CleanJet_jetId->At(vbs_jet_1));
                 returnValues[vjet_0_partfl_res] = Jet_partonFlavour->At(CleanJet_jetId->At(v_jet_0));
                 returnValues[vjet_1_partfl_res] = Jet_partonFlavour->At(CleanJet_jetId->At(v_jet_1));
-
+		//cout << "vbs 1 pf"<< Jet_partonFlavour->At(CleanJet_jetId->At(vbs_jet_0))<<endl;
                 returnValues[vbs_0_qglmorphed_boost] = -1;
                 returnValues[vbs_1_qglmorphed_boost] = -1;
                 returnValues[vbs_0_qglmorphed_res] = returnValues[vbs_0_partfl_res]==21 ?  
@@ -1012,7 +1030,7 @@ float jets_cat_qgl::getMorphedGluon(float x, float eta, float pt){
 }
 
 float jets_cat_qgl::getMorphedQuark(float x, float eta, float pt){
- // cout << "quark x,eta, pt = " << x << eta << pt <<endl; 
+  //cout << "quark x,eta, pt = " << x << eta << pt <<endl; 
   if (x<= 0.) return x;
   if (x>= 1.) return x;
   float y = x ;
