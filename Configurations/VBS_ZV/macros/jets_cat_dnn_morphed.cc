@@ -60,35 +60,54 @@ int isRunningSample(TString targetSample){
 
 class jets_cat_qgl : public multidraw::TTreeFunction {
 public:
-  jets_cat_qgl( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose, const char * morph_file,  const char * do_morph,
+  jets_cat_qgl( char const* _type, const char* year, const char* model_dir_full_bVeto, const char* model_dir_pruned_bVeto,  const char* model_dir_full_bVeto_noqgl, const char* model_dir_pruned_bVeto_noqgl, const char* model_dir_full_bReq, const char* model_dir_pruned_bReq,  const char* model_dir_full_bReq_noqgl, const char* model_dir_pruned_bReq_noqgl, bool verbose, const char * morph_file,  const char * do_morph,
                     const char * morph_loweta_gluon_pt0, const char * morph_loweta_gluon_pt1,
                     const char * morph_higheta_gluon_pt0, const char * morph_higheta_gluon_pt1,
                     const char * morph_loweta_quark_pt0, const char * morph_loweta_quark_pt1, 
                     const char * morph_higheta_quark_pt0, const char * morph_higheta_quark_pt1);
-  jets_cat_qgl( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose, const char * file, const char * do_morph,
+  jets_cat_qgl( unsigned type, const char* year, const char* model_dir_full_bVeto, const char* model_dir_pruned_bVeto,  const char* model_dir_full_bVeto_noqgl, const char* model_dir_pruned_bVeto_noqgl, const char* model_dir_full_bReq, const char* model_dir_pruned_bReq,  const char* model_dir_full_bReq_noqgl, const char* model_dir_pruned_bReq_noqgl, bool verbose, const char * file, const char * do_morph,
                     const char * morph_loweta_gluon_pt0, const char * morph_loweta_gluon_pt1,
                     const char * morph_higheta_gluon_pt0, const char * morph_higheta_gluon_pt1,
                     const char * morph_loweta_quark_pt0, const char * morph_loweta_quark_pt1, 
                     const char * morph_higheta_quark_pt0, const char * morph_higheta_quark_pt1);
 
   char const* getName() const override { return "jets_cat_qgl"; }
-  TTreeFunction* clone() const override { return new jets_cat_qgl(returnVar_,year_.c_str(), model_dir_.c_str(),model_dir_pruned_.c_str(), verbose, morph_file_.c_str(), do_morph_.c_str(),
+  TTreeFunction* clone() const override { return new jets_cat_qgl(returnVar_,year_.c_str(), model_dir_full_bVeto_.c_str(),model_dir_pruned_bVeto_.c_str(), model_dir_full_bVeto_noqgl_.c_str(),model_dir_pruned_bVeto_noqgl_.c_str(), model_dir_full_bReq_.c_str(),model_dir_pruned_bReq_.c_str(), model_dir_full_bReq_noqgl_.c_str(),model_dir_pruned_bReq_noqgl_.c_str(), verbose, morph_file_.c_str(), do_morph_.c_str(),
                                                 morph_loweta_gluon_pt0_.c_str(), morph_loweta_gluon_pt1_.c_str(),
                                                 morph_higheta_gluon_pt0_.c_str(),morph_higheta_gluon_pt1_.c_str(),
                                                 morph_loweta_quark_pt0_.c_str(),morph_loweta_quark_pt1_.c_str(),
                                                 morph_higheta_quark_pt0_.c_str(),morph_higheta_quark_pt1_.c_str()) ; }
-  std::string model_dir_;
-  std::string model_dir_pruned_;
+  std::string model_dir_full_bVeto_;
+  std::string model_dir_pruned_bVeto_;
+  std::string model_dir_full_bVeto_noqgl_;
+  std::string model_dir_pruned_bVeto_noqgl_;
+  std::string model_dir_full_bReq_;
+  std::string model_dir_pruned_bReq_;
+  std::string model_dir_full_bReq_noqgl_;
+  std::string model_dir_pruned_bReq_noqgl_;
+
   unsigned getNdata() override { return 1; }
   double evaluate(unsigned) override;
 
 protected:
   bool verbose;
   
-  DNNEvaluator* dnn_tensorflow_boosted;
-  DNNEvaluator* dnn_tensorflow_resolved;
-  DNNEvaluator* dnn_tensorflow_boosted_pruned;
-  DNNEvaluator* dnn_tensorflow_resolved_pruned;
+  DNNEvaluator* dnn_tensorflow_boosted_full_bVeto;
+  DNNEvaluator* dnn_tensorflow_resolved_full_bVeto;
+  DNNEvaluator* dnn_tensorflow_boosted_pruned_bVeto;
+  DNNEvaluator* dnn_tensorflow_resolved_pruned_bVeto;
+  DNNEvaluator* dnn_tensorflow_boosted_full_bVeto_noqgl;
+  DNNEvaluator* dnn_tensorflow_resolved_full_bVeto_noqgl;
+  DNNEvaluator* dnn_tensorflow_boosted_pruned_bVeto_noqgl;
+  DNNEvaluator* dnn_tensorflow_resolved_pruned_bVeto_noqgl;
+  DNNEvaluator* dnn_tensorflow_boosted_full_bReq;
+  DNNEvaluator* dnn_tensorflow_resolved_full_bReq;
+  DNNEvaluator* dnn_tensorflow_boosted_pruned_bReq;
+  DNNEvaluator* dnn_tensorflow_resolved_pruned_bReq;
+  DNNEvaluator* dnn_tensorflow_boosted_full_bReq_noqgl;
+  DNNEvaluator* dnn_tensorflow_resolved_full_bReq_noqgl;
+  DNNEvaluator* dnn_tensorflow_boosted_pruned_bReq_noqgl;
+  DNNEvaluator* dnn_tensorflow_resolved_pruned_bReq_noqgl;
 
   enum ReturnType {
     vbs_category, 
@@ -104,8 +123,14 @@ protected:
     nbtag,
     Zleppt,
     Vpt,
-    dnn_output,
-    dnn_output_pruned, 
+    dnn_output_full_bVeto,
+    dnn_output_pruned_bVeto,
+    dnn_output_full_bVeto_noqgl,
+    dnn_output_pruned_bVeto_noqgl,
+    dnn_output_full_bReq,
+    dnn_output_pruned_bReq,
+    dnn_output_full_bReq_noqgl,
+    dnn_output_pruned_bReq_noqgl, 
     vbs_0_qgl_res,
     vbs_1_qgl_res,
     vjet_0_qgl_res,
@@ -242,12 +267,12 @@ std::array<double, jets_cat_qgl::nVarTypes> jets_cat_qgl::returnValues{};
 // function Helper ---
 
 
-jets_cat_qgl::jets_cat_qgl( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose,   const char * morph_file, const char * do_morph,
+jets_cat_qgl::jets_cat_qgl( char const* _type, const char* year, const char* model_dir_full_bVeto, const char* model_dir_pruned_bVeto,  const char* model_dir_full_bVeto_noqgl, const char* model_dir_pruned_bVeto_noqgl, const char* model_dir_full_bReq, const char* model_dir_pruned_bReq,  const char* model_dir_full_bReq_noqgl, const char* model_dir_pruned_bReq_noqgl, bool verbose,   const char * morph_file, const char * do_morph,
                     const char * morph_loweta_gluon_pt0, const char * morph_loweta_gluon_pt1,
                     const char * morph_higheta_gluon_pt0, const char * morph_higheta_gluon_pt1,
                     const char * morph_loweta_quark_pt0, const char * morph_loweta_quark_pt1, 
                     const char * morph_higheta_quark_pt0, const char * morph_higheta_quark_pt1):
-   TTreeFunction(), model_dir_(model_dir), model_dir_pruned_(model_dir_pruned), verbose(verbose), morph_file_(morph_file),  do_morph_(do_morph),
+   TTreeFunction(),  model_dir_full_bVeto_(model_dir_full_bVeto), model_dir_pruned_bVeto_(model_dir_pruned_bVeto), model_dir_full_bVeto_noqgl_(model_dir_full_bVeto_noqgl), model_dir_pruned_bVeto_noqgl_(model_dir_pruned_bVeto_noqgl),model_dir_full_bReq_(model_dir_full_bReq), model_dir_pruned_bReq_(model_dir_pruned_bReq), model_dir_full_bReq_noqgl_(model_dir_full_bReq_noqgl), model_dir_pruned_bReq_noqgl_(model_dir_pruned_bReq_noqgl) , verbose(verbose), morph_file_(morph_file),  do_morph_(do_morph),
   morph_loweta_gluon_pt0_(morph_loweta_gluon_pt0),morph_loweta_gluon_pt1_(morph_loweta_gluon_pt1),
   morph_higheta_gluon_pt0_(morph_higheta_gluon_pt0),morph_higheta_gluon_pt1_(morph_higheta_gluon_pt1),
   morph_loweta_quark_pt0_(morph_loweta_quark_pt0),morph_loweta_quark_pt1_(morph_loweta_quark_pt1),
@@ -280,10 +305,22 @@ jets_cat_qgl::jets_cat_qgl( char const* _type, const char* year, const char* mod
       returnVar_ = Zleppt;
     else if (type== "Vpt")
       returnVar_ = Vpt;
-    else if (type == "dnn_output")
-      returnVar_ = dnn_output;
-    else if (type == "dnn_output_pruned")
-      returnVar_ = dnn_output_pruned;
+    else if (type == "dnn_output_full_bVeto")
+      returnVar_ = dnn_output_full_bVeto;
+    else if (type == "dnn_output_pruned_bVeto")
+      returnVar_ = dnn_output_pruned_bVeto;
+    else if (type == "dnn_output_full_bVeto_noqgl")
+      returnVar_ = dnn_output_full_bVeto_noqgl;
+    else if (type == "dnn_output_pruned_bVeto_noqgl")
+      returnVar_ = dnn_output_pruned_bVeto_noqgl;
+    else if (type == "dnn_output_full_bReq")
+      returnVar_ = dnn_output_full_bReq;
+    else if (type == "dnn_output_pruned_bReq")
+      returnVar_ = dnn_output_pruned_bReq;
+    else if (type == "dnn_output_full_bReq_noqgl")
+      returnVar_ = dnn_output_full_bReq_noqgl;
+    else if (type == "dnn_output_pruned_bReq_noqgl")
+      returnVar_ = dnn_output_pruned_bReq_noqgl;
     else  if (type ==  "vbs_0_qgl_res")
     returnVar_ = vbs_0_qgl_res;
     else if (type == "vbs_1_qgl_res")
@@ -349,13 +386,13 @@ jets_cat_qgl::jets_cat_qgl( char const* _type, const char* year, const char* mod
     rfile.Close();
 }
 
-jets_cat_qgl::jets_cat_qgl( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned,bool verbose,const char * morph_file, const char * do_morph,
+jets_cat_qgl::jets_cat_qgl( unsigned type, const char* year,const char* model_dir_full_bVeto, const char* model_dir_pruned_bVeto,  const char* model_dir_full_bVeto_noqgl, const char* model_dir_pruned_bVeto_noqgl, const char* model_dir_full_bReq, const char* model_dir_pruned_bReq,  const char* model_dir_full_bReq_noqgl, const char* model_dir_pruned_bReq_noqgl ,bool verbose,const char * morph_file, const char * do_morph,
                     const char * morph_loweta_gluon_pt0, const char * morph_loweta_gluon_pt1,
                     const char * morph_higheta_gluon_pt0, const char * morph_higheta_gluon_pt1,
                     const char * morph_loweta_quark_pt0, const char * morph_loweta_quark_pt1, 
                     const char * morph_higheta_quark_pt0, const char * morph_higheta_quark_pt1 ):
 TTreeFunction(), returnVar_(type), 
-model_dir_(model_dir),model_dir_pruned_(model_dir_pruned) ,verbose(verbose),morph_file_(morph_file),  do_morph_(do_morph),
+model_dir_full_bVeto_(model_dir_full_bVeto),model_dir_pruned_bVeto_(model_dir_pruned_bVeto), model_dir_full_bVeto_noqgl_(model_dir_full_bVeto_noqgl),model_dir_pruned_bVeto_noqgl_(model_dir_pruned_bVeto_noqgl), model_dir_full_bReq_(model_dir_full_bReq),model_dir_pruned_bReq_(model_dir_pruned_bReq),  model_dir_full_bReq_noqgl_(model_dir_full_bReq_noqgl),model_dir_pruned_bReq_noqgl_(model_dir_pruned_bReq_noqgl) ,verbose(verbose),morph_file_(morph_file),  do_morph_(do_morph),
   morph_loweta_gluon_pt0_(morph_loweta_gluon_pt0),morph_loweta_gluon_pt1_(morph_loweta_gluon_pt1),
   morph_higheta_gluon_pt0_(morph_higheta_gluon_pt0),morph_higheta_gluon_pt1_(morph_higheta_gluon_pt1),
   morph_loweta_quark_pt0_(morph_loweta_quark_pt0),morph_loweta_quark_pt1_(morph_loweta_quark_pt1),
@@ -364,15 +401,46 @@ model_dir_(model_dir),model_dir_pruned_(model_dir_pruned) ,verbose(verbose),morp
   jets_cat_qgl::year_ = year;
   //jets_cat_qgl::model_dir_ = model_dir;
   //jets_cat_qgl::verbose = verbose;
-  std::string boosted_path_ = model_dir_ + "/Boosted_SR/DNN/";
-  dnn_tensorflow_boosted = new DNNEvaluator(boosted_path_, verbose);
-  std::string resolved_path_ = model_dir_ + "/Resolved_SR/DNN/";
-  dnn_tensorflow_resolved = new DNNEvaluator(resolved_path_, verbose);
+  std::string boosted_path_full_bVeto_ = model_dir_full_bVeto_ + "/Boosted/";
+  dnn_tensorflow_boosted_full_bVeto = new DNNEvaluator(boosted_path_full_bVeto_, verbose);
+  std::string resolved_path_full_bVeto_ = model_dir_full_bVeto_ + "/Resolved/";
+  dnn_tensorflow_resolved_full_bVeto = new DNNEvaluator(resolved_path_full_bVeto_, verbose);
   
-  std::string boosted_path_pruned_ = model_dir_pruned_ + "/Boosted_SR/DNN/";
-  dnn_tensorflow_boosted_pruned = new DNNEvaluator(boosted_path_pruned_, verbose);
-  std::string resolved_path_pruned_ = model_dir_pruned_ + "/Resolved_SR/DNN/";
-  dnn_tensorflow_resolved_pruned = new DNNEvaluator(resolved_path_pruned_, verbose);
+  std::string boosted_path_pruned_bVeto_ = model_dir_pruned_bVeto_ + "/Boosted/";
+  dnn_tensorflow_boosted_pruned_bVeto = new DNNEvaluator(boosted_path_pruned_bVeto_, verbose);
+  std::string resolved_path_pruned_bVeto_ = model_dir_pruned_bVeto_ + "/Resolved/";
+  dnn_tensorflow_resolved_pruned_bVeto = new DNNEvaluator(resolved_path_pruned_bVeto_, verbose);
+
+  std::string boosted_path_full_bVeto_noqgl_ = model_dir_full_bVeto_noqgl_ + "/Boosted/";
+  dnn_tensorflow_boosted_full_bVeto_noqgl = new DNNEvaluator(boosted_path_full_bVeto_noqgl_, verbose);
+  std::string resolved_path_full_bVeto_noqgl_ = model_dir_full_bVeto_noqgl_ + "/Resolved/";
+  dnn_tensorflow_resolved_full_bVeto_noqgl = new DNNEvaluator(resolved_path_full_bVeto_noqgl_, verbose);
+
+  std::string boosted_path_pruned_bVeto_noqgl_ = model_dir_pruned_bVeto_noqgl_ + "/Boosted/";
+  dnn_tensorflow_boosted_pruned_bVeto_noqgl = new DNNEvaluator(boosted_path_pruned_bVeto_noqgl_, verbose);
+  std::string resolved_path_pruned_bVeto_noqgl_ = model_dir_pruned_bVeto_noqgl_ + "/Resolved/";
+  dnn_tensorflow_resolved_pruned_bVeto_noqgl = new DNNEvaluator(resolved_path_pruned_bVeto_noqgl_, verbose);
+
+  std::string boosted_path_full_bReq_ = model_dir_full_bReq_ + "/Boosted/";
+  dnn_tensorflow_boosted_full_bReq = new DNNEvaluator(boosted_path_full_bReq_, verbose);
+  std::string resolved_path_full_bReq_ = model_dir_full_bReq_ + "/Resolved/";
+  dnn_tensorflow_resolved_full_bReq = new DNNEvaluator(resolved_path_full_bReq_, verbose);
+
+  std::string boosted_path_pruned_bReq_ = model_dir_pruned_bReq_ + "/Boosted/";
+  dnn_tensorflow_boosted_pruned_bReq = new DNNEvaluator(boosted_path_pruned_bReq_, verbose);
+  std::string resolved_path_pruned_bReq_ = model_dir_pruned_bReq_ + "/Resolved/";
+  dnn_tensorflow_resolved_pruned_bReq = new DNNEvaluator(resolved_path_pruned_bReq_, verbose);
+
+  std::string boosted_path_full_bReq_noqgl_ = model_dir_full_bReq_noqgl_ + "/Boosted/";
+  dnn_tensorflow_boosted_full_bReq_noqgl = new DNNEvaluator(boosted_path_full_bReq_noqgl_, verbose);
+  std::string resolved_path_full_bReq_noqgl_ = model_dir_full_bReq_noqgl_ + "/Resolved/";
+  dnn_tensorflow_resolved_full_bReq_noqgl = new DNNEvaluator(resolved_path_full_bReq_noqgl_, verbose);
+
+  std::string boosted_path_pruned_bReq_noqgl_ = model_dir_pruned_bReq_noqgl_ + "/Boosted/";
+  dnn_tensorflow_boosted_pruned_bReq_noqgl = new DNNEvaluator(boosted_path_pruned_bReq_noqgl_, verbose);
+  std::string resolved_path_pruned_bReq_noqgl_ = model_dir_pruned_bReq_noqgl_ + "/Resolved/";
+  dnn_tensorflow_resolved_pruned_bReq_noqgl = new DNNEvaluator(resolved_path_pruned_bReq_noqgl_, verbose);
+
   int do_morph_flags = std::stoi(do_morph_,0,2);
 jets_cat_qgl::do_morph_gluon_loweta_pt0 = do_morph_flags & 1;
 jets_cat_qgl::do_morph_gluon_loweta_pt1 = do_morph_flags >>1 & 1;
@@ -404,7 +472,6 @@ jets_cat_qgl::evaluate(unsigned)
 
   //if returnVar_ = dnnoutput, run dnn
   //cout << "evaluate event " << *event->Get()<< endl;
-  if (returnVar_ == dnn_output){
   int category = (int) returnValues[vbs_category];
   int vbs_jet1 = (int) returnValues[vbs_jet_0];
   int vbs_jet2 = (int) returnValues[vbs_jet_1];
@@ -417,13 +484,19 @@ jets_cat_qgl::evaluate(unsigned)
   float dphijj = (float)returnValues[dphijj_mjjmax];
   int btag = (int)returnValues[nbtag];
   //if (nbtag >0) {//cout << "nbtag DNN = " << nbtag << endl;}
-  //Boosted
+  
+//////////////////////////////////DNNoutput_full_bVeto////////////////////////////////
+ if (returnVar_ == dnn_output_full_bVeto){  
+//Boosted
+
   if (category ==0 ){
           //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
   //    cout << "boosted full morphed" <<endl; 
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float vbs_0_qgl_morphed = returnValues[vbs_0_qglmorphed_boost];
+      float vbs_1_qgl_morphed =returnValues[vbs_1_qglmorphed_boost];
       std::vector<float> input{};
 
       input.push_back((Lepton_pt->At(0)));
@@ -444,11 +517,11 @@ jets_cat_qgl::evaluate(unsigned)
       input.push_back(dphijj);
       input.push_back(njet30);
       input.push_back(Zvjet);
-      input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet1))));
-      input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
-      input.push_back(btag);
+      input.push_back(vbs_0_qgl_morphed);
+      input.push_back(vbs_1_qgl_morphed);
+      //input.push_back(btag);
 
-      returnValues[dnn_output]= dnn_tensorflow_boosted->analyze(input);
+      returnValues[dnn_output_full_bVeto]= dnn_tensorflow_boosted_full_bVeto->analyze(input);
 
 //Resolved
   }else if (category == 1){
@@ -489,24 +562,156 @@ jets_cat_qgl::evaluate(unsigned)
         input.push_back(v_0_qgl_morphed);
         input.push_back(v_1_qgl_morphed);
         //input.push_back(btag);
-        returnValues[dnn_output]= dnn_tensorflow_resolved->analyze(input);
+        returnValues[dnn_output_full_bVeto]= dnn_tensorflow_resolved_full_bVeto->analyze(input);
 
     }
   }
+/////////////DNNoutput_pruned bVeto///////////////////////////////////////////
+  else if (returnVar_ == dnn_output_pruned_bVeto){
+  //Boosted
 
-  else if (returnVar_ == dnn_output_pruned){
-  int category = (int) returnValues[vbs_category];
-  int vbs_jet1 = (int) returnValues[vbs_jet_0];
-  int vbs_jet2 = (int) returnValues[vbs_jet_1];
-  int v_jet1 = (int) returnValues[v_jet_0];
-  int v_jet2 = (int) returnValues[v_jet_1];
-  float Vjetmass = (float) returnValues[Vjet_mass];
-  float mjj = (float) returnValues[mjj_max];
-  float detajj = (float)returnValues[detajj_mjjmax];
-  int njet30 = (int)returnValues[njet30];
-  float dphijj = (float)returnValues[dphijj_mjjmax];
-  int btag = (int)returnValues[nbtag];
-  //if (nbtag >0) {//cout << "nbtag DNN = " << nbtag << endl;}
+  //carefull, inputs must be in same order than in scaler.txt
+  if (category ==0 ){
+          //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
+  //    cout << "boosted pruned morphed" << endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      std::vector<float> input{};
+     
+      input.push_back((Lepton_pt->At(0)));
+      //input.push_back((Lepton_pt->At(1)));
+      input.push_back((Lepton_eta->At(0)));
+      input.push_back((Lepton_eta->At(1)));
+      //input.push_back(*(mll->Get()));
+      input.push_back((FatJet_pt->At(0)));
+      input.push_back((FatJet_eta->At(0)));
+      input.push_back(Zlep_1);
+      input.push_back(Zlep_2);
+      //input.push_back((CleanJet_pt->At(vbs_jet1)));
+      input.push_back((CleanJet_pt->At(vbs_jet2)));
+      //input.push_back((CleanJet_eta->At(vbs_jet1)));
+      input.push_back((CleanJet_eta->At(vbs_jet2)));
+      input.push_back(mjj);
+      input.push_back(detajj);
+      input.push_back(dphijj);
+      input.push_back(njet30);
+      input.push_back(Zvjet);
+      //input.push_back(vbs_0_qgl_morphed);
+      //input.push_back((vbs_1_qgl_morphed);
+
+      returnValues[dnn_output_pruned_bVeto]= dnn_tensorflow_boosted_pruned_bVeto->analyze(input);
+	
+//Resolved
+   }else if (category == 1){ 
+    //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
+//	cout << "resolved pruned morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float vbs_0_qgl_morphed = (float)returnValues[vbs_0_qglmorphed_res];
+      float vbs_1_qgl_morphed =(float)returnValues[vbs_1_qglmorphed_res];
+      float v_0_qgl_morphed =(float)returnValues[vjet_0_qglmorphed_res];
+      float v_1_qgl_morphed =(float)returnValues[vjet_1_qglmorphed_res];
+
+
+        std::vector<float> input{};
+
+        input.push_back(Zlep_1);
+        input.push_back(Zlep_2);
+        input.push_back((CleanJet_pt -> At(vbs_jet2)));
+        input.push_back( (CleanJet_pt -> At(v_jet1)) );
+	input.push_back( (CleanJet_pt -> At(v_jet2)) );
+        input.push_back( (CleanJet_eta -> At(v_jet1)) );
+        input.push_back( (CleanJet_eta -> At(v_jet2)) );
+	input.push_back(mjj);
+	input.push_back(detajj);
+	input.push_back(njet30);
+	input.push_back(dphijj);
+	input.push_back( Vjetmass);
+        input.push_back(v_0_qgl_morphed);
+        input.push_back(v_1_qgl_morphed);
+
+       returnValues[dnn_output_pruned_bVeto]= dnn_tensorflow_resolved_pruned_bVeto->analyze(input);
+
+     }
+  }else  if (returnVar_ == dnn_output_full_bVeto_noqgl){
+//Boosted
+
+  if (category ==0 ){
+          //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
+  //    cout << "boosted full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      std::vector<float> input{};
+
+      input.push_back((Lepton_pt->At(0)));
+      input.push_back((Lepton_pt->At(1)));
+      input.push_back((Lepton_eta->At(0)));
+      input.push_back((Lepton_eta->At(1)));
+      input.push_back(*(mll->Get()));
+      input.push_back((FatJet_pt->At(0)));
+      input.push_back((FatJet_eta->At(0)));
+      input.push_back(Zlep_1);
+      input.push_back(Zlep_2);
+      input.push_back((CleanJet_pt->At(vbs_jet1)));
+      input.push_back((CleanJet_pt->At(vbs_jet2)));
+      input.push_back((CleanJet_eta->At(vbs_jet1)));
+      input.push_back((CleanJet_eta->At(vbs_jet2)));
+      input.push_back(mjj);
+      input.push_back(detajj);
+      input.push_back(dphijj);
+      input.push_back(njet30);
+      input.push_back(Zvjet);
+      input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet1))));
+      input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
+      //input.push_back(btag);
+
+      returnValues[dnn_output_full_bVeto_noqgl]= dnn_tensorflow_boosted_full_bVeto_noqgl->analyze(input);
+
+//Resolved
+  }else if (category == 1){
+    //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
+//      cout << "resolved full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float vbs_0_qgl_morphed = returnValues[vbs_0_qglmorphed_res];
+      float vbs_1_qgl_morphed =returnValues[vbs_1_qglmorphed_res];
+      float v_0_qgl_morphed =returnValues[vjet_0_qglmorphed_res];
+      float v_1_qgl_morphed =returnValues[vjet_1_qglmorphed_res];
+
+        std::vector<float> input{};
+
+
+        input.push_back( (Lepton_pt->At(0)) );
+        input.push_back( (Lepton_pt->At(1)));
+        input.push_back( (Lepton_eta->At(0)));
+        input.push_back( (Lepton_eta->At(1)));
+        input.push_back( *(mll->Get()) );
+        input.push_back( Zlep_1 );
+        input.push_back( Zlep_2 );
+        input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
+        input.push_back( (CleanJet_eta -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_eta -> At(vbs_jet2)) );
+        input.push_back( (CleanJet_pt -> At(v_jet1)) );
+        input.push_back( (CleanJet_pt -> At(v_jet2)) );
+        input.push_back( (CleanJet_eta -> At(v_jet1)) );
+        input.push_back( (CleanJet_eta -> At(v_jet2)) );
+        input.push_back( mjj);
+        input.push_back( detajj);
+        input.push_back(dphijj);
+        input.push_back( Vjetmass);
+        input.push_back(njet30);
+        //input.push_back(vbs_0_qgl_morphed);
+        //input.push_back(vbs_1_qgl_morphed);
+        //input.push_back(v_0_qgl_morphed);
+        //input.push_back(v_1_qgl_morphed);
+        //input.push_back(btag);
+        returnValues[dnn_output_full_bVeto_noqgl]= dnn_tensorflow_resolved_full_bVeto_noqgl->analyze(input);
+
+    }
+  }else if (returnVar_ == dnn_output_pruned_bVeto_noqgl){
   //Boosted
 
   //carefull, inputs must be in same order than in scaler.txt
@@ -521,43 +726,19 @@ jets_cat_qgl::evaluate(unsigned)
       input.push_back(mjj);
       input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet1))));
       input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
-      input.push_back((FatJet_pt->At(0))); 
-      input.push_back((CleanJet_eta->At(vbs_jet2)));  
-      input.push_back(detajj);    
-      input.push_back((FatJet_eta->At(0)));    
-      input.push_back((CleanJet_eta->At(vbs_jet1)));    
+      input.push_back((FatJet_pt->At(0)));
+      input.push_back((CleanJet_eta->At(vbs_jet2)));
+      input.push_back(detajj);
+      input.push_back((FatJet_eta->At(0)));
+      input.push_back((CleanJet_eta->At(vbs_jet1)));
       input.push_back((CleanJet_pt->At(vbs_jet2)));
       input.push_back(Zlep_1);
-
-
-      //input.push_back((Lepton_pt->At(0))); 
-
-      //input.push_back((Lepton_pt->At(1)));
-      //input.push_back((Lepton_eta->At(0)));
-      //input.push_back((Lepton_eta->At(1)));
-      //input.push_back(*(mll->Get()));
-
-
-
-      //input.push_back(Zlep_2);
-      //input.push_back((CleanJet_pt->At(vbs_jet1)));
-
-
-
-      
-
-      //input.push_back(dphijj);
-      //input.push_back(njet30);
-      //input.push_back(Zvjet);
-
-      //input.push_back(btag);
-
-      returnValues[dnn_output_pruned]= dnn_tensorflow_boosted_pruned->analyze(input);
+      returnValues[dnn_output_pruned_bVeto_noqgl]= dnn_tensorflow_boosted_pruned_bVeto_noqgl->analyze(input);
 
 //Resolved
-  }else if (category == 1){
+   }else if (category == 1){
     //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
-//	cout << "resolved pruned morphed" <<endl;
+//      cout << "resolved pruned morphed" <<endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float vbs_0_qgl_morphed = (float)returnValues[vbs_0_qglmorphed_res];
@@ -568,42 +749,336 @@ jets_cat_qgl::evaluate(unsigned)
 
         std::vector<float> input{};
 
+        input.push_back(Zlep_1);
+        input.push_back(Zlep_2);
+        input.push_back((CleanJet_pt -> At(vbs_jet2)));
+        input.push_back( (CleanJet_pt -> At(v_jet1)) );
+        input.push_back( (CleanJet_pt -> At(v_jet2)) );
+        input.push_back( (CleanJet_eta -> At(v_jet1)) );
+        input.push_back( (CleanJet_eta -> At(v_jet2)) );
+        input.push_back(mjj);
+        input.push_back(detajj);
+        input.push_back(njet30);
+        input.push_back(dphijj);
+        input.push_back( Vjetmass);
+        //input.push_back(v_0_qgl_morphed);
+        //input.push_back(v_1_qgl_morphed);
+
+       returnValues[dnn_output_pruned_bVeto_noqgl]= dnn_tensorflow_resolved_pruned_bVeto_noqgl->analyze(input);
+
+     }
+  }else if (returnVar_ == dnn_output_full_bReq){
+//Boosted
+
+  if (category ==0 ){
+          //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
+  //    cout << "boosted full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float vbs_0_qgl_morphed = (float)returnValues[vbs_0_qglmorphed_boost];
+      float vbs_1_qgl_morphed =(float)returnValues[vbs_1_qglmorphed_boost];
+
+      std::vector<float> input{};
+
+      input.push_back((Lepton_pt->At(0)));
+      input.push_back((Lepton_pt->At(1)));
+      input.push_back((Lepton_eta->At(0)));
+      input.push_back((Lepton_eta->At(1)));
+      input.push_back(*(mll->Get()));
+      input.push_back((FatJet_pt->At(0)));
+      input.push_back((FatJet_eta->At(0)));
+      input.push_back(Zlep_1);
+      input.push_back(Zlep_2);
+      input.push_back((CleanJet_pt->At(vbs_jet1)));
+      input.push_back((CleanJet_pt->At(vbs_jet2)));
+      input.push_back((CleanJet_eta->At(vbs_jet1)));
+      input.push_back((CleanJet_eta->At(vbs_jet2)));
+      input.push_back(mjj);
+      input.push_back(detajj);
+      input.push_back(dphijj);
+      input.push_back(njet30);
+      input.push_back(Zvjet);
+      input.push_back(vbs_0_qgl_morphed);
+      input.push_back(vbs_1_qgl_morphed);
+      input.push_back(btag);
+
+      returnValues[dnn_output_full_bReq]= dnn_tensorflow_boosted_full_bReq->analyze(input);
+
+//Resolved
+  }else if (category == 1){
+    //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
+//      cout << "resolved full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float vbs_0_qgl_morphed = returnValues[vbs_0_qglmorphed_res];
+      float vbs_1_qgl_morphed =returnValues[vbs_1_qglmorphed_res];
+      float v_0_qgl_morphed =returnValues[vjet_0_qglmorphed_res];
+      float v_1_qgl_morphed =returnValues[vjet_1_qglmorphed_res];
+
+        std::vector<float> input{};
+
+
+        input.push_back( (Lepton_pt->At(0)) );
+        input.push_back( (Lepton_pt->At(1)));
+        input.push_back( (Lepton_eta->At(0)));
+        input.push_back( (Lepton_eta->At(1)));
+        input.push_back( *(mll->Get()) );
+        input.push_back( Zlep_1 );
+        input.push_back( Zlep_2 );
+        input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
+        input.push_back( (CleanJet_eta -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_eta -> At(vbs_jet2)) );
+        input.push_back( (CleanJet_pt -> At(v_jet1)) );
+        input.push_back( (CleanJet_pt -> At(v_jet2)) );
+        input.push_back( (CleanJet_eta -> At(v_jet1)) );
+        input.push_back( (CleanJet_eta -> At(v_jet2)) );
         input.push_back( mjj);
+        input.push_back( detajj);
+        input.push_back(dphijj);
+        input.push_back( Vjetmass);
+        input.push_back(njet30);
+        input.push_back(vbs_0_qgl_morphed);
+        input.push_back(vbs_1_qgl_morphed);
         input.push_back(v_0_qgl_morphed);
         input.push_back(v_1_qgl_morphed);
-        input.push_back(vbs_0_qgl_morphed);
-        input.push_back( Zlep_1 );
-        input.push_back(vbs_1_qgl_morphed);
-        //input.push_back( detajj);
-        input.push_back( Zlep_2 );
-        input.push_back( (CleanJet_eta -> At(v_jet1)) );
-        input.push_back( (CleanJet_eta -> At(v_jet2)) ); 
-        input.push_back(dphijj);
-        input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
-        input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
-        input.push_back( (CleanJet_pt -> At(v_jet2)) );
-	input.push_back(detajj);
+        input.push_back(btag);
+        returnValues[dnn_output_full_bReq]= dnn_tensorflow_resolved_full_bReq->analyze(input);
 
-        //input.push_back( (Lepton_pt->At(0)) );
+    }
+  }else if (returnVar_ == dnn_output_pruned_bReq){
+//Boosted
+
+  if (category ==0 ){
+          //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
+  //    cout << "boosted full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      std::vector<float> input{};
+
+      input.push_back((Lepton_pt->At(0)));
+     // input.push_back((Lepton_pt->At(1)));
+      //input.push_back((Lepton_eta->At(0)));
+      //input.push_back((Lepton_eta->At(1)));
+      //input.push_back(*(mll->Get()));
+      input.push_back((FatJet_pt->At(0)));
+      input.push_back((FatJet_eta->At(0)));
+      input.push_back(Zlep_1);
+      input.push_back(Zlep_2);
+      //input.push_back((CleanJet_pt->At(vbs_jet1)));
+      input.push_back((CleanJet_pt->At(vbs_jet2)));
+      input.push_back((CleanJet_eta->At(vbs_jet1)));
+      input.push_back((CleanJet_eta->At(vbs_jet2)));
+      input.push_back(mjj);
+      input.push_back(detajj);
+      //input.push_back(dphijj);
+      input.push_back(njet30);
+      input.push_back(Zvjet);
+      //input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet1))));
+      //input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
+      input.push_back(btag);
+
+      returnValues[dnn_output_pruned_bReq]= dnn_tensorflow_boosted_pruned_bReq->analyze(input);
+
+//Resolved
+  }else if (category == 1){
+    //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
+//      cout << "resolved full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float vbs_0_qgl_morphed = returnValues[vbs_0_qglmorphed_res];
+      float vbs_1_qgl_morphed =returnValues[vbs_1_qglmorphed_res];
+      float v_0_qgl_morphed =returnValues[vjet_0_qglmorphed_res];
+      float v_1_qgl_morphed =returnValues[vjet_1_qglmorphed_res];
+
+        std::vector<float> input{};
+
+
+        input.push_back( (Lepton_pt->At(0)) );
         //input.push_back( (Lepton_pt->At(1)));
         //input.push_back( (Lepton_eta->At(0)));
         //input.push_back( (Lepton_eta->At(1)));
-        //input.push_back( *(mll->Get()) );
-
+        input.push_back( *(mll->Get()) );
+        input.push_back( Zlep_1 );
+        input.push_back( Zlep_2 );
+        //input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
         //input.push_back( (CleanJet_eta -> At(vbs_jet1)) );
         //input.push_back( (CleanJet_eta -> At(vbs_jet2)) );
-        //input.push_back( (CleanJet_pt -> At(v_jet1)) );
-
-        //input.push_back( Vjetmass);
-        //input.push_back(njet30);
-
-
-
+        input.push_back( (CleanJet_pt -> At(v_jet1)) );
+        input.push_back( (CleanJet_pt -> At(v_jet2)) );
+        input.push_back( (CleanJet_eta -> At(v_jet1)) );
+        input.push_back( (CleanJet_eta -> At(v_jet2)) );
+        input.push_back( mjj);
+        input.push_back( detajj);
+        input.push_back(dphijj);
+        input.push_back( Vjetmass);
+        input.push_back(njet30);
+        //input.push_back(vbs_0_qgl_morphed);
+        //input.push_back(vbs_1_qgl_morphed);
+        input.push_back(v_0_qgl_morphed);
+        //input.push_back(v_1_qgl_morphed);
         //input.push_back(btag);
-        returnValues[dnn_output_pruned]= dnn_tensorflow_resolved_pruned->analyze(input);
+        returnValues[dnn_output_pruned_bReq]= dnn_tensorflow_resolved_pruned_bReq->analyze(input);
 
     }
-  }
+  } else  if (returnVar_ == dnn_output_full_bReq_noqgl){
+//Boosted
+
+  if (category ==0 ){
+          //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
+  //    cout << "boosted full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      std::vector<float> input{};
+
+      input.push_back((Lepton_pt->At(0)));
+      input.push_back((Lepton_pt->At(1)));
+      input.push_back((Lepton_eta->At(0)));
+      input.push_back((Lepton_eta->At(1)));
+      input.push_back(*(mll->Get()));
+      input.push_back((FatJet_pt->At(0)));
+      input.push_back((FatJet_eta->At(0)));
+      input.push_back(Zlep_1);
+      input.push_back(Zlep_2);
+      input.push_back((CleanJet_pt->At(vbs_jet1)));
+      input.push_back((CleanJet_pt->At(vbs_jet2)));
+      input.push_back((CleanJet_eta->At(vbs_jet1)));
+      input.push_back((CleanJet_eta->At(vbs_jet2)));
+      input.push_back(mjj);
+      input.push_back(detajj);
+      input.push_back(dphijj);
+      input.push_back(njet30);
+      input.push_back(Zvjet);
+      input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet1))));
+      input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
+      //input.push_back(btag);
+
+      returnValues[dnn_output_full_bReq_noqgl]= dnn_tensorflow_boosted_full_bReq_noqgl->analyze(input);
+
+//Resolved
+  }else if (category == 1){
+    //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
+//      cout << "resolved full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float vbs_0_qgl_morphed = returnValues[vbs_0_qglmorphed_res];
+      float vbs_1_qgl_morphed =returnValues[vbs_1_qglmorphed_res];
+      float v_0_qgl_morphed =returnValues[vjet_0_qglmorphed_res];
+      float v_1_qgl_morphed =returnValues[vjet_1_qglmorphed_res];
+
+        std::vector<float> input{};
+
+
+        input.push_back( (Lepton_pt->At(0)) );
+        input.push_back( (Lepton_pt->At(1)));
+        input.push_back( (Lepton_eta->At(0)));
+        input.push_back( (Lepton_eta->At(1)));
+        input.push_back( *(mll->Get()) );
+        input.push_back( Zlep_1 );
+        input.push_back( Zlep_2 );
+        input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
+        input.push_back( (CleanJet_eta -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_eta -> At(vbs_jet2)) );
+        input.push_back( (CleanJet_pt -> At(v_jet1)) );
+        input.push_back( (CleanJet_pt -> At(v_jet2)) );
+        input.push_back( (CleanJet_eta -> At(v_jet1)) );
+        input.push_back( (CleanJet_eta -> At(v_jet2)) );
+        input.push_back( mjj);
+        input.push_back( detajj);
+        input.push_back(dphijj);
+        input.push_back( Vjetmass);
+        input.push_back(njet30);
+        //input.push_back(vbs_0_qgl_morphed);
+        //input.push_back(vbs_1_qgl_morphed);
+        //input.push_back(v_0_qgl_morphed);
+        //input.push_back(v_1_qgl_morphed);
+        input.push_back(btag);
+        returnValues[dnn_output_full_bReq_noqgl]= dnn_tensorflow_resolved_full_bReq_noqgl->analyze(input);
+
+    }
+  }else if (returnVar_ == dnn_output_pruned_bReq_noqgl){
+//Boosted
+
+  if (category ==0 ){
+          //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
+  //    cout << "boosted full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      std::vector<float> input{};
+
+      input.push_back((Lepton_pt->At(0)));
+      input.push_back((Lepton_pt->At(1)));
+      input.push_back((Lepton_eta->At(0)));
+      input.push_back((Lepton_eta->At(1)));
+      input.push_back(*(mll->Get()));
+      input.push_back((FatJet_pt->At(0)));
+      input.push_back((FatJet_eta->At(0)));
+      input.push_back(Zlep_1);
+      input.push_back(Zlep_2);
+      input.push_back((CleanJet_pt->At(vbs_jet1)));
+      input.push_back((CleanJet_pt->At(vbs_jet2)));
+      input.push_back((CleanJet_eta->At(vbs_jet1)));
+      input.push_back((CleanJet_eta->At(vbs_jet2)));
+      input.push_back(mjj);
+      input.push_back(detajj);
+      input.push_back(dphijj);
+      input.push_back(njet30);
+      input.push_back(Zvjet);
+      input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet1))));
+      input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
+      //input.push_back(btag);
+
+      returnValues[dnn_output_pruned_bReq_noqgl]= dnn_tensorflow_boosted_pruned_bReq_noqgl->analyze(input);
+
+//Resolved
+  }else if (category == 1){
+    //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
+//      cout << "resolved full morphed" <<endl;
+      float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
+      float vbs_0_qgl_morphed = returnValues[vbs_0_qglmorphed_res];
+      float vbs_1_qgl_morphed =returnValues[vbs_1_qglmorphed_res];
+      float v_0_qgl_morphed =returnValues[vjet_0_qglmorphed_res];
+      float v_1_qgl_morphed =returnValues[vjet_1_qglmorphed_res];
+
+        std::vector<float> input{};
+
+
+        input.push_back( (Lepton_pt->At(0)) );
+        //input.push_back( (Lepton_pt->At(1)));
+        //input.push_back( (Lepton_eta->At(0)));
+        //input.push_back( (Lepton_eta->At(1)));
+        input.push_back( *(mll->Get()) );
+        input.push_back( Zlep_1 );
+        input.push_back( Zlep_2 );
+        //input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
+        input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
+        //input.push_back( (CleanJet_eta -> At(vbs_jet1)) );
+        //input.push_back( (CleanJet_eta -> At(vbs_jet2)) );
+        input.push_back( (CleanJet_pt -> At(v_jet1)) );
+        input.push_back( (CleanJet_pt -> At(v_jet2)) );
+        input.push_back( (CleanJet_eta -> At(v_jet1)) );
+        input.push_back( (CleanJet_eta -> At(v_jet2)) );
+        input.push_back( mjj);
+        input.push_back( detajj);
+        input.push_back(dphijj);
+        input.push_back( Vjetmass);
+        input.push_back(njet30);
+        //input.push_back(vbs_0_qgl_morphed);
+        //input.push_back(vbs_1_qgl_morphed);
+        //input.push_back(v_0_qgl_morphed);
+        //input.push_back(v_1_qgl_morphed);
+        //input.push_back(btag);
+        returnValues[dnn_output_pruned_bReq_noqgl]= dnn_tensorflow_resolved_pruned_bReq_noqgl->analyze(input);
+
+    }
+  }   
   return returnValues[returnVar_];
 }
 
@@ -959,7 +1434,7 @@ returnValues[vjet_1_partfl_res] = 0;
     returnValues[vbs_jet_1] = 999;
     returnValues[v_jet_0] = 999;
     returnValues[v_jet_1] = 999;
-    returnValues[dnn_output] = -0.2;
+    returnValues[dnn_output_full_bVeto] = -0.2;
 
 
   // Now go back to CleanJet indexes for easy use of the collection
@@ -1018,19 +1493,18 @@ returnValues[vjet_1_partfl_res] = 0;
 
  
 float jets_cat_qgl::getMorphedGluon(float x, float eta, float pt){
-  float eta_sep=3.5;
   //cout << "gluon x,eta, pt = " << x << eta << pt <<endl; 
   if (x<= 0.) return x;
   if (x>= 1.) return x;
   float y = x;
-  if (abs(eta)<eta_sep && pt < 75  && jets_cat_qgl::do_morph_gluon_loweta_pt0) {
+  if (abs(eta)<3 && pt < 75  && jets_cat_qgl::do_morph_gluon_loweta_pt0) {
 //	cout <<"gluon low eta lowpt "<<endl;
           y =  jets_cat_qgl::morphing_functions["gluon_loweta_pt0"]->Eval(x);}
-  if (abs(eta)<eta_sep && pt >= 75  && jets_cat_qgl::do_morph_gluon_loweta_pt1) 
+  if (abs(eta)<3 && pt >= 75  && jets_cat_qgl::do_morph_gluon_loweta_pt1) 
           y =  jets_cat_qgl::morphing_functions["gluon_loweta_pt1"]->Eval(x);
-  if (abs(eta)>=eta_sep && pt < 75  && jets_cat_qgl::do_morph_gluon_higheta_pt0) 
+  if (abs(eta)>=3 && pt < 75  && jets_cat_qgl::do_morph_gluon_higheta_pt0) 
           y =  jets_cat_qgl::morphing_functions["gluon_higheta_pt0"]->Eval(x);
-  if (abs(eta)>=eta_sep && pt >= 75  && jets_cat_qgl::do_morph_gluon_higheta_pt1) 
+  if (abs(eta)>=3 && pt >= 75  && jets_cat_qgl::do_morph_gluon_higheta_pt1) 
           y =  jets_cat_qgl::morphing_functions["gluon_higheta_pt1"]->Eval(x);
   if (y<0) return 0.;
   if (y>1.) return 1.;
@@ -1039,23 +1513,22 @@ float jets_cat_qgl::getMorphedGluon(float x, float eta, float pt){
 
 float jets_cat_qgl::getMorphedQuark(float x, float eta, float pt){
   //cout << "quark x,eta, pt = " << x << eta << pt <<endl; 
-  float eta_sep=3.5;
   if (x<= 0.) return x;
   if (x>= 1.) return x;
   float y = x ;
-  if (abs(eta)<eta_sep && pt < 75  && jets_cat_qgl::do_morph_quark_loweta_pt0) 
+  if (abs(eta)<3 && pt < 75  && jets_cat_qgl::do_morph_quark_loweta_pt0) 
           y =  jets_cat_qgl::morphing_functions["quark_loweta_pt0"]->Eval(x);
-  if (abs(eta)<eta_sep && pt >= 75  && jets_cat_qgl::do_morph_quark_loweta_pt1){ 
+  if (abs(eta)<3 && pt >= 75  && jets_cat_qgl::do_morph_quark_loweta_pt1){ 
 //	cout << "quark low eta high pt" <<endl;
           y =  jets_cat_qgl::morphing_functions["quark_loweta_pt1"]->Eval(x);
 //	cout << "y =" << y <<endl;
 	}
-  if (abs(eta)>=eta_sep && pt < 75  && jets_cat_qgl::do_morph_quark_higheta_pt0){ 
+  if (abs(eta)>=3 && pt < 75  && jets_cat_qgl::do_morph_quark_higheta_pt0){ 
 //	cout << "quark high eta low pt" <<endl;
           y =  jets_cat_qgl::morphing_functions["quark_higheta_pt0"]->Eval(x);
 	//cout << "y="<< y<<endl;
 	}
-  if (abs(eta)>=eta_sep && pt >= 75  && jets_cat_qgl::do_morph_quark_higheta_pt1) 
+  if (abs(eta)>=3 && pt >= 75  && jets_cat_qgl::do_morph_quark_higheta_pt1) 
           y =  jets_cat_qgl::morphing_functions["quark_higheta_pt1"]->Eval(x);
   if (y<0) return 0.;
   if (y>1.) return 1.;

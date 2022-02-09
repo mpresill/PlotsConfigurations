@@ -37,11 +37,11 @@ namespace multidraw {
 
 // --- functions Helper
 
-float deltaEtaqgl(float eta1, float eta2) {
+float deltaEtaqgl2(float eta1, float eta2) {
   return std::abs(eta1 - eta2);
 }
 
-float deltaPhiqgl(float phi1, float phi2){
+float deltaPhiqgl2(float phi1, float phi2){
   float PHI = std::abs(phi1-phi2);
   if (PHI<=3.14159265)
     return PHI;
@@ -49,7 +49,7 @@ float deltaPhiqgl(float phi1, float phi2){
     return 2*3.14159265-PHI;
 }
 
-int isRunningSample(TString targetSample){
+int isRunningSample2(TString targetSample){
   TString currentSampleName = TString(multidraw::currentTree->GetCurrentFile()->GetName());
   if ( currentSampleName.Contains(targetSample)) {
       return 1;
@@ -58,21 +58,21 @@ int isRunningSample(TString targetSample){
 }
 
 
-class jets_cat_qgl : public multidraw::TTreeFunction {
+class jets_cat_qgl_nbtag : public multidraw::TTreeFunction {
 public:
-  jets_cat_qgl( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose, const char * morph_file,  const char * do_morph,
+  jets_cat_qgl_nbtag( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose, const char * morph_file,  const char * do_morph,
                     const char * morph_loweta_gluon_pt0, const char * morph_loweta_gluon_pt1,
                     const char * morph_higheta_gluon_pt0, const char * morph_higheta_gluon_pt1,
                     const char * morph_loweta_quark_pt0, const char * morph_loweta_quark_pt1, 
                     const char * morph_higheta_quark_pt0, const char * morph_higheta_quark_pt1);
-  jets_cat_qgl( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose, const char * file, const char * do_morph,
+  jets_cat_qgl_nbtag( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose, const char * file, const char * do_morph,
                     const char * morph_loweta_gluon_pt0, const char * morph_loweta_gluon_pt1,
                     const char * morph_higheta_gluon_pt0, const char * morph_higheta_gluon_pt1,
                     const char * morph_loweta_quark_pt0, const char * morph_loweta_quark_pt1, 
                     const char * morph_higheta_quark_pt0, const char * morph_higheta_quark_pt1);
 
-  char const* getName() const override { return "jets_cat_qgl"; }
-  TTreeFunction* clone() const override { return new jets_cat_qgl(returnVar_,year_.c_str(), model_dir_.c_str(),model_dir_pruned_.c_str(), verbose, morph_file_.c_str(), do_morph_.c_str(),
+  char const* getName() const override { return "jets_cat_qgl_nbtag"; }
+  TTreeFunction* clone() const override { return new jets_cat_qgl_nbtag(returnVar_,year_.c_str(), model_dir_.c_str(),model_dir_pruned_.c_str(), verbose, morph_file_.c_str(), do_morph_.c_str(),
                                                 morph_loweta_gluon_pt0_.c_str(), morph_loweta_gluon_pt1_.c_str(),
                                                 morph_higheta_gluon_pt0_.c_str(),morph_higheta_gluon_pt1_.c_str(),
                                                 morph_loweta_quark_pt0_.c_str(),morph_loweta_quark_pt1_.c_str(),
@@ -196,53 +196,53 @@ protected:
   static float getMorphedQuark(float x, float eta, float pt);
 };
 
-std::tuple<UInt_t, UInt_t, ULong64_t> jets_cat_qgl::currentEvent{};
+std::tuple<UInt_t, UInt_t, ULong64_t> jets_cat_qgl_nbtag::currentEvent{};
 
-UIntValueReader* jets_cat_qgl::nFatJet{}; 
-FloatArrayReader* jets_cat_qgl::FatJet_pt{};
-FloatArrayReader* jets_cat_qgl::FatJet_eta{};
-FloatArrayReader* jets_cat_qgl::FatJet_phi{};
-FloatArrayReader* jets_cat_qgl::FatJet_mass{};
-FloatArrayReader* jets_cat_qgl::Jet_qgl{};
-IntArrayReader* jets_cat_qgl::Jet_partonFlavour{};
-std::map<std::string, TGraph*> jets_cat_qgl::morphing_functions{};
-bool jets_cat_qgl::isRunningOnData{false};
-bool jets_cat_qgl::do_morph_gluon_loweta_pt0{false};
-bool jets_cat_qgl::do_morph_gluon_higheta_pt0{false};
-bool jets_cat_qgl::do_morph_quark_loweta_pt0{false};
-bool jets_cat_qgl::do_morph_quark_higheta_pt0{false};
-bool jets_cat_qgl::do_morph_gluon_loweta_pt1{false};
-bool jets_cat_qgl::do_morph_gluon_higheta_pt1{false};
-bool jets_cat_qgl::do_morph_quark_loweta_pt1{false};
-bool jets_cat_qgl::do_morph_quark_higheta_pt1{false};
+UIntValueReader* jets_cat_qgl_nbtag::nFatJet{}; 
+FloatArrayReader* jets_cat_qgl_nbtag::FatJet_pt{};
+FloatArrayReader* jets_cat_qgl_nbtag::FatJet_eta{};
+FloatArrayReader* jets_cat_qgl_nbtag::FatJet_phi{};
+FloatArrayReader* jets_cat_qgl_nbtag::FatJet_mass{};
+FloatArrayReader* jets_cat_qgl_nbtag::Jet_qgl{};
+IntArrayReader* jets_cat_qgl_nbtag::Jet_partonFlavour{};
+std::map<std::string, TGraph*> jets_cat_qgl_nbtag::morphing_functions{};
+bool jets_cat_qgl_nbtag::isRunningOnData{false};
+bool jets_cat_qgl_nbtag::do_morph_gluon_loweta_pt0{false};
+bool jets_cat_qgl_nbtag::do_morph_gluon_higheta_pt0{false};
+bool jets_cat_qgl_nbtag::do_morph_quark_loweta_pt0{false};
+bool jets_cat_qgl_nbtag::do_morph_quark_higheta_pt0{false};
+bool jets_cat_qgl_nbtag::do_morph_gluon_loweta_pt1{false};
+bool jets_cat_qgl_nbtag::do_morph_gluon_higheta_pt1{false};
+bool jets_cat_qgl_nbtag::do_morph_quark_loweta_pt1{false};
+bool jets_cat_qgl_nbtag::do_morph_quark_higheta_pt1{false};
 
 
-IntArrayReader*   jets_cat_qgl::CleanJet_jetId{};
-IntArrayReader*   jets_cat_qgl::CleanFatJet_jetId{};
-IntArrayReader*   jets_cat_qgl::CleanJetNotFat_jetId{};
-FloatArrayReader* jets_cat_qgl::Jet_mass{};
-UIntValueReader*  jets_cat_qgl::nCleanJetNotFat; 
-FloatArrayReader* jets_cat_qgl::CleanJet_pt{};
-FloatArrayReader* jets_cat_qgl::CleanJet_eta{};
-FloatArrayReader* jets_cat_qgl::CleanJet_phi{};
-FloatArrayReader* jets_cat_qgl::Lepton_pt{};
-FloatArrayReader* jets_cat_qgl::Lepton_eta{};
-FloatArrayReader* jets_cat_qgl::Lepton_phi{};
-UIntValueReader* jets_cat_qgl::nLepton;
-FloatValueReader*  jets_cat_qgl::mll{};
-FloatArrayReader* jets_cat_qgl::Jet_btagDeepB{};
+IntArrayReader*   jets_cat_qgl_nbtag::CleanJet_jetId{};
+IntArrayReader*   jets_cat_qgl_nbtag::CleanFatJet_jetId{};
+IntArrayReader*   jets_cat_qgl_nbtag::CleanJetNotFat_jetId{};
+FloatArrayReader* jets_cat_qgl_nbtag::Jet_mass{};
+UIntValueReader*  jets_cat_qgl_nbtag::nCleanJetNotFat; 
+FloatArrayReader* jets_cat_qgl_nbtag::CleanJet_pt{};
+FloatArrayReader* jets_cat_qgl_nbtag::CleanJet_eta{};
+FloatArrayReader* jets_cat_qgl_nbtag::CleanJet_phi{};
+FloatArrayReader* jets_cat_qgl_nbtag::Lepton_pt{};
+FloatArrayReader* jets_cat_qgl_nbtag::Lepton_eta{};
+FloatArrayReader* jets_cat_qgl_nbtag::Lepton_phi{};
+UIntValueReader* jets_cat_qgl_nbtag::nLepton;
+FloatValueReader*  jets_cat_qgl_nbtag::mll{};
+FloatArrayReader* jets_cat_qgl_nbtag::Jet_btagDeepB{};
 
-string jets_cat_qgl::year_{};
-//string jets_cat_qgl::model_dir_{};
-//bool jets_cat_qgl::verbose{};
+string jets_cat_qgl_nbtag::year_{};
+//string jets_cat_qgl_nbtag::model_dir_{};
+//bool jets_cat_qgl_nbtag::verbose{};
 
-std::array<double, jets_cat_qgl::nVarTypes> jets_cat_qgl::returnValues{};
+std::array<double, jets_cat_qgl_nbtag::nVarTypes> jets_cat_qgl_nbtag::returnValues{};
 
 
 // function Helper ---
 
 
-jets_cat_qgl::jets_cat_qgl( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose,   const char * morph_file, const char * do_morph,
+jets_cat_qgl_nbtag::jets_cat_qgl_nbtag( char const* _type, const char* year, const char* model_dir, const char* model_dir_pruned, bool verbose,   const char * morph_file, const char * do_morph,
                     const char * morph_loweta_gluon_pt0, const char * morph_loweta_gluon_pt1,
                     const char * morph_higheta_gluon_pt0, const char * morph_higheta_gluon_pt1,
                     const char * morph_loweta_quark_pt0, const char * morph_loweta_quark_pt1, 
@@ -324,32 +324,32 @@ jets_cat_qgl::jets_cat_qgl( char const* _type, const char* year, const char* mod
         returnVar_ = vbs_1_partfl_boost;
     else
       throw std::runtime_error("unknown return type " + type);
-    jets_cat_qgl::year_ = year;
-    // jets_cat_qgl::model_dir_ = model_dir;
-    // jets_cat_qgl::verbose = verbose;
+    jets_cat_qgl_nbtag::year_ = year;
+    // jets_cat_qgl_nbtag::model_dir_ = model_dir;
+    // jets_cat_qgl_nbtag::verbose = verbose;
     int do_morph_flags = std::stoi(do_morph_,0,2);
-    jets_cat_qgl::do_morph_gluon_loweta_pt0 = do_morph_flags & 1;
-    jets_cat_qgl::do_morph_gluon_loweta_pt1 = do_morph_flags >>1 & 1;
-    jets_cat_qgl::do_morph_gluon_higheta_pt0 = do_morph_flags >> 2 & 1;
-    jets_cat_qgl::do_morph_gluon_higheta_pt1 = do_morph_flags >> 3 & 1;
-    jets_cat_qgl::do_morph_quark_loweta_pt0 = do_morph_flags >> 4 & 1;
-    jets_cat_qgl::do_morph_quark_loweta_pt1 = do_morph_flags >> 5 & 1;
-    jets_cat_qgl::do_morph_quark_higheta_pt0 = do_morph_flags >> 6 & 1;
-    jets_cat_qgl::do_morph_quark_higheta_pt1 = do_morph_flags >> 7 & 1;
+    jets_cat_qgl_nbtag::do_morph_gluon_loweta_pt0 = do_morph_flags & 1;
+    jets_cat_qgl_nbtag::do_morph_gluon_loweta_pt1 = do_morph_flags >>1 & 1;
+    jets_cat_qgl_nbtag::do_morph_gluon_higheta_pt0 = do_morph_flags >> 2 & 1;
+    jets_cat_qgl_nbtag::do_morph_gluon_higheta_pt1 = do_morph_flags >> 3 & 1;
+    jets_cat_qgl_nbtag::do_morph_quark_loweta_pt0 = do_morph_flags >> 4 & 1;
+    jets_cat_qgl_nbtag::do_morph_quark_loweta_pt1 = do_morph_flags >> 5 & 1;
+    jets_cat_qgl_nbtag::do_morph_quark_higheta_pt0 = do_morph_flags >> 6 & 1;
+    jets_cat_qgl_nbtag::do_morph_quark_higheta_pt1 = do_morph_flags >> 7 & 1;
     
     TFile rfile {morph_file, "READ"};
-    jets_cat_qgl::morphing_functions["gluon_loweta_pt0"] = (TGraph*) rfile.Get(morph_loweta_gluon_pt0);
-    jets_cat_qgl::morphing_functions["gluon_loweta_pt1"] = (TGraph*) rfile.Get(morph_loweta_gluon_pt1);
-    jets_cat_qgl::morphing_functions["gluon_higheta_pt0"] = (TGraph*) rfile.Get(morph_higheta_gluon_pt0);
-    jets_cat_qgl::morphing_functions["gluon_higheta_pt1"] = (TGraph*) rfile.Get(morph_higheta_gluon_pt1);
-    jets_cat_qgl::morphing_functions["quark_loweta_pt0"] = (TGraph*) rfile.Get(morph_loweta_quark_pt0);
-    jets_cat_qgl::morphing_functions["quark_loweta_pt1"] = (TGraph*) rfile.Get(morph_loweta_quark_pt1);
-    jets_cat_qgl::morphing_functions["quark_higheta_pt0"] = (TGraph*) rfile.Get(morph_higheta_quark_pt0);
-    jets_cat_qgl::morphing_functions["quark_higheta_pt1"] = (TGraph*) rfile.Get(morph_higheta_quark_pt1);
+    jets_cat_qgl_nbtag::morphing_functions["gluon_loweta_pt0"] = (TGraph*) rfile.Get(morph_loweta_gluon_pt0);
+    jets_cat_qgl_nbtag::morphing_functions["gluon_loweta_pt1"] = (TGraph*) rfile.Get(morph_loweta_gluon_pt1);
+    jets_cat_qgl_nbtag::morphing_functions["gluon_higheta_pt0"] = (TGraph*) rfile.Get(morph_higheta_gluon_pt0);
+    jets_cat_qgl_nbtag::morphing_functions["gluon_higheta_pt1"] = (TGraph*) rfile.Get(morph_higheta_gluon_pt1);
+    jets_cat_qgl_nbtag::morphing_functions["quark_loweta_pt0"] = (TGraph*) rfile.Get(morph_loweta_quark_pt0);
+    jets_cat_qgl_nbtag::morphing_functions["quark_loweta_pt1"] = (TGraph*) rfile.Get(morph_loweta_quark_pt1);
+    jets_cat_qgl_nbtag::morphing_functions["quark_higheta_pt0"] = (TGraph*) rfile.Get(morph_higheta_quark_pt0);
+    jets_cat_qgl_nbtag::morphing_functions["quark_higheta_pt1"] = (TGraph*) rfile.Get(morph_higheta_quark_pt1);
     rfile.Close();
 }
 
-jets_cat_qgl::jets_cat_qgl( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned,bool verbose,const char * morph_file, const char * do_morph,
+jets_cat_qgl_nbtag::jets_cat_qgl_nbtag( unsigned type, const char* year, const char* model_dir, const char* model_dir_pruned,bool verbose,const char * morph_file, const char * do_morph,
                     const char * morph_loweta_gluon_pt0, const char * morph_loweta_gluon_pt1,
                     const char * morph_higheta_gluon_pt0, const char * morph_higheta_gluon_pt1,
                     const char * morph_loweta_quark_pt0, const char * morph_loweta_quark_pt1, 
@@ -361,9 +361,9 @@ model_dir_(model_dir),model_dir_pruned_(model_dir_pruned) ,verbose(verbose),morp
   morph_loweta_quark_pt0_(morph_loweta_quark_pt0),morph_loweta_quark_pt1_(morph_loweta_quark_pt1),
   morph_higheta_quark_pt0_(morph_higheta_quark_pt0),morph_higheta_quark_pt1_(morph_higheta_quark_pt1){
   //cout << "2" <<endl;
-  jets_cat_qgl::year_ = year;
-  //jets_cat_qgl::model_dir_ = model_dir;
-  //jets_cat_qgl::verbose = verbose;
+  jets_cat_qgl_nbtag::year_ = year;
+  //jets_cat_qgl_nbtag::model_dir_ = model_dir;
+  //jets_cat_qgl_nbtag::verbose = verbose;
   std::string boosted_path_ = model_dir_ + "/Boosted_SR/DNN/";
   dnn_tensorflow_boosted = new DNNEvaluator(boosted_path_, verbose);
   std::string resolved_path_ = model_dir_ + "/Resolved_SR/DNN/";
@@ -374,30 +374,30 @@ model_dir_(model_dir),model_dir_pruned_(model_dir_pruned) ,verbose(verbose),morp
   std::string resolved_path_pruned_ = model_dir_pruned_ + "/Resolved_SR/DNN/";
   dnn_tensorflow_resolved_pruned = new DNNEvaluator(resolved_path_pruned_, verbose);
   int do_morph_flags = std::stoi(do_morph_,0,2);
-jets_cat_qgl::do_morph_gluon_loweta_pt0 = do_morph_flags & 1;
-jets_cat_qgl::do_morph_gluon_loweta_pt1 = do_morph_flags >>1 & 1;
-jets_cat_qgl::do_morph_gluon_higheta_pt0 = do_morph_flags >> 2 & 1;
-jets_cat_qgl::do_morph_gluon_higheta_pt1 = do_morph_flags >> 3 & 1;
-jets_cat_qgl::do_morph_quark_loweta_pt0 = do_morph_flags >> 4 & 1;
-jets_cat_qgl::do_morph_quark_loweta_pt1 = do_morph_flags >> 5 & 1;
-jets_cat_qgl::do_morph_quark_higheta_pt0 = do_morph_flags >> 6 & 1;
-jets_cat_qgl::do_morph_quark_higheta_pt1 = do_morph_flags >> 7 & 1;
+jets_cat_qgl_nbtag::do_morph_gluon_loweta_pt0 = do_morph_flags & 1;
+jets_cat_qgl_nbtag::do_morph_gluon_loweta_pt1 = do_morph_flags >>1 & 1;
+jets_cat_qgl_nbtag::do_morph_gluon_higheta_pt0 = do_morph_flags >> 2 & 1;
+jets_cat_qgl_nbtag::do_morph_gluon_higheta_pt1 = do_morph_flags >> 3 & 1;
+jets_cat_qgl_nbtag::do_morph_quark_loweta_pt0 = do_morph_flags >> 4 & 1;
+jets_cat_qgl_nbtag::do_morph_quark_loweta_pt1 = do_morph_flags >> 5 & 1;
+jets_cat_qgl_nbtag::do_morph_quark_higheta_pt0 = do_morph_flags >> 6 & 1;
+jets_cat_qgl_nbtag::do_morph_quark_higheta_pt1 = do_morph_flags >> 7 & 1;
 
 TFile rfile {morph_file, "READ"};
-jets_cat_qgl::morphing_functions["gluon_loweta_pt0"] = (TGraph*) rfile.Get(morph_loweta_gluon_pt0);
-jets_cat_qgl::morphing_functions["gluon_loweta_pt1"] = (TGraph*) rfile.Get(morph_loweta_gluon_pt1);
-jets_cat_qgl::morphing_functions["gluon_higheta_pt0"] = (TGraph*) rfile.Get(morph_higheta_gluon_pt0);
-jets_cat_qgl::morphing_functions["gluon_higheta_pt1"] = (TGraph*) rfile.Get(morph_higheta_gluon_pt1);
-jets_cat_qgl::morphing_functions["quark_loweta_pt0"] = (TGraph*) rfile.Get(morph_loweta_quark_pt0);
-jets_cat_qgl::morphing_functions["quark_loweta_pt1"] = (TGraph*) rfile.Get(morph_loweta_quark_pt1);
-jets_cat_qgl::morphing_functions["quark_higheta_pt0"] = (TGraph*) rfile.Get(morph_higheta_quark_pt0);
-jets_cat_qgl::morphing_functions["quark_higheta_pt1"] = (TGraph*) rfile.Get(morph_higheta_quark_pt1);
+jets_cat_qgl_nbtag::morphing_functions["gluon_loweta_pt0"] = (TGraph*) rfile.Get(morph_loweta_gluon_pt0);
+jets_cat_qgl_nbtag::morphing_functions["gluon_loweta_pt1"] = (TGraph*) rfile.Get(morph_loweta_gluon_pt1);
+jets_cat_qgl_nbtag::morphing_functions["gluon_higheta_pt0"] = (TGraph*) rfile.Get(morph_higheta_gluon_pt0);
+jets_cat_qgl_nbtag::morphing_functions["gluon_higheta_pt1"] = (TGraph*) rfile.Get(morph_higheta_gluon_pt1);
+jets_cat_qgl_nbtag::morphing_functions["quark_loweta_pt0"] = (TGraph*) rfile.Get(morph_loweta_quark_pt0);
+jets_cat_qgl_nbtag::morphing_functions["quark_loweta_pt1"] = (TGraph*) rfile.Get(morph_loweta_quark_pt1);
+jets_cat_qgl_nbtag::morphing_functions["quark_higheta_pt0"] = (TGraph*) rfile.Get(morph_higheta_quark_pt0);
+jets_cat_qgl_nbtag::morphing_functions["quark_higheta_pt1"] = (TGraph*) rfile.Get(morph_higheta_quark_pt1);
 rfile.Close();
 }
 
 
 double
-jets_cat_qgl::evaluate(unsigned)
+jets_cat_qgl_nbtag::evaluate(unsigned)
 { 
   //cout << "evaluate event " << *event->Get()<< endl;
   setValues(*run->Get(), *luminosityBlock->Get(), *event->Get());
@@ -420,7 +420,7 @@ jets_cat_qgl::evaluate(unsigned)
   //Boosted
   if (category ==0 ){
           //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
-  //    cout << "boosted full morphed" <<endl; 
+//cout << "boosted bReq full morphed" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -453,7 +453,7 @@ jets_cat_qgl::evaluate(unsigned)
 //Resolved
   }else if (category == 1){
     //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
-//	cout << "resolved full morphed" <<endl;
+//	cout << "resolved breq full morphed" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float vbs_0_qgl_morphed = returnValues[vbs_0_qglmorphed_res];
@@ -488,7 +488,7 @@ jets_cat_qgl::evaluate(unsigned)
         input.push_back(vbs_1_qgl_morphed);
         input.push_back(v_0_qgl_morphed);
         input.push_back(v_1_qgl_morphed);
-        //input.push_back(btag);
+        input.push_back(btag);
         returnValues[dnn_output]= dnn_tensorflow_resolved->analyze(input);
 
     }
@@ -512,7 +512,7 @@ jets_cat_qgl::evaluate(unsigned)
   //carefull, inputs must be in same order than in scaler.txt
   if (category ==0 ){
           //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
-  //    cout << "boosted pruned morphed" << endl;
+	  //      cout << "boosted breq pruned morphed" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -557,13 +557,13 @@ jets_cat_qgl::evaluate(unsigned)
 //Resolved
   }else if (category == 1){
     //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
-//	cout << "resolved pruned morphed" <<endl;
+	//cout << "resolved breq pruned morphed" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
-      float vbs_0_qgl_morphed = (float)returnValues[vbs_0_qglmorphed_res];
-      float vbs_1_qgl_morphed =(float)returnValues[vbs_1_qglmorphed_res];
-      float v_0_qgl_morphed =(float)returnValues[vjet_0_qglmorphed_res];
-      float v_1_qgl_morphed =(float)returnValues[vjet_1_qglmorphed_res];
+      float vbs_0_qgl_morphed = returnValues[vbs_0_qglmorphed_res];
+      float vbs_1_qgl_morphed =returnValues[vbs_1_qglmorphed_res];
+      float v_0_qgl_morphed =returnValues[vjet_0_qglmorphed_res];
+      float v_1_qgl_morphed =returnValues[vjet_1_qglmorphed_res];
 
 
         std::vector<float> input{};
@@ -583,7 +583,6 @@ jets_cat_qgl::evaluate(unsigned)
         input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
         input.push_back( (CleanJet_pt -> At(v_jet2)) );
 	input.push_back(detajj);
-
         //input.push_back( (Lepton_pt->At(0)) );
         //input.push_back( (Lepton_pt->At(1)));
         //input.push_back( (Lepton_eta->At(0)));
@@ -599,7 +598,7 @@ jets_cat_qgl::evaluate(unsigned)
 
 
 
-        //input.push_back(btag);
+        input.push_back(btag);
         returnValues[dnn_output_pruned]= dnn_tensorflow_resolved_pruned->analyze(input);
 
     }
@@ -608,7 +607,7 @@ jets_cat_qgl::evaluate(unsigned)
 }
 
 void
-jets_cat_qgl::bindTree_(multidraw::FunctionLibrary& _library)
+jets_cat_qgl_nbtag::bindTree_(multidraw::FunctionLibrary& _library)
 {   
     _library.bindBranch(run, "run");
     _library.bindBranch(luminosityBlock, "luminosityBlock");
@@ -636,8 +635,8 @@ jets_cat_qgl::bindTree_(multidraw::FunctionLibrary& _library)
     _library.bindBranch(nLepton, "nLepton");
     _library.bindBranch(mll, "mll");
     _library.bindBranch(Jet_btagDeepB, "Jet_btagDeepB");
-    jets_cat_qgl::isRunningOnData = isRunningSample("Run");
-    if (!jets_cat_qgl::isRunningOnData){
+    jets_cat_qgl_nbtag::isRunningOnData = isRunningSample2("Run");
+    if (!jets_cat_qgl_nbtag::isRunningOnData){
       //exclude Data and fakes
        _library.bindBranch(Jet_partonFlavour, "Jet_partonFlavour");
     }
@@ -672,7 +671,7 @@ jets_cat_qgl::bindTree_(multidraw::FunctionLibrary& _library)
 
 /*static*/
 void
-jets_cat_qgl::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
+jets_cat_qgl_nbtag::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
 { //cout << "Set values event :" << _event <<endl;
 
   if (std::get<0>(currentEvent) == _run && \
@@ -739,10 +738,10 @@ returnValues[vjet_1_partfl_res] = 0;
   }
 
   //btag cut values
-  //cout << jets_cat_qgl::year_ <<endl;
-  if (jets_cat_qgl::year_ == "2018") btag_cut=0.1241;
-  else if (jets_cat_qgl::year_ == "2017") btag_cut = 0.1522;
-  else if (jets_cat_qgl::year_ == "2016") btag_cut = 0.2217;
+  //cout << jets_cat_qgl_nbtag::year_ <<endl;
+  if (jets_cat_qgl_nbtag::year_ == "2018") btag_cut=0.1241;
+  else if (jets_cat_qgl_nbtag::year_ == "2017") btag_cut = 0.1522;
+  else if (jets_cat_qgl_nbtag::year_ == "2016") btag_cut = 0.2217;
   //cout << btag_cut <<endl;
   // Load all the quadrivectors for performance reason
   std::vector<TLorentzVector> vectors; 
@@ -775,8 +774,8 @@ returnValues[vjet_1_partfl_res] = 0;
                 
                 if( Mjj_tmp >= Mjj_max ){
                     Mjj_max=Mjj_tmp;
-                    detajj_mjj_max=deltaEtaqgl((vectors.at(ijet)).Eta(),(vectors.at(jjet)).Eta());
-                    dphijj_mjj_max=deltaPhiqgl((vectors.at(ijet)).Phi(),(vectors.at(jjet)).Phi());
+                    detajj_mjj_max=deltaEtaqgl2((vectors.at(ijet)).Eta(),(vectors.at(jjet)).Eta());
+                    dphijj_mjj_max=deltaPhiqgl2((vectors.at(ijet)).Phi(),(vectors.at(jjet)).Phi());
                     // Index in vectors
                     VBS_jets[0]= ijet;
                     VBS_jets[1]= jjet;
@@ -803,7 +802,7 @@ returnValues[vjet_1_partfl_res] = 0;
             returnValues[vjet_0_qgl_res] = -1;
             returnValues[vjet_1_qgl_res] = -1;
 
-            if (!jets_cat_qgl::isRunningOnData){
+            if (!jets_cat_qgl_nbtag::isRunningOnData){
                 returnValues[vbs_0_partfl_boost] = Jet_partonFlavour->At(CleanJet_jetId->At(vbs_jet_0));
                 returnValues[vbs_1_partfl_boost] = Jet_partonFlavour->At(CleanJet_jetId->At(vbs_jet_1));
                 returnValues[vbs_0_partfl_res] = 0;
@@ -870,7 +869,7 @@ returnValues[vjet_1_partfl_res] = 0;
                     }
                 }
             }
-	    //cout << "isrunningondata" << jets_cat_qgl::isRunningOnData <<endl;
+	    //cout << "isrunningondata" << jets_cat_qgl_nbtag::isRunningOnData <<endl;
 	    //cout << "vectors size " << vectors.size() <<endl;
             //cout << "vectors_id.size " << vectors_id.size() <<endl;
 	    //cout << "ncleanjet" << endl;
@@ -903,7 +902,7 @@ returnValues[vjet_1_partfl_res] = 0;
             returnValues[vjet_1_qgl_res] = Jet_qgl->At(CleanJet_jetId->At(v_jet_1));
             //cout << "V 2 " << returnValues[vjet_1_qgl_res]<< endl;
 
-            if (!jets_cat_qgl::isRunningOnData){
+            if (!jets_cat_qgl_nbtag::isRunningOnData){
 		//cout << "running on MC" <<endl;
                 returnValues[vbs_0_partfl_boost] = 0;
                 returnValues[vbs_1_partfl_boost] = 0;
@@ -1017,46 +1016,44 @@ returnValues[vjet_1_partfl_res] = 0;
 }
 
  
-float jets_cat_qgl::getMorphedGluon(float x, float eta, float pt){
-  float eta_sep=3.5;
+float jets_cat_qgl_nbtag::getMorphedGluon(float x, float eta, float pt){
   //cout << "gluon x,eta, pt = " << x << eta << pt <<endl; 
   if (x<= 0.) return x;
   if (x>= 1.) return x;
   float y = x;
-  if (abs(eta)<eta_sep && pt < 75  && jets_cat_qgl::do_morph_gluon_loweta_pt0) {
+  if (abs(eta)<3 && pt < 75  && jets_cat_qgl_nbtag::do_morph_gluon_loweta_pt0) {
 //	cout <<"gluon low eta lowpt "<<endl;
-          y =  jets_cat_qgl::morphing_functions["gluon_loweta_pt0"]->Eval(x);}
-  if (abs(eta)<eta_sep && pt >= 75  && jets_cat_qgl::do_morph_gluon_loweta_pt1) 
-          y =  jets_cat_qgl::morphing_functions["gluon_loweta_pt1"]->Eval(x);
-  if (abs(eta)>=eta_sep && pt < 75  && jets_cat_qgl::do_morph_gluon_higheta_pt0) 
-          y =  jets_cat_qgl::morphing_functions["gluon_higheta_pt0"]->Eval(x);
-  if (abs(eta)>=eta_sep && pt >= 75  && jets_cat_qgl::do_morph_gluon_higheta_pt1) 
-          y =  jets_cat_qgl::morphing_functions["gluon_higheta_pt1"]->Eval(x);
+          y =  jets_cat_qgl_nbtag::morphing_functions["gluon_loweta_pt0"]->Eval(x);}
+  if (abs(eta)<3 && pt >= 75  && jets_cat_qgl_nbtag::do_morph_gluon_loweta_pt1) 
+          y =  jets_cat_qgl_nbtag::morphing_functions["gluon_loweta_pt1"]->Eval(x);
+  if (abs(eta)>=3 && pt < 75  && jets_cat_qgl_nbtag::do_morph_gluon_higheta_pt0) 
+          y =  jets_cat_qgl_nbtag::morphing_functions["gluon_higheta_pt0"]->Eval(x);
+  if (abs(eta)>=3 && pt >= 75  && jets_cat_qgl_nbtag::do_morph_gluon_higheta_pt1) 
+          y =  jets_cat_qgl_nbtag::morphing_functions["gluon_higheta_pt1"]->Eval(x);
   if (y<0) return 0.;
   if (y>1.) return 1.;
   return y;
 }
 
-float jets_cat_qgl::getMorphedQuark(float x, float eta, float pt){
+float jets_cat_qgl_nbtag::getMorphedQuark(float x, float eta, float pt){
   //cout << "quark x,eta, pt = " << x << eta << pt <<endl; 
-  float eta_sep=3.5;
   if (x<= 0.) return x;
   if (x>= 1.) return x;
   float y = x ;
-  if (abs(eta)<eta_sep && pt < 75  && jets_cat_qgl::do_morph_quark_loweta_pt0) 
-          y =  jets_cat_qgl::morphing_functions["quark_loweta_pt0"]->Eval(x);
-  if (abs(eta)<eta_sep && pt >= 75  && jets_cat_qgl::do_morph_quark_loweta_pt1){ 
+  if (abs(eta)<3 && pt < 75  && jets_cat_qgl_nbtag::do_morph_quark_loweta_pt0) 
+          y =  jets_cat_qgl_nbtag::morphing_functions["quark_loweta_pt0"]->Eval(x);
+  if (abs(eta)<3 && pt >= 75  && jets_cat_qgl_nbtag::do_morph_quark_loweta_pt1){ 
 //	cout << "quark low eta high pt" <<endl;
-          y =  jets_cat_qgl::morphing_functions["quark_loweta_pt1"]->Eval(x);
+          y =  jets_cat_qgl_nbtag::morphing_functions["quark_loweta_pt1"]->Eval(x);
 //	cout << "y =" << y <<endl;
 	}
-  if (abs(eta)>=eta_sep && pt < 75  && jets_cat_qgl::do_morph_quark_higheta_pt0){ 
+  if (abs(eta)>=3 && pt < 75  && jets_cat_qgl_nbtag::do_morph_quark_higheta_pt0){ 
 //	cout << "quark high eta low pt" <<endl;
-          y =  jets_cat_qgl::morphing_functions["quark_higheta_pt0"]->Eval(x);
+          y =  jets_cat_qgl_nbtag::morphing_functions["quark_higheta_pt0"]->Eval(x);
 	//cout << "y="<< y<<endl;
 	}
-  if (abs(eta)>=eta_sep && pt >= 75  && jets_cat_qgl::do_morph_quark_higheta_pt1) 
-          y =  jets_cat_qgl::morphing_functions["quark_higheta_pt1"]->Eval(x);
+  if (abs(eta)>=3 && pt >= 75  && jets_cat_qgl_nbtag::do_morph_quark_higheta_pt1) 
+          y =  jets_cat_qgl_nbtag::morphing_functions["quark_higheta_pt1"]->Eval(x);
   if (y<0) return 0.;
   if (y>1.) return 1.;
   return y;

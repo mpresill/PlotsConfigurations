@@ -241,7 +241,7 @@ jets_cat_dnn::evaluate(unsigned)
   //Boosted
   if (category ==0 ){
           //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
-
+     //           cout << "boosted bveto full" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -273,6 +273,7 @@ jets_cat_dnn::evaluate(unsigned)
 
 //Resolved
   }else if (category == 1){
+   //      cout << "resolved bveto full" << endl;
     //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
 
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -330,7 +331,7 @@ jets_cat_dnn::evaluate(unsigned)
   //carefull, inputs must be in same order than in scaler.txt
   if (category ==0 ){
           //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
-
+        // cout << "boosted bveto pruned" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -376,7 +377,7 @@ jets_cat_dnn::evaluate(unsigned)
 //Resolved
   }else if (category == 1){
     //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
-
+      //   cout << "resolved bveto pruned" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
 
