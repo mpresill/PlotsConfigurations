@@ -39,13 +39,13 @@ bool do_morph_quark_loweta_pt0;
 bool do_morph_quark_loweta_pt1;
 bool do_morph_quark_higheta_pt0;
 bool do_morph_quark_higheta_pt1;
-int eta_sep =2.4;
+int eta_sep =3.5;
 double morph_gluon(double x, double eta, double pt ){
     double y = x;
     if (x<= 0.) return x;
     if (x>= 1.) return x;
 
-    if (abs(eta)<eta_sep)  {
+    if (abs(eta)<2.9)  {
         if (pt < 75 && do_morph_gluon_loweta_pt0) {
             y = morph_gluon_loweta_pt0->Eval(x);
         }else if (pt > 75 && do_morph_gluon_loweta_pt1){
@@ -104,13 +104,13 @@ HistosMap getHistos(RNode rdf, string name, string sample, string jet_type){
         // {name+"_"+jet_type+"_qgl_pt2", rdf.Filter(name + "_pt >= 100")
         //                                   .Histo1D({(sample + "_" +name+"_"+jet_type +"_qgl_pt2").c_str(), "QGL", 200,0,1}, ( name +qgl_var).c_str(), "weight")},
         
-        {name+"_"+jet_type+"_qgl_higheta_pt0", rdf.Filter( name + "_aeta > 3 && " + name + "_pt < 75")
+        {name+"_"+jet_type+"_qgl_higheta_pt0", rdf.Filter( name + "_aeta > 3.5 && " + name + "_pt < 75")
                                               .Histo1D({(sample + "_" + name +"_"+jet_type+"_qgl_higheta_pt0").c_str(), "QGL", 200,0,1}, (name +qgl_var).c_str(), "weight")},
-        {name+"_"+jet_type+"_qgl_higheta_pt1", rdf.Filter( name + "_aeta > 3 && " + name + "_pt >= 75")
+        {name+"_"+jet_type+"_qgl_higheta_pt1", rdf.Filter( name + "_aeta > 3.5 && " + name + "_pt >= 75")
                                               .Histo1D({(sample + "_" + name +"_"+jet_type+"_qgl_higheta_pt1").c_str(), "QGL", 200,0,1}, (name +qgl_var).c_str(), "weight")},
-        {name+"_"+jet_type+"_qgl_loweta_pt0",  rdf.Filter( name + "_aeta <= 2 && " + name + "_pt < 75")
+        {name+"_"+jet_type+"_qgl_loweta_pt0",  rdf.Filter( name + "_aeta <= 2.9 && " + name + "_pt < 75")
                                               .Histo1D({(sample + "_" + name +"_"+jet_type+"_qgl_loweta_pt0").c_str(), "QGL", 200,0,1}, (name +qgl_var).c_str(), "weight")},
-        {name+"_"+jet_type+"_qgl_loweta_pt1",  rdf.Filter( name + "_aeta <= 2 && " + name + "_pt >= 75" )
+        {name+"_"+jet_type+"_qgl_loweta_pt1",  rdf.Filter( name + "_aeta <= 2.9 && " + name + "_pt >= 75" )
                                               .Histo1D({(sample + "_" + name +"_"+jet_type+"_qgl_loweta_pt1").c_str(), "QGL", 200,0,1}, (name +qgl_var).c_str(), "weight")},
         
         // {name+"_"+jet_type+"_pt", rdf.Histo1D({(sample + "_" +name+"_"+jet_type+ "_pt").c_str(), "pt", 50,30,300}, (name + "_pt").c_str(), "weight")},
@@ -163,7 +163,7 @@ int main(int argc, char** argv){
     bool mt = true;
     
     //std::vector<string> samples_mc = {"VBS", "DY", "Wjets_HT", "top", "VV","VVV","VBF-V", "Vg","VgS"};
-    std::vector<string> samples_mc = {"VBS_ZV", "DY", "top","VVV", "Vg","VgS", "VBF-V", "tZq", "WGJJ", "VBS_VV_QCD", "WJets","WW", "ggWW", "VZ" };
+    std::vector<string> samples_mc = {"VBS_ZV", "DY", "top","VVV", "Vg","VgS", "tZq", "WJets","WW", "ggWW", "VZ" }; //"VBF-V", "VBS_VV_QCD"
     std::vector<string> samples_data = {"DATA", "Fake"};
     
     //Enabling multithread

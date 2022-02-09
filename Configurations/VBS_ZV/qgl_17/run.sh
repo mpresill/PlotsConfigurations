@@ -5,7 +5,7 @@
 BASEDIR=`pwd`/Remorphing
 mkdir $BASEDIR
 #No correction
-./rdf_analyzer_morph_ptorder.o rootFile_12Jul2021_2018_qgltest/plots_VBS_ZV_12Jul2021_2018_qgltest.root Resolved_DYcr \
+./rdf_analyzer_morph_ptorder.o rootFile_19Dec2021_2017_qgl/plots_VBS_ZV_19Dec2021_2017_qgl.root Resolved_DYcr \
         ./output_histos_Resolved_DYcr_iter0.root  \
         0 A A A A A  A A A A 
 
@@ -28,7 +28,7 @@ hadd -f morphing_functions_step1.root output_Resolved_DYcr_iter0/morphing_gluon_
 
 cd ..
 #first iteration: use purest regions corrections
-./rdf_analyzer_morph_ptorder.o rootFile_12Jul2021_2018_qgltest/plots_VBS_ZV_12Jul2021_2018_qgltest.root Resolved_DYcr \
+./rdf_analyzer_morph_ptorder.o  rootFile_19Dec2021_2017_qgl/plots_VBS_ZV_19Dec2021_2017_qgl.root Resolved_DYcr \
          output_histos_Resolved_DYcr_iter1.root  \
          11111111 $BASEDIR/morphing_functions_step1.root \
          j3_loweta_pt0_gluon j3_loweta_pt0_gluon j3_loweta_pt0_gluon j3_loweta_pt0_gluon \

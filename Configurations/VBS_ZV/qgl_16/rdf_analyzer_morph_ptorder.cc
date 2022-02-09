@@ -163,7 +163,7 @@ int main(int argc, char** argv){
     bool mt = true;
     
     //std::vector<string> samples_mc = {"VBS", "DY", "Wjets_HT", "top", "VV","VVV","VBF-V", "Vg","VgS"};
-    std::vector<string> samples_mc = {"VBS_ZV", "DY", "top","VVV", "Vg","VgS", "VBF-V", "tZq", "WGJJ", "VBS_VV_QCD", "WJets","WW", "ggWW", "VZ" };
+    std::vector<string> samples_mc = {"VBS_ZV", "DY", "top","VVV", "Vg","VgS", "tZq", "WJets","WW", "ggWW", "VZ" }; //"VBF-V", "VBS_VV_QCD"
     std::vector<string> samples_data = {"DATA", "Fake"};
     
     //Enabling multithread
