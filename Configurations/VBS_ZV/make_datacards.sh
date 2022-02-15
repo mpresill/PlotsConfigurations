@@ -1,5 +1,5 @@
 #! /bin/bash
-DATE=15Feb021_2016_btag
+DATE=24Nov2021_2018
 #10Dic2020_2017_nobtag #change date 
 #mkShapesMulti.py --pycfg=configuration.py --batchSplit=Samples,Files
 
@@ -16,7 +16,7 @@ DATE=15Feb021_2016_btag
 #to resubmit jobs:
 #for i in *jid; do sed -i "s/longlunch/microcentury/g" ${i/jid/jds}; condor_submit ${i/jid/jds}; done
 
-cd 2016_v7_Jan21
+cd 2018_alexandre
 #to make datacard:
 mkDatacards.py --pycfg configuration.py --inputFile rootFile_${DATE}/plots_VBS_ZV_${DATE}.root #plots_VBS_ZV_${DATE}.root
 

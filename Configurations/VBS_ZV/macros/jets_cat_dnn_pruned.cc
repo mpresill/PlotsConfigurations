@@ -79,11 +79,7 @@ protected:
     Zleppt,
     Vpt,
     dnn_output,
-    dnn_output_pruned,
-    vbs_jet_pt1,
-    vbs_jet_pt2,
-    v_jet_pt1,
-    v_jet_pt2, 
+    dnn_output_pruned, 
     nVarTypes
   };
   
@@ -197,14 +193,6 @@ jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* mod
       returnVar_ = dnn_output;
       else if (type == "dnn_output_pruned")
       returnVar_ = dnn_output_pruned;
-    else if (type == "vbs_jet_pt1")
-      returnVar_ = vbs_jet_pt1;
-    else if (type == "vbs_jet_pt2")
-      returnVar_ = vbs_jet_pt2;
-    else if (type == "v_jet_pt1")
-      returnVar_ = v_jet_pt1;
-    else if (type == "v_jet_pt2")
-      returnVar_ = v_jet_pt2;
     else
       throw std::runtime_error("unknown return type " + type);
     jets_cat_dnn::year_ = year;
@@ -253,7 +241,7 @@ jets_cat_dnn::evaluate(unsigned)
   //Boosted
   if (category ==0 ){
           //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
-
+     //           cout << "boosted bveto full" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -279,12 +267,13 @@ jets_cat_dnn::evaluate(unsigned)
       input.push_back(Zvjet);
       input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet1))));
       input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
-      input.push_back(btag);
+      //input.push_back(btag);
 
       returnValues[dnn_output]= dnn_tensorflow_boosted->analyze(input);
 
 //Resolved
   }else if (category == 1){
+   //      cout << "resolved bveto full" << endl;
     //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
 
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -318,7 +307,7 @@ jets_cat_dnn::evaluate(unsigned)
         input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
         input.push_back((Jet_qgl->At(CleanJet_jetId->At(v_jet1))));
         input.push_back((Jet_qgl->At(CleanJet_jetId->At(v_jet2))));
-        input.push_back(btag);
+        //input.push_back(btag);
         returnValues[dnn_output]= dnn_tensorflow_resolved->analyze(input);
 
     }
@@ -342,7 +331,7 @@ jets_cat_dnn::evaluate(unsigned)
   //carefull, inputs must be in same order than in scaler.txt
   if (category ==0 ){
           //cout <<"event "<<*event->Get()<<  " : Boosted  "<<returnValues[vbs_category]<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<  endl;
-
+        // cout << "boosted bveto pruned" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zvjet = ((FatJet_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
@@ -353,11 +342,12 @@ jets_cat_dnn::evaluate(unsigned)
       input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
       input.push_back((FatJet_pt->At(0))); 
       input.push_back((CleanJet_eta->At(vbs_jet2)));  
-      input.push_back(detajj);    
+      //input.push_back(detajj);    
       input.push_back((FatJet_eta->At(0)));    
       input.push_back((CleanJet_eta->At(vbs_jet1)));    
       input.push_back((CleanJet_pt->At(vbs_jet2)));
       input.push_back(Zlep_1);
+      input.push_back(detajj);
 
 
       //input.push_back((Lepton_pt->At(0))); 
@@ -387,7 +377,7 @@ jets_cat_dnn::evaluate(unsigned)
 //Resolved
   }else if (category == 1){
     //cout <<"event "<<*event->Get()<<  " : Resolved  "<<" vbs1 : " << vbs_jet1 << " vbs2: "<< vbs_jet2 <<" v1 : " << v_jet1 << " v2: "<< v_jet2 <<  endl;
-
+      //   cout << "resolved bveto pruned" << endl;
       float Zlep_1 = ((Lepton_eta->At(0)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
       float Zlep_2 = ((Lepton_eta->At(1)) - 0.5 * ((CleanJet_eta->At(vbs_jet1)) + (CleanJet_eta->At(vbs_jet2)))) / detajj;
 
@@ -400,7 +390,7 @@ jets_cat_dnn::evaluate(unsigned)
         input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet1))));
         input.push_back( Zlep_1 );
         input.push_back((Jet_qgl->At(CleanJet_jetId->At(vbs_jet2))));
-        input.push_back( detajj);
+        //input.push_back( detajj);
         input.push_back( Zlep_2 );
         input.push_back( (CleanJet_eta -> At(v_jet1)) );
         input.push_back( (CleanJet_eta -> At(v_jet2)) ); 
@@ -408,7 +398,7 @@ jets_cat_dnn::evaluate(unsigned)
         input.push_back( (CleanJet_pt -> At(vbs_jet2)) );
         input.push_back( (CleanJet_pt -> At(vbs_jet1)) );
         input.push_back( (CleanJet_pt -> At(v_jet2)) );
-
+	input.push_back( detajj);
 
         //input.push_back( (Lepton_pt->At(0)) );
         //input.push_back( (Lepton_pt->At(1)));
@@ -521,10 +511,6 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   std::vector<int> vectors_id;
   float _Zleppt =0.;
   float _Vpt = 0.;
-  int vbs_jet_0 = 999;
-  int vbs_jet_1 = 999;
-  int v_jet_0 = 999;
-  int v_jet_1 = 999;
   returnValues[Vpt]=-999;
   returnValues[Zleppt] = -999;
   //cout <<  returnValues[Zleppt] << endl;
@@ -559,6 +545,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
             }
         } 
     }
+
   njet=vectors.size();
 
   if (njet>=2){
@@ -583,8 +570,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
                 }
             }
         }
-	vbs_jet_0 = CleanJetNotFat_jetId->At(vectors_id.at(VBS_jets[0]));
-    	vbs_jet_1 = CleanJetNotFat_jetId->At(vectors_id.at(VBS_jets[1]));
+
         // Now we have the njets
         // Check if boosted
         if (nFJ >= 1){
@@ -618,8 +604,6 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
                     }
                 }
             }
-        v_jet_0 =CleanJetNotFat_jetId->At(vectors_id.at(V_jets[0]));
-        v_jet_1 =CleanJetNotFat_jetId->At(vectors_id.at(V_jets[1]));
         }else{
             category = 3;
         }
@@ -631,17 +615,15 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
         
     //set default values
     returnValues[Vpt]=_Vpt;
-    returnValues[vbs_jet_0] = 995;
-    returnValues[vbs_jet_1] = 996;
-    returnValues[v_jet_0] = 997;
-    returnValues[v_jet_1] = 998;
+    returnValues[vbs_jet_0] = 999;
+    returnValues[vbs_jet_1] = 999;
+    returnValues[v_jet_0] = 999;
+    returnValues[v_jet_1] = 999;
     returnValues[dnn_output] = -0.2;
 
 
   // Now go back to CleanJet indexes for easy use of the collection
     if (category != 3) {
-            returnValues[vbs_jet_pt1] = CleanJet_pt->At(vbs_jet_0);
-            returnValues[vbs_jet_pt2] = CleanJet_pt->At(vbs_jet_1);
          //cout << "event " << _event << endl;
         if (VBS_jets[0] != 999) returnValues[vbs_jet_0] = CleanJetNotFat_jetId->At(vectors_id.at(VBS_jets[0]));
         else   cout << "error : Boosted or resolved category but VBS_jets[0] = 999"       << endl;     
@@ -650,8 +632,6 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
         else   cout << "error : Boosted or resolved category but VBS_jets[1] = 999" << endl;                  
         
         if (category ==1){
-            returnValues[v_jet_pt1] = CleanJet_pt->At(v_jet_0);
-            returnValues[v_jet_pt2] = CleanJet_pt->At(v_jet_1);
             if (V_jets[0] != 999) returnValues[v_jet_0] = CleanJetNotFat_jetId->At(vectors_id.at(V_jets[0]));
             else       cout << "error :resolved category but V_jets[0] = 999" << endl;               
 
@@ -695,4 +675,3 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
 
      
 }
-

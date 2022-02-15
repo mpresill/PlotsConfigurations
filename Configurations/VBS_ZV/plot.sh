@@ -1,11 +1,11 @@
 #! /bin/bash
-DATE=18Feb2021_2016_btag #change date 
+DATE=28Oct2021_2016 #change date 
 #mkShapesMulti.py --pycfg=configuration.py --batchSplit=Samples,Files
 
 #mkShapesMulti.py --pycfg=configuration.py --doBatch=1 --batchSplit=Samples,Files --batchQueue=longlunch  #espresso #longlunch #--dry-run
 
 ##mkShapesMulti.py --pycfg=configuration.py --doHadd=1 --batchSplit=Samples,Files --doNotCleanup --nThreads=10 #to hadd files
-cd 2016_v7_Jan21
+cd 2016_v7_2
 
 mkPlot.py --pycfg=configuration.py --inputFile=rootFile_${DATE}/plots_VBS_ZV_${DATE}.root --minLogC=0.01 --minLogCratio=0.01 --maxLogC=10000 --maxLogCratio=10000  --showIntegralLegend=1 #--plotNormalizedDistributions #--fileFormats=png,eps
 #--showNormalizedDistributions
