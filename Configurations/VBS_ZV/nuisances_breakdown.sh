@@ -22,19 +22,19 @@ text2workspace.py ../${inputFOLDER}/${cardName}.txt -o ${cardNameWorkspace}.root
     ## 1. Breakdown into stat. and syst.
 
     ## run postfit with all nuisances floating and store it in an output
-combine ${cardNameWorkspace}.root -M MultiDimFit --rMin -20 --rMax 20--saveWorkspace -n ${CHANNEL}${DATACARD_NAME}.postfit
+combine ${cardNameWorkspace}.root -M MultiDimFit -t -1 --rMin -10 --rMax 10 --saveWorkspace -n ${CHANNEL}${DATACARD_NAME}.postfit
     ## run a scan from the postfit created
 combine higgsCombine${CHANNEL}${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -20 --rMax 20-n ${CHANNEL}${DATACARD_NAME}.total --algo grid --snapshotName MultiDimFit 
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 -n ${CHANNEL}${DATACARD_NAME}.total --algo grid --snapshotName MultiDimFit 
 
     ## freeze theory unc.
 combine higgsCombine${CHANNEL}${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -20 --rMax 20 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --algo grid --snapshotName MultiDimFit \
     --freezeNuisanceGroups Theory -n ${CHANNEL}${DATACARD_NAME}.freeze_theory
 
     ## freeze all nuisances
 combine higgsCombine${CHANNEL}${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -20 --rMax 20 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --algo grid --snapshotName MultiDimFit \
     --freezeParameters allConstrainedNuisances -n ${CHANNEL}${DATACARD_NAME}.freeze_all
 
     ## plotting and copying to my webpage
@@ -56,58 +56,58 @@ cp freeze_th_exp_st.pdf ${WEB_FOLDER}/${inputFOLDER}/${CHANNEL}${DATACARD_NAME}_
     ## 2.  breakdown in several uncertainties
 
     ## run postfit with all nuisances floating and store it in an output
-combine ${cardNameWorkspace}.root -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --saveWorkspace -n ${DATACARD_NAME}.postfit
+combine ${cardNameWorkspace}.root -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --saveWorkspace -n ${DATACARD_NAME}.postfit
     ## run a scan from the postfit created
 combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 -n ${DATACARD_NAME}.total --algo grid \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 -n ${DATACARD_NAME}.total --algo grid \
     --snapshotName MultiDimFit 
 
 
     ##  freezing lepton SFs
 combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
     --freezeNuisanceGroups leptonSF -n ${DATACARD_NAME}.freeze_leptonSF
 
     ##  freezing JEC/JER
 combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
     --freezeNuisanceGroups leptonSF,Jet -n ${DATACARD_NAME}.freeze_Jet
 
     ##  freezing PU 
 combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
     --freezeNuisanceGroups leptonSF,Jet,PU -n ${DATACARD_NAME}.freeze_PU
 
     ##  freezing leptonEN 
 combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
     --freezeNuisanceGroups leptonSF,Jet,PU,leptonEN -n ${DATACARD_NAME}.freeze_leptonEN
 
 
     ##  freezing TOP normalization  
 combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
     --freezeNuisanceGroups leptonSF,Jet,PU,leptonEN,TOPnorm -n ${DATACARD_NAME}.freeze_TOPnorm
 
     ##  freezing DYestimate  
 combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
     --freezeNuisanceGroups leptonSF,Jet,PU,leptonEN,TOPnorm,DYestimate -n ${DATACARD_NAME}.freeze_DYestimate
 
     ##  freezing theoretical uncertainties
 combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
     --freezeNuisanceGroups leptonSF,Jet,PU,leptonEN,TOPnorm,DYestimate,Theory -n ${DATACARD_NAME}.freeze_Theory
 
-    ##  freezing luminosity: we don't need to separate it
+    ##  freezing luminosity: we don't need to separate it, but if we want to add other splitting items, here is the way.
 #combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-#    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
+#    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
 #    --freezeNuisanceGroups leptonSF,Jet,PU,leptonEN,TOPnorm,DYestimate,Theory,lumi -n ${DATACARD_NAME}.freeze_lumi
 
 
     ##  freezing all nuis: scan with all nuisances frozen (for the purely data-statistical component breakdown)
 combine higgsCombine${DATACARD_NAME}.postfit.MultiDimFit.mH120.root \
-    -M MultiDimFit --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
+    -M MultiDimFit -t -1 --rMin -10 --rMax 10 --cminDefaultMinimizerStrategy 0 --algo grid --snapshotName MultiDimFit \
     --freezeParameters allConstrainedNuisances -n ${DATACARD_NAME}.freeze_all
 
 
