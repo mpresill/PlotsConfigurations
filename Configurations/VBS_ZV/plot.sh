@@ -1,16 +1,17 @@
 #! /bin/bash
-DATE=15Dec2020 #change date 
+VERS=2017_dec21 #2017_sep21
+DATE=02Feb2022_2017_qgl #change date 
 #mkShapesMulti.py --pycfg=configuration.py --batchSplit=Samples,Files
 
 #mkShapesMulti.py --pycfg=configuration.py --doBatch=1 --batchSplit=Samples,Files --batchQueue=longlunch  #espresso #longlunch #--dry-run
 
 ##mkShapesMulti.py --pycfg=configuration.py --doHadd=1 --batchSplit=Samples,Files --doNotCleanup --nThreads=10 #to hadd files
-cd 2018_SR_new
+cd ${VERS}
 
-mkPlot.py --pycfg=configuration.py --inputFile=rootFile_${DATE}/plots_VBS_ZV_${DATE}.root --minLogC=0.01 --minLogCratio=0.01 --maxLogC=10000 --maxLogCratio=10000  --showIntegralLegend=1 --plotNormalizedDistributions #--fileFormats=png,eps
+mkPlot.py --pycfg=configuration.py --inputFile=rootFile_${DATE}/plots_VBS_ZV_${DATE}.root --minLogC=0.01 --minLogCratio=0.01 --maxLogC=10000 --maxLogCratio=10000  --showIntegralLegend=1 --onlyPlot=cratio --logOnly #--fileFormats=png,eps
 #--showNormalizedDistributions
 
-#cp /eos/user/m/mpresill/www/VBS/2018_v7/index.php /eos/user/m/mpresill/www/VBS/2018_v7/PlotsVBS_ZV_${DATE}/.
+cp *.py /eos/home-a/ahakimi/www/ZV_analysis/Plots_${DATE}/
 #rm -rf /eos/user/m/mpresill/www/VBS/2018_v7/PlotsVBS_ZV_${DATE}*root
 
 cd ..

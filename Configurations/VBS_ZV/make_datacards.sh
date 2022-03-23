@@ -1,5 +1,6 @@
 #! /bin/bash
-DATE=26Nov2020 #change date 
+YEAR=2018_dec21
+DATE=03Feb2022_2018 #change date 
 #mkShapesMulti.py --pycfg=configuration.py --batchSplit=Samples,Files
 
 #mkShapesMulti.py --pycfg=configuration.py --doBatch=1 --batchSplit=Samples,Files --batchQueue=longlunch  #espresso #longlunch #--dry-run
@@ -16,5 +17,5 @@ DATE=26Nov2020 #change date
 #for i in *jid; do sed -i "s/longlunch/microcentury/g" ${i/jid/jds}; condor_submit ${i/jid/jds}; done
 
 #to make datacard:
-cd 2017_v7
+cd ${YEAR}
 mkDatacards.py --pycfg configuration.py --inputFile rootFile_${DATE}/plots_VBS_ZV_${DATE}.root
