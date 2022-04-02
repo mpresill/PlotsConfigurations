@@ -12,6 +12,8 @@ structure['DY']  = {
               }
 """
 
+
+"""
 phase_spaces_boost = [c for c in cuts if "Boosted" in c]
 phase_spaces_res = [c for c in cuts if "Resolved" in c]
 
@@ -21,6 +23,10 @@ for bin in range(1,7):
     DY_bins.append("DY_Resolved_Z_"+str(bin))
 #for bin in range(1,6):
 #     DY_bins.append("DY_B_bin"+str(bin))
+"""
+
+
+
 """
 for DYbin in DY_bins:
         if 'Boosted' in DYbin:
@@ -40,10 +46,6 @@ structure['DY'] = {
 		'isSignal': 0,
 		'isData':0
 }
-
-
-
-
 
 structure['WJets']  = {  
                   'isSignal' : 0,
@@ -109,7 +111,7 @@ structure['VBS_VV_QCD'] = {
                   'isData'   : 0,
                   }
 
-structure['VBS_ZV'] = {
+structure['sm'] = {
                   'isSignal' : 1,
                   'isData'   : 0    
                   }
@@ -117,14 +119,24 @@ structure['tZq'] = {
                   'isSignal' : 0,
                   'isData'   : 0
                   }
-structure['WGJJ'] = {
-                  'isSignal' : 0,
-                  'isData'   : 0
+###################
+##  EFT samples ###
+###################
+structure['quad_cT2'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
+                  }
+structure['sm_lin_quad_cT2'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
                   }
 
+
+
+
+
+
 # data
-
-
 structure['DATA']  = { 
                   'isSignal' : 0,
                   'isData'   : 1 

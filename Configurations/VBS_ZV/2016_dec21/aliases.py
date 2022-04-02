@@ -233,6 +233,22 @@ aliases['V_jet_mass'] = {
 
 ############################################################
 ############################################################
+# NEW VARIABLE
+
+
+
+aliases['mZV'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        'gSystem->Load("libDNNEvaluator.so")',
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
+    ],
+    'class': 'jets_cat_dnn',
+    'args': ('mZV','2016', models_path,models_path_pruned, False)
+}
+
+############################################################
+############################################################
 
 # PostProcessing did not create (anti)topGenPt for ST samples with _ext1
 lastcopy = (1 << 13)

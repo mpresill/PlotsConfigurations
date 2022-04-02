@@ -28,9 +28,10 @@ from LatinoAnalysis.Tools.HiggsXSection import HiggsXSection
 HiggsXS = HiggsXSection()
 
 
-mc        = ["WGJJ", "DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","tZq", "VBS_ZV", "VBS_VV_QCD" ]#,"VBS_ZV_aQGCs", "VBF-V missing
+# redefine sampels
+mc        = ["WGJJ", "DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","tZq", "sm", "VBS_VV_QCD" ,"quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"   ] #,"sm_aQGCs", "VBF-V missing
 mc_common = ["WGJJ", "DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","tZq"] #"VBF-V", missing
-mc_eos    = ["VBS_ZV", "VBS_VV_QCD"]#,"VBS_ZV_aQGCs"
+mc_eos    = ["sm", "VBS_VV_QCD"                                                                             ,"quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"   ] #,"sm_aQGCs"
 
 
 ################################ EXPERIMENTAL UNCERTAINTIES  #################################
@@ -162,7 +163,7 @@ nuisances['eff_e'] = {
     'name': 'CMS_eff_e_2016',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc),#if skey not in ['VBS_ZV','VBS_VV_QCD']
+    'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc),#if skey not in ['sm','VBS_VV_QCD']
 }
 
 nuisances['electronpt'] = {
@@ -174,7 +175,7 @@ nuisances['electronpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc_common),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
-    #'AsLnN': '1'
+    'AsLnN': '1'
 }
 #this is for the signals since they are in a different eos folder
 nuisances['electronpt_SMPeos'] = {
@@ -206,7 +207,7 @@ nuisances['muonpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc_common),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
-    #'AsLnN': '1'
+    'AsLnN': '1'
 }
 #this is for the signals
 nuisances['muonpt_SMPeos'] = {
@@ -285,7 +286,7 @@ for js in jes_systs:
       'samples': dict((skey, ['1', '1']) for skey in mc_common),  # if skey not in ['DY'] ###CHECK IF THIS IS STILL TRUE: Do we have all the DY samples shapes UP/DOWN for this available?
       'folderUp': folderup,
       'folderDown': folderdo,
-     # 'AsLnN': '1'
+      'AsLnN': '1'
   }
 
 
@@ -320,7 +321,7 @@ for js_VBS_ZV in jes_systs:
       'samples':  dict((skey, ['1','1']) for skey in mc_eos),
       'folderUp': folderup_signal,
       'folderDown': folderdo_signal,
-#      'AsLnN': '1'
+      'AsLnN': '1'
   }
 ##### Pileup
 puid_syst = ['Jet_PUIDSF_up/Jet_PUIDSF', 'Jet_PUIDSF_down/Jet_PUIDSF']
@@ -335,10 +336,9 @@ nuisances['jetPUID'] = {
 
 
 ##### PS and UE missing
-##### PS: taken from 2017, need to update to 2016
 
-samples_PS = ['VBS_ZV','VV','Vg','VgS','VBF-V']
-samples_PS_lnN= ['VBS_VV_QCD', 'VVV', 'ggWW', 'top'] 
+samples_PS = ['sm','VV','Vg','VgS', ]
+samples_PS_lnN= ['VBS_VV_QCD', 'VVV', 'ggWW', 'top','VBF-V'] 
 #DY removed for binning for now
 #VBS_VV_QCD, VVV, ggWW,top missing
 
@@ -393,6 +393,17 @@ for sample in mc :
             'samples'  :  { sample: ["LHEScaleWeight[0]", "LHEScaleWeight[8]"] }
         }
 
+# 30 march 2022 patch:
+# Weight missing, but from other analysese studies this looks a good estimate for our phase spaace.
+nuisances['QCD_scale_ggWW']  = {
+    'name'  : 'QCDscale_ggWW',
+    'type'  : 'lnN',
+    'samples'  : {
+        'ggWW' : '1.14',
+    },
+}
+
+
 # An overall 1.5% UE uncertainty will cover all the UEup/UEdo variations
 # And we don't observe any dependency of UE variations on njet
 nuisances['UE']  = {
@@ -402,6 +413,38 @@ nuisances['UE']  = {
                 'samples': dict((skey, '1.015') for skey in mc),
 }
 
+
+################# Theory nuisance: PDF
+
+nuisances['pdf']  = {
+               'name'  : 'pdf',
+               'type'  : 'lnN',
+               'samples'  : {
+                   'ggWW'    : '1.05',
+                   'WW'      : '1.04',
+                   'Vg'      : '1.04',
+                   'VZ'      : '1.04',
+                   'VgS'     : '1.04',
+                   #'DY'      : '1.002', # For HM category, no DY CR
+                   },
+              }
+
+######## PDF uncertainty TO BE CHECKED.
+#nuisances['pdf_weight'] = {
+#    'name'  : 'pdf_weight_1718',
+#    'kind'  : 'weight_envelope',
+#    'type'  : 'shape',
+#    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["VBS", "VBS_dipoleRecoil", "top"]+wjets_all_bins},
+#    'AsLnN':  '1'
+#}
+#
+#nuisances['pdf_weight_VBS'] = {
+#    'name'  : 'pdf_weight_1718_accept',
+#    'kind'  : 'weight_envelope',
+#    'type'  : 'shape',
+#    'samples' :  { "VBS": [ 'Alt$(PDFweight_normalized['+str(i)+'], 1.)' for i in range(0,103) ],
+#                   "VBS_dipoleRecoil": [ 'Alt$(PDFweight_normalized['+str(i)+'], 1.)' for i in range(0,103) ]}
+#}
 
 
 ####### Generic "cross section uncertainties"
@@ -446,50 +489,36 @@ nuisances['VZ'] = {
     }
 }
 
-## PDF
-
-nuisances['pdf']  = {
-               'name'  : 'pdf',
-               'type'  : 'lnN',
-               'samples'  : {
-                   'ggWW'    : '1.05',
-                   'WW'      : '1.04',
-                   'Vg'      : '1.04',
-                   'VZ'      : '1.04',
-                   'VgS'     : '1.04',
-                   #'DY'      : '1.002', # For HM category, no DY CR
-                   },
-              }
 
 
 ## rate parameters
-nuisances['Topnorm_boosted']  = {
-               'name'  : 'Topnorm_boosted_2016',
-               'samples'  : {
-                   'top' : '1.00',
-                   },
-               'type'  : 'rateParam',
-               'cuts'  : [
-                   'Boosted_topcr',
-                   'Boosted_SR',
-                   ]
-              }
-
-nuisances['Topnorm_resolved']  = {
-               'name'  : 'Topnorm_resolved_2016',
-               'samples'  : {
-                   'top' : '1.00',
-                   },
-               'type'  : 'rateParam',
-               'cuts'  : [
-                   'Resolved_topcr',
-                   'Resolved_SR',
-                   ]
-              }
-DY_bins=[]
-for bin in range(1,7):
-        DY_bins.append("DY_Resolved_Z_" + str(bin))
-        DY_bins.append("DY_Boosted_Z_" + str(bin))
+#nuisances['Topnorm_boosted']  = {
+#               'name'  : 'Topnorm_boosted_2016',
+#               'samples'  : {
+#                   'top' : '1.00',
+#                   },
+#               'type'  : 'rateParam',
+#               'cuts'  : [
+#                   'Boosted_topcr',
+#                   'Boosted_SR',
+#                   ]
+#              }
+#
+#nuisances['Topnorm_resolved']  = {
+#               'name'  : 'Topnorm_resolved_2016',
+#               'samples'  : {
+#                   'top' : '1.00',
+#                   },
+#               'type'  : 'rateParam',
+#               'cuts'  : [
+#                   'Resolved_topcr',
+#                   'Resolved_SR',
+#                   ]
+#              }
+#DY_bins=[]
+#for bin in range(1,7):
+#        DY_bins.append("DY_Resolved_Z_" + str(bin))
+#        DY_bins.append("DY_Boosted_Z_" + str(bin))
 #for bin in range(1,6):
 #        DY_bins.append("DY_B_bin" + str(bin))
 #DYrates=[0.899,0.874,0.774,0.631,0.69,0.514,1,1,1,1,1]

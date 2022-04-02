@@ -125,40 +125,21 @@ samples['VBS_ZV'] = {
              #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
              +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil'),
     'weight':  mcCommonWeight,
-    'FilesPerJob': 7
+    'FilesPerJob': 15,
+    'EventsPerJob' : 70000,
 }
 addSampleWeight(samples,'VBS_ZV','WmTo2J_ZTo2_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0')
 addSampleWeight(samples,'VBS_ZV','WpTo2J_ZTo2_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0')
-"""
-samples['tZq'] = {
-    'name':  nanoGetSampleFiles(mcDirectory, 'WmTo2J_ZTo2L')
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             +nanoGetSampleFiles(mcDirectory, 'WpTo2J_ZTo2L'),
-    'weight':  mcCommonWeight + '*(Sum$(abs(GenPart_pdgId)==6)>=1)',
-    'FilesPerJob': 1
-}
-"""
+
+
 samples['tZq'] = {
 	'name' : nanoGetSampleFiles(mcDirectory, 'tZq_ll_4f'),
 	'weight' : mcCommonWeight,
-	'FilesPerJob': 1,
-	'EventsPerJob': 70000
+    'FilesPerJob': 15,
+    'EventsPerJob' : 70000,
 }
 
 
-
-"""
-samples['tZq'] = {
-        'name' : nanoGetSampleFiles(mcDirectory, 'tZq_ll_4f'),
-        'weight' : mcCommonWeight,
-        'FilesPerJob': 7,
-}
-"""
 ###########################################
 #############  BACKGROUNDS  ###############
 ###########################################
@@ -175,8 +156,8 @@ samples['VBS_VV_QCD'] = {
              +nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J_QCD')        
              +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L_QCD'),
     'weight':  mcCommonWeight,
-    'FilesPerJob': 1,
-    'EventsPerJob': 70000
+    'FilesPerJob': 15,
+    'EventsPerJob' : 70000,
 }
 
 ########## DY #### consider using HT binned after Davide's studies.
@@ -210,7 +191,7 @@ samples['DY'] = {
         'name': files,
         'weight': mcCommonWeight + "*( !(Sum$(PhotonGen_isPrompt==1 && PhotonGen_pt>15 && abs(PhotonGen_eta)<2.6) > 0 &&\
                                          Sum$(LeptonGen_isPrompt==1 && LeptonGen_pt>15)>=2) )",
-        'FilesPerJob': 4,
+        'FilesPerJob': 6,
        'EventsPerJob' : 70000,
     }
 addSampleWeight(samples, 'DY', 'DYJetsToLL_M-50_ext2', '('+ptllDYW_NLO+')*(LHE_HT < 70)')
@@ -244,7 +225,8 @@ files = nanoGetSampleFiles(mcDirectory, 'TTTo2L2Nu') + \
 samples['top'] = {
     'name': files,
     'weight': mcCommonWeight,
-    'FilesPerJob': 1,
+    'FilesPerJob': 6,
+    'EventsPerJob' : 70000,
 }
 
 addSampleWeight(samples, 'top', 'TTTo2L2Nu', 'Top_pTrw')
@@ -266,7 +248,7 @@ files = nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT100_200') + \
 samples['WJets'] = {
     'name': files,
     'weight': mcCommonWeight, 
-    'FilesPerJob': 2
+    'FilesPerJob': 6
 }
 """
 addSampleWeight(samples,'WJets', 'WJetsToLNu-HT100_200', '0.993')
@@ -282,27 +264,8 @@ addSampleWeight(samples,'WJets', 'WJetsToLNu-HT2500_inf', '4.200')
 samples['WW'] = {
     'name': nanoGetSampleFiles(mcDirectory, 'WpWmJJ_QCD_noTop'),
     'weight': mcCommonWeight, #+ '*nllW',
-    'FilesPerJob': 3
+    'FilesPerJob': 6
 }
-
-"""
-# k-factor 1.4 already taken into account in XSWeight
-files = nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENEN') + \
-    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENMN') + \
-    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENTN') + \
-    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToMNEN') + \
-    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToMNMN') + \
-    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToMNTN') + \
-    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToTNEN') + \
-    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToTNMN') + \
-    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToTNTN')
-
-samples['ggWW'] = {
-    'name': files,
-    'weight': mcCommonWeight + '*1.53/1.4', # updating k-factor
-    'FilesPerJob': 2
-}
-"""
 
 
 samples['ggWW'] = {
@@ -354,7 +317,7 @@ files = nanoGetSampleFiles(mcDirectory, 'ZZTo2L2Nu') + \
 samples['VZ'] = {
     'name': files,
     'weight': mcCommonWeight + '*1.11',
-    'FilesPerJob': 2
+    'FilesPerJob': 6
 }
 
 ########## VVV #########
@@ -368,21 +331,21 @@ files = nanoGetSampleFiles(mcDirectory, 'ZZZ') + \
 samples['VVV'] = {
     'name': files,
     'weight': mcCommonWeight,
-    'FilesPerJob': 4
+    'FilesPerJob': 6
 }
 
 
 ########VBF-V##########
-"""
-files =nanoGetSampleFiles(mcDirectory, 'WLNuJJ_EWK') + \
-    nanoGetSampleFiles(mcDirectory, 'EWKZ2Jets_ZToLL_M-50_newpmx')
+
+files =nanoGetSampleFiles(mcDirectory, 'EWK_LLJJ_MLL-50_MJJ-120')
 
 samples['VBF-V'] = {
     'name': files,
     'weight': mcCommonWeight,
-    'FilesPerJob': 2
+    'FilesPerJob': 6,
+    'EventsPerJob' : 70000,
 }
-"""
+
 ###########################################
 ################## FAKE ###################
 ###########################################

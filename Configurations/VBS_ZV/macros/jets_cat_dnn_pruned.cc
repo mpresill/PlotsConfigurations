@@ -77,6 +77,7 @@ protected:
     njet30,
     nbtag,
     Zleppt,
+    mZV,
     Vpt,
     dnn_output,
     dnn_output_pruned, 
@@ -187,6 +188,8 @@ jets_cat_dnn::jets_cat_dnn( char const* _type, const char* year, const char* mod
       returnVar_ = nbtag;
     else if (type== "Zleppt")
       returnVar_ = Zleppt;
+    else if (type== "mZV")
+      returnVar_ = mZV;
     else if (type== "Vpt")
       returnVar_ = Vpt;
     else if (type == "dnn_output")
@@ -510,20 +513,13 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   float btag_cut = 0.;
   std::vector<int> vectors_id;
   float _Zleppt =0.;
+  float _mZV =0.;
   float _Vpt = 0.;
   returnValues[Vpt]=-999;
-  returnValues[Zleppt] = -999;
   //cout <<  returnValues[Zleppt] << endl;
-  //calculate leptonic Z pt
-  if (nLep == 2) {
-	//cout << " 2 Leptons " << endl;
-  	TLorentzVector lep0;
-  	TLorentzVector lep1;
-  	lep0.SetPtEtaPhiM(Lepton_pt->At(0), Lepton_eta->At(0), Lepton_phi->At(0), 0);
-  	lep1.SetPtEtaPhiM(Lepton_pt->At(1), Lepton_eta->At(1), Lepton_phi->At(1), 0);
-  	_Zleppt = (lep0+lep1).Pt();
-  	//cout << _Zleppt <<endl;
-  }
+  returnValues[Zleppt] = -999;
+  returnValues[mZV] = -999;
+  
 
   //btag cut values
   //cout << jets_cat_dnn::year_ <<endl;
@@ -531,6 +527,22 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   else if (jets_cat_dnn::year_ == "2017") btag_cut = 0.1522;
   else if (jets_cat_dnn::year_ == "2016") btag_cut = 0.2217;
   //cout << btag_cut <<endl;
+
+
+
+   //calculate leptonic Z pt
+  if (nLep == 2) {
+	//cout << " 2 Leptons " << endl;
+    	TLorentzVector lep0;
+    	TLorentzVector lep1;
+    	lep0.SetPtEtaPhiM(Lepton_pt->At(0), Lepton_eta->At(0), Lepton_phi->At(0), 0);
+    	lep1.SetPtEtaPhiM(Lepton_pt->At(1), Lepton_eta->At(1), Lepton_phi->At(1), 0);
+    	_Zleppt = (lep0+lep1).Pt();
+    //cout << _Zleppt <<endl;
+  }
+
+
+
   // Load all the quadrivectors for performance reason
   std::vector<TLorentzVector> vectors; 
   for (unsigned int ijet=0 ; ijet<njet ; ijet++){
@@ -548,18 +560,19 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
 
   njet=vectors.size();
 
+
   if (njet>=2){
         // Calculate max mjj invariant pair on CleanJetNotFat to exclude the correct jets
         for (unsigned int ijet=0 ; ijet<(njet-1) ; ijet++){
             for (unsigned int jjet= ijet+1 ; jjet<njet ; jjet++){
                 if (ijet==jjet) continue; //useless?
-         
+
 
                 TLorentzVector jet0 = vectors.at(ijet);
                 TLorentzVector jet1 = vectors.at(jjet); 
 
                 Mjj_tmp = (jet0 + jet1).M();
-                
+
                 if( Mjj_tmp >= Mjj_max ){
                     Mjj_max=Mjj_tmp;
                     detajj_mjj_max=deltaEta((vectors.at(ijet)).Eta(),(vectors.at(jjet)).Eta());
@@ -577,18 +590,32 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
             //cout << "Boosted" << endl;
             category = 0;
             Vjet_mass_max = FatJet_mass->At(0);
-	    _Vpt = FatJet_pt->At(0);  //does it need to be the first FatJet?
+            _Vpt = FatJet_pt->At(0);  //does it need to be the first FatJet?
+
+            // calculate invariant mass of ZV system, in boosted topology
+            if (nLep == 2) {
+              TLorentzVector lep0;
+              TLorentzVector lep1;
+              lep0.SetPtEtaPhiM(Lepton_pt->At(0), Lepton_eta->At(0), Lepton_phi->At(0), 0);
+              lep1.SetPtEtaPhiM(Lepton_pt->At(1), Lepton_eta->At(1), Lepton_phi->At(1), 0);
+
+              TLorentzVector FJ0; 
+              FJ0.SetPtEtaPhiM(FatJet_pt->At(0), FatJet_eta->At(0), FatJet_phi->At(0), FatJet_mass->At(0));
+              _mZV = (lep0 + lep1 + FJ0).M();
+            
+            }
+
 
         }else if (njet>=4) { 
             category = 1;
-           // cout << "resolved , njet = " << njet << endl;
-           // cout << "vbs1 "<< VBS_jets[0] <<" vbs2 "<< VBS_jets[1]<< endl;
+            // cout << "resolved , njet = " << njet << endl;
+            // cout << "vbs1 "<< VBS_jets[0] <<" vbs2 "<< VBS_jets[1]<< endl;
             for (unsigned int ijet=0 ; ijet<(njet-1) ; ijet++){
                 if (ijet == VBS_jets[0] || ijet == VBS_jets[1]) continue;
                 else for (unsigned int jjet= ijet+1 ; jjet<njet ; jjet++){
                     if ( VBS_jets[0] == jjet || VBS_jets[1] == jjet) continue;
                     else{
-                       // cout <<"potential Vjets: "<<ijet<<jjet<<endl;
+                        // cout <<"potential Vjets: "<<ijet<<jjet<<endl;
                         TLorentzVector jet0 = vectors.at(ijet);
                         TLorentzVector jet1 = vectors.at(jjet); 
                         float mvjet = (jet0+jet1).M();
@@ -599,7 +626,17 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
                             V_jets[1] = jjet;
                             deltamass_Vjet = dmass;
                             Vjet_mass_max = mvjet;
-			    _Vpt=(jet0+jet1).Pt();
+                            _Vpt=(jet0+jet1).Pt();
+
+                            // calculate invariant mass of ZV system, in resolved topology
+                            if (nLep == 2) {
+                              TLorentzVector lep0;
+                              TLorentzVector lep1;
+                              lep0.SetPtEtaPhiM(Lepton_pt->At(0), Lepton_eta->At(0), Lepton_phi->At(0), 0);
+                              lep1.SetPtEtaPhiM(Lepton_pt->At(1), Lepton_eta->At(1), Lepton_phi->At(1), 0);
+                              _mZV = (lep0 + lep1 + jet0 + jet1).M();
+                            }
+                            
                         }
                     }
                 }
@@ -607,11 +644,12 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
         }else{
             category = 3;
         }
-    
+
     }else{
     category = 3;
     }
-
+    
+  
         
     //set default values
     returnValues[Vpt]=_Vpt;
@@ -647,6 +685,7 @@ jets_cat_dnn::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
   returnValues[njet30] = njet;
   //cout << "test" <<endl;
   returnValues[Zleppt] = _Zleppt;
+  returnValues[mZV] = _mZV;
   //cout << returnValues[Zleppt]<<endl;
   //cout << "nbtag = " << nbtag << endl;
   returnValues[nbtag] = _nbtag;
