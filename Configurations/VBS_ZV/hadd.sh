@@ -1,5 +1,5 @@
 #! /bin/bash
-cd 2018_SR_new
+cd 2018_Feb22
 mkShapesMulti.py --pycfg=configuration.py --doHadd=1 --batchSplit=Samples,Files --doNotCleanup --nThreads=10 #to hadd files
 cd ..
 

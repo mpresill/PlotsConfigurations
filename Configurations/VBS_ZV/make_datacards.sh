@@ -1,6 +1,7 @@
 #! /bin/bash
-YEAR=2018_dec21
-DATE=03Feb2022_2018 #change date 
+YEAR=2018_Feb22
+DATE=16Feb2022_2018 #change date
+ROOT=/eos/home-a/ahakimi/www/ZV_analysis 
 #mkShapesMulti.py --pycfg=configuration.py --batchSplit=Samples,Files
 
 #mkShapesMulti.py --pycfg=configuration.py --doBatch=1 --batchSplit=Samples,Files --batchQueue=longlunch  #espresso #longlunch #--dry-run
@@ -18,4 +19,4 @@ DATE=03Feb2022_2018 #change date
 
 #to make datacard:
 cd ${YEAR}
-mkDatacards.py --pycfg configuration.py --inputFile rootFile_${DATE}/plots_VBS_ZV_${DATE}.root
+mkDatacards.py --pycfg configuration.py --inputFile ${ROOT}/rootFile_${DATE}/plots_VBS_ZV_${DATE}.root -C cuts.py --outputDirDatacard=Datacards_${DATE}
