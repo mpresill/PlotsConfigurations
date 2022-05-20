@@ -40,18 +40,30 @@ palette = {
 }
 
 
-DY_palette = ['#093316','#006400', '#008000',  '#32CD32','#00FF00', '#ADFF2F', '#FFFF00', '#FFC800', '#FF9D00', '#FF7700', '#FF3300','#FF003C', '#006400', '#008000',  '#32CD32','#00FF00', '#ADFF2F'  ]
+DY_palette = ['#006400', '#008000',  '#32CD32','#00FF00', '#ADFF2F', '#FFFF00','#006400', '#008000',  '#32CD32','#00FF00', '#ADFF2F'  ]
 
 
 phase_spaces_boost = [c for c in cuts if "Boosted" in c]
 phase_spaces_res = [c for c in cuts if "Resolved" in c]
 
-DY_bins= []
+DY_bins_res = []
+DY_bins_boost = []
 for bin in range(1,6):
-     DY_bins.append("DY_bin"+str(bin))
+    DY_bins_res.append("DY_Resolved_Z_"+str(bin))
+    DY_bins_boost.append("DY_Boosted_Z_"+str(bin))
+#for bin in range(1,7):
+#    DY_bins.append("DY_Z_"+str(bin))
+#for bin in range(1,7):
+#    DY_bins.append("DY_vbs1_"+str(bin))
+#for bin in range(1,7):
+#    DY_bins.append("DY_detajj_"+str(bin))
+
+
+#for bin in range(1,5):
+#     DY_bins.append("DY_Boosted_"+str(bin))
+
 
 """
-
 groupPlot['WJets']  = {  
                   'nameHR' : 'W+Jets',
                   'isSignal' : 0,
@@ -59,8 +71,8 @@ groupPlot['WJets']  = {
                   'samples'  : ['WJets' ],#,'WGJJ'
                   'fill': 1001
 
-              }"""
-
+              }
+"""
 groupPlot['tZq']  = {
                   'nameHR' : 'tZq',
                   'isSignal' : 0,
@@ -89,7 +101,7 @@ groupPlot['Vg+VgS']  = {
                   'nameHR' : "V#gamma+V#gamma*",
                   'isSignal' : 0,
                   'color'    : palette['LightBlue'],   # kOrange - 3
-                  'samples'  : ['Vg'],
+                  'samples'  : ['Vg','VgS'],
                   'fill': 1001
               }
 
@@ -97,34 +109,42 @@ groupPlot['vbfV+VV+VVV']  = {
                   'nameHR' : 'vbfV+VV+VVV',
                   'isSignal' : 0,
                   'color': palette["DarkBlue"],
-                  'samples'  : ['VVV','VBS_VV_QCD','VZ','WW','ggWW','VBF-V'],
+                  'samples'  : ['VBF-V','VVV', 'VZ','WW','ggWW','VBS_VV_QCD'],
                   'fill': 1001
               }
 
-    #or i,DYbin in enumerate(DY_bins):
-    #       groupPlot[DYbin] = {
-    #                       'nameHR': DYbin,
-    #                       'isSignal' : 0,
-    #                       'color' : DY_palette[i],
-    #                       'samples' : DYbin,
-    #                       'fill' : 1001,              
-    #
-
-groupPlot['DY'] = {
-        'nameHR': 'DY',
-        'isSignal' : 0,
-        'color' : palette["Green2"],
-        'samples' : DY_bins,
-        'fill' : 1001,
-    }
 
 
+
+for i,DYbin in enumerate(DY_bins_boost):
+        groupPlot[DYbin] = {
+                        'nameHR': 'DY_{}'.format(i+1),
+                        'isSignal' : 0,
+                        'color' : DY_palette[i],
+                        'samples' : DYbin,
+                        'fill' : 1001,
+                        'removeFromCuts': phase_spaces_res
+                
+}
+"""
+for i,DYbin in enumerate(DY_bins_res):
+        groupPlot[DYbin] = {
+                        'nameHR': DYbin,
+                        'isSignal' : 0,
+                        'color' : DY_palette[i],
+                        'samples' : DYbin,
+                        'fill' : 1001,
+                        'removeFromCuts': phase_spaces_boost
+                
+}
+
+"""
 
 groupPlot['VBS']  = {
-                 'nameHR' : 'VBS ewk',
+                 'nameHR' : 'VBS',
                  'isSignal' : 1,
                  'color': colors["kRed"]+1,
-                 'samples'  : ['sm'],
+                 'samples'  : ['VBS_ZV'],
                  'fill': 1001
               }
 
@@ -143,19 +163,6 @@ plot['VVV']  = {
                   'scale'    : 1.0
                   }
 
-plot['WW']  = { 
-                  'color': colors["kAzure"] -3,    
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'scale'    : 1.0
-                  }
-
-plot['ggWW']  = { 
-                  'color': colors["kAzure"] -3,    
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'scale'    : 1.0
-                  }
 
 plot['VZ']  = {
                   'color': colors['kGreen']+3,  
@@ -172,16 +179,26 @@ plot['DY']  = {
                 'isData'   : 0, 
                 #'scale'    : 0.6
             }
-
 """
-for DYbin in DY_bins:
+
+for DYbin in DY_bins_boost:
 	plot[DYbin] =  {   
                     'color': colors['kAzure']-1,
                     'isSignal' : 0,
                     'isData'   : 0, 
                     'scale'    : 1.0,
-                                      }
-
+                    'removeFromCuts' : phase_spaces_res, 
+                    }
+"""
+for DYbin in DY_bins_res:
+	plot[DYbin] =  {   
+                    'color': colors['kAzure']-1,
+                    'isSignal' : 0,
+                    'isData'   : 0, 
+                    'scale'    : 1.0,
+                    'removeFromCuts' : phase_spaces_boost, 
+                    }
+"""
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
                   'isSignal' : 0,
@@ -210,24 +227,17 @@ plot['top'] = {
                  'scale'    : 1.
         }
 
-
+"""
 plot['WJets']  = {
                   'color':  colors['kRed']-3,
                   'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.0
               }
-
-plot['sm']  = {
+"""
+plot['VBS_ZV']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
-                  'isData'   : 0,
-                  'scale'    : 1.   
-              }
-
-plot['VBS_VV_QCD']  = {
-                  'color': colors["kCyan"]+1, 
-                  'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.   
               }
@@ -262,15 +272,11 @@ plot['DATA']  = {
                  'isBlind'  : 0,
 		         'scale' :1.,
                  'cuts': {
-		#	"Preselection" : 0,			#
-            "Boosted_SR_bVeto" : 0,
-			"Boosted_SR_bTag" :0,
+#		#	"Preselection" : 0,
+			"Boosted_SR_bVeto" : 0,
+			"Boosted_SR_bReqTight" :0,
 			"Resolved_SR_bVeto" : 0,
-			"Resolved_SR_bTag" :0,
-            "SR_bVeto" : 0,
-			"SR_bTag" :0,
-			"SR_bVeto" : 0,
-			"SR_bTag" :0 
+#			"Resolved_SR_bReqTight" :0 
 		}	
              }
 
@@ -279,6 +285,8 @@ plot['DATA']  = {
 
 # additional options
 
-legend['lumi'] = 'L = 35.87/fb'
+legend['lumi'] = 'L = 59.74/fb'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'
+legend['lumi'] = 'L = 59.74/fb'  
+

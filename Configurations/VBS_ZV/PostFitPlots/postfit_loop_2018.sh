@@ -84,7 +84,7 @@ mkPostFitCombinedPlot.py \
    --variable ${PLOTVAR} \
    --structureFile ../${folder}/structure.py \
    --plotFile ../${folder}/plot_boost.py \
-   --lumiText '41.53/fb' 
+   --lumiText '59.74/fb' 
    
 mkPlot.py --pycfg=configuration_combined.py --inputFile=output_postfit.root --onlyPlot=cratio --logOnly --showIntegralLegend=1 --minLogCratio=0.01 --maxLogCratio=10000
 
@@ -107,7 +107,7 @@ mkPostFitCombinedPlot.py \
    --variable ${PLOTVAR} \
    --structureFile ../${folder}/structure.py \
    --plotFile ../${folder}/plot_boost.py \
-   --lumiText '41.53/fb' 
+   --lumiText '59.74/fb' 
 
     # clean up local plotter folder
 rm -r plot_combined/*

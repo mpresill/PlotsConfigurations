@@ -49,11 +49,11 @@ text2workspace.py ${DATACARD_PLOT}.txt -o ${DATACARD_PLOT}.root
 
 DATACARD_FIT=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_${date}/combined_card_all_comb_${date}
 echo "${DATACARD_FIT}"
-#text2workspace.py ${DATACARD_FIT}.txt -o ${DATACARD_FIT}.root
-#combine -M FitDiagnostics ${DATACARD_FIT}.root \
-#        --out fit \
-#        -t -1 --toysFreq --rMin -10 \
-#        --saveNormalizations --saveWithUncertainties #\
+text2workspace.py ${DATACARD_FIT}.txt -o ${DATACARD_FIT}.root
+combine -M FitDiagnostics ${DATACARD_FIT}.root \
+        --out fit \
+        -t -1 --toysFreq --rMin -10 \
+        --saveNormalizations --saveWithUncertainties #\
     ##        --cminDefaultMinimizerStrategy 0 --robustFit=1
     ##        --expectSignal 1 \
 
