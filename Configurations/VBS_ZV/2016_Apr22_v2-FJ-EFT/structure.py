@@ -96,10 +96,7 @@ structure['VBS_VV_QCD'] = {
                   'isData'   : 0,
                   }
 
-structure['sm'] = {
-                  'isSignal' : 1,
-                  'isData'   : 0    
-                  }
+
 structure['tZq'] = {
                   'isSignal' : 0,
                   'isData'   : 0
@@ -116,6 +113,108 @@ structure['DATA']  = {
                   'isSignal' : 0,
                   'isData'   : 1 
               }
+
+
+
+###########################signals                  
+structure['sm'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
+                  }
+
+#### EFT ###
+#structure['quad_cS0'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+#structure['sm_lin_quad_cS0'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+##
+#structure['quad_cS1'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+#structure['sm_lin_quad_cS1'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+##
+#structure['quad_cM0'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+#structure['sm_lin_quad_cM0'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+##
+#structure['quad_cM1'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+#structure['sm_lin_quad_cM1'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+##
+#structure['quad_cM6'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+#structure['sm_lin_quad_cM6'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+##
+#structure['quad_cM7'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+#structure['sm_lin_quad_cM7'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+##
+structure['quad_cT0'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
+                  }
+structure['sm_lin_quad_cT0'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
+                  }
+#
+structure['quad_cT1'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
+                  }
+structure['sm_lin_quad_cT1'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
+                  }
+#
+structure['quad_cT2'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
+                  }
+structure['sm_lin_quad_cT2'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
+                  }
+
+#structure['quad_cT6'] = {
+#'isSignal' : 1,
+#'isData'   : 0    
+#}
+#structure['sm_lin_quad_cT6'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+#############################
+
+
 
 """
 print "INSTRUCTURE"

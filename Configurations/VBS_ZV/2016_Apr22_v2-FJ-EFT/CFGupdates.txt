@@ -1,0 +1,1 @@
+this contains same updates as the config 2016_Apr22_v2-FJ, but adding dim-8 operators.

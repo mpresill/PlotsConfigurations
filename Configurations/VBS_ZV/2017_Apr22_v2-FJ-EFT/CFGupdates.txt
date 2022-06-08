@@ -1,0 +1,20 @@
+LIST OF UPDATES WRT TO CONFIG 2017_Apr22_v2:
+> FSR/ISR put back with correct name
+> qcd scale variation put back for all samples after fixing the lenght of the QDC scale vector
+> FJ uncertainties put in, after updating references to fj nom macros in aliases.py
+> updated variables according to new fj pt definition + removed dnn pruned with less bins to speed up the process
+> fixing in VZ samples errors in bugus norm in datacards -> removing all negative nuisances in samples.py
+> replaces name in DY_boosted sub-samples:
+"Boosted_Z_bin1" -> "Boosted_Z_1", to make it similar to 2018
+
+> added EFT samples and their nuisance. Runnning only T0, T1, T2 operators for the moment
+
+
+besides this configs, some files has been updated in the LatinoAnalysis folder:
+>/afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/LatinoAnalysis/ShapeAnalysis/python/ShapeFactoryMulti.py 
+  (with the definition of "auxname")
+>LatinoAnalysis/NanoGardener/python/data/BranchMapping_cfg.py (with the inclusion of FJ branches in the multidraw mapping)
+
+
+Do not forget to polish all the compiled files (*_cc*) in the relevant folders, 
+i.e. ../patches/, ./macros/, ../Differential/ (and maybe more if I am forgetting any!)
