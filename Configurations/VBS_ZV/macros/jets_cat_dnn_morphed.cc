@@ -1049,8 +1049,7 @@ jets_cat_qgl::evaluate(unsigned)
 
         std::vector<float> input{};
 
-
-        input.push_back( (Lepton_pt->At(0)) );
+  	input.push_back( (Lepton_pt->At(0)) );
         //input.push_back( (Lepton_pt->At(1)));
         //input.push_back( (Lepton_eta->At(0)));
         //input.push_back( (Lepton_eta->At(1)));
@@ -1072,9 +1071,9 @@ jets_cat_qgl::evaluate(unsigned)
         input.push_back(njet30);
         //input.push_back(vbs_0_qgl_morphed);
         //input.push_back(vbs_1_qgl_morphed);
-        //input.push_back(v_0_qgl_morphed);
+        input.push_back(v_0_qgl_morphed);
         //input.push_back(v_1_qgl_morphed);
-        //input.push_back(btag);
+        input.push_back(btag); 
         returnValues[dnn_output_pruned_bReq_noqgl]= dnn_tensorflow_resolved_pruned_bReq_noqgl->analyze(input);
 
     }
