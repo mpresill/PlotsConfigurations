@@ -444,7 +444,7 @@ samples['sm'] = {
     'EventsPerJob' : 70000,
 }
 addSampleWeight(samples,'sm','ZTo2L_ZTo2J','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.01606/0.01589)')
-addSampleWeight(samples,'sm','WmTo2J_ZTo2','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.03004/0.02982)')
+addSampleWeight(samples,'sm','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.03004/0.02982)')
 addSampleWeight(samples,'sm','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05526/0.05401)')
 
  #************ dipole recoil ************#
@@ -463,7 +463,7 @@ samples['sm_dipole'] = {
     'EventsPerJob' : 70000,
 }
 addSampleWeight(samples,'sm_dipole','ZTo2L_ZTo2J_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.01606/0.01589)')
-addSampleWeight(samples,'sm_dipole','WmTo2J_ZTo2_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.03004/0.02982)')
+addSampleWeight(samples,'sm_dipole','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.03004/0.02982)')
 addSampleWeight(samples,'sm_dipole','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05526/0.05401)')
 
 
