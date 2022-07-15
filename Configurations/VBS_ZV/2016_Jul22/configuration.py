@@ -51,6 +51,6 @@ outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/DatacardsEFT/Datacards'
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
-#nuisancesFile = 'nuisances.py'
-nuisancesFile = '../2016_v7_Jan22/nuisances_StatOnly.py'
+nuisancesFile = 'nuisances.py'
+#nuisancesFile = '../2016_v7_Jan22/nuisances_StatOnly.py'
 
