@@ -7,7 +7,7 @@ and place it its correct ShapeAnalysis path:
 
 
 2. update mapping of fat jet nominal values branches to let them apply the magics of MultiDraw to produce up and down variations
-
+https://github.com/mpresill/PlotsConfigurations/blob/matteo/Configurations/VBS_ZV/FatJetAux/BranchMapping_cfg.py
 and place it its correct NanoGardner path:
 >/afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/LatinoAnalysis/NanoGardener/python/data/BranchMapping_cfg.py 
 
