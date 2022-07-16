@@ -1,7 +1,7 @@
 # Uage of Fat Jet systematics in ReReco 
 
 1. update the ShapeFactoryMulti.py to include auxiliary systematics according to this example:
-
+https://github.com/mpresill/PlotsConfigurations/blob/matteo/Configurations/VBS_ZV/FatJetAux/ShapeFactoryMulti.py
 and place it its correct ShapeAnalysis path:
 >/afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/LatinoAnalysis/ShapeAnalysis/python/ShapeFactoryMulti.py 
 
