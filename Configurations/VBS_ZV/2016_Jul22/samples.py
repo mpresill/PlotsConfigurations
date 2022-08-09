@@ -246,7 +246,7 @@ addSampleWeight(samples,'sm_lin_quad_cT2','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart
 addSampleWeight(samples,'sm_lin_quad_cT2','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT2 )
 addSampleWeight(samples,'sm_lin_quad_cT2','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
 addSampleWeight(samples,'sm_lin_quad_cT2','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-########### FT5 ############
+########## FT5 ############
 ###default coupling, quadratic EFT 
 samples['quad_cT5'] = {
     'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
@@ -336,6 +336,7 @@ addSampleWeight(samples,'sm_lin_quad_cT7','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart
 addSampleWeight(samples,'sm_lin_quad_cT7','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT7 )
 addSampleWeight(samples,'sm_lin_quad_cT7','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
 addSampleWeight(samples,'sm_lin_quad_cT7','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+
 ########### FT8 ############
 ###default coupling, quadratic EFT 
 samples['quad_cT8'] = {
@@ -366,6 +367,7 @@ addSampleWeight(samples,'sm_lin_quad_cT8','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart
 addSampleWeight(samples,'sm_lin_quad_cT8','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT8 )
 addSampleWeight(samples,'sm_lin_quad_cT8','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
 addSampleWeight(samples,'sm_lin_quad_cT8','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+
 ########### FT9 ############
 ###default coupling, quadratic EFT 
 samples['quad_cT9'] = {
@@ -396,8 +398,6 @@ addSampleWeight(samples,'sm_lin_quad_cT9','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart
 addSampleWeight(samples,'sm_lin_quad_cT9','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT9 )
 addSampleWeight(samples,'sm_lin_quad_cT9','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
 addSampleWeight(samples,'sm_lin_quad_cT9','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-
-
 
 ##########################################################
 ############   SIGNALS FOR COMBINATION  ##################
@@ -447,7 +447,7 @@ addSampleWeight(samples,'sm','ZTo2L_ZTo2J','(Sum$(abs(GenPart_pdgId)==6)==0)  * 
 addSampleWeight(samples,'sm','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.03004/0.02982)')
 addSampleWeight(samples,'sm','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05526/0.05401)')
 
- #************ dipole recoil ************#
+#************ dipole recoil ************#
 samples['sm_dipole'] = {
     'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J_dipoleRecoil')
              +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil')
@@ -468,10 +468,7 @@ addSampleWeight(samples,'sm_dipole','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPa
 
 
 
-
-
-
-###########################################¢
+###########################################
 #############  BACKGROUNDS  ###############
 ###########################################
 
@@ -721,4 +718,3 @@ for _, sd in DataRun:
     files = nanoGetSampleFiles(dataDirectory, pd + '_' + sd)
     samples['DATA']['name'].extend(files)
     samples['DATA']['weights'].extend([DataTrig[pd]] * len(files))
-

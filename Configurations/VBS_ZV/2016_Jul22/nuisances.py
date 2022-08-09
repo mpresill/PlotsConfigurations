@@ -192,7 +192,6 @@ nuisances['prefire'] = {
 }
 
 
-
 ##### Electron Efficiency and energy scale
 nuisances['eff_e'] = {
     'name': 'CMS_eff_e_2016',
@@ -474,28 +473,7 @@ nuisances['mV_jer'] = {
 ###########################################
 #############  PARTON SHOWER ##############
 ###########################################
-    # REF: https://github.com/latinos/PlotsConfigurations/blob/master/Configurations/VBS_OS/Full2016_v7/SF/nuisances.py#L280-L318 
-
-    # ---- for signal samples (with dipole recoil option) we have correctly defined the PS weights in 16/17
-
-"""for sample in mc_eos:                        BUGGY NUISANCE FOR SIGNALS!!! TO BE FIXED
-    nuisances['PS_ISR_'+sample]  = {
-                'name'  : 'CMS_PSroot -l_ISR_'+sample,
-                'kind'  : 'weight',
-                'type'  : 'shape',
-                'samples'  : {
-                    sample : ['PSWeight[2]', 'PSWeight[0]'],
-           		},
-    }
-    nuisances['PS_FSR_'+sample]  = {
-                'name'  : 'CMS_PS_FSR_'+sample,
-                'kind'  : 'weight',
-                'type'  : 'shape',
-                'samples'  : {
-                    sample :  ['PSWeight[3]', 'PSWeight[1]'], 
-                },
-    }"""
-
+        # REF: https://github.com/latinos/PlotsConfigurations/blob/master/Configurations/VBS_OS/Full2016_v7/SF/nuisances.py#L280-L318 
         # --- for bkg samples the PS weights were not available for 2016 and 2017, so they are retrieved with this parameterization measured here: 
         #      https://indico.cern.ch/event/904975/contributions/3826788/attachments/2020329/3377936/Update_on_PS_uncertainties_.pdf 
 samples_PS = ['Vg','VgS','ggWW','WW','top','DY','VVV']
@@ -631,7 +609,7 @@ nuisances['pdf_weight'] = { # --> Now save also the normalization one for the si
     'name'  : 'pdf_16',
     'kind'  : 'weight_envelope',
     'type'  : 'shape',
-    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["DY","top","WW"]}, #-> here we reomve bkgs measured on, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["DY","top","WW"]}, #-> here we reomve bkgs measured in CR, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
     'AsLnN':  '1'
 }
 
@@ -657,7 +635,6 @@ nuisances['UE']  = {
 
 
 
-
 ####### Generic "cross section uncertainties"
 nuisances['singleTopToTTbar'] = {
     'name': 'singleTopToTTbar',
@@ -671,8 +648,8 @@ nuisances['singleTopToTTbar'] = {
       }
 }
 
-## Top pT reweighting uncertainty
 
+## Top pT reweighting uncertainty
 nuisances['TopPtRew'] = {
     'name': 'CMS_topPtRew',   # Theory uncertainty
     'kind': 'weight',
@@ -727,9 +704,7 @@ nuisances['Topnorm_resolved']  = {
 DY_bins=[]
 for bin in range(1,6):
         DY_bins.append("DY_bin" + str(bin))
-#for bin in range(1,6):
-#        DY_bins.append("DY_B_bin" + str(bin))
-#DYrates=[0.899,0.874,0.774,0.631,0.69,0.514,1,1,1,1,1]
+
 
 for i,DYbin in enumerate(DY_bins):
         nuisances["{}_norm_res_Z_bVeto_2016".format(DYbin)]  = {
@@ -739,8 +714,6 @@ for i,DYbin in enumerate(DY_bins):
                 'cuts'  : [
                    'Resolved_DYcr_bVeto',
                    'Resolved_SR_bVeto',
-                   #'Resolved_SR_bVeto_blind',
-
                    ]
             }
  	nuisances["{}_norm_res_Z_bTag_2016".format(DYbin)]  = {
@@ -750,8 +723,6 @@ for i,DYbin in enumerate(DY_bins):
                 'cuts'  : [
                    'Resolved_DYcr_bTag',
                    'Resolved_SR_bTag',
-                   #'Resolved_SR_bTag_blind',
-
                    ]
             }
         nuisances["{}_norm_boost_Z_bVeto_2016".format(DYbin)]  = {
@@ -761,8 +732,6 @@ for i,DYbin in enumerate(DY_bins):
                 'cuts'  : [
                    'Boosted_DYcr_bVeto',
                    'Boosted_SR_bVeto',
-                   #'Boosted_SR_bVeto_blind',
-
                    ]
             }
         nuisances["{}_norm_boost_Z_bTag_2016".format(DYbin)]  = {
@@ -772,8 +741,6 @@ for i,DYbin in enumerate(DY_bins):
                 'cuts'  : [
                    'Boosted_DYcr_bTag',
                    'Boosted_SR_bTag',
-                   #'Boosted_SR_bTag_blind',
-
                    ]
             }
              
