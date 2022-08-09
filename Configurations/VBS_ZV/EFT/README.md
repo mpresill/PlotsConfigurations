@@ -13,3 +13,7 @@ LHEReweighting weights maps:
  - reweighting weights 16/17 https://github.com/singh-ramanpreet/VBS-customNanoAODProduction/blob/main/NanoAODProduction/data/initrwgt_aQGC17.header#L152 
  
  
+Here is an example of samples.py:
+ - define weights: https://github.com/mpresill/PlotsConfigurations/blob/matteo/Configurations/VBS_ZV/2016_Jul22/samples.py#L122-L125 
+ - define samples (quad, and sm+lin+quad): https://github.com/mpresill/PlotsConfigurations/blob/matteo/Configurations/VBS_ZV/2016_Jul22/samples.py#L189-L218 
+ 
