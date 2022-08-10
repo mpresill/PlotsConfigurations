@@ -558,7 +558,7 @@ for sample in samples_PS:
 #variations = ['Alt$(LHEScaleWeight[0],1)', 'Alt$(LHEScaleWeight[1],1)', 'Alt$(LHEScaleWeight[3],1)', 'Alt$(LHEScaleWeight[5],1)', 'Alt$(LHEScaleWeight[7],1)', 'Alt$(LHEScaleWeight[8],1)']
 variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
 
-for sample in mc_common :
+for sample in mc :
     if sample in ["ggWW", "WW"]: continue   #this sample apparently doesn't have LHE weights, but it's real minor for us, "DY","WW","top"
     nuisances['QCDscale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
@@ -582,14 +582,15 @@ for sample in mc_eos :
 # -> Davide also considered an uncertainty on the acceptance for signals: https://github.com/UniMiBAnalyses/PlotsConfigurations/blob/VBSjjlnu_v7/Configurations/VBSjjlnu/Full2016v7/conf_fit_v4.5/nuisances_datacard_split.py#L509-L525
 # >>>next iteration....
 # QCD acceptance
-nuisances['QCDscale_ewk_ZV_accept'] = {
-            'name'  : 'QCDscale_ewk_ZV_accept',
-            'kind'  : 'weight',
-            'type'  : 'shape',
-            'samples'  :  { k : ["QCDscale_normalized[0]", "QCDscale_normalized[8]"] for k in mc_signal },
-            'AsLnN': '1'    ##
-            #'samples': { k:["QCDscale_normalized[0]", "QCDscale_normalized[8]"] for k in mc_eos }
-        }
+for sample in mc_signal :
+    nuisances['QCDscale_'+sample+'_accept'] = {
+                'name'  : 'QCDscale_'+sample+'_accept',
+                'kind'  : 'weight',
+                'type'  : 'shape',
+                'samples'  :  { sample : ["QCDscale_normalized[0]", "QCDscale_normalized[8]"] },
+                'AsLnN': '1'    ##
+                #'samples': { k:["QCDscale_normalized[0]", "QCDscale_normalized[8]"] for k in mc_eos }
+            }
 
     # UNCOMMENT FOR EFT analysis
 #nuisances['QCD_scale_VBS_EFT_accept'] = {
@@ -614,13 +615,14 @@ nuisances['pdf_weight'] = { # --> Now save also the normalization one for the si
 }
 
     # pdf uncertainty on signal acceptance
-nuisances['pdf_ewk_ZV_accept'] = {
-    'name'  : 'pdf_ewk_ZV_16_accept',
-    'kind'  : 'weight_envelope',
-    'type'  : 'shape',
-    'samples': { k : [ 'Alt$(PDFweight_normalized['+str(i)+'], 1.)' for i in range(0,103) ] for k in mc_signal},
-    'AsLnN': '1'    ##
-}
+for sample in mc_signal :
+    nuisances['pdf_'+sample+'_accept'] = {
+        'name'  : 'pdf_'+sample+'_16_accept',
+        'kind'  : 'weight_envelope',
+        'type'  : 'shape',
+        'samples': { sample : [ 'Alt$(PDFweight_normalized['+str(i)+'], 1.)' for i in range(0,103) ] },
+        'AsLnN': '1'    ##
+    }
 
 
 ######  UE: THIS NEEDS TO BE FIXED 
@@ -676,31 +678,54 @@ nuisances['VZ'] = {
 
 
 ## rate parameters
-nuisances['Topnorm_boosted']  = {
-               'name'  : 'Topnorm_boosted_2016',
+nuisances['Topnorm_boosted_bVeto']  = {
+               'name'  : 'Topnorm_boosted_bVeto_2016',
                'samples'  : {
                    'top' : '1.00',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
-                   'Boosted_topcr',
+                   'Boosted_topcr_bVeto',
                    'Boosted_SR_bVeto',
-		           'Boosted_SR_bTag',
                    ]
               }
 
-nuisances['Topnorm_resolved']  = {
-               'name'  : 'Topnorm_resolved_2016',
+nuisances['Topnorm_boosted_bTag']  = {
+               'name'  : 'Topnorm_boosted_bTag_2016',
                'samples'  : {
                    'top' : '1.00',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
-                   'Resolved_topcr',
-                   'Resolved_SR_bVeto',
-		           'Resolved_SR_bTag'
+                   'Boosted_topcr_bTag',
+                   'Boosted_SR_bTag',
                    ]
               }
+
+nuisances['Topnorm_resolved_bVeto']  = {
+               'name'  : 'Topnorm_resolved_bVeto_2016',
+               'samples'  : {
+                   'top' : '1.00',
+                   },
+               'type'  : 'rateParam',
+               'cuts'  : [
+                   'Boosted_topcr_bVeto',
+                   'Boosted_SR_bVeto',
+                   ]
+              }
+
+nuisances['Topnorm_resolved_bTag']  = {
+               'name'  : 'Topnorm_resolved_bTag_2016',
+               'samples'  : {
+                   'top' : '1.00',
+                   },
+               'type'  : 'rateParam',
+               'cuts'  : [
+                   'Boosted_topcr_bTag',
+                   'Boosted_SR_bTag',
+                   ]
+              }
+
 DY_bins=[]
 for bin in range(1,6):
         DY_bins.append("DY_bin" + str(bin))
