@@ -109,17 +109,17 @@ structure['tZq'] = {
 
 
 
-###########################signals                  
-structure['sm'] = {
-                  'isSignal' : 1,
-                  'isData'   : 0    
-                  }
-
 ############################signals                  
-#structure['sm_dipole'] = {
+#structure['sm'] = {
 #                  'isSignal' : 1,
 #                  'isData'   : 0    
 #                  }
+
+###########################signals                  
+structure['sm_dipole'] = {
+                  'isSignal' : 1,
+                  'isData'   : 0    
+                  }
 
 ######### signal for VBS combination effort 
 #
@@ -191,14 +191,14 @@ structure['sm'] = {
 #                  'isData'   : 0    
 #                  }
 ##
-structure['quad_cT0'] = {
-                  'isSignal' : 1,
-                  'isData'   : 0    
-                  }
-structure['sm_lin_quad_cT0'] = {
-                  'isSignal' : 1,
-                  'isData'   : 0    
-                  }
+#structure['quad_cT0'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
+#structure['sm_lin_quad_cT0'] = {
+#                  'isSignal' : 1,
+#                  'isData'   : 0    
+#                  }
 #
 #structure['quad_cT1'] = {
 #                  'isSignal' : 1,

@@ -156,248 +156,248 @@ LinQuadReweight_cT9 = '(' + quadReweight_cT9 + '+' + LinReweight_cT9 + ')'
 
 
 
-######### FT0 ############
-#default coupling, quadratic EFT 
-samples['quad_cT0'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
-    'weight': mcCommonWeight + '*' + quadReweight_cT0, 
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'quad_cT0','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
-addSampleWeight(samples,'quad_cT0','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222)')
-addSampleWeight(samples,'quad_cT0','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)')
-# SM + lin + quad 
-samples['sm_lin_quad_cT0'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight': mcCommonWeight, 
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'sm_lin_quad_cT0','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) * '                                      + LinQuadReweight_cT0 )
-addSampleWeight(samples,'sm_lin_quad_cT0','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) * ' + LinQuadReweight_cT0 )
-addSampleWeight(samples,'sm_lin_quad_cT0','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   * ' + LinQuadReweight_cT0 )
-addSampleWeight(samples,'sm_lin_quad_cT0','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'sm_lin_quad_cT0','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-######## FT1 ############
-#default coupling, quadratic EFT 
-samples['quad_cT1'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
-    'weight': mcCommonWeight + '*' + quadReweight_cT1, #do we have to add reweighting for the different Wilson Coeff.?
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'quad_cT1','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
-addSampleWeight(samples,'quad_cT1','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
-addSampleWeight(samples,'quad_cT1','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
-# SM + lin + quad 
-samples['sm_lin_quad_cT1'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight': mcCommonWeight, 
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'sm_lin_quad_cT1','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT1 )
-addSampleWeight(samples,'sm_lin_quad_cT1','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT1 )
-addSampleWeight(samples,'sm_lin_quad_cT1','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT1 )
-addSampleWeight(samples,'sm_lin_quad_cT1','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'sm_lin_quad_cT1','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-########## FT2 ############
+########## FT0 ############
 ##default coupling, quadratic EFT 
-samples['quad_cT2'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
-    'weight': mcCommonWeight + '*' + quadReweight_cT2, #do we have to add reweighting for the different Wilson Coeff.?
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'quad_cT2','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
-addSampleWeight(samples,'quad_cT2','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
-addSampleWeight(samples,'quad_cT2','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
-# SM + lin + quad 
-samples['sm_lin_quad_cT2'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight': mcCommonWeight, 
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'sm_lin_quad_cT2','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT2 )
-addSampleWeight(samples,'sm_lin_quad_cT2','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT2 )
-addSampleWeight(samples,'sm_lin_quad_cT2','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT2 )
-addSampleWeight(samples,'sm_lin_quad_cT2','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'sm_lin_quad_cT2','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-########## FT5 ############
+#samples['quad_cT0'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
+#    'weight': mcCommonWeight + '*' + quadReweight_cT0, 
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'quad_cT0','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
+#addSampleWeight(samples,'quad_cT0','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222)')
+#addSampleWeight(samples,'quad_cT0','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)')
+## SM + lin + quad 
+#samples['sm_lin_quad_cT0'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight': mcCommonWeight, 
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'sm_lin_quad_cT0','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) * '                                      + LinQuadReweight_cT0 )
+#addSampleWeight(samples,'sm_lin_quad_cT0','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) * ' + LinQuadReweight_cT0 )
+#addSampleWeight(samples,'sm_lin_quad_cT0','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   * ' + LinQuadReweight_cT0 )
+#addSampleWeight(samples,'sm_lin_quad_cT0','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#addSampleWeight(samples,'sm_lin_quad_cT0','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+######### FT1 ############
+##default coupling, quadratic EFT 
+#samples['quad_cT1'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
+#    'weight': mcCommonWeight + '*' + quadReweight_cT1, #do we have to add reweighting for the different Wilson Coeff.?
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'quad_cT1','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
+#addSampleWeight(samples,'quad_cT1','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
+#addSampleWeight(samples,'quad_cT1','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
+## SM + lin + quad 
+#samples['sm_lin_quad_cT1'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight': mcCommonWeight, 
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'sm_lin_quad_cT1','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT1 )
+#addSampleWeight(samples,'sm_lin_quad_cT1','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT1 )
+#addSampleWeight(samples,'sm_lin_quad_cT1','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT1 )
+#addSampleWeight(samples,'sm_lin_quad_cT1','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#addSampleWeight(samples,'sm_lin_quad_cT1','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+########### FT2 ############
 ###default coupling, quadratic EFT 
-samples['quad_cT5'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
-    'weight': mcCommonWeight + '*' + quadReweight_cT5, #do we have to add reweighting for the different Wilson Coeff.?
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'quad_cT5','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
-addSampleWeight(samples,'quad_cT5','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
-addSampleWeight(samples,'quad_cT5','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
-# SM + lin + quad 
-samples['sm_lin_quad_cT5'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight': mcCommonWeight, 
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'sm_lin_quad_cT5','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT5 )
-addSampleWeight(samples,'sm_lin_quad_cT5','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT5 )
-addSampleWeight(samples,'sm_lin_quad_cT5','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT5 )
-addSampleWeight(samples,'sm_lin_quad_cT5','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'sm_lin_quad_cT5','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-########### FT6 ############
-###default coupling, quadratic EFT 
-samples['quad_cT6'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
-    'weight': mcCommonWeight + '*' + quadReweight_cT6, #do we have to add reweighting for the different Wilson Coeff.?
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'quad_cT6','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
-addSampleWeight(samples,'quad_cT6','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
-addSampleWeight(samples,'quad_cT6','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
-# SM + lin + quad 
-samples['sm_lin_quad_cT6'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight': mcCommonWeight, 
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'sm_lin_quad_cT6','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT6 )
-addSampleWeight(samples,'sm_lin_quad_cT6','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT6 )
-addSampleWeight(samples,'sm_lin_quad_cT6','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT6 )
-addSampleWeight(samples,'sm_lin_quad_cT6','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'sm_lin_quad_cT6','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-########### FT7 ############
-###default coupling, quadratic EFT 
-samples['quad_cT7'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
-    'weight': mcCommonWeight + '*' + quadReweight_cT7, #do we have to add reweighting for the different Wilson Coeff.?
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'quad_cT7','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
-addSampleWeight(samples,'quad_cT7','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
-addSampleWeight(samples,'quad_cT7','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
-# SM + lin + quad 
-samples['sm_lin_quad_cT7'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight': mcCommonWeight, 
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'sm_lin_quad_cT7','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT7 )
-addSampleWeight(samples,'sm_lin_quad_cT7','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT7 )
-addSampleWeight(samples,'sm_lin_quad_cT7','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT7 )
-addSampleWeight(samples,'sm_lin_quad_cT7','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'sm_lin_quad_cT7','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-
-########### FT8 ############
-###default coupling, quadratic EFT 
-samples['quad_cT8'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
-    'weight': mcCommonWeight + '*' + quadReweight_cT8, #do we have to add reweighting for the different Wilson Coeff.?
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'quad_cT8','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
-addSampleWeight(samples,'quad_cT8','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
-addSampleWeight(samples,'quad_cT8','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
-# SM + lin + quad 
-samples['sm_lin_quad_cT8'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight': mcCommonWeight, 
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'sm_lin_quad_cT8','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT8 )
-addSampleWeight(samples,'sm_lin_quad_cT8','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT8 )
-addSampleWeight(samples,'sm_lin_quad_cT8','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT8 )
-addSampleWeight(samples,'sm_lin_quad_cT8','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'sm_lin_quad_cT8','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-
-########### FT9 ############
-###default coupling, quadratic EFT 
-samples['quad_cT9'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
-    'weight': mcCommonWeight + '*' + quadReweight_cT9, #do we have to add reweighting for the different Wilson Coeff.?
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'quad_cT9','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
-addSampleWeight(samples,'quad_cT9','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
-addSampleWeight(samples,'quad_cT9','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
-# SM + lin + quad 
-samples['sm_lin_quad_cT9'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight': mcCommonWeight, 
-    'FilesPerJob': 10,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'sm_lin_quad_cT9','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT9 )
-addSampleWeight(samples,'sm_lin_quad_cT9','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT9 )
-addSampleWeight(samples,'sm_lin_quad_cT9','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT9 )
-addSampleWeight(samples,'sm_lin_quad_cT9','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'sm_lin_quad_cT9','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#samples['quad_cT2'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
+#    'weight': mcCommonWeight + '*' + quadReweight_cT2, #do we have to add reweighting for the different Wilson Coeff.?
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'quad_cT2','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
+#addSampleWeight(samples,'quad_cT2','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
+#addSampleWeight(samples,'quad_cT2','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
+## SM + lin + quad 
+#samples['sm_lin_quad_cT2'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight': mcCommonWeight, 
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'sm_lin_quad_cT2','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT2 )
+#addSampleWeight(samples,'sm_lin_quad_cT2','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT2 )
+#addSampleWeight(samples,'sm_lin_quad_cT2','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT2 )
+#addSampleWeight(samples,'sm_lin_quad_cT2','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#addSampleWeight(samples,'sm_lin_quad_cT2','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+########### FT5 ############
+####default coupling, quadratic EFT 
+#samples['quad_cT5'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
+#    'weight': mcCommonWeight + '*' + quadReweight_cT5, #do we have to add reweighting for the different Wilson Coeff.?
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'quad_cT5','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
+#addSampleWeight(samples,'quad_cT5','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
+#addSampleWeight(samples,'quad_cT5','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
+## SM + lin + quad 
+#samples['sm_lin_quad_cT5'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight': mcCommonWeight, 
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'sm_lin_quad_cT5','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT5 )
+#addSampleWeight(samples,'sm_lin_quad_cT5','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT5 )
+#addSampleWeight(samples,'sm_lin_quad_cT5','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT5 )
+#addSampleWeight(samples,'sm_lin_quad_cT5','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#addSampleWeight(samples,'sm_lin_quad_cT5','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+############ FT6 ############
+####default coupling, quadratic EFT 
+#samples['quad_cT6'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
+#    'weight': mcCommonWeight + '*' + quadReweight_cT6, #do we have to add reweighting for the different Wilson Coeff.?
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'quad_cT6','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
+#addSampleWeight(samples,'quad_cT6','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
+#addSampleWeight(samples,'quad_cT6','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
+## SM + lin + quad 
+#samples['sm_lin_quad_cT6'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight': mcCommonWeight, 
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'sm_lin_quad_cT6','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT6 )
+#addSampleWeight(samples,'sm_lin_quad_cT6','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT6 )
+#addSampleWeight(samples,'sm_lin_quad_cT6','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT6 )
+#addSampleWeight(samples,'sm_lin_quad_cT6','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#addSampleWeight(samples,'sm_lin_quad_cT6','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+############ FT7 ############
+####default coupling, quadratic EFT 
+#samples['quad_cT7'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
+#    'weight': mcCommonWeight + '*' + quadReweight_cT7, #do we have to add reweighting for the different Wilson Coeff.?
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'quad_cT7','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
+#addSampleWeight(samples,'quad_cT7','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
+#addSampleWeight(samples,'quad_cT7','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
+## SM + lin + quad 
+#samples['sm_lin_quad_cT7'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight': mcCommonWeight, 
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'sm_lin_quad_cT7','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT7 )
+#addSampleWeight(samples,'sm_lin_quad_cT7','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT7 )
+#addSampleWeight(samples,'sm_lin_quad_cT7','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT7 )
+#addSampleWeight(samples,'sm_lin_quad_cT7','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#addSampleWeight(samples,'sm_lin_quad_cT7','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#
+############ FT8 ############
+####default coupling, quadratic EFT 
+#samples['quad_cT8'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
+#    'weight': mcCommonWeight + '*' + quadReweight_cT8, #do we have to add reweighting for the different Wilson Coeff.?
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'quad_cT8','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
+#addSampleWeight(samples,'quad_cT8','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
+#addSampleWeight(samples,'quad_cT8','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
+## SM + lin + quad 
+#samples['sm_lin_quad_cT8'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight': mcCommonWeight, 
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'sm_lin_quad_cT8','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT8 )
+#addSampleWeight(samples,'sm_lin_quad_cT8','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT8 )
+#addSampleWeight(samples,'sm_lin_quad_cT8','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT8 )
+#addSampleWeight(samples,'sm_lin_quad_cT8','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#addSampleWeight(samples,'sm_lin_quad_cT8','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#
+############ FT9 ############
+####default coupling, quadratic EFT 
+#samples['quad_cT9'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC'),
+#    'weight': mcCommonWeight + '*' + quadReweight_cT9, #do we have to add reweighting for the different Wilson Coeff.?
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'quad_cT9','ZTo2L_ZTo2J_aQGC','0.799 / 3.361 ')
+#addSampleWeight(samples,'quad_cT9','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.05862 / 0.2222)')
+#addSampleWeight(samples,'quad_cT9','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0)* (0.1365 / 0.569)')
+## SM + lin + quad 
+#samples['sm_lin_quad_cT9'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J') 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight': mcCommonWeight, 
+#    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'sm_lin_quad_cT9','ZTo2L_ZTo2J_aQGC', '(0.799 / 3.361) *'                                      + LinQuadReweight_cT9 )
+#addSampleWeight(samples,'sm_lin_quad_cT9','WmTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05862 / 0.2222) *' + LinQuadReweight_cT9 )
+#addSampleWeight(samples,'sm_lin_quad_cT9','WpTo2J_ZTo2L_aQGC','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.1365 / 0.569)   *' + LinQuadReweight_cT9 )
+#addSampleWeight(samples,'sm_lin_quad_cT9','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#addSampleWeight(samples,'sm_lin_quad_cT9','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)')
 
 ##########################################################
 ############   SIGNALS FOR COMBINATION  ##################
@@ -429,23 +429,23 @@ addSampleWeight(samples,'ewk_WpZ','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart
 ##########################################################
 
  #************ global recoil (for EFT limits) ************#
-samples['sm'] = {
-    'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J')
-             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L')
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
-             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
-             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L'),
-    'weight':  mcCommonWeight,
-    'FilesPerJob': 15,
-    'EventsPerJob' : 70000,
-}
-addSampleWeight(samples,'sm','ZTo2L_ZTo2J','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.01606/0.01589)')
-addSampleWeight(samples,'sm','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.03004/0.02982)')
-addSampleWeight(samples,'sm','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05526/0.05401)')
+#samples['sm'] = {
+#    'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J')
+#             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L')
+#             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_WmTo2J')
+#             #+nanoGetSampleFiles(mcDirectory, 'WmToLNu_ZTo2J')
+#             #+nanoGetSampleFiles(mcDirectory, 'WpTo2J_WmToLNu')
+#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WmTo2J')
+#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_WpTo2J')
+#             #+nanoGetSampleFiles(mcDirectory, 'WpToLNu_ZTo2J')
+#             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L'),
+#    'weight':  mcCommonWeight,
+#    'FilesPerJob': 15,
+#    'EventsPerJob' : 70000,
+#}
+#addSampleWeight(samples,'sm','ZTo2L_ZTo2J','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.01606/0.01589)')
+#addSampleWeight(samples,'sm','WmTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0)  * (0.03004/0.02982)')
+#addSampleWeight(samples,'sm','WpTo2J_ZTo2L','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05526/0.05401)')
 
 #************ dipole recoil ************#
 samples['sm_dipole'] = {

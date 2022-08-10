@@ -124,26 +124,26 @@ groupPlot['VBS']  = {
                  'nameHR' : 'VBS ewk',
                  'isSignal' : 1,
                  'color': colors["kRed"]+1,
-                 'samples'  : ['sm'],
+                 'samples'  : ['sm_dipole'],
                  'fill': 1001
               }
 
 
-groupPlot['sm_lin_quad_cT0']  = {
-                 'nameHR' : 'SM+Linear+Quadratic FT2',
-                 'isSignal' : 2,
-                 'color': colors["kBlue"]+4,
-                 'samples'  : ['sm_lin_quad_cT0'],
-                 'fill': 1001
-              }
-#
-groupPlot['quad_cT0']  = {
-                 'nameHR' : 'Quadratic FT2',
-                 'isSignal' : 2,
-                 'color': colors["kBlue"]+1,
-                 'samples'  : ['quad_cT0'],
-                 'fill': 1001
-              }
+#groupPlot['sm_lin_quad_cT0']  = {
+#                 'nameHR' : 'SM+Linear+Quadratic FT2',
+#                 'isSignal' : 2,
+#                 'color': colors["kBlue"]+4,
+#                 'samples'  : ['sm_lin_quad_cT0'],
+#                 'fill': 1001
+#              }
+##
+#groupPlot['quad_cT0']  = {
+#                 'nameHR' : 'Quadratic FT2',
+#                 'isSignal' : 2,
+#                 'color': colors["kBlue"]+1,
+#                 'samples'  : ['quad_cT0'],
+#                 'fill': 1001
+#              }
 
 
 # keys here must match keys in samples.py    
@@ -153,20 +153,20 @@ groupPlot['quad_cT0']  = {
 #  
 
 
-plot['quad_cT0']  = {
-                    'color': colors["kCyan"]+1, 
-                    'isSignal' : 1,
-                    'isData'   : 0,
-                    'scale'    : 1.   
-                }
-
-plot['sm_lin_quad_cT0']  = {
-                    'color': colors["kCyan"]+1, 
-                    'isSignal' : 1,
-                    'isData'   : 0,
-                    'scale'    : 1.   
-                }
-
+#plot['quad_cT0']  = {
+#                    'color': colors["kCyan"]+1, 
+#                    'isSignal' : 1,
+#                    'isData'   : 0,
+#                    'scale'    : 1.   
+#                }
+#
+#plot['sm_lin_quad_cT0']  = {
+#                    'color': colors["kCyan"]+1, 
+#                    'isSignal' : 1,
+#                    'isData'   : 0,
+#                    'scale'    : 1.   
+#                }
+#
 
 
 
@@ -252,12 +252,19 @@ plot['WJets']  = {
                   'scale'    : 1.0
               }
 
-plot['sm']  = {
+plot['sm_dipole']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
                   'isData'   : 0,
                   'scale'    : 1.   
               }
+
+#plot['sm']  = {
+#                  'color': colors["kCyan"]+1, 
+#                  'isSignal' : 1,
+#                  'isData'   : 0,
+#                  'scale'    : 1.   
+#              }
 
 plot['VBS_VV_QCD']  = {
                   'color': colors["kCyan"]+1, 
@@ -300,10 +307,6 @@ plot['DATA']  = {
 			        "Boosted_SR_bTag" :0,
 			        "Resolved_SR_bVeto" : 0,
 			        "Resolved_SR_bTag" :0,
-                    "SR_bVeto" : 0,
-			        "SR_bTag" :0,
-			        "SR_bVeto" : 0,
-			        "SR_bTag" :0,
 	            }	
              }
 

@@ -46,6 +46,39 @@ variables['ZV_mass'] = { 'name': 'mZV',            #   variable name
 
 
 
+    #************* other variables for plotting *****************#
+
+variables['Zleppt'] = { 'name' : 'Alt$(Zleppt, -999)',
+			'range' : (20,0.,800),
+			'xaxis' : 'p_{T} leptonic Z [GeV]',
+			'fold' : 3,
+
+                    }
+
+variables['mjj']  = {   'name': 'mjj_max',            #   variable name    
+                        'range' : (30,200,4000),    #   variable range
+                        'xaxis' : 'm_{jj} [GeV]',  #   x axis name
+                        'fold' :3,
+                        
+                        }
+
+variables['VBS_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_0],-9999.)',            #   variable name    
+                        'range' : (30,0,400),    #   variable range
+                        'xaxis' : 'p_{T} 1st VBS jet [GeV]',  #   x axis name
+                        'fold' : 3,
+                        
+                        }
+
+variables['VBS_jet_pt2']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_1],-9999.)',            #   variable name    
+                        'range' : (30,0,400),    #   variable range
+                        'xaxis' : 'p_{T} 2nd VBS jet [GeV]',  #   x axis name
+                        'fold' : 3,
+                        
+                        }
+
+
+
+
 ### DNN variables
 
     #************* coarse binning (2016 only) ***************#
@@ -63,17 +96,21 @@ variables['DNNoutput_pruned_bReq'] = {
     'fold': 3 ,
 }
 
-    #************ finer binning (used in 2017 and 2018) ***************#
-variables['DNNoutput_pruned_bVeto_morebins'] = {
-    'name': 'DNNoutput_pruned_bVeto',
-    'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.82,0.84,0.86,0.88,0.90,0.92,0.94,0.96,0.98,1.],),
-    'xaxis': 'DNN output',
-    'fold': 3 ,
-}
 
-variables['DNNoutput_pruned_bReq_morebins'] = {
-    'name': 'DNNoutput_pruned_bReq',
-    'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.82,0.84,0.86,0.88,0.90,0.92,0.94,0.96,0.98,1.],),
-    'xaxis': 'DNN output',
-    'fold': 3 ,
-}
+
+
+
+    #************ finer binning (used in 2017 and 2018) ***************#
+#variables['DNNoutput_pruned_bVeto_morebins'] = {
+#    'name': 'DNNoutput_pruned_bVeto',
+#    'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.82,0.84,0.86,0.88,0.90,0.92,0.94,0.96,0.98,1.],),
+#    'xaxis': 'DNN output',
+#    'fold': 3 ,
+#}
+#
+#variables['DNNoutput_pruned_bReq_morebins'] = {
+#    'name': 'DNNoutput_pruned_bReq',
+#    'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.82,0.84,0.86,0.88,0.90,0.92,0.94,0.96,0.98,1.],),
+#    'xaxis': 'DNN output',
+#    'fold': 3 ,
+#}

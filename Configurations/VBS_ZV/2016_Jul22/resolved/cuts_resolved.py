@@ -21,20 +21,11 @@ supercut = '   nLepton == 2 \
 #   RESOLVED CATEGORY
 #   vbs_category = 1
 #######################################
-cuts['Resolved_topcr']  = 'vbs_category==1 && Vjet_mass >65 && Vjet_mass<105 && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13)'
-
-#cuts['Resolved_DYcr']  = 'vbs_category==1 && ( Vjet_mass<65 || Vjet_mass>105) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
+#cuts['Resolved_topcr']  = 'vbs_category==1 && Vjet_mass >65 && Vjet_mass<105 && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13)'
+cuts['Resolved_topcr_bVeto']  = 'vbs_category==1 && bVeto && Vjet_mass >65 && Vjet_mass<105 && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13)'
+cuts['Resolved_topcr_bTag']  = 'vbs_category==1 && bReq && Vjet_mass >65 && Vjet_mass<105 && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13)'
 
 cuts['Resolved_DYcr_bVeto']  = 'vbs_category==1 && bVeto && ( Vjet_mass<65 || Vjet_mass>105) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
-
 cuts['Resolved_DYcr_bTag']  = 'vbs_category==1 && bReq && ( Vjet_mass<65 || Vjet_mass>105) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
-
-#cuts['Resolved_SR']  = 'vbs_category==1 && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Vjet_mass > 65 && Vjet_mass <105'
-
-
 cuts['Resolved_SR_bVeto']  = 'vbs_category==1  &&  bVeto &&(Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Vjet_mass > 65 && Vjet_mass <105'
-
 cuts['Resolved_SR_bTag']  = 'vbs_category==1  &&  bReq &&(Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Vjet_mass > 65 && Vjet_mass <105'
-
-
-#cuts['Resolved_SR_nobVeto']  = 'vbs_category==1  &&  !bVeto &&(Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Vjet_mass > 65 && Vjet_mass <105'
