@@ -409,7 +409,7 @@ aliases['PUJetIdSF_down'] = {
 """
 #nobtag sf test
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF', 'btagSF' ]),
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF', 'btagSF','PrefireWeight' ]),
     'samples': mc
 }
 # variations

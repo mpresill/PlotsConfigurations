@@ -425,7 +425,7 @@ aliases['Jet_PUIDSF_down'] = {
 """
 #nobtag sf test
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF', 'btagSF' ]),
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF', 'btagSF','PrefireWeight' ]),
     'samples': mc
 }
 # variations
@@ -489,11 +489,11 @@ m_quark_higheta_pt1 = "_higheta_pt1_quark"
 
 
 models_path_full_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bVeto'
-models_path_pruned_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Feb22/2016_bVeto_pruned'
+models_path_pruned_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/May22/2016_bVeto_pruned'
 models_path_full_bVeto_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bVeto_noqgl'
 models_path_pruned_bVeto_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/pruned_bVeto_noqgl'
 models_path_full_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bReq'
-models_path_pruned_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Feb22/2016_bReq_pruned'
+models_path_pruned_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/May22/2016_bReq_pruned'
 models_path_full_bReq_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bReq_noqgl'
 models_path_pruned_bReq_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/pruned_bReq_noqgl'
 
