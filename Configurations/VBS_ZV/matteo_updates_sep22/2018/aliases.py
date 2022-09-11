@@ -451,8 +451,8 @@ m_quark_loweta_pt1 = "_loweta_pt1_quark"
 m_quark_higheta_pt0 = "_higheta_pt0_quark"
 m_quark_higheta_pt1 = "_higheta_pt1_quark"
 
-models_path_pruned_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/May22/2018_bVeto_pruned'
-models_path_pruned_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/May22/2018_bReq_pruned'
+models_path_pruned_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2018_bVeto_pruned'
+models_path_pruned_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2018_bReq_pruned'
 
 aliases['DNNoutput_pruned_bVeto'] = {
      'linesToAdd': [
