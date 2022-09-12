@@ -97,53 +97,54 @@ groupPlot['vbfV+VV+VVV']  = {
                   'nameHR' : 'vbfV+VV+VVV',
                   'isSignal' : 0,
                   'color': palette["DarkBlue"],
-                  'samples'  : ['VVV','VBS_VV_QCD','VZ','WW','ggWW','VBF-V'],
+                  'samples'  : ['VVV', 'VZ','WW','ggWW','VBS_VV_QCD'], #VBF-V
                   'fill': 1001
               }
 
-    #or i,DYbin in enumerate(DY_bins):
-    #       groupPlot[DYbin] = {
-    #                       'nameHR': DYbin,
-    #                       'isSignal' : 0,
-    #                       'color' : DY_palette[i],
-    #                       'samples' : DYbin,
-    #                       'fill' : 1001,              
-    #
 
+
+"""
+for i,DYbin in enumerate(DY_bins_boost):
+        groupPlot[DYbin] = {
+                        'nameHR': DYbin,
+                        'isSignal' : 0,
+                        'color' : DY_palette[i],
+                        'samples' : DYbin,
+                        'fill' : 1001,
+                        'removeFromCuts': phase_spaces_res
+                
+}
+"""
+for i,DYbin in enumerate(DY_bins):
+        groupPlot[DYbin] = {
+                        'nameHR': DYbin,
+                        'isSignal' : 0,
+                        'color' : DY_palette[i],
+                        'samples' : DYbin,
+                        'fill' : 1001,
+                        
+                
+}
+"""
 groupPlot['DY'] = {
-        'nameHR': 'DY',
-        'isSignal' : 0,
-        'color' : palette["Green2"],
-        'samples' : DY_bins,
-        'fill' : 1001,
-    }
 
-
+		 'nameHR' : 'DY',
+                 'isSignal' : 0,
+                 'color': colors["kGreen"]+1,
+                 'samples'  : ['DY'],
+                 'fill': 1001
+}
+"""
 
 groupPlot['VBS']  = {
-                 'nameHR' : 'VBS ewk',
+                 'nameHR' : 'VBS',
                  'isSignal' : 1,
                  'color': colors["kRed"]+1,
-                 'samples'  : ['sm_dipole'],
+                 'samples'  : ['VBS_ZV'],
                  'fill': 1001
               }
 
 
-#groupPlot['sm_lin_quad_cT0']  = {
-#                 'nameHR' : 'SM+Linear+Quadratic FT2',
-#                 'isSignal' : 2,
-#                 'color': colors["kBlue"]+4,
-#                 'samples'  : ['sm_lin_quad_cT0'],
-#                 'fill': 1001
-#              }
-##
-#groupPlot['quad_cT0']  = {
-#                 'nameHR' : 'Quadratic FT2',
-#                 'isSignal' : 2,
-#                 'color': colors["kBlue"]+1,
-#                 'samples'  : ['quad_cT0'],
-#                 'fill': 1001
-#              }
 
 
 # keys here must match keys in samples.py    
@@ -151,25 +152,6 @@ groupPlot['VBS']  = {
 # 
 # 
 #  
-
-
-#plot['quad_cT0']  = {
-#                    'color': colors["kCyan"]+1, 
-#                    'isSignal' : 1,
-#                    'isData'   : 0,
-#                    'scale'    : 1.   
-#                }
-#
-#plot['sm_lin_quad_cT0']  = {
-#                    'color': colors["kCyan"]+1, 
-#                    'isSignal' : 1,
-#                    'isData'   : 0,
-#                    'scale'    : 1.   
-#                }
-#
-
-
-
 plot['VVV']  = { 
                   'color': colors["kAzure"] -3,    
                   'isSignal' : 0,
@@ -177,19 +159,6 @@ plot['VVV']  = {
                   'scale'    : 1.0
                   }
 
-plot['WW']  = { 
-                  'color': colors["kAzure"] -3,    
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'scale'    : 1.0
-                  }
-
-plot['ggWW']  = { 
-                  'color': colors["kAzure"] -3,    
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'scale'    : 1.0
-                  }
 
 plot['VZ']  = {
                   'color': colors['kGreen']+3,  
@@ -215,7 +184,16 @@ for DYbin in DY_bins:
                     'isData'   : 0, 
                     'scale'    : 1.0,
                                       }
-
+"""
+for DYbin in DY_bins_res:
+	plot[DYbin] =  {   
+                    'color': colors['kAzure']-1,
+                    'isSignal' : 0,
+                    'isData'   : 0, 
+                    'scale'    : 1.0,
+                    'removeFromCuts' : phase_spaces_boost, 
+                    }
+"""
 plot['Vg']  = { 
                   'color': 859, # kAzure -1  
                   'isSignal' : 0,
@@ -228,14 +206,14 @@ plot['VgS'] = {
                   'isData'   : 0,
                   'scale'    : 1.0
                   }
-
+"""
 plot['VBF-V']  = {
                   'color': colors['kYellow']+3,  
                   'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.
               }
-
+"""
 
 plot['top'] = {   
                  'color': colors['kAzure']-1,
@@ -252,23 +230,9 @@ plot['WJets']  = {
                   'scale'    : 1.0
               }
 
-plot['sm_dipole']  = {
+plot['VBS_ZV']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
-                  'isData'   : 0,
-                  'scale'    : 1.   
-              }
-
-#plot['sm']  = {
-#                  'color': colors["kCyan"]+1, 
-#                  'isSignal' : 1,
-#                  'isData'   : 0,
-#                  'scale'    : 1.   
-#              }
-
-plot['VBS_VV_QCD']  = {
-                  'color': colors["kCyan"]+1, 
-                  'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.   
               }
@@ -303,11 +267,12 @@ plot['DATA']  = {
                  'isBlind'  : 0,
 		         'scale' :1.,
                  'cuts': {
-                    "Boosted_SR_bVeto" : 0,
-			        "Boosted_SR_bTag" :0,
-			        "Resolved_SR_bVeto" : 0,
-			        "Resolved_SR_bTag" :0,
-	            }	
+#		#	"Preselection" : 0,
+			#"Boosted_SR_bVeto" : 0,
+			"Boosted_SR_bReqTight" :0,
+			"Resolved_SR_bVeto" : 0,
+#			"Resolved_SR_bReqTight" :0 
+		}	
              }
 
 

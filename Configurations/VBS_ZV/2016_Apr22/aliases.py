@@ -92,17 +92,17 @@ aliases['fakeWStatMuDown'] = {
 ############# VBS variables for jet pairing
 ############################################################
 mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
-models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2016_bReq_pruned'
+models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/All_years_nobtag'
 #models_path = '/eos/user/m/mpresill/www/VBS/Numpy/Alex/'
-models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2016_bReq_pruned'
+models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_nobtag'
 
 aliases['vbs_category'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations 
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations 
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('vbs_category','2016',models_path,models_path_pruned, False)
 }
 
@@ -110,9 +110,9 @@ aliases['vbs_jet_0'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('vbs_jet_0','2016', models_path,models_path_pruned, False)
 }
 
@@ -120,9 +120,9 @@ aliases['vbs_jet_1'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('vbs_jet_1','2016', models_path,models_path_pruned, False)
 }
 
@@ -130,9 +130,9 @@ aliases['v_jet_0'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('v_jet_0','2016', models_path,models_path_pruned, False)
 }
 
@@ -140,9 +140,9 @@ aliases['v_jet_1'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('v_jet_1','2016', models_path,models_path_pruned, False)
 }
 
@@ -151,9 +151,9 @@ aliases['mjj_max'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('mjj_max','2016', models_path,models_path_pruned, False)
 }
 
@@ -161,9 +161,9 @@ aliases['detajj_mjjmax'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
 	],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('detajj_mjjmax','2016', models_path,models_path_pruned, False)
 }
 
@@ -171,9 +171,9 @@ aliases['dphijj_mjjmax'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('dphijj_mjjmax','2016', models_path,models_path_pruned, False)
 }
 
@@ -181,9 +181,9 @@ aliases['Vjet_mass'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
 	'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('Vjet_mass','2016', models_path,models_path_pruned, False)
 }
 
@@ -191,9 +191,9 @@ aliases['njet30'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
         'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('njet30','2016', models_path, models_path_pruned,False)
 }
 
@@ -201,9 +201,9 @@ aliases['nbtag'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
         'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('nbtag','2016', models_path,models_path_pruned, False)
 }
 
@@ -211,9 +211,9 @@ aliases['Zleppt'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
         'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('Zleppt','2016', models_path,models_path_pruned, False)
 }
 
@@ -221,9 +221,9 @@ aliases['Vpt'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
         'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('Vpt','2016', models_path,models_path_pruned, False)
 }
  
@@ -236,9 +236,9 @@ aliases['mZV'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
         'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
     ],
-    'class': 'jets_cat_dnn_FJ',
+    'class': 'jets_cat_dnn',
     'args': ('mZV','2016', models_path,models_path_pruned, False)
 }
 
@@ -363,6 +363,20 @@ aliases['DY_LO_pTllrw'] = {
 ###########################################################################################
 # PU jet Id SF
 
+# PU jet Id SF
+"""
+puidSFSource = '{}/Configurations/patches/PUID_81XTraining_EffSFandUncties.root'.format(configurations)
+
+aliases['PUJetIdSF'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        '.L %s/Configurations/VBS_ZV/patches/pujetidsf_event_new.cc+' % configurations
+    ],
+    'class': 'PUJetIdEventSF',
+    'args': (puidSFSource, "2016", "loose"),
+    'samples': mc
+}
+"""
 aliases['PUJetIdSF'] = {
   'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2 && ( (Jet_electronIdx1 != Lepton_electronIdx[0]) || Jet_electronIdx1 < 0 )  \
                                           && ( (Jet_muonIdx1 != Lepton_muonIdx[0] ) || Jet_muonIdx1 < 0 ) \
@@ -404,8 +418,14 @@ aliases['Jet_PUIDSF_down'] = {
 
 
 # data/MC scale factors
+"""aliases['SFweight'] = {
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF','PUJetIdSF']),
+    'samples': mc
+}
+"""
+#nobtag sf test
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','Jet_PUIDSF', 'btagSF','PrefireWeight' ]),
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF', 'btagSF' ]),
     'samples': mc
 }
 # variations
@@ -426,7 +446,32 @@ aliases['SFweightMuDown'] = {
     'samples': mc
 }
 
+"""
+aliases['DNNoutput_allvar'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        'gSystem->Load("libDNNEvaluator.so")',
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
+    ],
+    'class': 'jets_cat_dnn',
+    'args': ('dnn_output','2016', models_path,models_path_pruned, False)
+}
 
+
+mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
+models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_nobtag'
+
+aliases['DNNoutput_pruned'] = {
+    'linesToAdd': [
+        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+        'gSystem->Load("libDNNEvaluator.so")',
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned.cc+' % configurations
+    ],
+    'class': 'jets_cat_dnn',
+    'args': ('dnn_output_pruned','2016', models_path,models_path_pruned, False)
+}
+
+"""
 
 morphing_file = configurations + '/Configurations/VBS_ZV/qgl_16/Remorphing/morphing_functions_comb.root'
 
@@ -442,61 +487,68 @@ m_quark_loweta_pt1 = "_loweta_pt1_quark"
 m_quark_higheta_pt0 = "_higheta_pt0_quark"
 m_quark_higheta_pt1 = "_higheta_pt1_quark"
 
-models_path_pruned_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2016_bVeto_pruned'
-models_path_pruned_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2016_bReq_pruned'
 
+models_path_full_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bVeto'
+models_path_pruned_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Feb22/2016_bVeto_pruned'
+models_path_full_bVeto_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bVeto_noqgl'
+models_path_pruned_bVeto_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/pruned_bVeto_noqgl'
+models_path_full_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bReq'
+models_path_pruned_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Feb22/2016_bReq_pruned'
+models_path_full_bReq_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bReq_noqgl'
+models_path_pruned_bReq_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/pruned_bReq_noqgl'
 
 aliases['DNNoutput_pruned_bVeto'] = {
     'linesToAdd': [
         'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
         'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_morphed_FJ.cc+' % configurations
+        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_morphed.cc+' % configurations
     ],
-    'class': 'jets_cat_qgl_FJ',
-    'args': ('dnn_output_pruned_bVeto','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'class': 'jets_cat_qgl',
+    'args': ('dnn_output_pruned_bVeto','2016', models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 aliases['DNNoutput_pruned_bReq'] = {
-    'class': 'jets_cat_qgl_FJ',
-    'args': ('dnn_output_pruned_bReq','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'class': 'jets_cat_qgl',
+    'args': ('dnn_output_pruned_bReq','2016', models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 #qgls
 
 aliases['vbs_0_qglmorphed_res'] = {
-   'class': 'jets_cat_qgl_FJ',
-    'args': ('vbs_0_qglmorphed_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)}
+   'class': 'jets_cat_qgl',
+    'args': ('vbs_0_qglmorphed_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)}
 aliases['vbs_1_qglmorphed_res'] =  {
-'class': 'jets_cat_qgl_FJ',
-    'args': ('vbs_1_qglmorphed_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)}
+'class': 'jets_cat_qgl',
+    'args': ('vbs_1_qglmorphed_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)}
 
 aliases['vjet_0_qglmorphed_res'] = {
-'class': 'jets_cat_qgl_FJ',
-    'args': ('vjet_0_qglmorphed_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+'class': 'jets_cat_qgl',
+    'args': ('vjet_0_qglmorphed_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 aliases['vjet_1_qglmorphed_res'] = {
-'class': 'jets_cat_qgl_FJ',
-    'args': ('vjet_1_qglmorphed_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+'class': 'jets_cat_qgl',
+    'args': ('vjet_1_qglmorphed_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 aliases['vbs_0_qgl_res'] =  {
-'class': 'jets_cat_qgl_FJ',
-    'args': ('vbs_0_qgl_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+'class': 'jets_cat_qgl',
+    'args': ('vbs_0_qgl_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 aliases['vbs_1_qgl_res'] =  {
-'class': 'jets_cat_qgl_FJ',
-    'args': ('vbs_1_qgl_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+'class': 'jets_cat_qgl',
+    'args': ('vbs_1_qgl_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 aliases['vjet_0_qgl_res'] = {
-'class': 'jets_cat_qgl_FJ',
-    'args': ('vjet_0_qgl_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+'class': 'jets_cat_qgl',
+    'args': ('vjet_0_qgl_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 aliases['vjet_1_qgl_res'] = {
-'class': 'jets_cat_qgl_FJ',
-    'args': ('vjet_1_qgl_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+'class': 'jets_cat_qgl',
+    'args': ('vjet_1_qgl_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
+
 
 
 ####DY binning
@@ -514,30 +566,27 @@ aliases['fit_Z_bin'] = {
 
 ####### QCD scale and PDF systematics on signal acceptance macros:
 
-EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
-mc_eos    = ["sm","sm_dipole","ewk_WpZ","ewk_WmZ","ewk_ZZ","VBS_VV_QCD",] + EFT_samples
+#EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
+#mc_eos    = ["sm", "VBS_VV_QCD"] + EFT_samples
 
-aliases['QCDscale_normalized'] = {
-            'class': 'QCDScaleNormalized',
-            'args': (),
-            'linesToAdd': [
-                'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-                'gSystem->Load("libDNNEvaluator.so")',
-                '.L %s/Configurations/VBS_ZV/macros/QCDscale_normalize.cc+' % configurations
-             ],
-            'samples':mc_eos          
-}
+#aliases['QCDscale_normalized'] = {
+#            'class': 'QCDScaleNormalized',
+#            'args': (),
+#            'linesToAdd': [
+#                'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+#                'gSystem->Load("libDNNEvaluator.so")',
+#                '.L %s/Configurations/VBS_ZV/macros/QCDscale_normalize.cc+' % configurations
+#             ],
+#            'samples':mc_eos          
+#}
 
-aliases['PDFweight_normalized'] = {
-            'class': 'PDFWeightNormalized',
-            'args': (),
-            'linesToAdd': [
-                'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-                'gSystem->Load("libDNNEvaluator.so")',
-                '.L %s/Configurations/VBS_ZV/macros/PDFweight_normalize.cc+' % configurations
-             ],
-            'samples': mc_eos        
-}
-
-
-aliases['mV'] = { 'expr': 'FatJet_msoftdrop_nom[CleanFatJet_jetIdx[0]]' }
+#aliases['PDFweight_normalized'] = {
+#            'class': 'PDFWeightNormalized',
+#            'args': (),
+#            'linesToAdd': [
+#                'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+#                'gSystem->Load("libDNNEvaluator.so")',
+#                '.L %s/Configurations/VBS_ZV/macros/PDFweight_normalize.cc+' % configurations
+#             ],
+#            'samples': mc_eos        
+#}

@@ -105,6 +105,7 @@ protected:
     njet30,
     nbtag,
     Zleppt,
+    mZV,
     Vpt,
     dnn_output_pruned_bVeto,
     dnn_output_pruned_bReq,
@@ -280,6 +281,8 @@ jets_cat_qgl_FJ::jets_cat_qgl_FJ( char const* _type, const char* year, const cha
       returnVar_ = nbtag;
     else if (type== "Zleppt")
       returnVar_ = Zleppt;
+    else if (type=="mZV")
+      returnVar_=mZV;
     else if (type== "Vpt")
       returnVar_ = Vpt;
     else if (type == "dnn_output_pruned_bVeto")
@@ -365,7 +368,8 @@ model_dir_pruned_bVeto_(model_dir_pruned_bVeto), model_dir_pruned_bReq_(model_di
   //cout << "2" <<endl;
   jets_cat_qgl_FJ::year_ = year;
   //jets_cat_qgl_FJ::model_dir_ = model_dir;
-  //jets_cat_qgl_FJ::verbose = verbose  std::string boosted_path_pruned_bVeto_ = model_dir_pruned_bVeto_ + "/Boosted/";
+  //jets_cat_qgl_FJ::verbose = verbose  
+  std::string boosted_path_pruned_bVeto_ = model_dir_pruned_bVeto_ + "/Boosted/";
   dnn_tensorflow_boosted_pruned_bVeto = new DNNEvaluator(boosted_path_pruned_bVeto_, verbose);
   std::string resolved_path_pruned_bVeto_ = model_dir_pruned_bVeto_ + "/Resolved/";
   dnn_tensorflow_resolved_pruned_bVeto = new DNNEvaluator(resolved_path_pruned_bVeto_, verbose);
@@ -664,10 +668,11 @@ jets_cat_qgl_FJ::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _even
   float btag_cut = 0.;
   std::vector<int> vectors_id;
   float _Zleppt =0.;
+  float _mZV=0.;
   float _Vpt = 0.;
   returnValues[Vpt]=-999;
   returnValues[Zleppt] = -999;
-
+  returnValues[mZV] = -999;
   //default qgl morph returns
 returnValues[vbs_0_qgl_boost] = -1;
 returnValues[vbs_1_qgl_boost] = -1;
@@ -738,8 +743,8 @@ returnValues[vjet_1_partfl_res] = 0;
                 
                 if( Mjj_tmp >= Mjj_max ){
                     Mjj_max=Mjj_tmp;
-                    detajj_mjj_max=deltaEtaqgl((vectors.at(ijet)).Eta(),(vectors.at(jjet)).Eta());
-                    dphijj_mjj_max=deltaPhiqgl((vectors.at(ijet)).Phi(),(vectors.at(jjet)).Phi());
+                    detajj_mjj_max=deltaEtaqglFJ((vectors.at(ijet)).Eta(),(vectors.at(jjet)).Eta());
+                    dphijj_mjj_max=deltaPhiqglFJ((vectors.at(ijet)).Phi(),(vectors.at(jjet)).Phi());
                     // Index in vectors
                     VBS_jets[0]= ijet;
                     VBS_jets[1]= jjet;
@@ -754,8 +759,19 @@ returnValues[vjet_1_partfl_res] = 0;
         if (nFJ >= 1){
             //cout << "Boosted" << endl;
             category = 0;
-            Vjet_mass_max = FatJet_mass->At(0);
-	        _Vpt = FatJet_pt->At(0);  //does it need to be the first FatJet?
+            Vjet_mass_max = FatJet_mass->At(CleanFatJet_jetId->At(0)->At(CleanFatJet_jetId->At(0);
+	    _Vpt = Fat_jet_pt->At(CleanFatJet_jetId->At(0);  //does it need to be the first FatJet?
+            if (nLep == 2) {
+              TLorentzVector lep0;
+              TLorentzVector lep1;
+              lep0.SetPtEtaPhiM(Lepton_pt->At(0), Lepton_eta->At(0), Lepton_phi->At(0), 0);
+              lep1.SetPtEtaPhiM(Lepton_pt->At(1), Lepton_eta->At(1), Lepton_phi->At(1), 0);
+
+              TLorentzVector FJ0; 
+              FJ0.SetPtEtaPhiM(FatJet_pt->At(CleanFatJet_jetId->At(0)), FatJet_eta->At(0), FatJet_phi->At(0), FatJet_mass->At(CleanFatJet_jetId->At(0)));
+              _mZV = (lep0 + lep1 + FJ0).M();
+            
+            }
 
             //qgl morph
             
@@ -829,6 +845,14 @@ returnValues[vjet_1_partfl_res] = 0;
                             deltamass_Vjet = dmass;
                             Vjet_mass_max = mvjet;
 			    _Vpt=(jet0+jet1).Pt();
+
+			    if (nLep == 2) {
+                              TLorentzVector lep0;
+                              TLorentzVector lep1;
+                              lep0.SetPtEtaPhiM(Lepton_pt->At(0), Lepton_eta->At(0), Lepton_phi->At(0), 0);
+                              lep1.SetPtEtaPhiM(Lepton_pt->At(1), Lepton_eta->At(1), Lepton_phi->At(1), 0);
+                              _mZV = (lep0 + lep1 + jet0 + jet1).M();
+                            }
                         }
                     }
                 }
@@ -922,7 +946,7 @@ returnValues[vjet_1_partfl_res] = 0;
     returnValues[vbs_jet_1] = 999;
     returnValues[v_jet_0] = 999;
     returnValues[v_jet_1] = 999;
-    returnValues[dnn_output_full_bVeto] = -0.2;
+    //returnValues[dnn_output_full_bVeto] = -0.2;
 
 
   // Now go back to CleanJet indexes for easy use of the collection
@@ -950,6 +974,8 @@ returnValues[vjet_1_partfl_res] = 0;
   returnValues[njet30] = njet;
   //cout << "test" <<endl;
   returnValues[Zleppt] = _Zleppt;
+  returnValues[mZV] = _mZV;
+
   //cout << returnValues[Zleppt]<<endl;
   //cout << "nbtag = " << nbtag << endl;
   returnValues[nbtag] = _nbtag;

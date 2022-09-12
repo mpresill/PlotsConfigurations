@@ -1,18 +1,11 @@
 # example of configuration file
 treeName= 'Events'
 
-
-date='_14Jul2022_2016'
-
-#categ = 'boosted'
-#categ = 'EFT'
-
-tag = 'VBS_ZV'+date             #after adding
-#tag = 'VBS_ZV'+date+'_EFT'
-
+date='_8Apr2022_2016'
+tag = 'VBS_ZV'+date
 
 # used by mkShape to define output directory for root files
-outputDir = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile'+date #+tag
+outputDir = 'rootFile'+date
 
 # file with TTree aliases
 aliasesFile = 'aliases.py'
@@ -22,16 +15,15 @@ aliasesFile = 'aliases.py'
 variablesFile = 'variables_reduced.py'
 
 # file with list of cuts
-#cutsFile = 'cuts_'+categ+'.py'  #when launching
-cutsFile = 'cuts.py'           #after adding the categories
+cutsFile = 'cuts.py'
 
 # file with list of samples
-samplesFile = 'samples.py'
+samplesFile = 'samples_EFT.py'
+#samplesFile = 'samples.py' #this is a subset of samples_EFT.py, which does not contain EFT and VBS samples global recoil option.
 
 
 # file with list of samples
 plotFile = 'plot.py'
-#plotFile = 'plot_test.py'
 
 
 # luminosity to normalize to (in 1/fb)
@@ -39,18 +31,16 @@ lumi = 35.87
 
 # used by mkPlot to define output directory for plots
 # different from "outputDir" to do things more tidy
-outputDirPlots = '/eos/user/m/mpresill/www/VBS/2016_v7/Plots'+date
+outputDirPlots = '/eos/user/m/mpresill/www/VBS/2016_v7/Plots'+date+'_test'
 
 
 # used by mkDatacards to define output directory for datacards: common vbs-italia github folder : /afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/2017_v7/
-#outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards'+date
-outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/DatacardsEFT/Datacards'+date
-#outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/VBScomb_Datacards'+date    
+outputDirDatacard = './Datacards'+date
+#to be backed up here: /eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards
 
 # structure file for datacard
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards and for mkShape
 nuisancesFile = 'nuisances.py'
-#nuisancesFile = '../2016_v7_Jan22/nuisances_StatOnly.py'
 
