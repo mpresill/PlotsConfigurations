@@ -363,20 +363,6 @@ aliases['DY_LO_pTllrw'] = {
 ###########################################################################################
 # PU jet Id SF
 
-# PU jet Id SF
-"""
-puidSFSource = '{}/Configurations/patches/PUID_81XTraining_EffSFandUncties.root'.format(configurations)
-
-aliases['PUJetIdSF'] = {
-    'linesToAdd': [
-        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        '.L %s/Configurations/VBS_ZV/patches/pujetidsf_event_new.cc+' % configurations
-    ],
-    'class': 'PUJetIdEventSF',
-    'args': (puidSFSource, "2016", "loose"),
-    'samples': mc
-}
-"""
 aliases['PUJetIdSF'] = {
   'expr' : 'TMath::Exp(Sum$((Jet_jetId>=2 && ( (Jet_electronIdx1 != Lepton_electronIdx[0]) || Jet_electronIdx1 < 0 )  \
                                           && ( (Jet_muonIdx1 != Lepton_muonIdx[0] ) || Jet_muonIdx1 < 0 ) \
@@ -418,14 +404,8 @@ aliases['Jet_PUIDSF_down'] = {
 
 
 # data/MC scale factors
-"""aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut', 'btagSF','PUJetIdSF']),
-    'samples': mc
-}
-"""
-#nobtag sf test
 aliases['SFweight'] = {
-    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','PUJetIdSF', 'btagSF','PrefireWeight' ]),
+    'expr': ' * '.join(['SFweight2l', 'LepSF2l__ele_' + eleWP + '__mu_' + muWP, 'LepWPCut','Jet_PUIDSF', 'btagSF','PrefireWeight' ]),
     'samples': mc
 }
 # variations
@@ -446,32 +426,7 @@ aliases['SFweightMuDown'] = {
     'samples': mc
 }
 
-"""
-aliases['DNNoutput_allvar'] = {
-    'linesToAdd': [
-        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
-    ],
-    'class': 'jets_cat_dnn_FJ',
-    'args': ('dnn_output','2016', models_path,models_path_pruned, False)
-}
 
-
-mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
-models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_nobtag'
-
-aliases['DNNoutput_pruned'] = {
-    'linesToAdd': [
-        'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-        'gSystem->Load("libDNNEvaluator.so")',
-        '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_pruned_FJ.cc+' % configurations
-    ],
-    'class': 'jets_cat_dnn_FJ',
-    'args': ('dnn_output_pruned','2016', models_path,models_path_pruned, False)
-}
-
-"""
 
 morphing_file = configurations + '/Configurations/VBS_ZV/qgl_16/Remorphing/morphing_functions_comb.root'
 
@@ -487,15 +442,9 @@ m_quark_loweta_pt1 = "_loweta_pt1_quark"
 m_quark_higheta_pt0 = "_higheta_pt0_quark"
 m_quark_higheta_pt1 = "_higheta_pt1_quark"
 
+models_path_pruned_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2016_bVeto_pruned'
+odels_path_pruned_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2016_bReq_pruned'
 
-models_path_full_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bVeto'
-models_path_pruned_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/May22/2016_bVeto_pruned'
-models_path_full_bVeto_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bVeto_noqgl'
-models_path_pruned_bVeto_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/pruned_bVeto_noqgl'
-models_path_full_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bReq'
-models_path_pruned_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/May22/2016_bReq_pruned'
-models_path_full_bReq_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/full_bReq_noqgl'
-models_path_pruned_bReq_noqgl = '/eos/home-a/ahakimi/www/ZV_analysis/Models/dec21/pruned_bReq_noqgl'
 
 aliases['DNNoutput_pruned_bVeto'] = {
     'linesToAdd': [
@@ -504,51 +453,50 @@ aliases['DNNoutput_pruned_bVeto'] = {
         '.L %s/Configurations/VBS_ZV/macros/jets_cat_dnn_morphed_FJ.cc+' % configurations
     ],
     'class': 'jets_cat_qgl_FJ',
-    'args': ('dnn_output_pruned_bVeto','2016', models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'args': ('dnn_output_pruned_bVeto','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 aliases['DNNoutput_pruned_bReq'] = {
     'class': 'jets_cat_qgl_FJ',
-    'args': ('dnn_output_pruned_bReq','2016', models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'args': ('dnn_output_pruned_bReq','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 #qgls
 
 aliases['vbs_0_qglmorphed_res'] = {
    'class': 'jets_cat_qgl_FJ',
-    'args': ('vbs_0_qglmorphed_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)}
+    'args': ('vbs_0_qglmorphed_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)}
 aliases['vbs_1_qglmorphed_res'] =  {
 'class': 'jets_cat_qgl_FJ',
-    'args': ('vbs_1_qglmorphed_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)}
+    'args': ('vbs_1_qglmorphed_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)}
 
 aliases['vjet_0_qglmorphed_res'] = {
 'class': 'jets_cat_qgl_FJ',
-    'args': ('vjet_0_qglmorphed_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'args': ('vjet_0_qglmorphed_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 aliases['vjet_1_qglmorphed_res'] = {
 'class': 'jets_cat_qgl_FJ',
-    'args': ('vjet_1_qglmorphed_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'args': ('vjet_1_qglmorphed_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 aliases['vbs_0_qgl_res'] =  {
 'class': 'jets_cat_qgl_FJ',
-    'args': ('vbs_0_qgl_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'args': ('vbs_0_qgl_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 aliases['vbs_1_qgl_res'] =  {
 'class': 'jets_cat_qgl_FJ',
-    'args': ('vbs_1_qgl_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'args': ('vbs_1_qgl_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 
 aliases['vjet_0_qgl_res'] = {
 'class': 'jets_cat_qgl_FJ',
-    'args': ('vjet_0_qgl_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'args': ('vjet_0_qgl_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
 aliases['vjet_1_qgl_res'] = {
 'class': 'jets_cat_qgl_FJ',
-    'args': ('vjet_1_qgl_res','2016',models_path_full_bVeto, models_path_pruned_bVeto, models_path_full_bVeto_noqgl, models_path_pruned_bVeto_noqgl, models_path_full_bReq, models_path_pruned_bReq, models_path_full_bReq_noqgl, models_path_pruned_bReq_noqgl,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
+    'args': ('vjet_1_qgl_res','2016',models_path_pruned_bVeto, models_path_pruned_bReq,False,morphing_file, do_morph, m_gluon_loweta_pt0, m_gluon_loweta_pt1, m_gluon_higheta_pt0, m_gluon_higheta_pt1,m_quark_loweta_pt0, m_quark_loweta_pt1, m_quark_higheta_pt0, m_quark_higheta_pt1)
 }
-
 
 
 ####DY binning
