@@ -640,7 +640,8 @@ jets_cat_qgl_FJ::bindTree_(multidraw::FunctionLibrary& _library)
 /*static*/
 void
 jets_cat_qgl_FJ::setValues(UInt_t _run, UInt_t _luminosityBlock, ULong64_t _event)
-{ //cout << "Set values event :" << _event <<endl;
+{ 
+//cout << "Set values event :" << _event <<endl;
 
   if (std::get<0>(currentEvent) == _run && \
       std::get<1>(currentEvent) == _luminosityBlock && \
@@ -759,8 +760,8 @@ returnValues[vjet_1_partfl_res] = 0;
         if (nFJ >= 1){
             //cout << "Boosted" << endl;
             category = 0;
-            Vjet_mass_max = FatJet_mass->At(CleanFatJet_jetId->At(0)->At(CleanFatJet_jetId->At(0);
-	    _Vpt = Fat_jet_pt->At(CleanFatJet_jetId->At(0);  //does it need to be the first FatJet?
+            Vjet_mass_max = FatJet_mass->At(CleanFatJet_jetId->At(0));
+	    _Vpt = FatJet_pt->At(CleanFatJet_jetId->At(0));  //does it need to be the first FatJet?
             if (nLep == 2) {
               TLorentzVector lep0;
               TLorentzVector lep1;
