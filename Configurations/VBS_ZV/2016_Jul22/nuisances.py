@@ -678,51 +678,29 @@ nuisances['VZ'] = {
 
 
 ## rate parameters
-nuisances['Topnorm_boosted_bVeto']  = {
-               'name'  : 'Topnorm_boosted_bVeto_2016',
+nuisances['Topnorm_boosted']  = {
+               'name'  : 'Topnorm_boosted_2016',
                'samples'  : {
                    'top' : '1.00',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
-                   'Boosted_topcr_bVeto',
+                   'Boosted_topcr',
                    'Boosted_SR_bVeto',
+		           'Boosted_SR_bTag'
                    ]
               }
 
-nuisances['Topnorm_boosted_bTag']  = {
-               'name'  : 'Topnorm_boosted_bTag_2016',
+nuisances['Topnorm_resolved']  = {
+               'name'  : 'Topnorm_resolved_2016',
                'samples'  : {
                    'top' : '1.00',
                    },
                'type'  : 'rateParam',
                'cuts'  : [
-                   'Boosted_topcr_bTag',
-                   'Boosted_SR_bTag',
-                   ]
-              }
-
-nuisances['Topnorm_resolved_bVeto']  = {
-               'name'  : 'Topnorm_resolved_bVeto_2016',
-               'samples'  : {
-                   'top' : '1.00',
-                   },
-               'type'  : 'rateParam',
-               'cuts'  : [
-                   'Boosted_topcr_bVeto',
-                   'Boosted_SR_bVeto',
-                   ]
-              }
-
-nuisances['Topnorm_resolved_bTag']  = {
-               'name'  : 'Topnorm_resolved_bTag_2016',
-               'samples'  : {
-                   'top' : '1.00',
-                   },
-               'type'  : 'rateParam',
-               'cuts'  : [
-                   'Boosted_topcr_bTag',
-                   'Boosted_SR_bTag',
+                   'Resolved_topcr',
+                   'Resolved_SR_bVeto',
+		           'Resolved_SR_bTag'
                    ]
               }
 

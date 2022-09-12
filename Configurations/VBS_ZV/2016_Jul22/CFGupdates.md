@@ -8,6 +8,10 @@
 
 > added two folders "boosted", "resolved" to help splitting submission into the two categories and speed up a little bit
 
+ (date: 12th Sept '22)
+
+> updated training models (before we missed Prefiring weights in those trainings)
+
 > Updated JET PU ID SF in nominal histograms: before we were erroneausly using 'PUJetIdSF' in nominal histos, but ‘Jet_PUIDSF_down’ (other implementation) for nuisances. NOW WE USE ONLY ONE! (FIXED changing nominal to ‘Jet_PUIDSF’ as it is very similar but should be computational less expensive and identical from physics p.o.v.)
 
 

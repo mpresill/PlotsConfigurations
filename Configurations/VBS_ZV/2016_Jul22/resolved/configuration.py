@@ -2,10 +2,10 @@
 treeName= 'Events'
 
 
-date='_14Jul2022_2016'
+date='_12Sep2022_2016'
 
-operator = 'T0'
 categ = 'resolved'
+#operator = 'T0' #uncomment for EFT launching process.
 
 
 #tag = 'VBS_ZV'+date             #after adding
