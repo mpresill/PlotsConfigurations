@@ -177,7 +177,7 @@ nuisances['prefire'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, prefire_syst) for skey in mc), 
-    'AsLnN': '1',
+    #'AsLnN': '1',
 }
 
 ##### Electron Efficiency and energy scale REMOVED VBS EW AND QCD FOR THE MOMENT
@@ -367,11 +367,11 @@ nuisances['PU'] = {
 }
 
 ### PU ID SF uncertainty
-"""
+
 puid_syst = ['Jet_PUIDSF_up/Jet_PUIDSF', 'Jet_PUIDSF_down/Jet_PUIDSF']
 
 nuisances['jetPUID'] = {
-    'name': 'CMS_PUID_2017',
+    'name': 'CMS_jetpuid_2017',
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, puid_syst) for skey in mc)
@@ -384,7 +384,7 @@ nuisances['jetPUID']  = {
                 'type'  : 'shape',
                 'samples'  : dict((skey, ['PUJetIdSF_up/PUJetIdSF','PUJetIdSF_down/PUJetIdSF']) for skey in mc ),
 }
-
+"""
 #############################
 ###      fat jet - NEW     ##
 #############################

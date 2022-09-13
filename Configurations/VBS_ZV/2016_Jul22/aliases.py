@@ -92,9 +92,8 @@ aliases['fakeWStatMuDown'] = {
 ############# VBS variables for jet pairing
 ############################################################
 mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
-models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2016_bReq_pruned'
-#models_path = '/eos/user/m/mpresill/www/VBS/Numpy/Alex/'
-models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2016_bReq_pruned'
+models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/All_years_nobtag'
+models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_nobtag'
 
 aliases['vbs_category'] = {
     'linesToAdd': [
@@ -281,10 +280,10 @@ aliases['Top_pTrw'] = {
 # Jet bins
 # using Alt$(CleanJet_pt[n], 0) instead of Sum$(CleanJet_pt >= 30) because jet pt ordering is not strictly followed in JES-varied samples
 
-############b tag
-# B tagging
-#loose 0.1241
-#tight 0.7527
+############b tag (DeepCSV)
+# B tagging https://twiki.cern.ch/twiki/bin/viewauth/CMS/BtagRecommendation2016Legacy 
+#loose 0.2217
+#tight 0.8953
 aliases['bVeto'] = {
     'expr': '(Sum$(CleanJet_pt > 30. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.2217) == 0)'
 }
@@ -295,12 +294,12 @@ aliases['bReq'] = {
 
 aliases['bReqTight'] = {
     'expr': '(Sum$(CleanJet_pt > 30. && abs(CleanJet_eta) < 2.5 && Jet_btagDeepB[CleanJet_jetIdx] > 0.7527) >= 1)'
-}
+} #####wrong WP discriminator (not used here)
 
 aliases['bVetoSF'] = {
     'expr': 'TMath::Exp(Sum$(TMath::Log((CleanJet_pt>30 && abs(CleanJet_eta)<2.5)*Jet_btagSF_deepcsv_shape[CleanJet_jetIdx]+1*(CleanJet_pt<=30 || abs(CleanJet_eta)>=2.5))))',
     'samples': mc
-}
+}   
 
 aliases['bReqSF'] = {
     'expr': 'TMath::Exp(Sum$(TMath::Log((CleanJet_pt>30 && abs(CleanJet_eta)<2.5)*Jet_btagSF_deepcsv_shape[CleanJet_jetIdx]+1*(CleanJet_pt<=30 || abs(CleanJet_eta)>=2.5))))',
