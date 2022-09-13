@@ -336,9 +336,9 @@ nuisances['PU'] = {
 
 ### PU ID SF uncertainty
 puid_syst = ['Jet_PUIDSF_up/Jet_PUIDSF', 'Jet_PUIDSF_down/Jet_PUIDSF']
-"""
+
 nuisances['jetPUID'] = {
-    'name': 'CMS_PUID_2018',
+    'name': 'CMS_jetpuid_2018',
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, puid_syst) for skey in mc)
@@ -349,7 +349,7 @@ nuisances['JetPUID_sf']  = {
                 'kind'  : 'weight',
                 'type'  : 'shape',
                 'samples'  : dict((skey, ['PUJetIdSF_up/PUJetIdSF','PUJetIdSF_down/PUJetIdSF']) for skey in mc ),
-}
+}"""
 
 #############################
 ###      fat jet - NEW     ##
