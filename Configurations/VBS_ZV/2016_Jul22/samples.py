@@ -402,25 +402,25 @@ LinQuadReweight_cT9 = '(' + quadReweight_cT9 + '+' + LinReweight_cT9 + ')'
 ##########################################################
 ############   SIGNALS FOR COMBINATION  ##################
 ##########################################################
-samples['ewk_ZZ'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_dipoleRecoil'),
-    'weight':  mcCommonWeight,
-    'FilesPerJob': 7
-}
+#samples['ewk_ZZ'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_dipoleRecoil'),
+#    'weight':  mcCommonWeight,
+#    'FilesPerJob': 7
+#}
+#######
+#samples['ewk_WmZ'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil'),
+#    'weight':  mcCommonWeight,
+#    'FilesPerJob': 7
+#}
+#addSampleWeight(samples,'ewk_WmZ','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
 ######
-samples['ewk_WmZ'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil'),
-    'weight':  mcCommonWeight,
-    'FilesPerJob': 7
-}
-addSampleWeight(samples,'ewk_WmZ','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
-#####
-samples['ewk_WpZ'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil'),
-    'weight':  mcCommonWeight,
-    'FilesPerJob': 7
-}
-addSampleWeight(samples,'ewk_WpZ','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
+#samples['ewk_WpZ'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil'),
+#    'weight':  mcCommonWeight,
+#    'FilesPerJob': 7
+#}
+#addSampleWeight(samples,'ewk_WpZ','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
 
 
 

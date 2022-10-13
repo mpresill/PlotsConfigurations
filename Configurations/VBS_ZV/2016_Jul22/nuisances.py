@@ -28,11 +28,20 @@ from LatinoAnalysis.Tools.HiggsXSection import HiggsXSection
 HiggsXS = HiggsXSection()
 
 
+############ Load norm factors / differential binning to normalize signal ####################
+#import os
+#import json
+#configurations = os.path.realpath(inspect.getfile(inspect.currentframe())) # this file
+#configurations = os.path.dirname(configurations) # inclusive
+#nfdict = json.load(open("%s/VBS_ZV/2016_Jul22/VBS_VV_QCD_QCDscale.json"%configurations))
+
+#########################################################################
+
 EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
 
 mc_common = ["DY", "top", "WJets", "WW", "ggWW", "Vg", "VgS", "VZ", "VVV","tZq", "VBF-V"] 
-mc_signal= ["sm","sm_dipole","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
-mc_eos    = ["VBS_VV_QCD"] + mc_signal + EFT_samples
+mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
+mc_eos    = ["VBS_VV_QCD"] + mc_signal #+ EFT_samples
 
 mc        = mc_common + mc_eos
 
@@ -72,34 +81,39 @@ mc        = mc_common + mc_eos
 nuisances['lumi_Uncorrelated'] = {
     'name': 'lumi_13TeV_2016',
     'type': 'lnN',
-    'samples': dict((skey, '1.01') for skey in mc if skey not in ['DY', 'top'])
+    'samples': dict((skey, '1.01') for skey in mc if skey not in ['DY', 'top']),
+    'group': 'lumi',
 }
 
 
 nuisances['lumi_CurrCalib'] = {
     'name': 'lumi_13TeV_CurrCalib',
     'type': 'lnN',
-    'samples': dict((skey, '1.002') for skey in mc if skey not in ['top', "DY"])
+    'samples': dict((skey, '1.002') for skey in mc if skey not in ['top', "DY"]),
+    'group': 'lumi',
 }
 
 nuisances['lumi_Ghosts'] = {
     'name': 'lumi_13TeV_Ghosts',
     'type': 'lnN',
-    'samples': dict((skey, '1.001') for skey in mc if skey not in ['DY', 'top'])
+    'samples': dict((skey, '1.001') for skey in mc if skey not in ['DY', 'top']),
+    'group': 'lumi',
 }
 
 
 nuisances['lumi_LScale'] = {
     'name': 'lumi_13TeV_LSCale',
     'type': 'lnN',
-    'samples': dict((skey, '1.003') for skey in mc if skey not in ['top', "DY"])
+    'samples': dict((skey, '1.003') for skey in mc if skey not in ['top', "DY"]),
+    'group': 'lumi',
 }
 
 
 nuisances['lumi_XYFact'] = {
     'name': 'lumi_13TeV_XYFact',
     'type': 'lnN',
-    'samples': dict((skey, '1.005') for skey in mc if skey not in ['DY', 'top'])
+    'samples': dict((skey, '1.005') for skey in mc if skey not in ['DY', 'top']),
+    'group': 'lumi',
 }
 
 
@@ -110,6 +124,7 @@ nuisances['fake_syst'] = {
     'samples': {
         'Fake': '1.3'
     },
+    'group': 'fake',    
 }
 
 nuisances['fake_ele'] = {
@@ -119,7 +134,7 @@ nuisances['fake_ele'] = {
     'samples': {
         'Fake': ['fakeWEleUp', 'fakeWEleDown'],
     },
-    'AsLnN': '1'
+    'group': 'fake',    
 }
 
 nuisances['fake_ele_stat'] = {
@@ -129,7 +144,7 @@ nuisances['fake_ele_stat'] = {
     'samples': {
         'Fake': ['fakeWStatEleUp', 'fakeWStatEleDown']
     },
-    'AsLnN': '1'
+    'group': 'fake',    
 }
 
 nuisances['fake_mu'] = {
@@ -139,7 +154,7 @@ nuisances['fake_mu'] = {
     'samples': {
         'Fake': ['fakeWMuUp', 'fakeWMuDown'],
     },
-    'AsLnN': '1'
+    'group': 'fake',    
 }
 
 nuisances['fake_mu_stat'] = {
@@ -149,7 +164,7 @@ nuisances['fake_mu_stat'] = {
     'samples': {
         'Fake': ['fakeWStatMuUp', 'fakeWStatMuDown'],
     },
-    'AsLnN': '1'
+    'group': 'fake',    
 }
 
 ##### B-tagger
@@ -166,6 +181,7 @@ for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2',
         'kind': 'weight',
         'type': 'shape',
         'samples': dict((skey, btag_syst) for skey in mc), 
+        'group':'AK4jet',
     }
 
 ##### Trigger Efficiency
@@ -177,6 +193,7 @@ nuisances['trigg'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, trig_syst) for skey in mc), 
+    'group':'trigger',
 }
 
 
@@ -188,6 +205,7 @@ nuisances['prefire'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, prefire_syst) for skey in mc), 
+    'group':'lepton'
     #'AsLnN': '1' #
 }
 
@@ -198,6 +216,7 @@ nuisances['eff_e'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc),#if skey not in ['VBS_ZV','VBS_VV_QCD']
+    'group':'lepton'    
 }
 
 nuisances['electronpt'] = {
@@ -209,6 +228,7 @@ nuisances['electronpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc_common),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
+    'group':'lepton'
     #'AsLnN': '1' #
 }
 #this is for the signals since they are in a different eos folder
@@ -221,6 +241,7 @@ nuisances['electronpt_SMPeos'] = {
     'samples': dict((skey, ['1','1']) for skey in mc_eos ),
     'folderUp': DirectorySMPeos+'__ElepTup_suffix',
     'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
+    'group':'lepton'
     #'AsLnN': '1'
 }
 
@@ -230,6 +251,7 @@ nuisances['eff_m'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['SFweightMuUp', 'SFweightMuDown']) for skey in mc),# if skey not in ['VBS_ZV','VBS_VV_QCD']
+    'group':'lepton'
 }
 
 nuisances['muonpt'] = {
@@ -241,6 +263,7 @@ nuisances['muonpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc_common),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
+    'group':'lepton'
     #'AsLnN': '1' 
 }
 #this is for the signals
@@ -253,6 +276,7 @@ nuisances['muonpt_SMPeos'] = {
     'samples': dict((skey, ['1','1']) for skey in mc_eos),
     'folderUp': DirectorySMPeos+'__MupTup_suffix',
     'folderDown': DirectorySMPeos+'__MupTdo_suffix',
+    'group':'lepton'
     #'AsLnN': '1'
 }
 
@@ -293,6 +317,7 @@ for js in jes_systs:
       'samples': dict((skey, ['1', '1']) for skey in mc_common),  # if skey not in ['DY'] ###CHECK IF THIS IS STILL TRUE: Do we have all the DY samples shapes UP/DOWN for this available?
       'folderUp': folderup,
       'folderDown': folderdo,
+      'group': 'AK4jet',
       #'AsLnN': '1' 
   }
 
@@ -328,6 +353,7 @@ for js_VBS_ZV in jes_systs:
       'samples':  dict((skey, ['1','1']) for skey in mc_eos),
       'folderUp': folderup_signal,
       'folderDown': folderdo_signal,
+      'group': 'AK4jet',
       #'AsLnN': '1' #
   }
 
@@ -340,7 +366,8 @@ nuisances['PU'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, pu_syst) for skey in mc),
-    'AsLnN': '1',
+    'group': 'PU',
+#    'AsLnN': '1',
 }
 
 
@@ -352,7 +379,8 @@ nuisances['jetPUID'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, puid_syst) for skey in mc),
-    'AsLnN': '1', ##
+    'group': 'AK4jet',
+#    'AsLnN': '1', ##
 	
 }
 
@@ -378,7 +406,8 @@ nuisances['cfj_pt_JESTotal'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-    'AsLnN': '1'
+    'group': 'AK8jet',
+#    'AsLnN': '1'
 }
 
 nuisances['cfj_pt_JER'] = {
@@ -396,7 +425,9 @@ nuisances['cfj_pt_JER'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-    'AsLnN': '1'
+    'group': 'AK8jet',
+
+#    'AsLnN': '1'
 }
 
 nuisances['mV_jmr'] = {
@@ -414,7 +445,8 @@ nuisances['mV_jmr'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-    'AsLnN': '1'
+    'group': 'AK8jet',
+#    'AsLnN': '1'
 }
 nuisances['mV_jms'] = {
     'name': 'CMS_scale_mVjms_2016',
@@ -431,7 +463,8 @@ nuisances['mV_jms'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-    'AsLnN': '1'
+    'group': 'AK8jet',
+#    'AsLnN': '1'
 }
 
 nuisances['mV_jesTotal'] = {
@@ -449,7 +482,8 @@ nuisances['mV_jesTotal'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-    'AsLnN': '1'
+    'group': 'AK8jet',
+#    'AsLnN': '1'
 }
 
 nuisances['mV_jer'] = {
@@ -467,7 +501,8 @@ nuisances['mV_jer'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-    'AsLnN': '1'
+    'group': 'AK8jet',
+#    'AsLnN': '1'
 }
 
 ###########################################
@@ -476,7 +511,7 @@ nuisances['mV_jer'] = {
         # REF: https://github.com/latinos/PlotsConfigurations/blob/master/Configurations/VBS_OS/Full2016_v7/SF/nuisances.py#L280-L318 
         # --- for bkg samples the PS weights were not available for 2016 and 2017, so they are retrieved with this parameterization measured here: 
         #      https://indico.cern.ch/event/904975/contributions/3826788/attachments/2020329/3377936/Update_on_PS_uncertainties_.pdf 
-samples_PS = ['Vg','VgS','ggWW','WW','top','DY','VVV']
+samples_PS = ['Vg','VgS','ggWW','WW','VVV','DY','top']
 for sample in samples_PS:
     nuisances['PS_ISR']  = {
         'name': 'PS_ISR',
@@ -491,6 +526,7 @@ for sample in samples_PS:
             'DY'     : ['0.9998177685645392*(nCleanGenJet==0) + 1.0080838149428026*(nCleanGenJet==1) + 1.0057948912950987*(nCleanGenJet==2) + 0.9721358221196619*(nCleanGenJet>=3)', '1.0003244155266309*(nCleanGenJet==0) + 0.9897992135367016*(nCleanGenJet==1) + 0.9928782069009531*(nCleanGenJet==2) + 1.0348902921423981*(nCleanGenJet>=3)'],
             'VVV'    : ['1.0270826786253018*(nCleanGenJet==0) + 1.0198703447307862*(nCleanGenJet==1) + 1.0109191915514344*(nCleanGenJet==2) + 0.9838184220287978*(nCleanGenJet>=3)', '0.9661665482954546*(nCleanGenJet==0) + 0.9751744967838527*(nCleanGenJet==1) + 0.9859624782745712*(nCleanGenJet==2) + 1.0202995039288625*(nCleanGenJet>=3)'],
         },
+        'group' : 'theory',
         'AsLnN': '1'    ##
     }
     nuisances['PS_FSR']  = {
@@ -506,7 +542,8 @@ for sample in samples_PS:
             'DY'     : ['0.9958763409773141*(nCleanGenJet==0) + 1.0041335498093422*(nCleanGenJet==1) + 1.0163363150953029*(nCleanGenJet==2) + 1.0296733670670226*(nCleanGenJet>=3)', '1.0066775262249232*(nCleanGenJet==0) + 0.9945601465681602*(nCleanGenJet==1) + 0.9662459619335311*(nCleanGenJet==2) + 0.9479423453563661*(nCleanGenJet>=3)'],
             'VVV'    : ['0.9809047855490748*(nCleanGenJet==0) + 0.9823641498350338*(nCleanGenJet==1) + 0.9976414629808243*(nCleanGenJet==2) + 1.0077953569413387*(nCleanGenJet>=3)', '1.035388723727876*(nCleanGenJet==0) + 1.0347339790465233*(nCleanGenJet==1) + 1.0017058788771533*(nCleanGenJet==2) + 0.9829344116371653*(nCleanGenJet>=3)'],
         },
-        'AsLnN': '1'    ##
+       'group' : 'theory',
+       'AsLnN': '1'    ##
     }
 
 ###########################################
@@ -558,39 +595,83 @@ for sample in samples_PS:
 #variations = ['Alt$(LHEScaleWeight[0],1)', 'Alt$(LHEScaleWeight[1],1)', 'Alt$(LHEScaleWeight[3],1)', 'Alt$(LHEScaleWeight[5],1)', 'Alt$(LHEScaleWeight[7],1)', 'Alt$(LHEScaleWeight[8],1)']
 variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
 
-for sample in mc :
-    if sample in ["ggWW", "WW"]: continue   #this sample apparently doesn't have LHE weights, but it's real minor for us, "DY","WW","top"
+for sample in mc_common :
+    if sample in ["ggWW", "WW","WJets","VgS"]: continue   #,"DY","top" #this sample apparently doesn't have LHE weights, but it's real minor for us
     nuisances['QCDscale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
             'kind': 'weight_envelope',
             'type'  : 'shape',
             'samples'  :  { sample: variations },
-	        'AsLnN': '1'    ##
+            'group' : 'theory',
+#	        'AsLnN': '1'    ##
     }
 ## maybe top needs particular care, see e.g. https://github.com/latinos/PlotsConfigurations/blob/master/Configurations/WW/FullRunII/Full2016_v7/inclusive/nuisances.py#L552-L604 
 
 
-for sample in mc_eos :
+#for sample in mc_eos :
+for sample in ["sm_dipole"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016!!!
     nuisances['QCDscale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
             'kind': 'weight_envelope',
             'type'  : 'shape',
             'samples'  :  { sample: variations },
-	        'AsLnN': '1'    ##
+            'group' : 'theory',
+#	        'AsLnN': '1'    ##
     }
+
+#for sample in mc_eos :
+
+
+for sample in ["VBS_VV_QCD"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016, it is extracted as normalization factors from 2018
+    nuisances['QCDscale_'+sample] = {
+            'name'  : 'QCDscale_'+sample,
+            'type': 'lnN',
+            'samples'  :  { sample: '1.30/0.78' },
+            'group' : 'theory',
+	        #'AsLnN': '1'    ##
+    }
+
+
+# for VBS VV QCD 2016 the sets of QCDscale weights are bugged
+# for an alternative implementation see: https://github.com/latinos/PlotsConfigurations/blob/master/Configurations/VBS_OS/DNN/2016/comb_paper/nuisances.py#L522-L551 
+#VBSScaleNormFactors2j = {
+#    'Alt$(LHEScaleWeight[0],1)': 1.04499,
+#    'Alt$(LHEScaleWeight[1],1)': 1.06296,
+#    'Alt$(LHEScaleWeight[3],1)': 0.943058,
+#    'Alt$(LHEScaleWeight[5],1)': 1.01909,
+#    'Alt$(LHEScaleWeight[7],1)': 0.94859,
+#    'Alt$(LHEScaleWeight[8],1)': 0.98728
+#}
+#for var in topvariations:
+#  WWvars2j.append(var+'/'+str(WWScaleNormFactors2j[var]))
+#
+#nuisances['QCDscale_WW_2j']  = {
+#    'name'  : 'QCDscale_WW_2j',
+#    'skipCMS' : 1,
+#    'kind'  : 'weight_envelope',
+#    'type'  : 'shape',
+#    #'cutspost' : lambda self, cuts: [cut for cut in cuts if '2j' in cut],
+#    'samples'  : {
+#       'WW' : WWvars2j,
+#    }
+#}
+
+
+
+
 
 # -> Davide also considered an uncertainty on the acceptance for signals: https://github.com/UniMiBAnalyses/PlotsConfigurations/blob/VBSjjlnu_v7/Configurations/VBSjjlnu/Full2016v7/conf_fit_v4.5/nuisances_datacard_split.py#L509-L525
 # >>>next iteration....
-# QCD acceptance
-for sample in mc_signal :
-    nuisances['QCDscale_'+sample+'_accept'] = {
-                'name'  : 'QCDscale_'+sample+'_accept',
-                'kind'  : 'weight',
-                'type'  : 'shape',
-                'samples'  :  { sample : ["QCDscale_normalized[0]", "QCDscale_normalized[8]"] },
-                'AsLnN': '1'    ##
-                #'samples': { k:["QCDscale_normalized[0]", "QCDscale_normalized[8]"] for k in mc_eos }
-            }
+## QCD acceptance
+#for sample in mc_signal :
+#    nuisances['QCDscale_'+sample+'_accept'] = {
+#                'name'  : 'QCDscale_'+sample+'_accept',
+#                'kind'  : 'weight',
+#                'type'  : 'shape',
+#                'samples'  :  { sample : ["QCDscale_normalized[0]", "QCDscale_normalized[8]"] },
+#                'AsLnN': '1'    ##
+#                #'samples': { k:["QCDscale_normalized[0]", "QCDscale_normalized[8]"] for k in mc_eos }
+#            }
 
     # UNCOMMENT FOR EFT analysis
 #nuisances['QCD_scale_VBS_EFT_accept'] = {
@@ -606,23 +687,32 @@ for sample in mc_signal :
 ###########################################
 #############    PDF WEIGHT  ##############
 ###########################################
-nuisances['pdf_weight'] = { # --> Now save also the normalization one for the signal
+nuisances['pdf_weight'] = { ###TO BE UPDATED FOR 2016 SAMPLES: USE RMS HERE!!!
     'name'  : 'pdf_16',
     'kind'  : 'weight_envelope',
     'type'  : 'shape',
     'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["DY","top","WW"]}, #-> here we reomve bkgs measured in CR, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+    'group' : 'theory',
     'AsLnN':  '1'
 }
 
+nuisances['pdf_weight'] = { ###TO BE UPDATED FOR 2016 SIGNAL: here we generated with NNPDF3.1, so it should be correlated with 2017 and 2018 instead
+    'name'  : 'pdf_16',
+    'kind'  : 'weight_envelope',
+    'type'  : 'shape',
+    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc_signal}, #-> here we reomve bkgs measured in CR, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+    'group' : 'theory',
+    'AsLnN':  '1'
+}
     # pdf uncertainty on signal acceptance
-for sample in mc_signal :
-    nuisances['pdf_'+sample+'_accept'] = {
-        'name'  : 'pdf_'+sample+'_16_accept',
-        'kind'  : 'weight_envelope',
-        'type'  : 'shape',
-        'samples': { sample : [ 'Alt$(PDFweight_normalized['+str(i)+'], 1.)' for i in range(0,103) ] },
-        'AsLnN': '1'    ##
-    }
+#for sample in mc_signal :
+#    nuisances['pdf_'+sample+'_accept'] = {
+#        'name'  : 'pdf_'+sample+'_16_accept',
+#        'kind'  : 'weight_envelope',
+#        'type'  : 'shape',
+#        'samples': { sample : [ 'Alt$(PDFweight_normalized['+str(i)+'], 1.)' for i in range(0,103) ] },
+#        'AsLnN': '1'    ##
+#    }
 
 
 ######  UE: THIS NEEDS TO BE FIXED 
@@ -633,22 +723,23 @@ nuisances['UE']  = {
                 'skipCMS' : 1,
                 'type': 'lnN',
                 'samples': dict((skey, '1.015') for skey in mc if skey not in ['DY','top']),########### removed fot top and DY, which are measured in CRs 
+                'group' : 'theory',
 }
 
 
 
 ####### Generic "cross section uncertainties"
-nuisances['singleTopToTTbar'] = {
-    'name': 'singleTopToTTbar',
-    'skipCMS': 1,
-    'kind': 'weight',
-    'type': 'shape',
-    'samples': { 
-       'top': [
-        'isSingleTop * 1.0816 + isTTbar',
-        'isSingleTop * 0.9184 + isTTbar']
-      }
-}
+#nuisances['singleTopToTTbar'] = {
+#    'name': 'singleTopToTTbar',
+#    'skipCMS': 1,
+#    'kind': 'weight',
+#    'type': 'shape',
+#    'samples': { 
+#       'top': [
+#        'isSingleTop * 1.0816 + isTTbar',
+#        'isSingleTop * 0.9184 + isTTbar']
+#      }
+#}
 
 
 ## Top pT reweighting uncertainty
@@ -657,23 +748,8 @@ nuisances['TopPtRew'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': {'top': ["1.", "1./Top_pTrw"]},
-    'symmetrize': True
-}
-
-nuisances['VgStar'] = {
-    'name': 'CMS_VgStarScale',
-    'type': 'lnN',
-    'samples': {
-        'VgS_L': '1.25'
-    }
-}
-
-nuisances['VZ'] = {
-    'name': 'CMS_VZScale',
-    'type': 'lnN',
-    'samples': {
-        'VgS_H': '1.16'
-    }
+    'symmetrize': True,
+    'group' : 'theory',
 }
 
 
@@ -758,8 +834,8 @@ nuisances['stat'] = {
 }
 
 
-#for n in nuisances.values():
-#    n['skipCMS'] = 1
+for n in nuisances.values():
+    n['skipCMS'] = 1
 
 #print ' '.join(nuis['name'] for nname, nuis in nuisances.iteritems() if nname not in ('lumi', 'stat'))
 

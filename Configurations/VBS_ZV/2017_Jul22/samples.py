@@ -107,12 +107,6 @@ mcCommonWeight = 'XSWeight*SFweight*PromptGenLepMatch2l*METFilter_MC'
 
 
 
-
-
-
-
-
-
 ########################################
 #######       EFT weights       ########
 ########################################
