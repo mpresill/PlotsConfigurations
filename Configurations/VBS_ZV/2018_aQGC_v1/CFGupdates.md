@@ -6,7 +6,7 @@ This folder contains the first version of the sync for samples name and nuisance
 # LIST OF UPDATES WRT TO CONFIG [2018_Jul22](https://github.com/mpresill/PlotsConfigurations/tree/matteo/Configurations/VBS_ZV/2018_Jul22):
 Changes implemented: 
 - [ ] updated samples name in boosted category according to [Irene's configs](https://github.com/IreneZoi/PlotsConfigurations/tree/VBSjjlnu_v7_aQGC/Configurations/VBSjjlnu/Full2018v7/conf_fit_v4.5_aQGC)
-- [ ] QCDscale is fully correlated amongst linear, quadratic and SM "signals". Name convention ```Nuisance_SIGNAL```
+- [ ] QCDscale is fully correlated amongst linear, quadratic and SM "signals". Name convention ```Nuisance_signal```
 
 # To-do-list:
 - [ ] extend to resolved
