@@ -70,7 +70,9 @@ groupPlot['top + tZq']  = {
                  'color':  colors['kOrange'] +1 ,
                  'samples'  : ['top', 'tZq'],
                  'fill': 1001
-             }
+             
+}
+"""
 groupPlot['Vg+VgS']  = {
                   'nameHR' : "V#gamma+V#gamma*",
                   'isSignal' : 0,
@@ -96,9 +98,11 @@ groupPlot['Fake']  = {
 groupPlot['others'] = {
                   'nameHR' : 'others',
                   'isSignal' : 0,
-                  'color': palette['DarkBlue'],    # kGray + 1
-                  'samples'  : ['Fake', 'VBF-V','VVV', 'VZ','WW','ggWW','VBS_VV_QCD', 'Vg','VgS', 'top', 'tZq', 'VBS_ZV']}
-
+                  'color':  palette["LightBlue"],    # kGray + 1
+                  'samples'  : ['VBF-V','VVV', 'VZ','WW','ggWW','VBS_VV_QCD', 'Vg','VgS'],
+		  'fill' : 1001,
+}
+"""
 for i,DYbin in enumerate(DY_bins_boost):
         groupPlot[DYbin] = {
                         'nameHR': DYbin,
@@ -274,7 +278,7 @@ plot['DATA']  = {
 #		#	"Preselection" : 0,
 			#"Boosted_SR_bVeto" : 0,
 			"Boosted_SR_bReqTight" :0,
-			"Resolved_SR_bVeto" : 0,
+			#"Resolved_SR_bVeto" : 0,
 #			"Resolved_SR_bReqTight" :0 
 		}	
              }
@@ -284,7 +288,7 @@ plot['DATA']  = {
 
 # additional options
 
-legend['lumi'] = 'L = 59.74/fb'
+legend['lumi'] = 'L = 59.74 fb^{-1}'
 
 legend['sqrt'] = '#sqrt{s} = 13 TeV'
 
