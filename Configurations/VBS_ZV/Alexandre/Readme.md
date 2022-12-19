@@ -17,4 +17,5 @@ https://unimib-analyses.docs.cern.ch/ml_tutorial/numpy_extraction/
 # Utilities
 1. DY_2Dbinning.ipynb was used to optimize DY sample 2D binning
 2. QGL.ipynb was used to devise purest qaurk/gluon regions for morphing
+(qgl morphing is extracted via the run.sh macro in the VBS_ZV/qgl_X folders, where X corresponds to the year)
 3. rateparams.py is used to extract optimal rateparams values from fit so they can be used as initialization 
