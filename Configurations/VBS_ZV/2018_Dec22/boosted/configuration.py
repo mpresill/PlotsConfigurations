@@ -1,10 +1,12 @@
 # example of configuration file
 treeName= 'Events'
 
-date='_14Dec2022_2018'
+date='_19Dec2022_2018'
 
-#categ = 'boosted'
-categ = 'resolved'
+categ = 'boosted'
+#operator = 'T9'
+
+#categ = 'resolved'
 
 #tag = 'VBS_ZV'+date              #after adding
 tag = 'VBS_ZV'+date+'_'+categ
@@ -20,7 +22,7 @@ aliasesFile = '../aliases.py'
 variablesFile = '../variables_reduced.py'
 
 # file with list of cuts
-#cutsFile = 'cuts_'+categ+'.py'#when launching
+# cutsFile = 'cuts_'+categ+'.py'#when launching
 cutsFile = 'cuts_'+categ+'_closure.py'#when launching
 #cutsFile = 'cuts.py'#after adding
 
@@ -43,7 +45,7 @@ outputDirPlots = '/eos/user/m/mpresill/www/VBS/2018_v7/PlotsVBS_ZV'+date
 
 # used by mkDatacards to define output directory for datacards: common vbs-italia github folder : /afs/cern.ch/work/m/mpresill/Combine_limits/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/VBS/2017_v7/
 outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards'+date
-#outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/DatacardsEFT/Datacards'+date
+#outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/DatacardsEFT/Datacards'+date+'_c'+operator
 #outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/VBScomb_Datacards'+date
 
 
