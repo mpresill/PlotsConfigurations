@@ -28,7 +28,7 @@ cuts['Boosted_SR_bVeto']  = 'vbs_category==0 && bVeto && (Lepton_pdgId[0]*Lepton
 cuts['Boosted_SR_bTag']  = 'vbs_category==0 && bReq && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13) && Vjet_mass > 65 && Vjet_mass <105'
 
 
-cuts['Boosted_DYcr_bVeto_ext']  = 'vbs_category==0 && bVeto && nCleanFatJet==1 && ( Vjet_mass<50 || Vjet_mass>150) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
-cuts['Boosted_DYcr_bVeto_int']  = 'vbs_category==0 && bVeto && nCleanFatJet==1 && ( (Vjet_mass>50 && Vjet_mass<65) || (Vjet_mass>105 && Vjet_mass<150) ) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
-cuts['Boosted_DYcr_bTag_ext']  = 'vbs_category==0 && bReq && nCleanFatJet==1 && ( Vjet_mass<50 || Vjet_mass>150) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
-cuts['Boosted_DYcr_bTag_int']  = 'vbs_category==0 && bReq && nCleanFatJet==1 && ( (Vjet_mass>50 && Vjet_mass<65) || (Vjet_mass>105 && Vjet_mass<150) ) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
+#cuts['Boosted_DYcr_bVeto_ext']  = 'vbs_category==0 && bVeto && nCleanFatJet==1 && ( Vjet_mass<50 || Vjet_mass>150) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
+#cuts['Boosted_DYcr_bVeto_int']  = 'vbs_category==0 && bVeto && nCleanFatJet==1 && ( (Vjet_mass>50 && Vjet_mass<65) || (Vjet_mass>105 && Vjet_mass<150) ) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
+#cuts['Boosted_DYcr_bTag_ext']  = 'vbs_category==0 && bReq && nCleanFatJet==1 && ( Vjet_mass<50 || Vjet_mass>150) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'
+#cuts['Boosted_DYcr_bTag_int']  = 'vbs_category==0 && bReq && nCleanFatJet==1 && ( (Vjet_mass>50 && Vjet_mass<65) || (Vjet_mass>105 && Vjet_mass<150) ) && (Lepton_pdgId[0]*Lepton_pdgId[1] == -11*11 || Lepton_pdgId[0]*Lepton_pdgId[1] == -13*13)'

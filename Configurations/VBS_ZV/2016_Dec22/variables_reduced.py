@@ -38,25 +38,25 @@ variables['DYfit_Z_bin'] ={  'name' : 'fit_Z_bin',
 }
 
 
-## mZV invariant mass
-variables['ZV_mass'] = { 'name': 'mZV',            #   variable name    
-                        'range' : ([200.,300.,400.,500.,600., 700.,800.,900., 1000., 1250., 1500., 2000., 2500.],),   #   variable range
-                        'xaxis' : 'm_{ZV} [GeV]',  #   x axis name
-                        'fold' :3,           
-                        'divideByBinWidth': 1,        
-}
+### mZV invariant mass
+#variables['ZV_mass'] = { 'name': 'mZV',            #   variable name    
+#                        'range' : ([200.,300.,400.,500.,600., 700.,800.,900., 1000., 1250., 1500., 2000., 2500.],),   #   variable range
+#                        'xaxis' : 'm_{ZV} [GeV]',  #   x axis name
+#                        'fold' :3,           
+#                        'divideByBinWidth': 1,        
+#}
 
 
 
     #************* other variables for plotting *****************#
 
-variables['Zleppt'] = { 'name' : 'Alt$(Zleppt, -999)',
-			'range' : (20,0.,800),
-			'xaxis' : 'p_{T} leptonic Z [GeV]',
-			'fold' : 3,
-            'divideByBinWidth': 1,
-
-                    }
+#variables['Zleppt'] = { 'name' : 'Alt$(Zleppt, -999)',
+#			'range' : (20,0.,800),
+#			'xaxis' : 'p_{T} leptonic Z [GeV]',
+#			'fold' : 3,
+#            'divideByBinWidth': 1,
+#
+#                    }
 
 variables['mjj']  = {   'name': 'mjj_max',            #   variable name    
                         'range' : (30,200,4000),    #   variable range
@@ -65,6 +65,16 @@ variables['mjj']  = {   'name': 'mjj_max',            #   variable name
                         'divideByBinWidth': 1,
                         
                         }
+
+variables['mjj_VS_mZV']  = {   'name': 'mjj_max:mZV',            #   variable name    
+                        'range' : ([200,500,700,1000,1300,1600,2000,2500],[200,500,700,1000,1300,1600,2000,2500],),    #   variable range
+                        'xaxis' : 'mjj_max:mZV [GeV]',  #   x axis name
+                        'fold' :3,
+                        'divideByBinWidth': 1,
+                        
+                        }
+
+
 
 variables['VBS_jet_pt1']  = {   'name': 'Alt$(CleanJet_pt[vbs_jet_0],-9999.)',            #   variable name    
                         'range' : (30,0,400),    #   variable range
@@ -103,7 +113,22 @@ variables['DNNoutput_pruned_bReq'] = {
 }
 
 
+    #************* extremly fine DNN for rebinning purposes ***************#
+variables['DNNoutput_pruned_bReq_rebin'] = {
+    'name': 'DNNoutput_pruned_bReq',
+    'range':  (1000,0,1),
+    'xaxis': 'DNN output',
+    'fold': 3 ,                            
+    'divideByBinWidth': 1,
+}
 
+variables['DNNoutput_pruned_bVeto_rebin'] = {
+    'name': 'DNNoutput_pruned_bVeto',
+    'range':  (1000,0,1),
+    'xaxis': 'DNN output',
+    'fold': 3 ,                            
+    'divideByBinWidth': 1,
+}
 
 
     #************ finer binning (used in 2017 and 2018) ***************#
