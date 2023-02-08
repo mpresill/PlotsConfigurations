@@ -52,28 +52,28 @@ nuisances['lumi_Uncorrelated'] = {
     'name': 'lumi_13TeV_2018',
     'type': 'lnN',
     'samples': dict((skey, '1.015') for skey in mc if skey not in ['WW', 'top',"DY"] ),
-   # 'group': 'lumi',
+   'group': 'lumi',
 }
 
 nuisances['lumi_XYFact'] = {
     'name': 'lumi_13TeV_XYFact',
     'type': 'lnN',
     'samples': dict((skey, '1.02') for skey in mc if skey not in ['WW', 'top',"DY"] ),
-   # 'group': 'lumi',
+   'group': 'lumi',
 }
 
 nuisances['lumi_LScale'] = {
     'name': 'lumi_13TeV_LSCale',
     'type': 'lnN',
     'samples': dict((skey, '1.002') for skey in mc if skey not in ['WW', 'top',"DY"] ),
-   # 'group': 'lumi',
+   'group': 'lumi',
 }
 
 nuisances['lumi_CurrCalib'] = {
     'name': 'lumi_13TeV_CurrCalib',
     'type': 'lnN',
     'samples': dict((skey, '1.002') for skey in mc if skey not in ['WW', 'top',"DY"] ),
-   # 'group': 'lumi',
+   'group': 'lumi',
 }
 
 #### FAKES
@@ -83,7 +83,7 @@ nuisances['fake_syst'] = {
     'samples': {
         'Fake': '1.3'
     },
-   # 'group': 'fake',
+   'group': 'fake',
 }
 
 nuisances['fake_ele'] = {
@@ -93,7 +93,7 @@ nuisances['fake_ele'] = {
     'samples': {
         'Fake': ['fakeWEleUp', 'fakeWEleDown'],
     },
-   # 'group': 'fake',
+   'group': 'fake',
 #    'AsLnN': '1'
 }
 
@@ -104,7 +104,7 @@ nuisances['fake_ele_stat'] = {
     'samples': {
         'Fake': ['fakeWStatEleUp', 'fakeWStatEleDown']
     },
-   # 'group': 'fake',
+   'group': 'fake',
 #    'AsLnN': '1'
 }
 
@@ -115,7 +115,7 @@ nuisances['fake_mu'] = {
     'samples': {
         'Fake': ['fakeWMuUp', 'fakeWMuDown'],
     },
-   # 'group': 'fake',
+   'group': 'fake',
 #    'AsLnN': '1'
 }
 
@@ -126,7 +126,7 @@ nuisances['fake_mu_stat'] = {
     'samples': {
         'Fake': ['fakeWStatMuUp', 'fakeWStatMuDown'],
     },
-   # 'group': 'fake',
+   'group': 'fake',
 #    'AsLnN': '1'
 }
 
@@ -144,7 +144,7 @@ for shift in ['jes', 'lf', 'hf', 'hfstats1', 'hfstats2', 'lfstats1', 'lfstats2',
         'kind': 'weight',
         'type': 'shape',
         'samples': dict((skey, btag_syst) for skey in mc),
-       # 'group':'AK4jet',
+       'group':'AK4jet',
     }
 
 ##### Trigger Efficiency
@@ -156,7 +156,7 @@ nuisances['trigg'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, trig_syst) for skey in mc), 
-   # 'group':'trigger',
+   'group':'trigger',
 }
 
 
@@ -167,7 +167,7 @@ nuisances['eff_e'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['SFweightEleUp', 'SFweightEleDown']) for skey in mc), 
-   # 'group':'lepton'
+   'group':'lepton'
 }
 
 nuisances['electronpt'] = {
@@ -179,7 +179,7 @@ nuisances['electronpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc_common if skey not in ["WJets"]),
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
-   # 'group':'lepton',
+   'group':'lepton',
     #'AsLnN': '1'
 }
 #this is for the signals since they are in a different eos folder
@@ -192,7 +192,7 @@ nuisances['electronpt_SMPeos'] = {
     'samples': dict((skey, ['1','1']) for skey in mc_eos), # if skey not in ["sm"], why was removed!?
     'folderUp': DirectorySMPeos+'__ElepTup_suffix',
     'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
-   # 'group':'lepton',
+   'group':'lepton',
     #'AsLnN': '1'
 }
 
@@ -203,7 +203,7 @@ nuisances['eff_m'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['SFweightMuUp', 'SFweightMuDown']) for skey in mc),
-   # 'group':'lepton',
+   'group':'lepton',
 }
 
 nuisances['muonpt'] = {
@@ -215,7 +215,7 @@ nuisances['muonpt'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc_common),
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
-   # 'group':'lepton',
+   'group':'lepton',
     #'AsLnN': '1'
 }
 #this is for the signals
@@ -228,7 +228,7 @@ nuisances['muonpt_SMPeos'] = {
     'samples': dict((skey, ['1','1']) for skey in mc_eos), # if skey not in ["sm"], why was removed!?
     'folderUp': DirectorySMPeos+'__MupTup_suffix',
     'folderDown': DirectorySMPeos+'__MupTdo_suffix',
-   # 'group':'lepton',
+   'group':'lepton',
     #'AsLnN': '1'
 }
 
@@ -271,7 +271,7 @@ for js in jes_systs:
       'samples': dict((skey, ['1', '1']) for skey in mc_common),
       'folderUp': folderup,
       'folderDown': folderdo,
-     # 'group': 'AK4jet',
+     'group': 'AK4jet',
 #      'AsLnN': '1'
   }
 
@@ -305,7 +305,7 @@ for js_VBS_ZV in jes_systs:
       'samples':  dict((skey, ['1','1']) for skey in mc_eos),
       'folderUp': folderup_signal,
       'folderDown': folderdo_signal,
-     # 'group': 'AK4jet',
+     'group': 'AK4jet',
 #      'AsLnN': '1'
   }
 
@@ -324,7 +324,7 @@ nuisances['JER'] = {
     'samples': dict((skey, ['1', '1']) for skey in mc_common),
     'folderUp': makeMCDirectory('JERup_suffix'),
     'folderDown': makeMCDirectory('JERdo_suffix'),
-   # 'group': 'AK4jet',
+   'group': 'AK4jet',
 #    'AsLnN': '1'
 }
 
@@ -338,7 +338,7 @@ nuisances['JER_SMPeos'] = {
     'samples': dict((skey, ['1','1']) for skey in mc_eos if skey not in mc_signal),  ####      WHY REMOVING SIGNAL?
     'folderUp': DirectorySMPeos+'__JERup_suffix',
     'folderDown': DirectorySMPeos+'__JERdo_suffix',
-   # 'group': 'AK4jet',
+   'group': 'AK4jet',
 #    'AsLnN': '1'
 }
 
@@ -352,7 +352,7 @@ nuisances['PU'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, pu_syst) for skey in mc),
-   # 'group': 'PU',
+   'group': 'PU',
 #    'AsLnN': '1',
 }
 
@@ -364,7 +364,7 @@ nuisances['jetPUID'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, puid_syst) for skey in mc),
-   # 'group': 'AK4jet',
+   'group': 'AK4jet',
 }
 
 
@@ -389,7 +389,7 @@ nuisances['cfj_pt_JESTotal'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+   'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 
@@ -410,7 +410,7 @@ nuisances['cfj_pt_JER'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+   'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 nuisances['mV_jms'] = {
@@ -430,7 +430,7 @@ nuisances['mV_jms'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+   'group' : 'AK8jet',
              #'AsLnN': '1'
 }
 nuisances['mV_jmr'] = {
@@ -450,7 +450,7 @@ nuisances['mV_jmr'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+   'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 
@@ -471,7 +471,7 @@ nuisances['mV_jesTotal'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+   'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 
@@ -492,7 +492,7 @@ nuisances['mV_jer'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+   'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 
@@ -539,7 +539,7 @@ for sample in mc_common :
             'kind': 'weight_envelope',
             'type'  : 'shape',
             'samples'  :  { sample: variations },
-           # 'group' : 'theory',
+           'group' : 'theory',
 	        #'AsLnN': '1'    ##
     }
 
@@ -549,7 +549,7 @@ for sample in mc_eos :
             'kind': 'weight_envelope',
             'type'  : 'shape',
             'samples'  :  { sample: variations },
-           # 'group' : 'theory',
+           'group' : 'theory',
 	        #'AsLnN': '1'    ##
     }
 
@@ -560,7 +560,7 @@ for sample in mc_eos :
 #            'type'  : 'shape',
 #            'samples'  :  { k : ["QCDscale_normalized[0]", "QCDscale_normalized[8]"] for k in mc_signal},
 #            'AsLnN': '1',
-#           # 'group' : 'theory',
+#           'group' : 'theory',
 #            #'samples': { k:["QCDscale_normalized[0]", "QCDscale_normalized[8]"] for k in mc_eos }
 #        }
 
@@ -586,7 +586,7 @@ nuisances['pdf_weight'] = { # --> Now save also the normalization one for the si
     'kind'  : 'weight_envelope',
     'type'  : 'shape',
     'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["DY","top"]}, #-> here we reomve bkgs measured on, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
-   # 'group' : 'theory',
+   'group' : 'theory',
     #'AsLnN':  '1'
 }
 
@@ -618,7 +618,7 @@ nuisances['UE']  = {
                 'skipCMS' : 1,
                 'type': 'lnN',
                 'samples': dict((skey, '1.015') for skey in mc if skey not in ['DY','top']), ########### removed fot top and DY, which are measured in CRs 
-               # 'group' : 'theory',
+               'group' : 'theory',
 }
 
 
@@ -631,7 +631,7 @@ nuisances['TopPtRew'] = {
     'type': 'shape',
     'samples': {'top': ["1.", "1./Top_pTrw"]},
     'symmetrize': True,
-   # 'group' : 'theory',
+   'group' : 'theory',
 }
 
 #nuisances['VgStar'] = {
@@ -640,7 +640,7 @@ nuisances['TopPtRew'] = {
 #    'samples': {
 #        'VgS_L': '1.25'
 #    },
-#   # 'group' : 'theory',
+#   'group' : 'theory',
 #}
 #
 #nuisances['VZ'] = {
@@ -649,7 +649,7 @@ nuisances['TopPtRew'] = {
 #    'samples': {
 #        'VgS_H': '1.16'
 #    },
-#   # 'group' : 'theory',
+#   'group' : 'theory',
 #}
 
 
@@ -664,7 +664,7 @@ nuisances['TopPtRew'] = {
                    'Boosted_topcr',
                    'Boosted_SR_bVeto',
                    ],
-               # 'group' : 'Topnorm',
+               'group' : 'Topnorm',
               }
 nuisances['Topnorm_boosted_bTag']  = {
                'name'  : 'Topnorm_boosted_bTag_2018',
@@ -676,7 +676,7 @@ nuisances['Topnorm_boosted_bTag']  = {
                    'Boosted_topcr',
                    'Boosted_SR_bTag',
                    ],
-               # 'group' : 'Topnorm',
+               'group' : 'Topnorm',
               }
 
 nuisances['Topnorm_resolved_bTag']  = {
@@ -689,7 +689,7 @@ nuisances['Topnorm_resolved_bTag']  = {
                    'Resolved_topcr',
 		           'Resolved_SR_bTag'
                    ],
-               # 'group' : 'Topnorm',
+               'group' : 'Topnorm',
               }
 nuisances['Topnorm_resolved_bVeto']  = {
                'name'  : 'Topnorm_resolved_bVeto_2018',
@@ -701,7 +701,7 @@ nuisances['Topnorm_resolved_bVeto']  = {
                    'Resolved_topcr',
 		           'Resolved_SR_bVeto'
                    ],
-               # 'group' : 'Topnorm',
+               'group' : 'Topnorm',
               }
 """
 
@@ -717,7 +717,7 @@ nuisances['Topnorm_boosted']  = {
                    'Boosted_SR_bVeto',
                    'Boosted_SR_bTag',
                    ],
-               # 'group' : 'Topnorm',
+               'group' : 'Topnorm',
               }
 
 nuisances['Topnorm_resolved']  = {
@@ -731,7 +731,7 @@ nuisances['Topnorm_resolved']  = {
                    'Resolved_SR_bVeto',
                    'Resolved_SR_bTag',
                    ],
-               # 'group' : 'Topnorm',
+               'group' : 'Topnorm',
               }         
               
 DY_bins = []
@@ -741,53 +741,58 @@ for bin in ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '1
         #DY_bins.append("DY_Boosted_Z_" + str(bin))
 for bin in range(1,6):
         DY_bins.append("DY_Boosted_Z_" + str(bin))
-#DYrates=[0.899,0.874,0.774,0.631,0.69,0.514,1,1,1,1,1]
+
+    # DY rateparams are initialized to the pre-fit value
+res_bVeto_2018=['1.05', '1.19', '1.08', '1.06', '0.93', '0.96', '0.82', '0.68', '0.76', '0.45', '0.46', '0.55']
+res_btag_2018=['1.10', '1.33', '1.10', '1.15', '1.03', '1.10', '0.90', '0.73', '0.83', '0.56', '0.57', '0.80']
+boos_bVeto_2018=['0.64', '0.74', '0.64', '0.57', '0.51']
+boos_bTag_2018=['0.77', '0.73', '0.58', '0.63', '0.52']
 
 for i,DYbin in enumerate(DY_bins):
 	if "Resolved_2d_" in DYbin:
 		nuisances["{}_norm_res_Z_bVeto_2018".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_res_Z_bVeto_2018'.format(DYbin),
                 #'samples'  : {DYbin: DY_init[i] },
-                'samples'  : {DYbin: '1.0' },
+                'samples'  : {DYbin:k for k in res_bVeto_2018},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Resolved_DYcr_bVeto',
 		            'Resolved_SR_bVeto',
                    ],
-               # 'group' : 'DYnorm',
+               'group' : 'DYnorm',
 
             	}
 		nuisances["{}_norm_res_Z_btag_2018".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_res_Z_btag_2018'.format(DYbin),
                 #'samples'  : {DYbin: DY_init[i] },
-                'samples'  : {DYbin: '1.0' },
+                'samples'  : {DYbin:k for k in res_btag_2018},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Resolved_DYcr_bTag',
                    'Resolved_SR_bTag',
                    ],
-               # 'group' : 'DYnorm',
+               'group' : 'DYnorm',
                  }
 	elif "Boosted_Z_" in DYbin:
 		nuisances["{}_norm_boost_bVeto_2018".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_boost_bVeto_2018'.format(DYbin),
-                'samples'  : {DYbin: '1.0'},
+                'samples'  : {DYbin:k for k in boos_bVeto_2018},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Boosted_DYcr_bVeto',
                    'Boosted_SR_bVeto',
                    ],
-               # 'group' : 'DYnorm',
+               'group' : 'DYnorm',
             }
 		nuisances["{}_norm_boost_bTag_2018".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_boost_bTag_2018'.format(DYbin),
-                'samples'  : {DYbin: '1.0'},
+                'samples'  : {DYbin:k for k in boos_bTag_2018},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Boosted_DYcr_bTag',
                    'Boosted_SR_bTag',
                    ],
-               # 'group' : 'DYnorm',
+               'group' : 'DYnorm',
             }
 
 

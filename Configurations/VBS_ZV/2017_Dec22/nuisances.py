@@ -416,7 +416,7 @@ nuisances['cfj_pt_JESTotal'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+    'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 
@@ -437,7 +437,7 @@ nuisances['cfj_pt_JER'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+    'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 nuisances['mV_jms'] = {
@@ -457,7 +457,7 @@ nuisances['mV_jms'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+    'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 nuisances['mV_jmr'] = {
@@ -477,7 +477,7 @@ nuisances['mV_jmr'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+    'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 
@@ -498,7 +498,7 @@ nuisances['mV_jesTotal'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+    'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 
@@ -519,7 +519,7 @@ nuisances['mV_jer'] = {
                 'Boosted_DYcr_bVeto',
 		        'Boosted_DYcr_bTag',
               ],
-   # 'group' : 'AK8jet',
+    'group' : 'AK8jet',
             #'AsLnN': '1'
 }
 
@@ -596,7 +596,7 @@ nuisances['PS_ISR']  = {
             'VVV'        : ['1.02987133969*(nCleanGenJet==0) + 1.0213904525*(nCleanGenJet==1) + 1.00886979738*(nCleanGenJet==2) + 0.977642000383*(nCleanGenJet>=3)', '0.965150589752*(nCleanGenJet==0) + 0.975475697908*(nCleanGenJet==1) + 0.990942215976*(nCleanGenJet==2) + 1.03132089972*(nCleanGenJet>=3)'],
             'VBF-V'      : ['1.01495587791*(nCleanGenJet==0) + 1.01951555507*(nCleanGenJet==1) + 1.00929038995*(nCleanGenJet==2) + 0.950747494733*(nCleanGenJet>=3)', '0.981420072505*(nCleanGenJet==0) + 0.975841901281*(nCleanGenJet==1) + 0.9885517861*(nCleanGenJet==2) + 1.06360527002*(nCleanGenJet>=3)'],
     },
-      # 'group' : 'theory',
+       'group' : 'theory',
        'AsLnN': '1'
 }
 nuisances['PS_FSR']  = {
@@ -618,7 +618,7 @@ nuisances['PS_FSR']  = {
             'VVV'        : ['0.990288829498*(nCleanGenJet==0) + 0.984316494274*(nCleanGenJet==1) + 1.00232605296*(nCleanGenJet==2) + 1.01362602415*(nCleanGenJet>=3)', '1.02171399302*(nCleanGenJet==0) + 1.04053330541*(nCleanGenJet==1) + 1.00018227094*(nCleanGenJet==2) + 0.976478139211*(nCleanGenJet>=3)'],
             'VBF-V'      : ['0.974946339917*(nCleanGenJet==0) + 0.992423768259*(nCleanGenJet==1) + 1.00895839758*(nCleanGenJet==2) + 1.01090197115*(nCleanGenJet>=3)', '1.04219975267*(nCleanGenJet==0) + 1.01342193253*(nCleanGenJet==1) + 0.988282087395*(nCleanGenJet==2) + 0.980232687856*(nCleanGenJet>=3)'],
     },
-       # 'group' : 'theory',
+        'group' : 'theory',
         'AsLnN': '1'
 }
 
@@ -641,7 +641,7 @@ for sample in mc_common :
             'kind': 'weight_envelope',
             'type'  : 'shape',
             'samples'  :  { sample: variations },
-           # 'group' : 'theory',
+            'group' : 'theory',
 	        #'AsLnN': '1'    ##
     }
 
@@ -651,7 +651,7 @@ for sample in mc_eos :
             'kind': 'weight_envelope',
             'type'  : 'shape',
             'samples'  :  { sample: variations },
-           # 'group' : 'theory',
+            'group' : 'theory',
             #'AsLnN': '1'    ##
     }
 
@@ -687,7 +687,7 @@ nuisances['pdf_weight'] = { # --> Now save also the normalization one for the si
     'kind'  : 'weight_envelope',
     'type'  : 'shape',
     'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["DY","top"]}, #-> here we reomve bkgs measured on, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
-   # 'group' : 'theory',
+    'group' : 'theory',
     #'AsLnN':  '1'
 }
 
@@ -719,7 +719,7 @@ nuisances['UE']  = {
                 'skipCMS' : 1,
                 'type': 'lnN',
                 'samples': dict((skey, '1.015') for skey in mc if skey not in ['DY','top']), ########### removed fot top and DY, which are measured in CRs 
-               # 'group' : 'theory',
+                'group' : 'theory',
 }
 
 
@@ -745,7 +745,7 @@ nuisances['TopPtRew'] = {
    'type': 'shape',
    'samples': {'top': ["Top_pTrw*Top_pTrw", "1."]},
    'symmetrize': True,
-   # 'group' : 'theory',
+    'group' : 'theory',
 }
 
 
@@ -761,7 +761,7 @@ nuisances['TopPtRew'] = {
                    'Boosted_topcr',
                    'Boosted_SR_bVeto',
                    ],
-               # 'group' : 'Topnorm',
+                'group' : 'Topnorm',
               }
 nuisances['Topnorm_boosted_bTag']  = {
                'name'  : 'Topnorm_boosted_bTag_2017',
@@ -773,7 +773,7 @@ nuisances['Topnorm_boosted_bTag']  = {
                    'Boosted_topcr',
                    'Boosted_SR_bTag',
                    ],
-               # 'group' : 'Topnorm',
+                'group' : 'Topnorm',
               }
 
 nuisances['Topnorm_resolved_bTag']  = {
@@ -786,7 +786,7 @@ nuisances['Topnorm_resolved_bTag']  = {
                    'Resolved_topcr',
 		           'Resolved_SR_bTag'
                    ],
-               # 'group' : 'Topnorm',
+                'group' : 'Topnorm',
               }
 nuisances['Topnorm_resolved_bVeto']  = {
                'name'  : 'Topnorm_resolved_bVeto_2017',
@@ -798,7 +798,7 @@ nuisances['Topnorm_resolved_bVeto']  = {
                    'Resolved_topcr',
 		           'Resolved_SR_bVeto'
                    ],
-               # 'group' : 'Topnorm',
+                'group' : 'Topnorm',
               }
 """
 nuisances['Topnorm_boosted']  = {
@@ -812,7 +812,7 @@ nuisances['Topnorm_boosted']  = {
                    'Boosted_SR_bVeto',
                    'Boosted_SR_bTag',
                    ],
-               # 'group' : 'Topnorm',
+                'group' : 'Topnorm',
               }
 
 nuisances['Topnorm_resolved']  = {
@@ -826,7 +826,7 @@ nuisances['Topnorm_resolved']  = {
                    'Boosted_SR_bVeto',
                    'Resolved_SR_bTag',
                    ],
-               # 'group' : 'Topnorm',
+                'group' : 'Topnorm',
               }              
 
 
@@ -837,50 +837,55 @@ for bin in ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '1
         #DY_bins.append("DY_Boosted_Z_" + str(bin))
 for bin in range(1,6):
         DY_bins.append("DY_Boosted_Z_" + str(bin))
-#DYrates=[0.899,0.874,0.774,0.631,0.69,0.514,1,1,1,1,1]
+
+    # DY rateparams are initialized to the pre-fit value
+res_bVeto_2017=['0.91', '0.97', '1.08', '0.98', '1.00', '0.93', '0.92', '0.72', '0.74', '0.43', '0.61', '0.50']
+res_bTag_2017=['0.90', '0.98', '1.11', '1.02', '1.03', '0.97', '0.92', '0.89', '0.85', '0.57', '0.44', '0.91']
+boos_bVeto_2017=['0.78', '0.68', '0.75', '0.63', '0.29']
+boos_bTag_2017=['0.90', '0.72', '0.76', '0.76', '0.56']
 
 for i,DYbin in enumerate(DY_bins):
         if "Resolved_2d_" in DYbin:
                 nuisances["{}_norm_res_Z_bVeto_2017".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_res_Z_bVeto_2017'.format(DYbin),
-                'samples'  : {DYbin: '1.' },
+                'samples'  : {DYbin:k for k in res_bVeto_2017},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Resolved_DYcr_bVeto',
                    'Resolved_SR_bVeto',
                    ],
-               # 'group' : 'DYnorm',
+                'group' : 'DYnorm',
             	}
 		nuisances["{}_norm_res_Z_bTag_2017".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_res_Z_bTag_2017'.format(DYbin),
-                'samples'  : {DYbin: '1.' },
+                'samples'  : {DYbin:k for k in res_bTag_2017},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Resolved_DYcr_bTag',
                    'Resolved_SR_bTag',
                    ],
-               # 'group' : 'DYnorm',
+                'group' : 'DYnorm',
                 }
         if "Boosted_Z_" in DYbin:
                 nuisances["{}_norm_boost_Z_bVeto_2017".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_boost_Z_bVeto_2017'.format(DYbin),
-                'samples'  : {DYbin: '1.' },
+                'samples'  : {DYbin:k for k in boos_bVeto_2017},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Boosted_DYcr_bVeto',
                    'Boosted_SR_bVeto',
                    ],
-               # 'group' : 'DYnorm',
+               'group' : 'DYnorm',
                 }
                 nuisances["{}_norm_boost_Z_bTag_2017".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_boost_Z_bTag_2017'.format(DYbin),
-                'samples'  : {DYbin: '1.' },
+                'samples'  : {DYbin:k for k in boos_bTag_2017},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Boosted_DYcr_bTag',
                    'Boosted_SR_bTag',
                    ],
-               # 'group' : 'DYnorm',
+                'group' : 'DYnorm',
 	}
 
 
