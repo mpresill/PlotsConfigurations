@@ -46,7 +46,6 @@ mc_eos    = ["VBS_VV_QCD"] + mc_signal #+ EFT_samples
 
 mc        = mc_common + mc_eos
 
-
 ################################ EXPERIMENTAL UNCERTAINTIES  #################################
 
 #### Luminosity: old prescription commented
@@ -532,7 +531,7 @@ nuisances['PS_ISR']  = {
             'VVV'        : ['1.02987133969*(nCleanGenJet==0) + 1.0213904525*(nCleanGenJet==1) + 1.00886979738*(nCleanGenJet==2) + 0.977642000383*(nCleanGenJet>=3)', '0.965150589752*(nCleanGenJet==0) + 0.975475697908*(nCleanGenJet==1) + 0.990942215976*(nCleanGenJet==2) + 1.03132089972*(nCleanGenJet>=3)'],
             'VBF-V'      : ['1.01495587791*(nCleanGenJet==0) + 1.01951555507*(nCleanGenJet==1) + 1.00929038995*(nCleanGenJet==2) + 0.950747494733*(nCleanGenJet>=3)', '0.981420072505*(nCleanGenJet==0) + 0.975841901281*(nCleanGenJet==1) + 0.9885517861*(nCleanGenJet==2) + 1.06360527002*(nCleanGenJet>=3)'],
     },
-      # 'group' : 'theory',
+       'group' : 'theory',
        'AsLnN': '1'
 }
 nuisances['PS_FSR']  = {
@@ -554,7 +553,7 @@ nuisances['PS_FSR']  = {
             'VVV'        : ['0.990288829498*(nCleanGenJet==0) + 0.984316494274*(nCleanGenJet==1) + 1.00232605296*(nCleanGenJet==2) + 1.01362602415*(nCleanGenJet>=3)', '1.02171399302*(nCleanGenJet==0) + 1.04053330541*(nCleanGenJet==1) + 1.00018227094*(nCleanGenJet==2) + 0.976478139211*(nCleanGenJet>=3)'],
             'VBF-V'      : ['0.974946339917*(nCleanGenJet==0) + 0.992423768259*(nCleanGenJet==1) + 1.00895839758*(nCleanGenJet==2) + 1.01090197115*(nCleanGenJet>=3)', '1.04219975267*(nCleanGenJet==0) + 1.01342193253*(nCleanGenJet==1) + 0.988282087395*(nCleanGenJet==2) + 0.980232687856*(nCleanGenJet>=3)'],
     },
-       # 'group' : 'theory',
+        'group' : 'theory',
         'AsLnN': '1'
 }
 
@@ -704,7 +703,7 @@ nuisances['pdf_weight'] = { ### UPDATED FOR 2016 SAMPLES: NEED TO USE RMS HERE!!
     'name'  : 'pdf_16',
     'kind'  : 'weight_rms',    
     'type'  : 'shape',
-    'samples' :  { s: ["LHEPdfWeight[%d]" %i for i in range(100)] for s in mc if s not in ["DY","top","WW"]}, #-> here we reomve bkgs measured in CR, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+    'samples' :  { s: ["LHEPdfWeight[%d]" %i for i in range(100)] for s in mc if s not in ["DY","top","WW"]+mc_signal+EFT_samples}, #-> here we reomve bkgs measured in CR, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
     'group' : 'theory',
     'AsLnN':  '1'
 }
@@ -849,11 +848,16 @@ DY_bins=[]
 for bin in range(1,6):
         DY_bins.append("DY_bin" + str(bin))
 
+    # DY rateparams are initialized to the pre-fit value
+res_bVeto_2016=['1.13', '1.12', '1.21', '0.93', '0.87']
+res_bTag_2016=['1.24', '1.16', '1.14', '1.17', '0.85']
+boos_bVeto_2016=['0.99', '0.86', '0.96', '0.73', '0.51']
+boos_bTag_2016=['0.95', '0.99', '0.97', '0.76', '0.55']
 
 for i,DYbin in enumerate(DY_bins):
         nuisances["{}_norm_res_Z_bVeto_2016".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_res_Z_bVeto_2016'.format(DYbin),
-                'samples'  : {DYbin: '1.0'},
+                'samples'  : {DYbin:k for k in res_bVeto_2016},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Resolved_DYcr_bVeto',
@@ -863,7 +867,7 @@ for i,DYbin in enumerate(DY_bins):
             }
  	nuisances["{}_norm_res_Z_bTag_2016".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_res_Z_bTag_2016'.format(DYbin),
-                'samples'  : {DYbin: '1.0'},
+                'samples'  : {DYbin:k for k in res_bTag_2016},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Resolved_DYcr_bTag',
@@ -873,7 +877,7 @@ for i,DYbin in enumerate(DY_bins):
             }
         nuisances["{}_norm_boost_Z_bVeto_2016".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_boost_Z_bVeto_2016'.format(DYbin),    
-                'samples'  : {DYbin: '1.0'},
+                'samples'  : {DYbin:k for k in boos_bVeto_2016},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Boosted_DYcr_bVeto',
@@ -883,7 +887,7 @@ for i,DYbin in enumerate(DY_bins):
             }
         nuisances["{}_norm_boost_Z_bTag_2016".format(DYbin)]  = {
                 'name'  : 'CMS_{}_norm_boost_Z_bTag_2016'.format(DYbin),    
-                'samples'  : {DYbin: '1.0'},
+                'samples'  : {DYbin:k for k in boos_bTag_2016},
                 'type'  : 'rateParam',
                 'cuts'  : [
                    'Boosted_DYcr_bTag',
