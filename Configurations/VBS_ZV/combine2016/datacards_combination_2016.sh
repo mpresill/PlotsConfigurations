@@ -1,7 +1,7 @@
 #!/bin/bash
 DatacardPATH=/eos/user/m/mpresill/CMS/VBS/VBS_ZV
 SigPATH=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Significance
-Date2016=12Sep2022_2016
+Date2016=13Jan2023_2016
 
 mkdir -p ${SigPATH}/${Date2016}
 
@@ -19,20 +19,22 @@ cutSR2=SR_bTag
 TOPcr1_var=DNNoutput_pruned_bVeto 
 TOPcr2_var=DNNoutput_pruned_bReq
 
-tag=ANv5     
+tag=13Jan2023    
 
 #######################################################################################
                 #### B-veto BOOSTED
 combineCards.py boosted_2016_sr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutSR1}/${SR1_var}/datacard.txt \
                 boosted_2016_DYcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutDY1}/${CR_var_boost}/datacard.txt \
-                boosted_2016_topcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr1_var}/datacard.txt > ${DatacardPATH}/Datacards/Datacards_${Date2016}/bVeto_card_boosted_${Date2016}.txt
+                boosted_2016_topcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr1_var}/datacard.txt \
+                > ${DatacardPATH}/Datacards/Datacards_${Date2016}/bVeto_card_boosted_${Date2016}.txt
 
 combine -M Significance ${DatacardPATH}/Datacards/Datacards_${Date2016}/bVeto_card_boosted_${Date2016}.txt -t -1  --expectSignal=1 &> ${SigPATH}/${Date2016}/boosted_bVeto_${tag}.txt 
 
                 #### B-tag BOOSTED
 combineCards.py boosted_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutSR2}/${SR2_var}/datacard.txt \
                 boosted_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutDY2}/${CR_var_boost}/datacard.txt \
-                boosted_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr2_var}/datacard.txt > ${DatacardPATH}/Datacards/Datacards_${Date2016}/bTag_card_boosted_${Date2016}.txt
+                boosted_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr2_var}/datacard.txt \
+                > ${DatacardPATH}/Datacards/Datacards_${Date2016}/bTag_card_boosted_${Date2016}.txt
 
 combine -M Significance ${DatacardPATH}/Datacards/Datacards_${Date2016}/bTag_card_boosted_${Date2016}.txt -t -1  --expectSignal=1 &> ${SigPATH}/${Date2016}/boosted_bTag_${tag}.txt 
 
@@ -42,7 +44,8 @@ combineCards.py boosted_2016_sr1=${DatacardPATH}/Datacards/Datacards_${Date2016}
                 boosted_2016_topcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr1_var}/datacard.txt \
                 boosted_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutSR2}/${SR2_var}/datacard.txt \
                 boosted_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutDY2}/${CR_var_boost}/datacard.txt \
-                boosted_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr2_var}/datacard.txt > ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_boosted_comb_${Date2016}.txt
+                boosted_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr2_var}/datacard.txt \
+                > ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_boosted_comb_${Date2016}.txt
 echo "======================================="
 echo "produced boosted cat. 2016 card:" ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_boosted_comb_${Date2016}.txt 
 combine -M Significance ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_boosted_comb_${Date2016}.txt -t -1  --expectSignal=1 &> ${SigPATH}/${Date2016}/boosted_comb_${tag}.txt 
@@ -52,13 +55,16 @@ echo ">>>>>>>>>>>>>>>>>>>>>>>>>   whose significance (blind) is here: " ${SigPAT
                 #### B-TAG RESOLVED
 combineCards.py resolved_2016_sr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutSR1}/${SR1_var}/datacard.txt \
                 resolved_2016_DYcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutDY1}/${CR_var_res}/datacard.txt \
-                resolved_2016_topcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_topcr/${TOPcr1_var}/datacard.txt > ${DatacardPATH}/Datacards/Datacards_${Date2016}/bVeto_card_resolved_${Date2016}.txt
+                resolved_2016_topcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_topcr/${TOPcr1_var}/datacard.txt \
+                > ${DatacardPATH}/Datacards/Datacards_${Date2016}/bVeto_card_resolved_${Date2016}.txt
 
 combine -M Significance ${DatacardPATH}/Datacards/Datacards_${Date2016}/bVeto_card_resolved_${Date2016}.txt -t -1  --expectSignal=1 &> ${SigPATH}/${Date2016}/resolved_bVeto_${tag}.txt 
 
                 #### B-VETO RESOLVED
-combineCards.py resolved_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutDY2}/${CR_var_res}/datacard.txt  \
-                resolved_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutSR2}/${SR2_var}/datacard.txt > ${DatacardPATH}/Datacards/Datacards_${Date2016}/bTag_card_resolved_${Date2016}.txt
+combineCards.py resolved_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutDY2}/${CR_var_res}/datacard.txt \
+                resolved_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutSR2}/${SR2_var}/datacard.txt \
+                resolved_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_topcr/${TOPcr2_var}/datacard.txt \
+                > ${DatacardPATH}/Datacards/Datacards_${Date2016}/bTag_card_resolved_${Date2016}.txt
                 
 combine -M Significance ${DatacardPATH}/Datacards/Datacards_${Date2016}/bTag_card_resolved_${Date2016}.txt -t -1  --expectSignal=1 &> ${SigPATH}/${Date2016}/resolved_bTag_${tag}.txt 
 
@@ -66,8 +72,10 @@ combine -M Significance ${DatacardPATH}/Datacards/Datacards_${Date2016}/bTag_car
 combineCards.py resolved_2016_sr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutSR1}/${SR1_var}/datacard.txt \
                 resolved_2016_DYcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutDY1}/${CR_var_res}/datacard.txt \
                 resolved_2016_topcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_topcr/${TOPcr1_var}/datacard.txt \
-                resolved_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutDY2}/${CR_var_res}/datacard.txt  \
-                resolved_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutSR2}/${SR2_var}/datacard.txt > ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_resolved_comb_${Date2016}.txt
+                resolved_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutDY2}/${CR_var_res}/datacard.txt \
+                resolved_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutSR2}/${SR2_var}/datacard.txt \
+                resolved_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_topcr/${TOPcr2_var}/datacard.txt \
+                > ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_resolved_comb_${Date2016}.txt
 echo "======================================="
 echo "produced resolved cat. 2016 card:" ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_resolved_comb_${Date2016}.txt 
 combine -M Significance ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_resolved_comb_${Date2016}.txt -t -1  --expectSignal=1 &> ${SigPATH}/${Date2016}/resolved_comb_${tag}.txt 
@@ -83,12 +91,14 @@ combineCards.py resolved_2016_sr1=${DatacardPATH}/Datacards/Datacards_${Date2016
                 resolved_2016_topcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_topcr/${TOPcr1_var}/datacard.txt \
                 resolved_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutDY2}/${CR_var_res}/datacard.txt  \
                 resolved_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutSR2}/${SR2_var}/datacard.txt \
+                resolved_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_topcr/${TOPcr2_var}/datacard.txt \
                 boosted_2016_sr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutSR1}/${SR1_var}/datacard.txt \
                 boosted_2016_DYcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutDY1}/${CR_var_boost}/datacard.txt \
                 boosted_2016_topcr1=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr1_var}/datacard.txt \
                 boosted_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutSR2}/${SR2_var}/datacard.txt \
                 boosted_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_${cutDY2}/${CR_var_boost}/datacard.txt \
-                boosted_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr2_var}/datacard.txt > ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.txt
+                boosted_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Boosted_topcr/${TOPcr2_var}/datacard.txt \
+                > ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.txt
                 
 echo "======================================="
 echo "produced 2016 combined card:" ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.txt 
@@ -100,38 +110,40 @@ echo ">>>>>>>>>>>>>>>>>>>>>>>>>   whose significance (blind) is here: " ${SigPAT
               #################################################
               #   doing the fit for the whole year combined   #
               #################################################
-#text2workspace.py ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.txt -o ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.root
-#mkdir -p ${DatacardPATH}/fit/${Date2016}
-#              ########     fit
-#              ## -t -1 --expectSignal 0   -> this is for t0 Asimov, b-only
-#              ## -t -1 --expectSignal 1   -> this is for t1 Asimov, s+b
-#combine -M FitDiagnostics ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.root \
-#        --out ${DatacardPATH}/fit/${Date2016} \
-#        -t -1 --toysFreq --rMin -10 \
-#        --expectSignal=1 \
-#        --saveNormalizations --saveWithUncertainties  #\
-#        #        --cminDefaultMinimizerStrategy 0 --robustFit=1  \
-#        #--saveOverallShapes --plots --numToysForShapes 200 #-v 2 # --saveWithUncertainties --saveOverallShapes --numToysForShapes 200 --plots #--algo impact -P parameter #--cminDefaultMinimizerStrategy 1 # --robustHesse 1 #--X-rtd MINIMIZER_analytic #--robustHesse 1 # --forceRecreateNLL --saveNormalizations --saveShapes --saveWithUncertainties --saveNLL #--robustFit=1 --cminDefaultMinimizerStrategy 0 #--minos all #--cminDefaultMinimizerTolerance 0.1 --minos poi 
-#
-#
-#echo " card path for impacts "
-#echo " " ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.root
-#echo " fitDiagnostic folder for plotting "
-#echo " "  ${DatacardPATH}/fit/${Date2016}
-#python $CMSSW_BASE/src/HiggsAnalysis/CombinedLimit/test/diffNuisances.py --all --abs --format html ${DatacardPATH}/fit/${Date2016}/fitDiagnosticsTest.root > fit_${Date2016}.html
-#cp fit_${Date2016}.html /eos/user/m/mpresill/www/VBS/diffNuisances/. 
-#
-#python $CMSSW_BASE/src/HiggsAnalysis/CombinedLimit/test/mlfitNormsToText.py ${DatacardPATH}/fit/${Date2016}/fitDiagnosticsTest.root > postfit_${Date2016}_norm.txt
-#cp postfit_${Date2016}_norm.txt /eos/user/m/mpresill/www/VBS/diffNuisances/. 
-#
-#
-#              ########################################################
-#              #                                                      #
-#              #   runnning impact plots on the whole year combined   #
-#              #                                                      #
-#              ########################################################
-inputCard=${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}
-#inputCard=${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_boosted_comb_${Date2016}
+text2workspace.py ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.txt -o ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.root
+mkdir -p ${DatacardPATH}/fit/${Date2016}
+              ########     fit
+              ## -t -1 --expectSignal 0   -> this is for t0 Asimov, b-only
+              ## -t -1 --expectSignal 1   -> this is for t1 Asimov, s+b
+combine -M FitDiagnostics ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.root \
+        --out ${DatacardPATH}/fit/${Date2016} \
+        -t -1 --toysFreq --rMin -10 \
+        --expectSignal=1 \
+        --saveNormalizations --saveWithUncertainties \
+        --cminDefaultMinimizerStrategy 0 --robustFit=1  
+        #--saveOverallShapes --plots --numToysForShapes 200 #-v 2 # --saveWithUncertainties --saveOverallShapes --numToysForShapes 200 --plots #--algo impact -P parameter #--cminDefaultMinimizerStrategy 1 # --robustHesse 1 #--X-rtd MINIMIZER_analytic #--robustHesse 1 # --forceRecreateNLL --saveNormalizations --saveShapes --saveWithUncertainties --saveNLL #--robustFit=1 --cminDefaultMinimizerStrategy 0 #--minos all #--cminDefaultMinimizerTolerance 0.1 --minos poi 
+
+
+echo " card path for impacts "
+echo " " ${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016}.root
+echo " fitDiagnostic folder for plotting "
+echo " "  ${DatacardPATH}/fit/${Date2016}
+python $CMSSW_BASE/src/HiggsAnalysis/CombinedLimit/test/diffNuisances.py --all --abs --format html ${DatacardPATH}/fit/${Date2016}/fitDiagnosticsTest.root > fit_${Date2016}.html
+cp fit_${Date2016}.html /eos/user/m/mpresill/www/VBS/diffNuisances/. 
+
+python $CMSSW_BASE/src/HiggsAnalysis/CombinedLimit/test/mlfitNormsToText.py ${DatacardPATH}/fit/${Date2016}/fitDiagnosticsTest.root > postfit_${Date2016}_norm.txt
+cp postfit_${Date2016}_norm.txt /eos/user/m/mpresill/www/VBS/diffNuisances/. 
+
+
+
+              ########################################################
+              #                                                      #
+              #   runnning impact plots on the whole year combined   #
+              #                                                      #
+              ########################################################
+inputCard=${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016} 
+inputCard=${DatacardPATH}/Datacards/Datacards_${Date2016}/combined_card_all_comb_${Date2016} 
+echo "${inputCard}" 
 text2workspace.py ${inputCard}.txt ${inputCard}.root
 
 outputFolder=${DatacardPATH}/Datacards/Datacards_${Date2016}/impacts
@@ -157,3 +169,73 @@ cp impacts_t0.pdf /eos/user/m/mpresill/www/VBS/impacts/${Date2016}_impacts_t0_${
 cp impacts_t1.pdf /eos/user/m/mpresill/www/VBS/impacts/${Date2016}_impacts_t1_${tag}.pdf
 cp impacts_t0.pdf ${SigPATH}/${Date2016}/impacts_t0_${tag}.pdf
 cp impacts_t1.pdf ${SigPATH}/${Date2016}/impacts_t1_${tag}.pdf
+
+
+
+
+             #################################################
+              #                                               #
+              #            uncertainty breakdown              #
+              #                                               #
+              #################################################
+    ## run postfit with all nuisances floating and store it in an output
+#rm -rf local.root
+#cp ${inputCard}.root ZV_ewk.root
+#
+#combine ZV_ewk.root -M MultiDimFit -t -1 -m 120 --points 2000 --saveWorkspace -n ZV_ewk.total --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5  --cminDefaultMinimizerStrategy=0
+#    #### theory
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory -n ZV_ewk.freeze_theory
+#    ##### DYnorm
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory,DYnorm -n ZV_ewk.freeze_DYnorm
+#    #### Topnorm
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory,DYnorm,Topnorm -n ZV_ewk.freeze_Topnorm
+#    ### AK4
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory,DYnorm,Topnorm,AK4jet -n ZV_ewk.freeze_AK4jet
+#    ### AK8
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory,DYnorm,Topnorm,AK4jet,AK8jet -n ZV_ewk.freeze_AK8jet
+#    ### LEPTON
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory,DYnorm,Topnorm,AK4jet,AK8jet,lepton -n ZV_ewk.freeze_lepton
+#    ### PU
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory,DYnorm,Topnorm,AK4jet,AK8jet,lepton,PU -n ZV_ewk.freeze_PU
+#    ### LUMI
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory,DYnorm,Topnorm,AK4jet,AK8jet,lepton,PU,lumi -n ZV_ewk.freeze_lumi
+#    ### FAKE
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory,DYnorm,Topnorm,AK4jet,AK8jet,lepton,PU,lumi,fake -n ZV_ewk.freeze_fake
+#    ### TRIGGER
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5 --cminDefaultMinimizerStrategy=0 \
+#        --freezeNuisanceGroups theory,DYnorm,Topnorm,AK4jet,AK8jet,lepton,PU,lumi,fake,trigger -n ZV_ewk.freeze_trigger
+#
+#    ### ALL
+#combine higgsCombineZV_ewk.total.MultiDimFit.mH120.root -M MultiDimFit -t -1 -m 120 --points 2000 --algo grid --autoBoundsPOIs r --rMin -5 --rMax 5  --cminDefaultMinimizerStrategy=0 \
+#        --freezeParameters allConstrainedNuisances -n ZV_ewk.freeze_all
+#
+#
+#    ## plotting and copying to my webpage
+#plot1DScan.py higgsCombineZV_ewk.total.MultiDimFit.mH120.root --main-label "Total Uncert."  \
+#    --others \
+#    'higgsCombineZV_ewk.freeze_theory.MultiDimFit.mH120.root:Freeze theory:600' \
+#    'higgsCombineZV_ewk.freeze_DYnorm.MultiDimFit.mH120.root:Freeze DYnorm:920' \
+#    'higgsCombineZV_ewk.freeze_Topnorm.MultiDimFit.mH120.root:Freeze Topnorm:416' \
+#    'higgsCombineZV_ewk.freeze_AK4jet.MultiDimFit.mH120.root:Freeze AK4jet:400' \
+#    'higgsCombineZV_ewk.freeze_AK8jet.MultiDimFit.mH120.root:Freeze AK8jet:616' \
+#    'higgsCombineZV_ewk.freeze_lepton.MultiDimFit.mH120.root:Freeze lepton:432' \
+#    'higgsCombineZV_ewk.freeze_PU.MultiDimFit.mH120.root:Freeze PU:800' \
+#    'higgsCombineZV_ewk.freeze_lumi.MultiDimFit.mH120.root:Freeze lumi:820' \
+#    'higgsCombineZV_ewk.freeze_fake.MultiDimFit.mH120.root:Freeze fake:840' \
+#    'higgsCombineZV_ewk.freeze_trigger.MultiDimFit.mH120.root:Freeze trigger:860' \
+#    'higgsCombineZV_ewk.freeze_all.MultiDimFit.mH120.root:Freeze all:840' \
+#    -o freeze_th_exp_st \
+#    --breakdown "theory,DYnorm,Topnorm,AK4jet,AK8jet,lepton,PU,lumi,fake,trigger,rest,stat"
+#
+#cp freeze_th_exp_st.png /eos/user/m/mpresill/www/VBS/impacts/breakdown/${Date2016}_nuisances_breakdown_${tag}.png
+#cp freeze_th_exp_st.pdf /eos/user/m/mpresill/www/VBS/impacts/breakdown/${Date2016}_nuisances_breakdown_${tag}.pdf
+
