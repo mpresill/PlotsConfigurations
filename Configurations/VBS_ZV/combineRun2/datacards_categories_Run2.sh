@@ -13,11 +13,11 @@ localPATH=$PWD
 DatacardPATH=/eos/user/m/mpresill/CMS/VBS/VBS_ZV
 SigPATH=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Significance
 
-Date2016=12Sep2022_2016
-Date2017=13Sep2022_2017
-Date2018=13Sep2022_2018
+Date2016=13Jan2023_2016
+Date2017=13Jan2023_2017
+Date2018=13Jan2023_2018
 
-tag=ANv5          #this is a tag for the output folder for significances, impacts and post/pre-fit plots
+tag=13Jan2023          #this is a tag for the output folder for significances, impacts and post/pre-fit plots
 
 mkdir -p ${SigPATH}/FullRun2_${tag}
 mkdir -p ${DatacardPATH}/Datacards/YearsCombination_${tag}
@@ -116,6 +116,7 @@ echo "significance " ${SigPATH}/FullRun2_${tag}/combined_resolved_bVeto.txt
                 #### B-tag RESOLVED
 combineCards.py resolved_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutSR2}/${SR2_var_2016}/datacard.txt \
                 resolved_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutDY2}/${CR_var_res_16}/datacard.txt \
+                resolved_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_topcr/${SR2_var_2016}/datacard.txt \
                 resolved_2017_sr2=${DatacardPATH}/Datacards/Datacards_${Date2017}/Resolved_${cutSR2}/${SR2_var}/datacard.txt \
                 resolved_2017_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2017}/Resolved_${cutDY2}/${CR_var_res}/datacard.txt \
                 resolved_2017_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2017}/Resolved_topcr/${SR2_var}/datacard.txt \
@@ -139,6 +140,7 @@ combineCards.py resolved_2016_sr1=${DatacardPATH}/Datacards/Datacards_${Date2016
                 resolved_2018_topcr1=${DatacardPATH}/Datacards/Datacards_${Date2018}/Resolved_topcr/${SR1_var}/datacard.txt  \
                 resolved_2016_sr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutSR2}/${SR2_var_2016}/datacard.txt \
                 resolved_2016_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_${cutDY2}/${CR_var_res_16}/datacard.txt \
+                resolved_2016_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2016}/Resolved_topcr/${SR2_var_2016}/datacard.txt \
                 resolved_2017_sr2=${DatacardPATH}/Datacards/Datacards_${Date2017}/Resolved_${cutSR2}/${SR2_var}/datacard.txt \
                 resolved_2017_DYcr2=${DatacardPATH}/Datacards/Datacards_${Date2017}/Resolved_${cutDY2}/${CR_var_res}/datacard.txt \
                 resolved_2017_topcr2=${DatacardPATH}/Datacards/Datacards_${Date2017}/Resolved_topcr/${SR2_var}/datacard.txt \
