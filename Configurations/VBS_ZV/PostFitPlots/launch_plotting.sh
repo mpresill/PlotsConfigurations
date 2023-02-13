@@ -4,6 +4,35 @@
 
     # 2016
 
+sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Resolved DYcr_bVeto    DNNoutput_pruned_bVeto   
+sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Resolved topcr         DNNoutput_pruned_bVeto   
+#sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Resolved DYcr_bVeto    DYfit_Z_bin  
+
+sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Resolved DYcr_bTag    DNNoutput_pruned_bReq   
+sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Resolved topcr        DNNoutput_pruned_bReq   
+#sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Resolved DYcr_bTag    DYfit_Z_bin  
+
+sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Boosted DYcr_bVeto    DNNoutput_pruned_bVeto   
+sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Boosted topcr         DNNoutput_pruned_bVeto   
+#sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Boosted DYcr_bVeto    DYfit_Z_bin  
+
+sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Boosted DYcr_bTag    DNNoutput_pruned_bReq   
+sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Boosted topcr        DNNoutput_pruned_bReq   
+#sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Boosted DYcr_bTag    DYfit_Z_bin  
+
+#sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Resolved SR_bVeto    DNNoutput_pruned_bVeto
+#sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Boosted  SR_bVeto    DNNoutput_pruned_bVeto
+#sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Resolved SR_bTag     DNNoutput_pruned_bReq
+#sh postfit_loop_2016.sh 13Jan2023_2016 2016_Dec22 Boosted SR_bTag      DNNoutput_pruned_bReq
+
+#sh postfit_loop_2017+2018.sh Boosted   topcr  DNNoutput_pruned_bVeto_morebins#
+#sh postfit_loop_2017+2018.sh Boosted   topcr  DNNoutput_pruned_bReq_morebins
+#sh postfit_loop_2017+2018.sh Resolved  topcr  DNNoutput_pruned_bVeto_morebins
+#
+#sh postfit_loop_2017+2018.sh Resolved  DYcr_bVeto  DYfit_2D_bin_Resolved
+
+
+
 
 #sh postfit_loop_2016.sh 23May2022_2016 2016_Apr22_v2-FJ-EFT Resolved DYcr_bTag DNNoutput_pruned_bReq_morebins
 #sh postfit_loop_2016.sh 23May2022_2016 2016_Apr22_v2-FJ-EFT Resolved DYcr_bTag DYfit_Z_bin
