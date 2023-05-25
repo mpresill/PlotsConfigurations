@@ -17,4 +17,5 @@ Here is an example of samples.py:
  - define weights: https://github.com/mpresill/PlotsConfigurations/blob/matteo/Configurations/VBS_ZV/2016_Jul22/samples.py#L122-L125 
  - define samples (quad, and sm+lin+quad): https://github.com/mpresill/PlotsConfigurations/blob/matteo/Configurations/VBS_ZV/2016_Jul22/samples.py#L189-L218 
 
-A new script is available to extract per-event weights for quadratic and linear and sm components from EFT samples directly from reweighting Madgraph card.
+A new script is available to extract per-event weights for quadratic and linear and sm components from EFT samples directly from reweighting Madgraph card:
+https://github.com/mpresill/PlotsConfigurations/blob/matteo/Configurations/VBS_ZV/EFT/ReweightFactory/readWCs.py 
