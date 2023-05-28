@@ -1,0 +1,62 @@
+{
+  "Resolved_DYcr_bTag": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7691055980503004, 
+      1.2736606628790867
+    ]
+  }, 
+  "Boosted_DYcr_bTag": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7660162170880385, 
+      1.2791371864459393
+    ]
+  }, 
+  "Resolved_topcr": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7819786688965901, 
+      1.2567409966252179
+    ]
+  }, 
+  "Boosted_SR_bTag": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7693237562980351, 
+      1.274197187484218
+    ]
+  }, 
+  "Resolved_DYcr_bVeto": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7655397984018731, 
+      1.2785656993402768
+    ]
+  }, 
+  "Boosted_SR_bVeto": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7669779308839202, 
+      1.2772262175186317
+    ]
+  }, 
+  "Resolved_SR_bVeto": {
+    "QCDscale_VBS_VV_QCD": [
+      0.768843883561579, 
+      1.2737990302628526
+    ]
+  }, 
+  "Boosted_topcr": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7827916717568895, 
+      1.2565239152558285
+    ]
+  }, 
+  "Resolved_SR_bTag": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7726536197063908, 
+      1.2686818709025414
+    ]
+  }, 
+  "Boosted_DYcr_bVeto": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7682521786546218, 
+      1.275531897876976
+    ]
+  }
+}

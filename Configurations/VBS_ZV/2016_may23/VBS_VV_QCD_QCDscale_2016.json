@@ -1,0 +1,57 @@
+{
+  "Resolved_DYcr_bTag": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7444244978715185, 
+      2.0182006391952303
+    ]
+  }, 
+  "Boosted_DYcr_bTag": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7232405814104277, 
+      1.8228819091774682
+    ]
+  }, 
+  "Resolved_topcr": {
+    "QCDscale_VBS_VV_QCD": [
+      0.6956338798409317, 
+      1.8968665461323333
+    ]
+  }, 
+  "Boosted_SR_bTag": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7320232457018887, 
+      1.8623377448786589
+    ]
+  }, 
+  "Resolved_DYcr_bVeto": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7359051255915122, 
+      2.08700363537493
+    ]
+  }, 
+  "Boosted_SR_bVeto": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7276994712777769, 
+      1.8383702662209436
+    ]
+  }, 
+  "Resolved_SR_bVeto": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7382113671055172, 
+      1.9972841387996663
+    ]
+  }, 
+  "Boosted_topcr": {}, 
+  "Resolved_SR_bTag": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7340606471887106, 
+      1.9410076828846148
+    ]
+  }, 
+  "Boosted_DYcr_bVeto": {
+    "QCDscale_VBS_VV_QCD": [
+      0.7298805009310979, 
+      1.86590052042295
+    ]
+  }
+}
