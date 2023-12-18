@@ -1,5 +1,6 @@
     
 """
+
     This code takes as input a reweighting weight txt file, 
     and the name of the Wilson Coefficient of interest, e.g. FS0
     and produces as output all possibile quadratic, linear, sm weights for Latinos:
@@ -10,6 +11,7 @@
 
     Run the code with "python readWCs.py".
     Arguments of the code at the end.
+    
 """
 
 
@@ -59,7 +61,7 @@ def calculate_quadratic_function(filename,op,WC):
         print('LinReweight_{4} = ( 0.5* (1/({0})) * ( LHEReweightingWeight[{1}] - LHEReweightingWeight[{2}] ))'.format(WC,LHEwPLUS,LHEwMINUS,LHEwZERO,op))
         print('sm_{4} = ( LHEReweightingWeight[{3}] )'.format(WC,LHEwPLUS,LHEwMINUS,LHEwZERO,op))
     else:
-        print('wilson coefficient'+WC+'not found for the operator'+op)
+        print('wilson coefficient {} not found for the operator {}'.format(WC, op))
 
 
 
@@ -70,7 +72,7 @@ def calculate_quadratic_function(filename,op,WC):
 
 
 filename = 'aQGC_WMhadZlepJJ_EWK_LO_SM_mjj100_pTj10_reweight_card.txt'
-op='FS2'
+op='FS0'
 WC=30
 quadReweight_cS0 = calculate_quadratic_function(filename,op,WC)
 print(quadReweight_cS0)
