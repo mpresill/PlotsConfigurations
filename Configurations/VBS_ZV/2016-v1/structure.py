@@ -51,22 +51,28 @@ structure['top'] = {
                   }
 
 
-structure['WW']  = {
-                  'isSignal' : 0,
-                  'isData'   : 0    
-                  }
+#structure['WW']  = {
+#                  'isSignal' : 0,
+#                  'isData'   : 0    
+#                  }
 
 ##NELLA CATEGORIA BOOSTED NON HA EVENTI IN NESSUNA REGIONE!!! PROVOCA SOLO WARNING E CASINI CON COMBINE
-structure['ggWW']  = {
+structure['other']  = {
                   'isSignal' : 0,
                   'isData'   : 0,
-                  'removeFromCuts': phase_spaces_boost    
+                  #'removeFromCuts': phase_spaces_boost    
                   }
-structure['WJets']  = {  
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'removeFromCuts': phase_spaces_boost 
-              }
+
+#structure['ggWW']  = {
+#                  'isSignal' : 0,
+#                  'isData'   : 0,
+#                  'removeFromCuts': phase_spaces_boost    
+#                  }
+#structure['WJets']  = {  
+#                  'isSignal' : 0,
+#                  'isData'   : 0,
+#                  'removeFromCuts': phase_spaces_boost 
+#              }
 structure['VgS'] = { 
                   'isSignal' : 0,
                   'isData'   : 0,
@@ -77,15 +83,15 @@ structure['Vg']  = {
                   'isData'   : 0 
                   }
 
-structure['ZZlep']  = { 
-                  'isSignal' : 0,
-                  'isData'   : 0 
-                  }
-
-structure['VVV']  = { 
-                  'isSignal' : 0,
-                  'isData'   : 0 
-                  }
+#structure['ZZlep']  = { 
+#                  'isSignal' : 0,
+#                  'isData'   : 0 
+#                  }
+#
+#structure['VVV']  = { 
+#                  'isSignal' : 0,
+#                  'isData'   : 0 
+#                  }
 
 structure['VBF-V']  = { 
                   'isSignal' : 0,
