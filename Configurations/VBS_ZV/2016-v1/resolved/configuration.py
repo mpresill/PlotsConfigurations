@@ -2,7 +2,7 @@
 treeName= 'Events'
 
 
-date='_21Aug2023_2016'
+date='_6Dec2023_2016'
 
 categ = 'resolved'
 #operator = 'T0' #uncomment for EFT launching process.
@@ -14,6 +14,7 @@ tag = 'VBS_ZV'+date+'_'+categ
 
 # used by mkShape to define output directory for root files
 outputDir = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile'+date #+tag
+#outputDir = date #+tag
 
 # file with TTree aliases
 aliasesFile = '../aliases.py'

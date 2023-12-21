@@ -87,3 +87,16 @@ variables['events']  = {   'name': '1',
                         'xaxis' : 'events', 
                         'fold' : 3
                         }
+
+## mZV invariant mass (Giacomo's binning)
+variables['Mzv'] = {   'name': 'mZV',
+                        'range' : ([ 200., 400., 600., 800., 1000., 1200., 1500., 2000., 3000.],), #variable range  
+                        'xaxis' : 'M_{ZV} [GeV]',
+                        'fold' : 3,
+                        }
+## mZV invariant mass (smp-28-006 binning)
+variables['ZV_mass'] = { 'name': 'mZV',            #   variable name    
+                        'range' : ([200.,300.,400.,500.,600., 700.,800.,900., 1000., 1250., 1500., 2000., 2500.],),   #   variable range
+                        'xaxis' : 'm_{ZV} [GeV]',  #   x axis name
+                        'fold' :3,        
+}
