@@ -40,11 +40,16 @@ structure['DY'] = {
 }	
 """
 
-
-structure['WJets']  = {  
+structure['other']  = {  
                   'isSignal' : 0,
                   'isData'   : 0 
               }
+
+
+#structure['WJets']  = {  
+#                  'isSignal' : 0,
+#                  'isData'   : 0 
+#              }
 
 structure['Fake']  = {  
                   'isSignal' : 0,
@@ -58,10 +63,10 @@ structure['top'] = {
                   }
 
 
-structure['WW']  = {
-                  'isSignal' : 0,
-                  'isData'   : 0    
-                  }
+#structure['WW']  = {
+#                  'isSignal' : 0,
+#                  'isData'   : 0    
+#                  }
 """
 structure['WWewk']  = {
                   'isSignal' : 0,
@@ -70,11 +75,11 @@ structure['WWewk']  = {
 """
 
 ##NELLA CATEGORIA BOOSTED NON HA EVENTI IN NESSUNA REGIONE!!! PROVOCA SOLO WARNING E CASINI CON COMBINE
-structure['ggWW']  = {                         
-                  'isSignal' : 0,
-                  'isData'   : 0 ,
-                  'removeFromCuts': phase_spaces_boost   
-                  }
+#structure['ggWW']  = {                         
+#                  'isSignal' : 0,
+#                  'isData'   : 0 ,
+#                  'removeFromCuts': phase_spaces_boost   
+#                  }
 
 structure['Vg']  = { 
                   'isSignal' : 0,
@@ -86,16 +91,16 @@ structure['VgS'] = {
                   'isData'   : 0 
                   }
 
-structure['ZZlep']  = { 
-                  'isSignal' : 0,
-                  'isData'   : 0 
-                  }
-
-structure['VVV']  = { 
-                  'isSignal' : 0,
-                  'isData'   : 0 
-                  }
-
+#structure['ZZlep']  = { 
+#                  'isSignal' : 0,
+#                  'isData'   : 0 
+#                  }
+#
+#structure['VVV']  = { 
+#                  'isSignal' : 0,
+#                  'isData'   : 0 
+#                  }
+#
 structure['VBF-V']  = { 
                   'isSignal' : 0,
                   'isData'   : 0 
