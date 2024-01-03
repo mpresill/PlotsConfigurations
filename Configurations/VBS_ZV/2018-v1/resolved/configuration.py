@@ -1,7 +1,7 @@
 # example of configuration file
 treeName= 'Events'
 
-date='_21Aug2023_2018_wJes'
+date='_6Dec2023_2018'
 
 #categ = 'boosted'
 categ = 'resolved'

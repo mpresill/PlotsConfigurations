@@ -41,10 +41,14 @@ structure['DY'] = {
 """
 
 
-structure['WJets']  = {  
+structure['other']  = {  
                   'isSignal' : 0,
                   'isData'   : 0 
               }
+#structure['WJets']  = {  
+#                  'isSignal' : 0,
+#                  'isData'   : 0 
+#              }
 
 structure['Fake']  = {  
                   'isSignal' : 0,
@@ -58,22 +62,22 @@ structure['top'] = {
                   }
 
 
-structure['WW']  = {
-                  'isSignal' : 0,
-                  'isData'   : 0    
-                  }
-"""
-structure['WWewk']  = {
-                  'isSignal' : 0,
-                  'isData'   : 0
-                  }
-"""
-
-structure['ggWW']  = {
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'removeFromCuts': phase_spaces_boost
-                  }
+#structure['WW']  = {
+#                  'isSignal' : 0,
+#                  'isData'   : 0    
+#                  }
+#"""
+#structure['WWewk']  = {
+#                  'isSignal' : 0,
+#                  'isData'   : 0
+#                  }
+#"""
+#
+#structure['ggWW']  = {
+#                  'isSignal' : 0,
+#                  'isData'   : 0,
+#                  'removeFromCuts': phase_spaces_boost
+#                  }
 
 structure['Vg']  = { 
                   'isSignal' : 0,
@@ -85,15 +89,15 @@ structure['VgS'] = {
                   'isData'   : 0 
                   }
 
-structure['ZZlep']  = { 
-                  'isSignal' : 0,
-                  'isData'   : 0 
-                  } ###why was commented out??!
-
-structure['VVV']  = { 
-                  'isSignal' : 0,
-                  'isData'   : 0 
-                  }
+#structure['ZZlep']  = { 
+#                  'isSignal' : 0,
+#                  'isData'   : 0 
+#                  } ###why was commented out??!
+#
+#structure['VVV']  = { 
+#                  'isSignal' : 0,
+#                  'isData'   : 0 
+#                  }
 
 structure['VBF-V']  = { 
                   'isSignal' : 0,
