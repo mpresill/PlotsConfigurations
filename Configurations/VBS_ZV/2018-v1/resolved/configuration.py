@@ -11,7 +11,9 @@ tag = 'VBS_ZV'+date+'_'+categ
 
 
 # used by mkShape to define output directory for root files
-outputDir = 'rootFile'+date
+#outputDir = 'rootFile'+date
+outputDir = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile'+date
+
 
 # file with TTree aliases
 aliasesFile = '../aliases.py'
