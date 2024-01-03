@@ -167,8 +167,8 @@ samples['VBS_VV_QCD'] = {
              +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_QCD')              	 
              +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_QCD'),
     'weight':  mcCommonWeight,
-    'FilesPerJob': 4,
-    'EventsPerJob' : 70000,
+    'FilesPerJob': 10,
+#    'EventsPerJob' : 70000,
 }
 
 ########VBF-V##########
