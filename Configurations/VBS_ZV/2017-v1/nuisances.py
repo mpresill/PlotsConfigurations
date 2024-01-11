@@ -30,25 +30,17 @@ HiggsXS = HiggsXSection()
 
 EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
 mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] #"tZq_ll","VZ",
-#mc_eos    = ["sm", "VBS_VV_QCD"] + EFT_samples
 mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
 mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal #+ EFT_samples
 
 mc        = mc_common + mc_eos
 
 
-DirectorySMPeos = '/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/Fall2017_102X_nAODv7_Full2017v7/MCl1loose2017v7__MCCorr2017v7__l2loose__l2tightOR2017v7'
+DirectorySMPeos = '/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/Fall2017_102X_nAODv7_Full2017v7/MCl1loose2017v7__MCCorr2017v7__l2loose__l2tightOR2017v7' #this is line is probably not needed, if already included in samples.py files
 
 ################################ EXPERIMENTAL UNCERTAINTIES  #################################
 
 #### Luminosity
-
-#nuisances['lumi'] = {
-#    'name': 'lumi_13TeV_2017',
-#    'type': 'lnN',
-#    'samples': dict((skey, '1.023') for skey in mc if skey not in ['WW', 'top', 'DY'])
-#}
-
 nuisances['lumi_Uncorrelated'] = {
     'name': 'lumi_13TeV_2017',
     'type': 'lnN',
@@ -555,41 +547,41 @@ nuisances['PS_FSR_latinos']  = {
 #*************************************************#
 ### uncommenting the following lines at the moment of datacard making
 ### for signal, VBF-V, VBS VV QCD, we extrapolate them from 2018 uncommenting the following lines at the moment of datacard making
-#nuisances['PS_ISR']  = {
-#    'name': 'PS_ISR',
-#    'kind': 'weight',
-#    'type': 'shape',
-#    'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc if skey not in ['Vg','VgS','other','DY','top']), #PSWeights are buggy for some samples, we add them back by hand below
-#        'cuts'  : [
-#                   'Boosted_SR_bVeto',
-#                   'Boosted_SR_bTag',
-#                   'Resolved_SR_bVeto',
-#                   'Resolved_SR_bTag',
-#                   'Boosted_DYcr_bVeto',
-#                   'Boosted_DYcr_bTag',
-#                   'Resolved_DYcr_bVeto',
-#                   'Resolved_DYcr_bTag',
-#                   ],   
- #'AsLnN': '1',
-#}
-#
-#nuisances['PS_FSR']  = {
-#    'name': 'PS_FSR',
-#    'kind': 'weight',
-#    'type': 'shape',
-#    'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc if skey not in ['Vg','VgS','other','DY','top']), #PSWeights are buggy for some samples, we add them back by hand below
-#    'cuts'  : [
-#                   'Boosted_SR_bVeto',
-#                   'Boosted_SR_bTag',
-#                   'Resolved_SR_bVeto',
-#                   'Resolved_SR_bTag',
-#                   'Boosted_DYcr_bVeto',
-#                   'Boosted_DYcr_bTag',
-#                   'Resolved_DYcr_bVeto',
-#                   'Resolved_DYcr_bTag',
-#                   ],
-#    #'AsLnN': '1',
-#}
+nuisances['PS_ISR']  = {
+    'name': 'PS_ISR',
+    'kind': 'weight',
+    'type': 'shape',
+    'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc if skey not in ['Vg','VgS','other','DY','top']), #PSWeights are buggy for some samples, we add them back by hand below
+        'cuts'  : [
+                   'Boosted_SR_bVeto',
+                   'Boosted_SR_bTag',
+                   'Resolved_SR_bVeto',
+                   'Resolved_SR_bTag',
+                   'Boosted_DYcr_bVeto',
+                   'Boosted_DYcr_bTag',
+                   'Resolved_DYcr_bVeto',
+                   'Resolved_DYcr_bTag',
+                   ],   
+#'AsLnN': '1',
+}
+
+nuisances['PS_FSR']  = {
+    'name': 'PS_FSR',
+    'kind': 'weight',
+    'type': 'shape',
+    'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc if skey not in ['Vg','VgS','other','DY','top']), #PSWeights are buggy for some samples, we add them back by hand below
+    'cuts'  : [
+                   'Boosted_SR_bVeto',
+                   'Boosted_SR_bTag',
+                   'Resolved_SR_bVeto',
+                   'Resolved_SR_bTag',
+                   'Boosted_DYcr_bVeto',
+                   'Boosted_DYcr_bTag',
+                   'Resolved_DYcr_bVeto',
+                   'Resolved_DYcr_bTag',
+                   ],
+    #'AsLnN': '1',
+}
 #*************************************************#
 
 

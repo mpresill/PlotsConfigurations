@@ -20,9 +20,9 @@
 
 ## LIST OF UPDATES WRT TO CONFIG 2016-v0:
 - minor backgrounds are gathered in the datacards
-- PS weights for DY, Vg, VgS are computed with the old method 
+- PS weights for DY, Vg, VgS, top are computed with the old method 
 - some patches in the name conventions for Fakes
-- JES/JER are not log normal anymore (and they are included for all processes)
+- JES are not log normal anymore (and they are included for all processes)
 - b-tagging nuisances are shape
 
 
@@ -35,25 +35,27 @@ cp /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_V
 
 cp /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_resolved.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_resolved_copy.root
 ```
+Corrected samples will be stored at this path (if does not exists, mkdir): `/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections`
+
 
 3. apply the patch for QCDscale VBS VV QCD background (extracted from 2018):
 ```sh
 python ../../scripts/Utilities_nuisances/apply_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_resolved.root -o \
-plots_VBS_ZV_6Dec2023_2016_resolved_QCDvar.root --nuisance-effect \
-../../2018-v0/resolved/QCDscale-plots_VBS_ZV_21Aug2023_2018_resolved.root -s VBS_VV_QCD -n QCDscale_VBS_VV_QCD
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_QCDvar.root --nuisance-effect \
+../../2018-v1/resolved/QCDscale-plots_VBS_ZV_6Dec2023_2018_resolved.root -s VBS_VV_QCD -n QCDscale_VBS_VV_QCD
 
 python ../../scripts/Utilities_nuisances/apply_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_boosted.root -o \
-plots_VBS_ZV_6Dec2023_2016_boosted_QCDvar.root --nuisance-effect \
-../../2018-v0/boosted/QCDscale-plots_VBS_ZV_21Aug2023_2018_boosted.root -s VBS_VV_QCD -n QCDscale_VBS_VV_QCD
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_QCDvar.root --nuisance-effect \
+../../2018-v1/boosted/QCDscale-plots_VBS_ZV_6Dec2023_2018_boosted.root -s VBS_VV_QCD -n QCDscale_VBS_VV_QCD
 ```
 and the uncomment the corresponding nuisance from `nuisances.py` so can be included in the datacard
 
 4. patch for PS weights: 
 (N.b. ho dovuto togliere i fondi migliori per l'estrapolazione perché "other" non è ancora definito mentre scrivo nel 2018)
 ```sh
-python ../../scripts/Utilities_nuisances/apply_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_resolved.root -o plots_VBS_ZV_6Dec2023_2016_resolved_PSvar.root --nuisance-effect ../../2018-v0/resolved/PS-plots_VBS_ZV_21Aug2023_2018_resolved.root -sf ../../2018-v0/resolved/samples_PS_extraction_2016.txt -n PS_FSR PS_ISR
+python ../../scripts/Utilities_nuisances/apply_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_resolved.root -o /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_PSvar.root --nuisance-effect ../../2018-v1/resolved/PS-plots_VBS_ZV_6Dec2023_2018_resolved.root -sf ../../2018-v1/resolved/samples_PS_extraction_2016.txt -n PS_FSR PS_ISR
 
-python ../../scripts/Utilities_nuisances/apply_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_boosted.root -o plots_VBS_ZV_6Dec2023_2016_boosted_PSvar.root --nuisance-effect ../../2018-v0/boosted/PS-plots_VBS_ZV_21Aug2023_2018_boosted.root -sf ../../2018-v0/boosted/samples_PS_extraction_2016.txt -n PS_FSR PS_ISR
+python ../../scripts/Utilities_nuisances/apply_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_boosted.root -o /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_PSvar.root --nuisance-effect ../../2018-v1/boosted/PS-plots_VBS_ZV_6Dec2023_2018_boosted.root -sf ../../2018-v1/boosted/samples_PS_extraction_2016.txt -n PS_FSR PS_ISR
 ```
 and uncomment the corresponding nuisance from `nuisances.py` so can be included in the datacard
 5. patch for QCD scale DY process
@@ -63,22 +65,51 @@ sh QCDnorm_datacards.sh _6Dec2023_2016 boosted 2016-v1
 ```
 
 6. hadd files with the corrected ones
-```sh
-hadd plots_VBS_ZV_6Dec2023_2016_resolved_wPS_wQCD.root \
-plots_VBS_ZV_6Dec2023_2016_resolved_QCDvar.root \
-plots_VBS_ZV_6Dec2023_2016_resolved_PSvar.root \
-plots_VBS_ZV_6Dec2023_2016_resolved.root 
 
-hadd plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD.root \
-plots_VBS_ZV_6Dec2023_2016_boosted_QCDvar.root \
-plots_VBS_ZV_6Dec2023_2016_boosted_PSvar.root \
-plots_VBS_ZV_6Dec2023_2016_boosted.root 
+a.  WITH QCD scale DY corrections
+```sh
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_wPS_wQCD_QCDscaleDY_corr.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_QCDvar.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_PSvar.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved.root 
+
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD_QCDscaleDY_corr.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_QCDvar.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_PSvar.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted.root 
 ```
+b.  WITHOUT QCD scale DY corrections
+```sh
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_wPS_wQCD.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_QCDvar.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_PSvar.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_resolved.root 
+
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_QCDvar.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_PSvar.root \
+/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/plots_VBS_ZV_6Dec2023_2016_boosted.root 
+```
+
+
 
 7. make datacards:
 ```sh
-mkDatacards.py --pycfg=configuration.py --inputFile=plots_VBS_ZV_6Dec2023_2016_resolved_wPS_wQCD.root --skipMissingNuisance
-mkDatacards.py --pycfg=configuration.py --inputFile=plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD.root --skipMissingNuisance
+###without QCD corrections
+cd 2016-v1/resolved
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_wPS_wQCD.root --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_6Dec2023_2016/  --skipMissingNuisance 
+cd ../boosted
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD.root --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_6Dec2023_2016/  --skipMissingNuisance
+###with QCD corrections
+cd ../resolved
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_wPS_wQCD_QCDscaleDY_corr.root --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_6Dec2023_2016_QCDscaleDY_corr/  --skipMissingNuisance 
+cd ../boosted
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD_QCDscaleDY_corr.root --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_6Dec2023_2016_QCDscaleDY_corr/  --skipMissingNuisance
+###with QCD corrections and DY ln (for this need to update nuisances.py before)
+cd ../resolved
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_wPS_wQCD_QCDscaleDY_corr.root --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_6Dec2023_2016_QCDscaleDY_corr_ln/  --skipMissingNuisance 
+cd ../boosted
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD_QCDscaleDY_corr.root --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_6Dec2023_2016_QCDscaleDY_corr_ln/  --skipMissingNuisance
 ```
 
 8. do the statistical analysis (check combine2016 or combineRun2 folder)

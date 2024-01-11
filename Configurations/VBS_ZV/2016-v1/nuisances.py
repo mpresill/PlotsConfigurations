@@ -221,7 +221,7 @@ nuisances['eff_m'] = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['SFweightMuUp', 'SFweightMuDown']) for skey in mc),# if skey not in ['VBS_ZV','VBS_VV_QCD']
-    'AsLnN': '1'
+    #'AsLnN': '1'
    #'group':'lepton'
 }
 
@@ -505,12 +505,15 @@ nuisances['PS_FSR_latinos']  = {
         'DY'     : ['0.9958763409773141*(nCleanGenJet==0) + 1.0041335498093422*(nCleanGenJet==1) + 1.0163363150953029*(nCleanGenJet==2) + 1.0296733670670226*(nCleanGenJet>=3)', '1.0066775262249232*(nCleanGenJet==0) + 0.9945601465681602*(nCleanGenJet==1) + 0.9662459619335311*(nCleanGenJet==2) + 0.9479423453563661*(nCleanGenJet>=3)'],
     },
 }
+
+#*************************************************#
+### uncommenting the following lines at the moment of datacard making
 ### for signal, VBF-V, VBS VV QCD, we extrapolate them from 2018 uncommenting the following lines at the moment of datacard making
-"""nuisances['PS_ISR']  = {
+nuisances['PS_ISR']  = {
     'name': 'PS_ISR',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc if skey not in ['Vg','VgS','other','WW','ggWW']), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
+    'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc if skey not in ['Vg','VgS','other','DY','top']), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
     'cuts'  : [
                    'Boosted_SR_bVeto',
                    'Boosted_SR_bTag',
@@ -528,7 +531,7 @@ nuisances['PS_FSR']  = {
     'name': 'PS_FSR',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc if skey not in ['Vg','VgS','WJets','WW','ggWW']), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
+    'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc if skey not in ['Vg','VgS','other','DY','top']), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
     'cuts'  : [
                    'Boosted_SR_bVeto',
                    'Boosted_SR_bTag',
@@ -540,7 +543,9 @@ nuisances['PS_FSR']  = {
                    'Resolved_DYcr_bTag',
                    ],
 #'AsLnN': '1',
-}"""
+}
+#*************************************************#
+
 
 ###########################################
 #############    QCD scale   ##############
@@ -583,7 +588,7 @@ for sample in ["DY"] :
 #                   'Resolved_DYcr_bVeto',
 #                   'Resolved_DYcr_bTag',
 #                   ],
-	        #'AsLnN': '1'    ##
+#	        'AsLnN': '1'    ##
     }
 
 #for sample in mc_eos :
@@ -596,8 +601,11 @@ for sample in ["sm_dipole","tZq"] :       #### VBS_VV_QCD has bugged QCDscale we
             #'group' : 'theory',
 	       # 'AsLnN': '1'    ##
     }
-### for VBS VV QCD we extrapolate them from 2018 uncommenting the following lines at the moment of datacard making
-"""for sample in ["VBS_VV_QCD"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016, it is extracted as normalization factors from 2018
+
+#*************************************************#
+### for VBS VV QCD we extrapolate them from 2018 
+### uncommenting the following lines at the moment of datacard making
+for sample in ["VBS_VV_QCD"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016, it is extracted as normalization factors from 2018
     nuisances['QCDscale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
             'kind': 'weight_envelope',
@@ -614,9 +622,12 @@ for sample in ["sm_dipole","tZq"] :       #### VBS_VV_QCD has bugged QCDscale we
 #                   'Resolved_DYcr_bTag',
 #                   ],
 #            'samples'  :  dict((skey, ['1', '1']) for skey in ["VBS_VV_QCD"]), #{ sample: variations },
-            #'group' : 'theory',
+            'group' : 'theory',
 	       # 'AsLnN': '1'    ##
-    }"""
+    }
+#*************************************************#
+
+
 
 # for VBS VV QCD 2016 the sets of QCDscale weights are bugged
 # for an alternative implementation see: https://github.com/latinos/PlotsConfigurations/blob/master/Configurations/VBS_OS/DNN/2016/comb_paper/nuisances.py#L522-L551 
