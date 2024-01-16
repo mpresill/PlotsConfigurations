@@ -685,7 +685,7 @@ nuisances['pdf_weight'] = { ### UPDATED FOR 2016 SAMPLES: NEED TO USE RMS HERE!!
     'name'  : 'pdf_16',
     'kind'  : 'weight_rms',    
     'type'  : 'shape',
-    'samples' :  { s: ["LHEPdfWeight[%d]" %i for i in range(100)] for s in ["other", "Vg", "VgS","VBF-V","VBS_VV_QCD"] }, #-> here we reomve bkgs measured in CR (DY and top, and WW for which weights are bugged), as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+    'samples' :  { s: ["LHEPdfWeight[%d]" %i for i in range(100)] for s in [ "Vg", "VgS","VBF-V","VBS_VV_QCD"] }, #-> here we reomve bkgs measured in CR (DY and top, and WW for which weights are bugged), as well as BSM signals (PHDF4LHC prescription for BSM measurement)
     #'group' : 'theory',
     'AsLnN':  '1'
 }

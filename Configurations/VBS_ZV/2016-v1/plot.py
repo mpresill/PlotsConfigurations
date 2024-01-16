@@ -52,11 +52,11 @@ for bin in range(1,6):
 
 
 
-groupPlot['WJets']  = {  
-                  'nameHR' : 'W+Jets',
+groupPlot['other']  = {  
+                  'nameHR' : 'other',
                   'isSignal' : 0,
                   'color':   901, #kpink+1
-                  'samples'  : ['WJets' ],#,'WGJJ'
+                  'samples'  : ['other'],#,'WGJJ'
                   'fill': 1001
 
               }
@@ -93,11 +93,11 @@ groupPlot['Vg+VgS']  = {
                   'fill': 1001
               }
 
-groupPlot['vbfV+VV+VVV']  = {
-                  'nameHR' : 'vbfV+VV+VVV',
+groupPlot['vbfV+VV']  = {
+                  'nameHR' : 'vbfV+VV',
                   'isSignal' : 0,
                   'color': palette["DarkBlue"],
-                  'samples'  : ['VVV','VBS_VV_QCD','VZ','WW','ggWW','VBF-V'],
+                  'samples'  : ['VBS_VV_QCD','VBF-V'],
                   'fill': 1001
               }
 
@@ -130,33 +130,33 @@ groupPlot['VBS']  = {
 
 
 
-plot['VVV']  = { 
+plot['other']  = { 
                   'color': colors["kAzure"] -3,    
                   'isSignal' : 0,
                   'isData'   : 0,
                   'scale'    : 1.0
                   }
 
-plot['WW']  = { 
-                  'color': colors["kAzure"] -3,    
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'scale'    : 1.0
-                  }
-
-plot['ggWW']  = { 
-                  'color': colors["kAzure"] -3,    
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'scale'    : 1.0
-                  }
-
-plot['VZ']  = {
-                  'color': colors['kGreen']+3,  
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'scale'    : 1.   ,
-              }   
+#plot['WW']  = { 
+#                  'color': colors["kAzure"] -3,    
+#                  'isSignal' : 0,
+#                  'isData'   : 0,
+#                  'scale'    : 1.0
+#                  }
+#
+#plot['ggWW']  = { 
+#                  'color': colors["kAzure"] -3,    
+#                  'isSignal' : 0,
+#                  'isData'   : 0,
+#                  'scale'    : 1.0
+#                  }
+#
+#plot['VZ']  = {
+#                  'color': colors['kGreen']+3,  
+#                  'isSignal' : 0,
+#                  'isData'   : 0,
+#                  'scale'    : 1.   ,
+#              }   
          
 
 
@@ -197,13 +197,13 @@ plot['top'] = {
         }
 
 
-plot['WJets']  = {
-                  'color':  colors['kRed']-3,
-                  'isSignal' : 0,
-                  'isData'   : 0,
-                  'scale'    : 1.0
-              }
-
+#plot['WJets']  = {
+#                  'color':  colors['kRed']-3,
+#                  'isSignal' : 0,
+#                  'isData'   : 0,
+#                  'scale'    : 1.0
+#              }
+#
 plot['sm_dipole']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
