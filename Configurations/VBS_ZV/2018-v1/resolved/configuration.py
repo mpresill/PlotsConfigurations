@@ -33,7 +33,7 @@ samplesFile = 'samples_'+categ+'.py' #when launching
 
 
 # file with list of samples
-plotFile = '../plot_v3.py'
+plotFile = '../plot_v2.py'
 
 
 # luminosity to normalize to (in 1/fb)
