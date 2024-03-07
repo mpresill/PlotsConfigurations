@@ -27,7 +27,7 @@
 
 
 __________________________________________________
-# list of commands to make it work:
+# list of commands to make it work (SM EWK):
 1. run mkShape, get to end, and hadd
 2. backup the file produced
 ```sh
@@ -112,4 +112,35 @@ cd ../boosted
 mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD_QCDscaleDY_corr.root --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_6Dec2023_2016_QCDscaleDY_corr_ln/  --skipMissingNuisance --nuisancesFile=../nuisances_datacards.py
 ```
 
+
+To avoid unpleasant statistical fluctuations for nuisances of minor backgrouds in top cr (since those crs are very very pure), I am removing all nuisances from minor backgrouds in datacards for top cr. To try this out, please run again `mkDatacards.py` as follows (for the case of QCD corr+ln DY for instance)
+```sh
+cd ../resolved
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_resolved_wPS_wQCD_QCDscaleDY_corr.root --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_6Dec2023_2016_QCDscaleDY_corr_ln_topcr/ --skipMissingNuisance --nuisancesFile=../nuisances_datacards_topcr.py --cutsFile=cuts_resolved_topcr.py 
+cd ../boosted
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD_QCDscaleDY_corr.root --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_6Dec2023_2016_QCDscaleDY_corr_ln_topcr/ --skipMissingNuisance --nuisancesFile=../nuisances_datacards_topcr.py --cutsFile=cuts_boosted_topcr.py 
+```
+
+
 8. do the statistical analysis (check combine2016 or combineRun2 folder)
+
+
+__________________________________________________
+# list of commands to make it work (EFT):
+1. complete the list above for the SM EWK measurement and be sure to have the correct `variables.py` for both EWk and EFT processing
+2. hadd EFT outputs, and the manually hadd EFT and EWK outputs:
+```sh
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016-dim8/plots_VBS_ZV_6Dec2023_2016-dim8_boosted_wBkg.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016-dim8/plots_VBS_ZV_6Dec2023_2016-dim8_boosted.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_wPS_wQCD_QCDscaleDY_corr.root
+```
+In the example I merged the boosted dim-8 signals root file with the QCDscaleDY corrected smaples.
+3. prepare datacards (picking up the desired EFT signals in the `structure-dim8.py` and in the `samples-datacards-dim8.py`) and using the `nuisances_datacards-dim8.py`:
+```sh
+cd 2016-v1/boosted-dim8
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016-dim8/plots_VBS_ZV_6Dec2023_2016-dim8_boosted_wBkg.root --skipMissingNuisance --nuisancesFile=../nuisances_datacards-dim8.py --samplesFile=../samples-datacards-dim8.py
+```
+You need to prepare one set of datacards per EFT operator, modifying samples, structure and configuration every time.
+4. use the `EFT/datacards_categories_2016_EFT.sh` macro to combine categories (here for the single-here example)
+5. launch the `EFT/eft.sh` script as follows:
+```sh
+sh eft.sh /eos/user/m/mpresill/CMS/VBS/VBS_ZV/DatacardsEFT/YearsCombination_8June2022/combined_boosted_bVeto.txt cT1 boosted_bVeto 
+```
