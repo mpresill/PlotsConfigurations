@@ -48,7 +48,7 @@ python ../../scripts/Utilities_nuisances/apply_nuisances_effect.py -i /eos/user/
 /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted_QCDvar.root --nuisance-effect \
 ../../2018-v1/boosted/QCDscale-plots_VBS_ZV_6Dec2023_2018_boosted.root -s VBS_VV_QCD -n QCDscale_VBS_VV_QCD
 ```
-and the uncomment the corresponding nuisance from `nuisances.py` so can be included in the datacard
+and the uncomment the corresponding nuisance from `nuisances_datacard.py` so can be included in the datacard
 
 4. patch for PS weights: 
 (N.b. ho dovuto togliere i fondi migliori per l'estrapolazione perché "other" non è ancora definito mentre scrivo nel 2018)

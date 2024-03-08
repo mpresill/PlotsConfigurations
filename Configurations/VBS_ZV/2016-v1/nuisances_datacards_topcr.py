@@ -38,11 +38,11 @@ HiggsXS = HiggsXSection()
 
 #########################################################################
 
-EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
+#EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
 
-mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] #"VZ","tZq_ll",  LEFT OUT ONLY FOR DATACARDS, if needed we'll introduce them back
-mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
-mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal #+ EFT_samples
+mc_common = [ "top"] #"VZ","tZq_ll",  LEFT OUT ONLY FOR DATACARDS, if needed we'll introduce them back
+mc_signal= [] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
+mc_eos    = [] + mc_signal #+ EFT_samples
 
 mc        = mc_common + mc_eos
 
@@ -487,7 +487,7 @@ nuisances['PS_ISR']  = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
-    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V','top']),
+    #'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V','top']),
 #'AsLnN': '1',
 }
 
@@ -496,7 +496,7 @@ nuisances['PS_FSR']  = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
-    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V','top']),
+    #'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V','top']),
 #'AsLnN': '1',
 }
 #*************************************************#
@@ -526,38 +526,38 @@ for sample in mc_common :
 	        #'AsLnN': '1'    ##
     }
 ## maybe top needs particular care, see e.g. https://github.com/latinos/PlotsConfigurations/blob/master/Configurations/WW/FullRunII/Full2016_v7/inclusive/nuisances.py#L552-L604 
-for sample in ["DY"] :
-    nuisances['QCDscale_'+sample] = {
-            'name'  : 'QCDscale_'+sample,
-            'kind': 'weight_envelope',
-            'type'  : 'shape',
-            'samples'  :  { sample: variations },
-            #'group' : 'theory',
-	        'AsLnN': '1'    ##
-    }
-
-#for sample in mc_eos :
-for sample in ["sm_dipole","tZq"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016!!!
-    nuisances['QCDscale_'+sample] = {
-            'name'  : 'QCDscale_'+sample,
-            'kind': 'weight_envelope',
-            'type'  : 'shape',
-            'samples'  :  { sample: variations },
-            #'group' : 'theory',
-	       # 'AsLnN': '1'    ##
-    }
-
-#*************************************************#
-### for VBS VV QCD we extrapolate them from 2018 
-### uncommenting the following lines at the moment of datacard making
-for sample in ["VBS_VV_QCD"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016, it is extracted as normalization factors from 2018
-    nuisances['QCDscale_'+sample] = {
-            'name'  : 'QCDscale_'+sample,
-            'kind': 'weight_envelope',
-            'type'  : 'shape',
-            'samples'  :  { sample: variations },
-	       # 'AsLnN': '1'    ##
-    }
+#for sample in ["DY"] :
+#    nuisances['QCDscale_'+sample] = {
+#            'name'  : 'QCDscale_'+sample,
+#            'kind': 'weight_envelope',
+#            'type'  : 'shape',
+#            'samples'  :  { sample: variations },
+#            #'group' : 'theory',
+#	        'AsLnN': '1'    ##
+#    }
+#
+##for sample in mc_eos :
+#for sample in ["sm_dipole","tZq"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016!!!
+#    nuisances['QCDscale_'+sample] = {
+#            'name'  : 'QCDscale_'+sample,
+#            'kind': 'weight_envelope',
+#            'type'  : 'shape',
+#            'samples'  :  { sample: variations },
+#            #'group' : 'theory',
+#	       # 'AsLnN': '1'    ##
+#    }
+#
+##*************************************************#
+#### for VBS VV QCD we extrapolate them from 2018 
+#### uncommenting the following lines at the moment of datacard making
+#for sample in ["VBS_VV_QCD"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016, it is extracted as normalization factors from 2018
+#    nuisances['QCDscale_'+sample] = {
+#            'name'  : 'QCDscale_'+sample,
+#            'kind': 'weight_envelope',
+#            'type'  : 'shape',
+#            'samples'  :  { sample: variations },
+#	       # 'AsLnN': '1'    ##
+#    }
 #*************************************************#
 
 
@@ -565,37 +565,37 @@ for sample in ["VBS_VV_QCD"] :       #### VBS_VV_QCD has bugged QCDscale weights
 ###########################################
 #############    PDF WEIGHT  ##############
 ###########################################
+##pdf_variations = ["LHEPdfWeight[%d]" %i for i in range(100)]
 #pdf_variations = ["LHEPdfWeight[%d]" %i for i in range(100)]
-pdf_variations = ["LHEPdfWeight[%d]" %i for i in range(100)]
-nuisances['pdf_weight'] = { ### UPDATED FOR 2016 SAMPLES: NEED TO USE RMS HERE!!!
-    'name'  : 'pdf_16',
-    'kind'  : 'weight_rms',    
-    'type'  : 'shape',
-    'samples' :  { s: ["LHEPdfWeight[%d]" %i for i in range(100)] for s in ["Vg", "VgS","VBF-V","VBS_VV_QCD"] }, #-> here we reomve bkgs measured in CR (DY and top, and WW for which weights are bugged), as well as BSM signals (PHDF4LHC prescription for BSM measurement)
-    #'group' : 'theory',
-    'AsLnN':  '1'
-}
-
-nuisances['pdf_weight_1718'] = { ###TO BE UPDATED FOR 2016 SIGNAL: here we generated with NNPDF3.1, so it should be correlated with 2017 and 2018 instead
-    'name'  : 'pdf_1718',
-    'kind'  : 'weight_envelope',
-    'type'  : 'shape',
-    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc_signal}, #-> here we reomve bkgs measured in CR, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
-    #'group' : 'theory',
-    'AsLnN':  '1'
-}
-
-
-######  UE: THIS NEEDS TO BE FIXED 
-# An overall 1.5% UE uncertainty will cover all the UEup/UEdo variations
-# And we don't observe any dependency of UE variations on njet
-nuisances['UE']  = {
-                'name'  : 'UE_CUETP8',
-                'skipCMS' : 1,
-                'type': 'lnN',
-                'samples': dict((skey, '1.015') for skey in mc if skey not in ['DY','top']),########### removed fot top and DY, which are measured in CRs 
-                #'group' : 'theory',
-}
+#nuisances['pdf_weight'] = { ### UPDATED FOR 2016 SAMPLES: NEED TO USE RMS HERE!!!
+#    'name'  : 'pdf_16',
+#    'kind'  : 'weight_rms',    
+#    'type'  : 'shape',
+#    'samples' :  { s: ["LHEPdfWeight[%d]" %i for i in range(100)] for s in ["Vg", "VgS","VBF-V","VBS_VV_QCD"] }, #-> here we reomve bkgs measured in CR (DY and top, and WW for which weights are bugged), as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+#    #'group' : 'theory',
+#    'AsLnN':  '1'
+#}
+#
+#nuisances['pdf_weight_1718'] = { ###TO BE UPDATED FOR 2016 SIGNAL: here we generated with NNPDF3.1, so it should be correlated with 2017 and 2018 instead
+#    'name'  : 'pdf_1718',
+#    'kind'  : 'weight_envelope',
+#    'type'  : 'shape',
+#    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc_signal}, #-> here we reomve bkgs measured in CR, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+#    #'group' : 'theory',
+#    'AsLnN':  '1'
+#}
+#
+#
+#######  UE: THIS NEEDS TO BE FIXED 
+## An overall 1.5% UE uncertainty will cover all the UEup/UEdo variations
+## And we don't observe any dependency of UE variations on njet
+#nuisances['UE']  = {
+#                'name'  : 'UE_CUETP8',
+#                'skipCMS' : 1,
+#                'type': 'lnN',
+#                'samples': dict((skey, '1.015') for skey in mc if skey not in ['DY','top']),########### removed fot top and DY, which are measured in CRs 
+#                #'group' : 'theory',
+#}
 
 
 

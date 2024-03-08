@@ -41,8 +41,8 @@ HiggsXS = HiggsXSection()
 EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
 
 mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] #"VZ","tZq_ll",  LEFT OUT ONLY FOR DATACARDS, if needed we'll introduce them back
-mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
-mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal #+ EFT_samples
+mc_signal= ["sm"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
+mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal + EFT_samples
 
 mc        = mc_common + mc_eos
 
@@ -487,7 +487,7 @@ nuisances['PS_ISR']  = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
-    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V','top']),
+    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm','VBS_VV_QCD','tZq','other','VBF-V']),
 #'AsLnN': '1',
 }
 
@@ -496,7 +496,7 @@ nuisances['PS_FSR']  = {
     'kind': 'weight',
     'type': 'shape',
     'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
-    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V','top']),
+    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm','VBS_VV_QCD','tZq','other','VBF-V']),
 #'AsLnN': '1',
 }
 #*************************************************#
@@ -537,7 +537,7 @@ for sample in ["DY"] :
     }
 
 #for sample in mc_eos :
-for sample in ["sm_dipole","tZq"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016!!!
+for sample in ["sm","tZq"]+EFT_samples:       #### VBS_VV_QCD has bugged QCDscale weights for 2016!!!
     nuisances['QCDscale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
             'kind': 'weight_envelope',
