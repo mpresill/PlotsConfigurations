@@ -92,9 +92,9 @@ aliases['fakeWStatMuDown'] = {
 ############# VBS variables for jet pairing
 ############################################################
 mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
-models_path = '/eos/home-a/ahakimi/www/ZV_analysis/Models/All_years_nobtag'
+models_path = '%s/Configurations/VBS_ZV/Models/All_years_nobtag'
 #models_path = '/eos/user/m/mpresill/www/VBS/Numpy/Alex/'
-models_path_pruned = '/eos/home-a/ahakimi/www/ZV_analysis/Models/pruned_nobtag'
+models_path_pruned = '%s/Configurations/VBS_ZV/Models/pruned_nobtag'
 
 aliases['vbs_category'] = {
     'linesToAdd': [
@@ -465,8 +465,8 @@ m_quark_loweta_pt1 = "_loweta_pt1_quark"
 m_quark_higheta_pt0 = "_higheta_pt0_quark"
 m_quark_higheta_pt1 = "_higheta_pt1_quark"
 
-models_path_pruned_bVeto = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2018_bVeto_pruned'
-models_path_pruned_bReq = '/eos/home-a/ahakimi/www/ZV_analysis/Models/Sep22/2018_bReq_pruned'
+models_path_pruned_bVeto = '%s/Configurations/VBS_ZV/Models/Sep22/2018_bVeto_pruned'
+models_path_pruned_bReq = '%s/Configurations/VBS_ZV/Models/Sep22/2018_bReq_pruned'
 
 aliases['DNNoutput_pruned_bVeto'] = {
      'linesToAdd': [
