@@ -1,24 +1,35 @@
 
 #!/bin/bash
 
-set -e 
-DATE=10Nov2021_2016
+#set -e 
+#DATE=_29May2022_201mkShapes__VBS_ZV_25May2023_2018_resolved__ALL
+DATE=_16Mar*
+#DATE=_10Aug023_2017_etajet
+#DATE=_8June2022_21a8_resolved #_boosted
+#DATE=_11May2022_2017_EFT #_resolved #_boosted
+#DATE=_8Apr2022_2018_EFT #_resolved #_boosted
 DIR=$PWD
-JOB="/afs/cern.ch/work/m/mpresill/Latino/jobs"
+#JOB="/afs/cern.ch/work/m/mpresill/Latino/jobs"
 #QUEUE="espresso" #
-#QUEUE="workday" 
-QUEUE="longlunch"
-newQUEUE="workday"
+#QUEUE="microcentury"
+QUEUE="workday" 
+#QUEUE="longlunch"
+#QUEUE="testmatch"
+#newQUEUE="microcentury"
+#newQUEUE="longlunch"
+newQUEUE="tomorrow"
+#newQUEUE="testmatch"
 
 
-#for year in Full2017nano_STXS_1p1 Full2018nano_STXS_1p1 #Full2016nano_STXS_1p1 Full2017nano_STXS_1p1 Full2018nano_STXS_1p1
+#for year in Full2017nano_STXS_1p1 Full2018nano_STXS_1p1 #Full2017nano_STXS_1p1 Full2017nano_STXS_1p1 Full2018nano_STXS_1p1
 #do
 #    YEAR=`echo $year | awk -F "Full" '{print $2}' | awk -F "nano" '{print $1}'`
 #    echo " --> $year"
 #    cd $DIR; cd $year
     #cd $JOB/mkShapes__VBS_ZV${DATE} 
-    #cd $JOB/NanoGardening__Summer16_102X_nAODv7_Full2016v7
-    for i in /afs/cern.ch/work/m/mpresill/Latino/jobs/mkShapes__VBS_ZV_${DATE}/*jid
+    #cd $JOB/NanoGardening__Summer16_102X_nAODv7_Full2017v7
+    for i in /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/jobs/mkShapes__VBS_ZV${DATE}*__ALL/*/*jid
+    #for i in /afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/jobs/mkShapes__VBS_ZV*__ALL/*/*jid
     #for i in *jid
     do 
 	CHECK=`echo "$i" | awk -F "/" '{print $NF}'`
@@ -26,9 +37,15 @@ newQUEUE="workday"
         then
             echo "CONGRATULATION ALL JOB FINISHED"
         else    
-	    echo "sed -i \"s/${QUEUE}/${newQUEUE}/g\" ${i/jid/jds}"
-	    sed -i "s/${QUEUE}/${newQUEUE}/g" ${i/jid/jds}
-	    condor_submit ${i/jid/jds}
+           echo "sed -i \"s/${QUEUE}/${newQUEUE}/g\" ${i/jid/jds}"
+	   echo "sed -i "/request_cpus/s/1/4/g" ${i/jid/jds}"  ###   !!! this is to change the number of cores !!!
+	  # echo $i 
+	  # sed -i "s/el9/el7/g" ${i/jid/jds}
+	#    sed -i "s/${QUEUE}/${newQUEUE}/g" ${i/jid/jds}
+         #   sed -i "/request_cpus/s/4/10/g" ${i/jid/jds}
+	    #sed -i '/queue/ i\MY.WantOS = "el7"' ${i/jid/jds} ##inserice la riga per forzare l'utilizzo della singularity su lx9 prima dell'ultima riga che contiene "queue"
+	   #sed -i '/queue/ i\requirements = (OpSysAndVer =?= "CentOS7")' ${i/jid/jds}
+	 #  condor_submit ${i/jid/jds}
 	fi
     done
 #done

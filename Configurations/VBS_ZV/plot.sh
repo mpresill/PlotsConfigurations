@@ -1,30 +1,19 @@
 #! /bin/bash
-DATE=28Oct2021_2016 #change date 
-#mkShapesMulti.py --pycfg=configuration.py --batchSplit=Samples,Files
+DATE=16Mar2024_2018_ewk_qcd-v2 #change date 
+category=resolved #_QCDscaleDY_corr
+#eosPATH=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/
+#eosPATH=/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/
 
-#mkShapesMulti.py --pycfg=configuration.py --doBatch=1 --batchSplit=Samples,Files --batchQueue=longlunch  #espresso #longlunch #--dry-run
-
-##mkShapesMulti.py --pycfg=configuration.py --doHadd=1 --batchSplit=Samples,Files --doNotCleanup --nThreads=10 #to hadd files
-cd 2016_v7_2
-
-mkPlot.py --pycfg=configuration.py --inputFile=rootFile_${DATE}/plots_VBS_ZV_${DATE}.root --minLogC=0.01 --minLogCratio=0.01 --maxLogC=10000 --maxLogCratio=10000  --showIntegralLegend=1 #--plotNormalizedDistributions #--fileFormats=png,eps
-#--showNormalizedDistributions
-
-#mkPlot.py --pycfg=configuration.py --inputFile=rootFile_28Jan2021_2016_nobtag.root --minLogC=0.01 --minLogCratio=0.01 --maxLogC=10000 --maxLogCratio=10000  --showIntegralLegend=1 --plotNormalizedDistributions #--fileFormats=png,eps
-
-#mkPlot.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/www/VBS/2016_v7_Jan21/rootFile_${DATE}/plots_VBS_ZV_${DATE}.root --minLogC=0.01 --minLogCratio=0.01 --maxLogC=10000 --maxLogCratio=10000  --showIntegralLegend=1 --plotNormalizedDistributions #--fileFormats=png,eps
-#--showNormalizedDistributions
+estetica='--minLogC=0.01 --minLogCratio=0.01 --maxLogC=10000 --maxLogCratio=10000  --showIntegralLegend=1 --logOnly' #--plotNormalizedDistributions
+inputFile=/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd-v2/plots_VBS_ZV_16Mar2024_2018_ewk_qcd-v2_resolved.root
+#/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd_resolved_wBkg.root
+outputFolder=/eos/user/m/mpresill/www/VBS/2018_v7/PlotsVBS_ZV_${DATE}_${category}/
 
 
-cp /eos/user/m/mpresill/www/VBS/2016_v7/index.php /eos/user/m/mpresill/www/VBS/2016_v7/PlotsVBS_ZV_${DATE}/.
-#rm -rf /eos/user/m/mpresill/www/VBS/2016_v7_Jan21/PlotsVBS_ZV_${DATE}*root
-#rm -rf /eos/user/m/mpresill/www/VBS/2016_v7_Jan21/PlotsVBS_ZV_${DATE}/*SR*   #blind SR!
-cp -r *.py /eos/user/m/mpresill/www/VBS/2016_v7/PlotsVBS_ZV_${DATE}/.
+cd 2018-v1/resolved_ewk_qcd
+mkPlot.py --pycfg=configuration.py --inputFile=${inputFile} --outputDirPlots=${outputFolder} ${estetica} 
 
+cp /eos/user/m/mpresill/www/VBS/2018_v7/index.php ${outputFolder}
+cp -r *.py ${outputFolder}
 
-cd ..
-#to resubmit jobs:
-#for i in *jid; do sed -i "s/longlunch/microcentury/g" ${i/jid/jds}; condor_submit ${i/jid/jds}; done
-
-#to make datacard:
-#mkDatacards.py --pycfg configuration.py --inputFile rootFile_${DATE}/plots_VBS_ZV_${DATE}.root
+cd ../..
