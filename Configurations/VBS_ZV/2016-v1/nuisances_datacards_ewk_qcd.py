@@ -41,8 +41,8 @@ HiggsXS = HiggsXSection()
 EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
 
 mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] #"VZ","tZq_ll",  LEFT OUT ONLY FOR DATACARDS, if needed we'll introduce them back
-mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
-mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal #+ EFT_samples
+mc_signal= ["VBS_ZV_EWK_QCD"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
+mc_eos    = ["VBS_WV_QCD","tZq","tZq_QCD"] + mc_signal #+ EFT_samples
 
 mc        = mc_common + mc_eos
 
@@ -536,21 +536,11 @@ for sample in ["DY"] :
 	        'AsLnN': '1'    ##
     }
 
-#for sample in mc_eos :
-for sample in ["sm_dipole","tZq"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016!!!
-    nuisances['QCDscale_'+sample] = {
-            'name'  : 'QCDscale_'+sample,
-            'kind': 'weight_envelope',
-            'type'  : 'shape',
-            'samples'  :  { sample: variations },
-            #'group' : 'theory',
-	       # 'AsLnN': '1'    ##
-    }
 
 #*************************************************#
 ### for VBS VV QCD we extrapolate them from 2018 
 ### uncommenting the following lines at the moment of datacard making
-for sample in ["VBS_VV_QCD"] :       #### VBS_VV_QCD has bugged QCDscale weights for 2016, it is extracted as normalization factors from 2018
+for sample in mc_eos :       #### VBS_VV_QCD has bugged QCDscale weights for 2016, it is extracted as normalization factors from 2018
     nuisances['QCDscale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
             'kind': 'weight_envelope',
@@ -571,7 +561,7 @@ nuisances['pdf_weight'] = { ### UPDATED FOR 2016 SAMPLES: NEED TO USE RMS HERE!!
     'name'  : 'pdf_16',
     'kind'  : 'weight_rms',    
     'type'  : 'shape',
-    'samples' :  { s: ["LHEPdfWeight[%d]" %i for i in range(100)] for s in ["Vg", "VgS","VBF-V","VBS_VV_QCD"] }, #-> here we reomve bkgs measured in CR (DY and top, and WW for which weights are bugged), as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+    'samples' :  { s: ["LHEPdfWeight[%d]" %i for i in range(100)] for s in ["Vg", "VgS","VBF-V","VBS_WV_QCD"] }, #-> here we reomve bkgs measured in CR (DY and top, and WW for which weights are bugged), as well as BSM signals (PHDF4LHC prescription for BSM measurement)
     #'group' : 'theory',
     'AsLnN':  '1'
 }

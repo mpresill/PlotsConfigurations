@@ -749,7 +749,7 @@ nuisances['Topnorm_boosted']  = {
                'cuts'  : [
                    'Boosted_topcr',
                    'Boosted_SR_bVeto',
-		           'Boosted_SR_bTag'
+		           'Boosted_SR_bTag',
                    ],
                 #'group' : 'Topnorm',
               }
@@ -763,7 +763,7 @@ nuisances['Topnorm_resolved']  = {
                'cuts'  : [
                    'Resolved_topcr',
                    'Resolved_SR_bVeto',
-		           'Resolved_SR_bTag'
+		           'Resolved_SR_bTag',
                    ],
                 #'group' : 'Topnorm',
               }

@@ -1,7 +1,7 @@
 treeName= 'Events'
 
 
-date='_15Mar2024_2016_ewk_qcd'
+date='_16Mar2024_2016_ewk_qcd'
 
 categ = 'boosted'
 #operator = 'T0'    #uncomment for EFT launching process.
@@ -25,7 +25,7 @@ cutsFile = 'cuts_'+categ+'.py'  #when launching
 #cutsFile = 'cuts.py'           #after adding the categories
 
 # file with list of samples
-samplesFile = '../samples.py'
+samplesFile = '../samples_ewk_qcd.py'
 
 
 # file with list of samples
@@ -47,9 +47,9 @@ outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards'+da
 #outputDirDatacard = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/VBScomb_Datacards'+date    
 
 # structure file for datacard
-structureFile = '../structure.py'
+structureFile = '../structure_ewk_qcd.py'
 
 # nuisances file for mkDatacards and for mkShape
-nuisancesFile = '../nuisances.py'
+nuisancesFile = '../nuisances_ewk_qcd.py'
 #nuisancesFile = '../../2016_v7_Jan22/nuisances_StatOnly.py'
 

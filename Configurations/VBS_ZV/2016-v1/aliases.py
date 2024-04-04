@@ -92,8 +92,8 @@ aliases['fakeWStatMuDown'] = {
 ############# VBS variables for jet pairing
 ############################################################
 mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
-models_path = '%s/Configurations/VBS_ZV/Models/All_years_nobtag'
-models_path_pruned = '%s/Configurations/VBS_ZV/Models/pruned_nobtag'
+models_path = '%s/Configurations/VBS_ZV/Models/All_years_nobtag' % configurations
+models_path_pruned = '%s/Configurations/VBS_ZV/Models/pruned_nobtag' % configurations
 
 aliases['vbs_category'] = {
     'linesToAdd': [
@@ -441,8 +441,8 @@ m_quark_loweta_pt1 = "_loweta_pt1_quark"
 m_quark_higheta_pt0 = "_higheta_pt0_quark"
 m_quark_higheta_pt1 = "_higheta_pt1_quark"
 
-models_path_pruned_bVeto = '%s/Configurations/VBS_ZV/Models/Sep22/2016_bVeto_pruned'
-models_path_pruned_bReq = '%s/Configurations/VBS_ZV/Models/Sep22/2016_bReq_pruned'
+models_path_pruned_bVeto = '%s/Configurations/VBS_ZV/Models/Sep22/2016_bVeto_pruned' % configurations
+models_path_pruned_bReq = '%s/Configurations/VBS_ZV/Models/Sep22/2016_bReq_pruned' % configurations
 
 
 aliases['DNNoutput_pruned_bVeto'] = {
