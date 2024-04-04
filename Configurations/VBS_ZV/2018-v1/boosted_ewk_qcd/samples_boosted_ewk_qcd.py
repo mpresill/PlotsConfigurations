@@ -1,11 +1,6 @@
 
 import os 
 import inspect
-# Import the operators dictionary from EFT_dict.py
-# Execute the contents of EFT_dim8_dictionary.py, please update the path according to your exigency 
-with open('/afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/EFT/EFT_dim8_dictionary.py') as f:
-    code = compile(f.read(), 'EFT_dim8_dictionary.py', 'exec')
-    exec(code)
 
 configurations = os.path.realpath(inspect.getfile(inspect.currentframe())) # this file
 configurations = os.path.dirname(configurations) # ggH2018
@@ -106,58 +101,58 @@ def CombineBaseW(samples, proc, samplelist):
     for s in samplelist:
         addSampleWeight(samples, proc, s, newbaseW+'/baseW')
 
-#def CombineBaseWSMPeos(samples, proc, samplelist):
-#    newbaseW = getBaseWnAOD(makeMCDirectorySMPeos, mcProduction, samplelist)
-#    for s in samplelist:
-#        addSampleWeight(samples, proc, s, newbaseW+'/baseW')
 
+###########################################
+#############   SIGNALS  ##################
+###########################################
 
- #************          EFT samples       ************#
- #++++++ these are the centrally produced samples ++++#
-for operator, expressions in operators.items():
-    # Adding the quadratic sample for each operator:
-    samples['quad_'+operator] = {
-        'name':  nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC_eboliv2_official') 
-                 + nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC_eboliv2_official') 
-                 + nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC_eboliv2_official'),
-        'weight':  mcCommonWeight,
-        'FilesPerJob': 10
-    }
-    
-    quadReweight = expressions['quadReweight']
-    
-    addSampleWeight(samples, 'quad_'+operator, 'ZTo2L_ZTo2J_aQGC_eboliv2_official', quadReweight)
-    addSampleWeight(samples, 'quad_'+operator, 'WmTo2J_ZTo2L_aQGC_eboliv2_official', '(Sum$(abs(GenPart_pdgId)==6)==0) *'+ quadReweight)
-    addSampleWeight(samples, 'quad_'+operator, 'WpTo2J_ZTo2L_aQGC_eboliv2_official', '(Sum$(abs(GenPart_pdgId)==6)==0) *'+ quadReweight)
-
-    # Adding sm_lin_quad sample for each operator:
-    smLinQuadReweight = expressions['sm'] + expressions['LinReweight'] + expressions['quadReweight']
-    samples['sm_lin_quad_'+operator] = {
-        'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC_eboliv2_official') 
-                 + nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC_eboliv2_official') 
-                 + nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC_eboliv2_official'),
-        'weight':  mcCommonWeight,
-        'FilesPerJob': 10
-    }
-    addSampleWeight(samples,'sm_lin_quad_'+operator,'ZTo2L_ZTo2J_aQGC_eboliv2_official', smLinQuadReweight)
-    addSampleWeight(samples,'sm_lin_quad_'+operator,'WmTo2J_ZTo2L_aQGC_eboliv2_official','(Sum$(abs(GenPart_pdgId)==6)==0) *'+ smLinQuadReweight)
-    addSampleWeight(samples,'sm_lin_quad_'+operator,'WpTo2J_ZTo2L_aQGC_eboliv2_official','(Sum$(abs(GenPart_pdgId)==6)==0) *'+ smLinQuadReweight)
-
-
-"""
- #*******************#      sm from reweighting
-samples['sm'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC_eboliv2_official') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC_eboliv2_official') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC_eboliv2_official'),
+#************ dipole recoil ************#
+samples['VBS_ZV_EWK_QCD'] = {
+    'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J_dipoleRecoil')
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil')
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil')
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J_QCD')
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L_QCD')
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L_QCD'),
     'weight':  mcCommonWeight,
+    'FilesPerJob': 10,
+    'EventsPerJob' : 70000,
+}
+addSampleWeight(samples,'VBS_ZV_EWK_QCD','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
+addSampleWeight(samples,'VBS_ZV_EWK_QCD','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
+addSampleWeight(samples,'VBS_ZV_EWK_QCD','WmTo2J_ZTo2L_QCD','(Sum$(abs(GenPart_pdgId)==6)==0)')
+addSampleWeight(samples,'VBS_ZV_EWK_QCD','WpTo2J_ZTo2L_QCD','(Sum$(abs(GenPart_pdgId)==6)==0)')
+
+
+###########################################
+#############  BACKGROUNDS  ###############
+###########################################
+######## irreducible VBS QCD  #####
+samples['VBS_WV_QCD'] = {
+    'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'WpToLNu_ZTo2J_QCD') 
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpToLNu_WpTo2J_QCD')
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpToLNu_WmTo2J_QCD')
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_WmToLNu_QCD')
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmToLNu_ZTo2J_QCD')
+             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmToLNu_WmTo2J_QCD'),
+    'weight':  mcCommonWeight,
+    'FilesPerJob': 10,
+    'EventsPerJob': 70000
+}
+######## tZq ##########
+#tZq from sm qcd sample
+samples['tZq_QCD'] = {
+    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_QCD') 
+             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_QCD'),
+    'weight':  mcCommonWeight+'*(Sum$(abs(GenPart_pdgId)==6)!=0)',
     'FilesPerJob': 10
 }
 
-addSampleWeight(samples,'sm','ZTo2L_ZTo2J_aQGC_eboliv2_official',                                       sm_cT0)
-addSampleWeight(samples,'sm','WmTo2J_ZTo2L_aQGC_eboliv2_official','(Sum$(abs(GenPart_pdgId)==6)==0) *'+ sm_cT0)
-addSampleWeight(samples,'sm','WpTo2J_ZTo2L_aQGC_eboliv2_official','(Sum$(abs(GenPart_pdgId)==6)==0) *'+ sm_cT0)
 
+
+###########################################
+#############  BACKGROUNDS  ###############
+###########################################
 ###########################################
 #############  BACKGROUNDS  ###############
 ###########################################
@@ -175,20 +170,20 @@ samples['tZq'] = {
 
 ########## irreducible VBS QCD 
 
-samples['VBS_VV_QCD'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WpToLNu_ZTo2J_QCD') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpToLNu_WpTo2J_QCD')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpToLNu_WmTo2J_QCD')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_QCD')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_WmToLNu_QCD')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmToLNu_ZTo2J_QCD')
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmToLNu_WmTo2J_QCD')
-             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_QCD')              	 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_QCD'),
-    'weight':  mcCommonWeight,
-    'FilesPerJob': 10,
-#    'EventsPerJob' : 70000,
-}
+#samples['VBS_VV_QCD'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WpToLNu_ZTo2J_QCD') 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpToLNu_WpTo2J_QCD')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpToLNu_WmTo2J_QCD')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_QCD')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_WmToLNu_QCD')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmToLNu_ZTo2J_QCD')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmToLNu_WmTo2J_QCD')
+#             +nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_QCD')              	 
+#             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_QCD'),
+#    'weight':  mcCommonWeight,
+#    'FilesPerJob': 10,
+##    'EventsPerJob' : 70000,
+#}
 
 ########VBF-V##########
 
@@ -373,6 +368,7 @@ addSampleWeight(samples,'other','ZZTo4L_ext2',  "1.11")
 
 
 
+
 ###########################################
 ################## FAKE ###################
 ###########################################
@@ -413,4 +409,3 @@ for _, sd in DataRun:
 
 
 
-"""

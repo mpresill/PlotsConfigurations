@@ -29,10 +29,10 @@ HiggsXS = HiggsXSection()
 
 
 
-EFT_samples = ["sm", "quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
+EFT_samples = ["sm_lin_quad_cW","quad_cW"]
 mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] # "VZ","tZq_ll", 
-mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
-mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal #+ EFT_samples
+mc_signal= ["sm"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
+mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal + EFT_samples
 
 mc        = mc_common + mc_eos
 
@@ -331,7 +331,7 @@ nuisances['JER_SMPeos'] = {
     'type': 'shape',
     'mapUp': 'JERup',
     'mapDown': 'JERdo',
-    'samples': dict((skey, ['1','1']) for skey in mc_eos if skey not in mc_eos),  ####      WHY REMOVING SIGNAL?
+    'samples': dict((skey, ['1','1']) for skey in mc_eos),  ####      WHY REMOVING SIGNAL?
     'folderUp': DirectorySMPeos+'__JERup_suffix',
     'folderDown': DirectorySMPeos+'__JERdo_suffix',
    #'group': 'AK4jet',
@@ -632,11 +632,12 @@ nuisances['pdf_weight'] = { # --> Now save also the normalization one for the si
     'name'  : 'pdf_1718',
     'kind'  : 'weight_envelope',
     'type'  : 'shape',
-    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["DY","top"]}, #-> here we reomve bkgs measured on, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["DY","top"]+EFT_samples}, #-> here we reomve bkgs measured on, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
    #'group' : 'theory',
     'AsLnN':  '1'
 }
-
+#### removed EFT_samples from this nuisance as we found out that the weights are bugged.
+#### since we use it as a log normal nuisace, we will introduce the flat number from SM ewk sample
 
 ###########################################
 #############    UE         ##############

@@ -92,9 +92,9 @@ aliases['fakeWStatMuDown'] = {
 ############# VBS variables for jet pairing
 ############################################################
 mva_reader_path = '%s/Configurations/VBS_ZV/mva_macros/' % configurations
-models_path = '%s/Configurations/VBS_ZV/Models/All_years_nobtag'
+models_path = '%s/Configurations/VBS_ZV/Models/All_years_nobtag' % configurations
 #models_path = '/eos/user/m/mpresill/www/VBS/Numpy/Alex/'
-models_path_pruned = '%s/Configurations/VBS_ZV/Models/pruned_nobtag'
+models_path_pruned = '%s/Configurations/VBS_ZV/Models/pruned_nobtag' % configurations
 
 aliases['vbs_category'] = {
     'linesToAdd': [
@@ -465,8 +465,8 @@ m_quark_loweta_pt1 = "_loweta_pt1_quark"
 m_quark_higheta_pt0 = "_higheta_pt0_quark"
 m_quark_higheta_pt1 = "_higheta_pt1_quark"
 
-models_path_pruned_bVeto = '%s/Configurations/VBS_ZV/Models/Sep22/2018_bVeto_pruned'
-models_path_pruned_bReq = '%s/Configurations/VBS_ZV/Models/Sep22/2018_bReq_pruned'
+models_path_pruned_bVeto = '%s/Configurations/VBS_ZV/Models/Sep22/2018_bVeto_pruned' % configurations
+models_path_pruned_bReq = '%s/Configurations/VBS_ZV/Models/Sep22/2018_bReq_pruned' % configurations
 
 aliases['DNNoutput_pruned_bVeto'] = {
      'linesToAdd': [
@@ -588,29 +588,29 @@ aliases['fit_Z_bin_Boosted'] = {
 
 ####### QCD scale and PDF systematics on signal acceptance macros:
 
-EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
-mc_eos    = ["sm","sm_dipole","ewk_WpZ","ewk_WmZ","ewk_ZZ","VBS_VV_QCD",] + EFT_samples
-
-aliases['QCDscale_normalized'] = {
-            'class': 'QCDScaleNormalized',
-            'args': (),
-            'linesToAdd': [
-                'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-                'gSystem->Load("libDNNEvaluator.so")',
-                '.L %s/Configurations/VBS_ZV/macros/QCDscale_normalize.cc+' % configurations
-             ],
-            'samples':mc_eos          
-}
-
-aliases['PDFweight_normalized'] = {
-            'class': 'PDFWeightNormalized',
-            'args': (),
-            'linesToAdd': [
-                'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
-                'gSystem->Load("libDNNEvaluator.so")',
-                '.L %s/Configurations/VBS_ZV/macros/PDFweight_normalize.cc+' % configurations
-             ],
-            'samples': mc_eos        
-}
-
+#EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
+#mc_eos    = ["sm","sm_dipole","ewk_WpZ","ewk_WmZ","ewk_ZZ","VBS_VV_QCD",] + EFT_samples
+#
+#aliases['QCDscale_normalized'] = {
+#            'class': 'QCDScaleNormalized',
+#            'args': (),
+#            'linesToAdd': [
+#                'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+#                'gSystem->Load("libDNNEvaluator.so")',
+#                '.L %s/Configurations/VBS_ZV/macros/QCDscale_normalize.cc+' % configurations
+#             ],
+#            'samples':mc_eos          
+#}
+#
+#aliases['PDFweight_normalized'] = {
+#            'class': 'PDFWeightNormalized',
+#            'args': (),
+#            'linesToAdd': [
+#                'gSystem->AddIncludePath("-I%s/src");' % os.getenv('CMSSW_BASE'),
+#                'gSystem->Load("libDNNEvaluator.so")',
+#                '.L %s/Configurations/VBS_ZV/macros/PDFweight_normalize.cc+' % configurations
+#             ],
+#            'samples': mc_eos        
+#}
+#
 aliases['mV'] = { 'expr': 'FatJet_msoftdrop_nom[CleanFatJet_jetIdx[0]]' }

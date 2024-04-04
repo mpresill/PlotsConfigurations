@@ -31,8 +31,8 @@ HiggsXS = HiggsXSection()
 
 EFT_samples = ["sm", "quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
 mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] # "VZ","tZq_ll", 
-mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
-mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal #+ EFT_samples
+mc_signal= ["VBS_ZV_EWK_QCD"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
+mc_eos    = ["VBS_WV_QCD","tZq","tZq_QCD"] + mc_signal #+ EFT_samples
 
 mc        = mc_common + mc_eos
 
@@ -173,8 +173,8 @@ nuisances['electronpt'] = {
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
     'samples': dict((skey, ['1', '1']) for skey in mc_common if skey not in ["other"]), ##removed WJets as is corrupted, plus not really relevant for us.
-    'folderUp': makeMCDirectory('ElepTup_suffix'),
-    'folderDown': makeMCDirectory('ElepTdo_suffix'),
+    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory('ElepTup_suffix'),
+    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory('ElepTdo_suffix'),
    #'group':'lepton',
     #'AsLnN': '1'
 }
@@ -186,8 +186,8 @@ nuisances['electronpt_SMPeos'] = {
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
     'samples': dict((skey, ['1','1']) for skey in mc_eos), # if skey not in ["sm"], why was removed!?
-    'folderUp': DirectorySMPeos+'__ElepTup_suffix',
-    'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
+    'folderUp': 'root://eoscms.cern.ch/'+DirectorySMPeos+'__ElepTup_suffix',
+    'folderDown': 'root://eoscms.cern.ch/'+DirectorySMPeos+'__ElepTdo_suffix',
    #'group':'lepton',
     #'AsLnN': '1'
 }
@@ -209,8 +209,8 @@ nuisances['muonpt'] = {
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
     'samples': dict((skey, ['1', '1']) for skey in mc_common if skey not in ["other"]), ##removed WJets as is corrupted, plus not really relevant for us.
-    'folderUp': makeMCDirectory('MupTup_suffix'),
-    'folderDown': makeMCDirectory('MupTdo_suffix'),
+    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory('MupTup_suffix'),
+    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory('MupTdo_suffix'),
    #'group':'lepton',
     #'AsLnN': '1'
 }
@@ -222,8 +222,8 @@ nuisances['muonpt_SMPeos'] = {
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
     'samples': dict((skey, ['1','1']) for skey in mc_eos), 
-    'folderUp': DirectorySMPeos+'__MupTup_suffix',
-    'folderDown': DirectorySMPeos+'__MupTdo_suffix',
+    'folderUp': 'root://eoscms.cern.ch/'+DirectorySMPeos+'__MupTup_suffix',
+    'folderDown': 'root://eoscms.cern.ch/'+DirectorySMPeos+'__MupTdo_suffix',
    #'group':'lepton',
     #'AsLnN': '1'
 }
@@ -240,23 +240,23 @@ folderdo_signal = ""
 
 for js in jes_systs:
   if 'Absolute' in js: 
-    folderup = makeMCDirectory('JESAbsoluteup_suffix')
-    folderdo = makeMCDirectory('JESAbsolutedo_suffix')
+    folderup = 'root://eoscms.cern.ch/'+makeMCDirectory('JESAbsoluteup_suffix')
+    folderdo = 'root://eoscms.cern.ch/'+makeMCDirectory('JESAbsolutedo_suffix')
   elif 'BBEC1' in js:
-    folderup = makeMCDirectory('JESBBEC1up_suffix')
-    folderdo = makeMCDirectory('JESBBEC1do_suffix')
+    folderup = 'root://eoscms.cern.ch/'+makeMCDirectory('JESBBEC1up_suffix')
+    folderdo = 'root://eoscms.cern.ch/'+makeMCDirectory('JESBBEC1do_suffix')
   elif 'EC2' in js:
-    folderup = makeMCDirectory('JESEC2up_suffix')
-    folderdo = makeMCDirectory('JESEC2do_suffix')
+    folderup = 'root://eoscms.cern.ch/'+makeMCDirectory('JESEC2up_suffix')
+    folderdo = 'root://eoscms.cern.ch/'+makeMCDirectory('JESEC2do_suffix')
   elif 'HF' in js:
-    folderup = makeMCDirectory('JESHFup_suffix')
-    folderdo = makeMCDirectory('JESHFdo_suffix')
+    folderup = 'root://eoscms.cern.ch/'+makeMCDirectory('JESHFup_suffix')
+    folderdo = 'root://eoscms.cern.ch/'+makeMCDirectory('JESHFdo_suffix')
   elif 'Relative' in js:
-    folderup = makeMCDirectory('JESRelativeup_suffix')
-    folderdo = makeMCDirectory('JESRelativedo_suffix')
+    folderup = 'root://eoscms.cern.ch/'+makeMCDirectory('JESRelativeup_suffix')
+    folderdo = 'root://eoscms.cern.ch/'+makeMCDirectory('JESRelativedo_suffix')
   elif 'FlavorQCD' in js:
-    folderup = makeMCDirectory('JESFlavorQCDup_suffix')
-    folderdo = makeMCDirectory('JESFlavorQCDdo_suffix')
+    folderup = 'root://eoscms.cern.ch/'+makeMCDirectory('JESFlavorQCDup_suffix')
+    folderdo = 'root://eoscms.cern.ch/'+makeMCDirectory('JESFlavorQCDdo_suffix')
 
   nuisances[js] = {
       'name': 'CMS_scale_'+js,
@@ -274,23 +274,23 @@ for js in jes_systs:
 #this is for signals
 for js_VBS_ZV in jes_systs:
   if 'Absolute' in js_VBS_ZV: 
-    folderup_signal = DirectorySMPeos+'__JESAbsoluteup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESAbsolutedo_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESAbsoluteup_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESAbsolutedo_suffix'
   elif 'BBEC1' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESBBEC1up_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESBBEC1do_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESBBEC1up_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESBBEC1do_suffix'
   elif 'EC2' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESEC2up_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESEC2do_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESEC2up_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESEC2do_suffix'
   elif 'HF' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESHFup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESHFdo_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESHFup_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESHFdo_suffix'
   elif 'Relative' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESRelativeup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESRelativedo_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESRelativeup_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESRelativedo_suffix'
   elif 'FlavorQCD' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESFlavorQCDup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESFlavorQCDdo_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESFlavorQCDup_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESFlavorQCDdo_suffix'
 
   nuisances[js_VBS_ZV+'_SMPeos'] = {
       'name': 'CMS_scale_'+js_VBS_ZV,
@@ -318,8 +318,8 @@ nuisances['JER'] = {
     'mapUp': 'JERup',
     'mapDown': 'JERdo',
     'samples': dict((skey, ['1', '1']) for skey in mc_common),
-    'folderUp': makeMCDirectory('JERup_suffix'),
-    'folderDown': makeMCDirectory('JERdo_suffix'),
+    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory('JERup_suffix'),
+    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory('JERdo_suffix'),
    #'group': 'AK4jet',
    # 'AsLnN': '1'
 }
@@ -332,8 +332,8 @@ nuisances['JER_SMPeos'] = {
     'mapUp': 'JERup',
     'mapDown': 'JERdo',
     'samples': dict((skey, ['1','1']) for skey in mc_eos if skey not in mc_eos),  ####      WHY REMOVING SIGNAL?
-    'folderUp': DirectorySMPeos+'__JERup_suffix',
-    'folderDown': DirectorySMPeos+'__JERdo_suffix',
+    'folderUp': 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JERup_suffix',
+    'folderDown': 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JERdo_suffix',
    #'group': 'AK4jet',
    # 'AsLnN': '1'
 }
@@ -376,8 +376,8 @@ nuisances['cfj_pt_JESTotal'] = {
     'mapUp' : 'pt_jesTotalUp',
     'mapDown': 'pt_jesTotalDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -397,8 +397,8 @@ nuisances['cfj_pt_JER'] = {
     'mapUp' : 'pt_jerUp',
     'mapDown': 'pt_jerDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -417,8 +417,8 @@ nuisances['mV_jms'] = {
     'mapUp' : 'jmsUp',
     'mapDown': 'jmsDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -437,8 +437,8 @@ nuisances['mV_jmr'] = {
     'mapUp': 'jmrUp',
     'mapDown': 'jmrDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -458,8 +458,8 @@ nuisances['mV_jesTotal'] = {
     'mapUp' : 'jesTotalUp',
     'mapDown': 'jesTotalDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -479,8 +479,8 @@ nuisances['mV_jer'] = {
     'mapUp' : 'jerUp',
     'mapDown': 'jerDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',

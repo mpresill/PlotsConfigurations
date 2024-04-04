@@ -29,10 +29,10 @@ HiggsXS = HiggsXSection()
 
 
 
-EFT_samples = ["sm", "quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
+EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
 mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] # "VZ","tZq_ll", 
-mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
-mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal #+ EFT_samples
+mc_signal= ["VBS_ZV_EWK_QCD"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
+mc_eos    = ["VBS_WV_QCD","tZq","tZq_QCD"] + mc_signal #+ EFT_samples
 
 mc        = mc_common + mc_eos
 
@@ -172,25 +172,26 @@ nuisances['electronpt'] = {
     'type': 'shape',
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc_common if skey not in ["other"]), ##removed WJets as is corrupted, plus not really relevant for us.
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ["other"]), ##removed WJets as is corrupted, plus not really relevant for us.
     'folderUp': makeMCDirectory('ElepTup_suffix'),
     'folderDown': makeMCDirectory('ElepTdo_suffix'),
+    #'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag','Resolved_topcr']) for skey in ["Boosted_Z_1","Boosted_Z_2","Boosted_Z_3","Boosted_Z_4","Boosted_Z_5"]),
    #'group':'lepton',
     #'AsLnN': '1'
 }
 #this is for the signals since they are in a different eos folder
-nuisances['electronpt_SMPeos'] = {
-    'name': 'CMS_scale_e_2018',
-    'kind': 'suffix',
-    'type': 'shape',
-    'mapUp': 'ElepTup',
-    'mapDown': 'ElepTdo',
-    'samples': dict((skey, ['1','1']) for skey in mc_eos), # if skey not in ["sm"], why was removed!?
-    'folderUp': DirectorySMPeos+'__ElepTup_suffix',
-    'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
-   #'group':'lepton',
-    #'AsLnN': '1'
-}
+#nuisances['electronpt_SMPeos'] = {
+#    'name': 'CMS_scale_e_2018',
+#    'kind': 'suffix',
+#    'type': 'shape',
+#    'mapUp': 'ElepTup',
+#    'mapDown': 'ElepTdo',
+#    'samples': dict((skey, ['1','1']) for skey in mc_eos), # if skey not in ["sm"], why was removed!?
+#    'folderUp': DirectorySMPeos+'__ElepTup_suffix',
+#    'folderDown': DirectorySMPeos+'__ElepTdo_suffix',
+#   #'group':'lepton',
+#    #'AsLnN': '1'
+#}
 
 
 ##### Muon Efficiency and energy scale  
@@ -208,25 +209,27 @@ nuisances['muonpt'] = {
     'type': 'shape',
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc_common if skey not in ["other"]), ##removed WJets as is corrupted, plus not really relevant for us.
+    'samples': dict((skey, ['1', '1']) for skey in mc if skey not in ["other"]), ##removed WJets as is corrupted, plus not really relevant for us.
     'folderUp': makeMCDirectory('MupTup_suffix'),
     'folderDown': makeMCDirectory('MupTdo_suffix'),
+    #'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag','Resolved_topcr']) for skey in ["Boosted_Z_1","Boosted_Z_2","Boosted_Z_3","Boosted_Z_4","Boosted_Z_5"]),
+
    #'group':'lepton',
     #'AsLnN': '1'
 }
 #this is for the signals
-nuisances['muonpt_SMPeos'] = {
-    'name': 'CMS_scale_m_2018',
-    'kind': 'suffix',
-    'type': 'shape',
-    'mapUp': 'MupTup',
-    'mapDown': 'MupTdo',
-    'samples': dict((skey, ['1','1']) for skey in mc_eos), 
-    'folderUp': DirectorySMPeos+'__MupTup_suffix',
-    'folderDown': DirectorySMPeos+'__MupTdo_suffix',
-   #'group':'lepton',
-    #'AsLnN': '1'
-}
+#nuisances['muonpt_SMPeos'] = {
+#    'name': 'CMS_scale_m_2018',
+#    'kind': 'suffix',
+#    'type': 'shape',
+#    'mapUp': 'MupTup',
+#    'mapDown': 'MupTdo',
+#    'samples': dict((skey, ['1','1']) for skey in mc_eos), 
+#    'folderUp': DirectorySMPeos+'__MupTup_suffix',
+#    'folderDown': DirectorySMPeos+'__MupTdo_suffix',
+#   #'group':'lepton',
+#    #'AsLnN': '1'
+#}
 
 
 
@@ -264,7 +267,7 @@ for js in jes_systs:
       'type': 'shape',
       'mapUp': js+'up',
       'mapDown': js+'do',
-      'samples': dict((skey, ['1', '1']) for skey in mc_common),
+      'samples': dict((skey, ['1', '1']) for skey in mc),
       'folderUp': folderup,
       'folderDown': folderdo,
      #'group': 'AK4jet',
@@ -272,38 +275,38 @@ for js in jes_systs:
   }
 
 #this is for signals
-for js_VBS_ZV in jes_systs:
-  if 'Absolute' in js_VBS_ZV: 
-    folderup_signal = DirectorySMPeos+'__JESAbsoluteup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESAbsolutedo_suffix'
-  elif 'BBEC1' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESBBEC1up_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESBBEC1do_suffix'
-  elif 'EC2' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESEC2up_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESEC2do_suffix'
-  elif 'HF' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESHFup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESHFdo_suffix'
-  elif 'Relative' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESRelativeup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESRelativedo_suffix'
-  elif 'FlavorQCD' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESFlavorQCDup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESFlavorQCDdo_suffix'
-
-  nuisances[js_VBS_ZV+'_SMPeos'] = {
-      'name': 'CMS_scale_'+js_VBS_ZV,
-      'kind': 'suffix',
-      'type': 'shape',
-      'mapUp': js_VBS_ZV+'up',
-      'mapDown': js_VBS_ZV+'do',
-      'samples':  dict((skey, ['1','1']) for skey in mc_eos),
-      'folderUp': folderup_signal,
-      'folderDown': folderdo_signal,
-     #'group': 'AK4jet',
-     # 'AsLnN': '1'
-  }
+#for js_VBS_ZV in jes_systs:
+#  if 'Absolute' in js_VBS_ZV: 
+#    folderup_signal = DirectorySMPeos+'__JESAbsoluteup_suffix'
+#    folderdo_signal = DirectorySMPeos+'__JESAbsolutedo_suffix'
+#  elif 'BBEC1' in js_VBS_ZV:
+#    folderup_signal = DirectorySMPeos+'__JESBBEC1up_suffix'
+#    folderdo_signal = DirectorySMPeos+'__JESBBEC1do_suffix'
+#  elif 'EC2' in js_VBS_ZV:
+#    folderup_signal = DirectorySMPeos+'__JESEC2up_suffix'
+#    folderdo_signal = DirectorySMPeos+'__JESEC2do_suffix'
+#  elif 'HF' in js_VBS_ZV:
+#    folderup_signal = DirectorySMPeos+'__JESHFup_suffix'
+#    folderdo_signal = DirectorySMPeos+'__JESHFdo_suffix'
+#  elif 'Relative' in js_VBS_ZV:
+#    folderup_signal = DirectorySMPeos+'__JESRelativeup_suffix'
+#    folderdo_signal = DirectorySMPeos+'__JESRelativedo_suffix'
+#  elif 'FlavorQCD' in js_VBS_ZV:
+#    folderup_signal = DirectorySMPeos+'__JESFlavorQCDup_suffix'
+#    folderdo_signal = DirectorySMPeos+'__JESFlavorQCDdo_suffix'
+#
+#  nuisances[js_VBS_ZV+'_SMPeos'] = {
+#      'name': 'CMS_scale_'+js_VBS_ZV,
+#      'kind': 'suffix',
+#      'type': 'shape',
+#      'mapUp': js_VBS_ZV+'up',
+#      'mapDown': js_VBS_ZV+'do',
+#      'samples':  dict((skey, ['1','1']) for skey in mc_eos),
+#      'folderUp': folderup_signal,
+#      'folderDown': folderdo_signal,
+#     #'group': 'AK4jet',
+#     # 'AsLnN': '1'
+#  }
 
 
 
@@ -317,7 +320,7 @@ nuisances['JER'] = {
     'type': 'shape',
     'mapUp': 'JERup',
     'mapDown': 'JERdo',
-    'samples': dict((skey, ['1', '1']) for skey in mc_common),
+    'samples': dict((skey, ['1', '1']) for skey in mc),
     'folderUp': makeMCDirectory('JERup_suffix'),
     'folderDown': makeMCDirectory('JERdo_suffix'),
    #'group': 'AK4jet',
@@ -325,18 +328,18 @@ nuisances['JER'] = {
 }
 
 #this is for the signal
-nuisances['JER_SMPeos'] = {
-    'name': 'CMS_res_j_2018',
-    'kind': 'suffix',
-    'type': 'shape',
-    'mapUp': 'JERup',
-    'mapDown': 'JERdo',
-    'samples': dict((skey, ['1','1']) for skey in mc_eos if skey not in mc_eos),  ####      WHY REMOVING SIGNAL?
-    'folderUp': DirectorySMPeos+'__JERup_suffix',
-    'folderDown': DirectorySMPeos+'__JERdo_suffix',
-   #'group': 'AK4jet',
-   # 'AsLnN': '1'
-}
+#nuisances['JER_SMPeos'] = {
+#    'name': 'CMS_res_j_2018',
+#    'kind': 'suffix',
+#    'type': 'shape',
+#    'mapUp': 'JERup',
+#    'mapDown': 'JERdo',
+#    'samples': dict((skey, ['1','1']) for skey in mc_eos if skey not in mc_eos),  ####      WHY REMOVING SIGNAL?
+#    'folderUp': DirectorySMPeos+'__JERup_suffix',
+#    'folderDown': DirectorySMPeos+'__JERdo_suffix',
+#   #'group': 'AK4jet',
+#   # 'AsLnN': '1'
+#}
 
 
 
@@ -500,25 +503,43 @@ nuisances['mV_jer'] = {
 ###########################################
 #############  PARTON SHOWER ##############
 ###########################################
-nuisances['PS_ISR_latinos']  = {
+nuisances['PS_ISR']  = {
     'name': 'PS_ISR',
     'kind': 'weight',
     'type': 'shape',
-    'samples': {
-        'Vg'     : ['1.00227428567253*(nCleanGenJet==0) + 1.00572014989997*(nCleanGenJet==1) + 0.970824885256465*(nCleanGenJet==2) + 0.927346068071086*(nCleanGenJet>=3)', '0.996488506572636*(nCleanGenJet==0) + 0.993582795375765*(nCleanGenJet==1) + 1.03643678934568*(nCleanGenJet==2) + 1.09735277266955*(nCleanGenJet>=3)'],
-        'VgS'    : ['1.0000536116408023*(nCleanGenJet==0) + 1.0100100693580492*(nCleanGenJet==1) + 0.959068359375*(nCleanGenJet==2) + 0.9117049260469496*(nCleanGenJet>=3)', '0.9999367833485968*(nCleanGenJet==0) + 0.9873682892005163*(nCleanGenJet==1) + 1.0492717737268518*(nCleanGenJet==2) + 1.1176958835210322*(nCleanGenJet>=3)'],
-    },
+    'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc if skey not in ['top','DY']), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
+#    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V']),
+#'AsLnN': '1',
 }
 
-nuisances['PS_FSR_latinos']  = {
+nuisances['PS_FSR']  = {
     'name': 'PS_FSR',
     'kind': 'weight',
     'type': 'shape',
-    'samples': {
-        'Vg'     : ['0.999935529935028*(nCleanGenJet==0) + 0.997948255568351*(nCleanGenJet==1) + 1.00561645493085*(nCleanGenJet==2) + 1.0212896960035*(nCleanGenJet>=3)', '1.00757702771109*(nCleanGenJet==0) + 1.00256681166083*(nCleanGenJet==1) + 0.93676371569867*(nCleanGenJet==2) + 0.956448336052435*(nCleanGenJet>=3)'],
-        'VgS'    : ['0.9976593177227735*(nCleanGenJet==0) + 1.0016125187585532*(nCleanGenJet==1) + 1.0049344618055556*(nCleanGenJet==2) + 1.0195631514301164*(nCleanGenJet>=3)', '1.0026951855766457*(nCleanGenJet==0) + 1.0008132148661049*(nCleanGenJet==1) + 1.003949291087963*(nCleanGenJet==2) + 0.9708160910230832*(nCleanGenJet>=3)'],
-    },
+    'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc if skey not in ['top','DY']), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
+#    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V']),
+#'AsLnN': '1',
 }
+
+#nuisances['PS_ISR_latinos']  = {
+#    'name': 'PS_ISR',
+#    'kind': 'weight',
+#    'type': 'shape',
+#    'samples': {
+#        'Vg'     : ['1.00227428567253*(nCleanGenJet==0) + 1.00572014989997*(nCleanGenJet==1) + 0.970824885256465*(nCleanGenJet==2) + 0.927346068071086*(nCleanGenJet>=3)', '0.996488506572636*(nCleanGenJet==0) + 0.993582795375765*(nCleanGenJet==1) + 1.03643678934568*(nCleanGenJet==2) + 1.09735277266955*(nCleanGenJet>=3)'],
+#        'VgS'    : ['1.0000536116408023*(nCleanGenJet==0) + 1.0100100693580492*(nCleanGenJet==1) + 0.959068359375*(nCleanGenJet==2) + 0.9117049260469496*(nCleanGenJet>=3)', '0.9999367833485968*(nCleanGenJet==0) + 0.9873682892005163*(nCleanGenJet==1) + 1.0492717737268518*(nCleanGenJet==2) + 1.1176958835210322*(nCleanGenJet>=3)'],
+#    },
+#}
+#
+#nuisances['PS_FSR_latinos']  = {
+#    'name': 'PS_FSR',
+#    'kind': 'weight',
+#    'type': 'shape',
+#    'samples': {
+#        'Vg'     : ['0.999935529935028*(nCleanGenJet==0) + 0.997948255568351*(nCleanGenJet==1) + 1.00561645493085*(nCleanGenJet==2) + 1.0212896960035*(nCleanGenJet>=3)', '1.00757702771109*(nCleanGenJet==0) + 1.00256681166083*(nCleanGenJet==1) + 0.93676371569867*(nCleanGenJet==2) + 0.956448336052435*(nCleanGenJet>=3)'],
+#        'VgS'    : ['0.9976593177227735*(nCleanGenJet==0) + 1.0016125187585532*(nCleanGenJet==1) + 1.0049344618055556*(nCleanGenJet==2) + 1.0195631514301164*(nCleanGenJet>=3)', '1.0026951855766457*(nCleanGenJet==0) + 1.0008132148661049*(nCleanGenJet==1) + 1.003949291087963*(nCleanGenJet==2) + 0.9708160910230832*(nCleanGenJet>=3)'],
+#    },
+#}
 ###this was just a test
 nuisances['PS_ISR_latinos_dy_top']  = {
     'name': 'PS_ISR_latinos',
@@ -541,21 +562,21 @@ nuisances['PS_FSR_latinos_dy_top']  = {
 }
 
 
-nuisances['PS_ISR']  = {
-    'name': 'PS_ISR',
-    'kind': 'weight',
-    'type': 'shape',
-    'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc if skey not in ['Vg','VgS','DY','top']), #PSWeights are buggy for some samples (like WW, ggWW, so we remove PS from other as basically negligible for such small processes)
-    #'AsLnN': '1',
-}
-
-nuisances['PS_FSR']  = {
-    'name': 'PS_FSR',
-    'kind': 'weight',
-    'type': 'shape',
-    'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc if skey not in ['Vg','VgS','DY','top']), #PSWeights are buggy for some samples (like WW, ggWW, so we remove PS from other as basically negligible for such small processes)
-    #'AsLnN': '1',
-}
+#nuisances['PS_ISR']  = {
+#    'name': 'PS_ISR',
+#    'kind': 'weight',
+#    'type': 'shape',
+#    'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc if skey not in ['Vg','VgS','DY','top']), #PSWeights are buggy for some samples (like WW, ggWW, so we remove PS from other as basically negligible for such small processes)
+#    #'AsLnN': '1',
+#}
+#
+#nuisances['PS_FSR']  = {
+#    'name': 'PS_FSR',
+#    'kind': 'weight',
+#    'type': 'shape',
+#    'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc if skey not in ['Vg','VgS','DY','top']), #PSWeights are buggy for some samples (like WW, ggWW, so we remove PS from other as basically negligible for such small processes)
+#    #'AsLnN': '1',
+#}
 
 
 ###########################################
@@ -588,18 +609,7 @@ for sample in ["DY"] :
             'type'  : 'shape',
             'samples'  :  { sample: variations },
             #'group' : 'theory',
-            #'cuts'  : [
-            #       'Boosted_SR_bVeto',
-            #       'Boosted_DYcr_bVeto',
-            #       'Boosted_SR_bTag',
-            #       'Boosted_DYcr_bTag',
-            #       'Resolved_SR_bVeto',
-            #       'Resolved_DYcr_bVeto',
-            #       'Resolved_SR_bTag',
-            #       'Resolved_DYcr_bTag',
-            #       ],
-#            'symmetrize': True,
-#	         'AsLnN': '1'    ##
+	         'AsLnN': '1'    ##
     }
 
 for sample in mc_eos :

@@ -162,8 +162,8 @@ variables['nbjets']  = {
                         'fold' : 3   # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
                         }   
 
-
 """
+
     #**************** dy fitting variabl ***************#
 variables['DYfit_Z_bin_Boosted'] ={  'name' : 'fit_Z_bin_Boosted',
                             'range' : (5,1,6), #(n.bins, 1, n.bins+1)
@@ -179,7 +179,7 @@ variables['DNNoutput_pruned_bVeto'] = {
     'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],),
     'xaxis': 'DNN output',
     'fold': 3 ,                            
- #   'divideByBinWidth': 1,
+    'divideByBinWidth': 1,
 }
 
 variables['DNNoutput_pruned_bReq'] = {
@@ -187,7 +187,7 @@ variables['DNNoutput_pruned_bReq'] = {
     'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],),
     'xaxis': 'DNN output',
     'fold': 3 ,
- #   'divideByBinWidth': 1,
+    'divideByBinWidth': 1,
 }
 
     #******************** DNN for 2017/2018
@@ -197,7 +197,7 @@ variables['DNNoutput_pruned_bVeto_morebins'] = {
     'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.82,0.84,0.86,0.88,0.90,0.92,0.94,0.96,0.98,1.],),
     'xaxis': 'DNN output',
     'fold': 3 ,
- #   'divideByBinWidth': 1,
+    'divideByBinWidth': 1,
 }
 
 variables['DNNoutput_pruned_bReq_morebins'] = {
@@ -205,7 +205,7 @@ variables['DNNoutput_pruned_bReq_morebins'] = {
     'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.82,0.84,0.86,0.88,0.90,0.92,0.94,0.96,0.98,1.],),
     'xaxis': 'DNN output',
     'fold': 3 ,
- #   'divideByBinWidth': 1,
+    'divideByBinWidth': 1,
 }
 
 
@@ -234,6 +234,7 @@ variables['events']  = {   'name': '1',
                         }
 
 
+
 ## mZV invariant mass (Giacomo's binning)
 variables['Mzv'] = {   'name': 'mZV',
                         'range' : ([ 200., 400., 600., 800., 1000., 1200., 1500., 2000., 3000.],), #variable range  
@@ -246,3 +247,15 @@ variables['ZV_mass'] = { 'name': 'mZV',            #   variable name
                         'xaxis' : 'm_{ZV} [GeV]',  #   x axis name
                         'fold' :3,        
 }
+
+## mZV vs. DNN (with Giacomo's binning)
+variables['Mzv_vs_DNNoutput_pruned_bReq'] = {   'name': 'mZV:DNNoutput_pruned_bReq',
+                        'range' : ([ 200., 400., 600., 800., 1000., 1200., 1500., 2000., 3000.],[0,0.6,1.]), #variable range  
+                        'xaxis' : 'M_{ZV}:DNN [GeV]',
+                        'fold' : 3,
+                        }
+variables['Mzv_vs_DNNoutput_pruned_bVeto'] = {   'name': 'mZV:DNNoutput_pruned_bVeto',
+                        'range' : ([ 200., 400., 600., 800., 1000., 1200., 1500., 2000., 3000.],[0,0.6,1.]), #variable range  
+                        'xaxis' : 'M_{ZV}:DNN [GeV]',
+                        'fold' : 3,
+                        }

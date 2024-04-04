@@ -102,3 +102,67 @@ You need to prepare one set of datacards per EFT operator, modifying samples, st
 ```sh
 sh eft.sh /eos/user/m/mpresill/CMS/VBS/VBS_ZV/DatacardsEFT/YearsCombination_8June2022/combined_boosted_bVeto.txt cT1 boosted_bVeto 
 ```
+
+
+__________________________________________________
+# list of commands to make it work (EWK+QCD measurement):
+1. hadd newly produced signals (`sh hadd``)
+2. hadd the newly produced signals with the backgrounds produced for the EWK measurements (there is no problem if EWk and QCD signals are included in the hadd-ed root file, since they  will not overalp and we'll decide what to include in the datacardsa at a later stage):
+```sh
+###### boosted category (here I made only the signals)
+hadd /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd_boosted_wBkg.root \
+    /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/corrections/plots_VBS_ZV_6Dec2023_2018_boosted.root \
+    /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/plots_VBS_ZV_16Mar2024_2018_ewk_qcd_boosted.root 
+###### resolved b-veto category (here I made both signals and backgrounds, so no need to hadd further)
+    /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd-v2/plots_VBS_ZV_16Mar2024_2018_ewk_qcd-v2_resolved.root
+```
+we took the bkgs with correction on DY already applied.
+A new release for resolved category is now available `_16Mar2024_2018_ewk_qcd-v2` to include directly the patches for b-tagged DNN with 2017 model.
+
+2b. correct QCD scale for resolved cat (since I reproduced the bkgs):
+```sh
+sh QCDnorm_datacards.sh _16Mar2024_2018_ewk_qcd-v2 resolved 2018-v1
+``` 
+
+3. a. (ONLY ONCE) 
+    extract PS weights for all processes (VBS_ZV_EWK_QCD, tZq, tZq_QCD, VBS_WV_QCD, other, VBF-V):
+```sh
+cd 2018-v1/boosted_ewk_qcd
+python ../../scripts/Utilities_nuisances/extract_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/plots_VBS_ZV_6Dec2023_2018_boosted.root -o /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/PS-plots_VBS_ZV_16Mar2024_2018_ewk_qcd_boosted.root -sf samples_PS_extraction.txt -cf cuts_PS_extraction.txt -v ALL -n PS_ISR PS_FSR
+
+cd ../resolved_ewk_qcd
+python ../../scripts/Utilities_nuisances/extract_nuisances_effect.py -i  /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd-v2/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd-v2_resolved.root  -o /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/PS-plots_VBS_ZV_16Mar2024_2018_ewk_qcd_resolved.root -sf samples_PS_extraction.txt -cf cuts_PS_extraction.txt -v ALL -n PS_ISR PS_FSR
+```
+    extract QCDscale for `VBS_ZV_EWK_QCD`(sig) `VBS_WV_QCD`(bkg) `tZq_QCD` (bkg)
+```sh
+cd 2018-v1/boosted_ewk_qcd
+python ../../scripts/Utilities_nuisances/extract_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/plots_VBS_ZV_6Dec2023_2018_boosted.root -o /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/QCDscale_ZV_EWK_QCD-plots_VBS_ZV_16Mar2024_2018_ewk_qcd_boosted.root -s VBS_ZV_EWK_QCD -cf cuts_PS_extraction.txt -v ALL -n QCDscale_VBS_ZV_EWK_QCD
+
+python ../../scripts/Utilities_nuisances/extract_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/plots_VBS_ZV_6Dec2023_2018_boosted.root -o /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/QCDscale_WV_QCD-plots_VBS_ZV_16Mar2024_2018_ewk_qcd_boosted.root -s VBS_WV_QCD -cf cuts_PS_extraction.txt -v ALL -n QCDscale_VBS_WV_QCD
+
+python ../../scripts/Utilities_nuisances/extract_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/plots_VBS_ZV_6Dec2023_2018_boosted.root -o /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/QCDscale_tZq_QCD-plots_VBS_ZV_16Mar2024_2018_ewk_qcd_boosted.root -s tZq_QCD -cf cuts_PS_extraction.txt -v ALL -n QCDscale_tZq_QCD
+
+cd ../resolved_ewk_qcd
+python ../../scripts/Utilities_nuisances/extract_nuisances_effect.py -i  /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd-v2/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd-v2_resolved.root  -o /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/QCDscale_ZV_EWK_QCD-plots_VBS_ZV_16Mar2024_2018_ewk_qcd_resolved.root -s VBS_ZV_EWK_QCD -cf cuts_PS_extraction.txt -v ALL -n QCDscale_VBS_ZV_EWK_QCD
+
+python ../../scripts/Utilities_nuisances/extract_nuisances_effect.py -i  /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd-v2/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd-v2_resolved.root  -o /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/QCDscale_WV_QCD-plots_VBS_ZV_16Mar2024_2018_ewk_qcd_resolved.root -s VBS_WV_QCD -cf cuts_PS_extraction.txt -v ALL -n QCDscale_VBS_WV_QCD
+
+python ../../scripts/Utilities_nuisances/extract_nuisances_effect.py -i  /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd-v2/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd-v2_resolved.root  -o /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/QCDscale_tZq_QCD-plots_VBS_ZV_16Mar2024_2018_ewk_qcd_resolved.root -s tZq_QCD -cf cuts_PS_extraction.txt -v ALL -n QCDscale_tZq_QCD
+```
+
+4. make datacards (N.B.: use `nuisances_datacards_ewk_qcd.py` as input since I realized that when there are two nuisances entries with same name, the combineCards.py keeps only one of the two, i.e. in the case of `nuisances.py` would suppress all nuisances for backgrougs in JES, etc etc):
+```sh
+###with QCD corrections and DY ln (for this need to update nuisances.py before)
+cd ../resolved_ewk_qcd
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd-v2/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd-v2_resolved.root  --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_16Mar2024_2018_ewk_qcd_QCDscaleDY_corr_ln/ --skipMissingNuisance --nuisancesFile=../nuisances_datacards_ewk_qcd.py 
+cd ../boosted_ewk_qcd
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd_boosted_wBkg.root  --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_16Mar2024_2018_ewk_qcd_QCDscaleDY_corr_ln/ --skipMissingNuisance --nuisancesFile=../nuisances_datacards_ewk_qcd.py
+```
+
+To avoid unpleasant statistical fluctuations for nuisances of minor backgrouds in top cr (since those crs are very very pure), I am removing all nuisances from minor backgrouds in datacards for top cr. To try this out, please run again `mkDatacards.py` as follows (for the case of QCD corr+ln DY for instance)
+```sh
+cd ../resolved_ewk_qcd
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd-v2/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd-v2_resolved.root  --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_16Mar2024_2018_ewk_qcd_QCDscaleDY_corr_ln_topcr/ --skipMissingNuisance --nuisancesFile=../nuisances_datacards_topcr.py --cutsFile=cuts_resolved_topcr.py 
+cd ../boosted_ewk_qcd
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd_boosted_wBkg.root  --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_16Mar2024_2018_ewk_qcd_QCDscaleDY_corr_ln_topcr/ --skipMissingNuisance --nuisancesFile=../nuisances_datacards_topcr.py --cutsFile=cuts_boosted_topcr.py
+```

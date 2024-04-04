@@ -204,11 +204,11 @@ structure['sm'] = {
 #                  'isData'   : 0    
 #                  }
 ##
-structure['quad_cT2'] = {
+structure['quad_cW'] = {
                   'isSignal' : 1,
                   'isData'   : 0    
                   }
-structure['sm_lin_quad_cT2'] = {
+structure['sm_lin_quad_cW'] = {
                   'isSignal' : 1,
                   'isData'   : 0    
                   }

@@ -1,11 +1,6 @@
 
 import os 
 import inspect
-# Import the operators dictionary from EFT_dict.py
-# Execute the contents of EFT_dim8_dictionary.py, please update the path according to your exigency 
-with open('/afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/EFT/EFT_dim8_dictionary.py') as f:
-    code = compile(f.read(), 'EFT_dim8_dictionary.py', 'exec')
-    exec(code)
 
 configurations = os.path.realpath(inspect.getfile(inspect.currentframe())) # this file
 configurations = os.path.dirname(configurations) # ggH2018
@@ -74,7 +69,7 @@ fakeDirectory = os.path.join(treeBaseDir, fakeReco, fakeSteps)
 mcDirectorySMPeos = makeMCDirectorySMPeos() #this was added just for signals 
 
 DirectorySMPeos = '/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/Autumn18_102X_nAODv7_Full2018v7/MCl1loose2018v7__MCCorr2018v7__l2loose__l2tightOR2018v7'
-
+DirectoryHWW = '/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv7_Full2018v7/MCl1loose2018v7__MCCorr2018v7__l2loose__l2tightOR2018v7'
 ################################################
 ############ DATA DECLARATION ##################
 ################################################
@@ -106,66 +101,52 @@ def CombineBaseW(samples, proc, samplelist):
     for s in samplelist:
         addSampleWeight(samples, proc, s, newbaseW+'/baseW')
 
-#def CombineBaseWSMPeos(samples, proc, samplelist):
-#    newbaseW = getBaseWnAOD(makeMCDirectorySMPeos, mcProduction, samplelist)
-#    for s in samplelist:
-#        addSampleWeight(samples, proc, s, newbaseW+'/baseW')
 
 
- #************          EFT samples       ************#
- #++++++ these are the centrally produced samples ++++#
-for operator, expressions in operators.items():
-    # Adding the quadratic sample for each operator:
-    samples['quad_'+operator] = {
-        'name':  nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC_eboliv2_official') 
-                 + nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC_eboliv2_official') 
-                 + nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC_eboliv2_official'),
-        'weight':  mcCommonWeight,
-        'FilesPerJob': 10
-    }
-    
-    quadReweight = expressions['quadReweight']
-    
-    addSampleWeight(samples, 'quad_'+operator, 'ZTo2L_ZTo2J_aQGC_eboliv2_official', quadReweight)
-    addSampleWeight(samples, 'quad_'+operator, 'WmTo2J_ZTo2L_aQGC_eboliv2_official', '(Sum$(abs(GenPart_pdgId)==6)==0) *'+ quadReweight)
-    addSampleWeight(samples, 'quad_'+operator, 'WpTo2J_ZTo2L_aQGC_eboliv2_official', '(Sum$(abs(GenPart_pdgId)==6)==0) *'+ quadReweight)
+###########################################################
+#############   SIGNALS FOR COMBINATION  ##################
+###########################################################
+#samples['ewk_ZZ'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_dipoleRecoil'),
+#    'weight':  mcCommonWeight,
+#    'FilesPerJob': 7
+#}
+#######
+#samples['ewk_WmZ'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil'),
+#    'weight':  mcCommonWeight,
+#    'FilesPerJob': 7
+#}
+#addSampleWeight(samples,'ewk_WmZ','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
+######
+#samples['ewk_WpZ'] = {
+#    'name':   nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil'),
+#    'weight':  mcCommonWeight,
+#    'FilesPerJob': 7
+#}
+#addSampleWeight(samples,'ewk_WpZ','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
 
-    # Adding sm_lin_quad sample for each operator:
-    smLinQuadReweight = expressions['sm'] + expressions['LinReweight'] + expressions['quadReweight']
-    samples['sm_lin_quad_'+operator] = {
-        'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC_eboliv2_official') 
-                 + nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC_eboliv2_official') 
-                 + nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC_eboliv2_official'),
-        'weight':  mcCommonWeight,
-        'FilesPerJob': 10
-    }
-    addSampleWeight(samples,'sm_lin_quad_'+operator,'ZTo2L_ZTo2J_aQGC_eboliv2_official', smLinQuadReweight)
-    addSampleWeight(samples,'sm_lin_quad_'+operator,'WmTo2J_ZTo2L_aQGC_eboliv2_official','(Sum$(abs(GenPart_pdgId)==6)==0) *'+ smLinQuadReweight)
-    addSampleWeight(samples,'sm_lin_quad_'+operator,'WpTo2J_ZTo2L_aQGC_eboliv2_official','(Sum$(abs(GenPart_pdgId)==6)==0) *'+ smLinQuadReweight)
+###########################################
+#############   SIGNALS  ##################
+###########################################
 
-
-"""
- #*******************#      sm from reweighting
-samples['sm'] = {
-    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_aQGC_eboliv2_official') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_aQGC_eboliv2_official') 
-             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_aQGC_eboliv2_official'),
+ #************ dipole recoil ************#
+samples['sm_dipole'] = {
+    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_dipoleRecoil') 
+             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil') 
+             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil'),
     'weight':  mcCommonWeight,
     'FilesPerJob': 10
 }
+addSampleWeight(samples,'sm_dipole','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.03004/0.02982)')
+addSampleWeight(samples,'sm_dipole','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05526/0.05401)')
 
-addSampleWeight(samples,'sm','ZTo2L_ZTo2J_aQGC_eboliv2_official',                                       sm_cT0)
-addSampleWeight(samples,'sm','WmTo2J_ZTo2L_aQGC_eboliv2_official','(Sum$(abs(GenPart_pdgId)==6)==0) *'+ sm_cT0)
-addSampleWeight(samples,'sm','WpTo2J_ZTo2L_aQGC_eboliv2_official','(Sum$(abs(GenPart_pdgId)==6)==0) *'+ sm_cT0)
 
 ###########################################
 #############  BACKGROUNDS  ###############
 ###########################################
 
-############## tZq  
-#changed tZq to specific bkg
-
-#tZq from sm ewk sample
+############## tZq => tZq from sm ewk sample
 samples['tZq'] = {
     'name':   nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil') 
              +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil'),
@@ -221,23 +202,23 @@ samples['DY'] = {
                                         Sum$(LeptonGen_isPrompt==1 && LeptonGen_pt>15)>=2) )",
     'FilesPerJob': 1,
     'subsamples' :{
-        "Boosted_Z_1":'fit_Z_bin_Boosted==1',
-        "Boosted_Z_2":'fit_Z_bin_Boosted==2',
-        "Boosted_Z_3":'fit_Z_bin_Boosted==3',
-        "Boosted_Z_4":'fit_Z_bin_Boosted==4',
-        "Boosted_Z_5":'fit_Z_bin_Boosted==5',
-        #"Resolved_2d_01" : "fit_2D_bin_Resolved==1",
-        #"Resolved_2d_02" : "fit_2D_bin_Resolved==2",
-        #"Resolved_2d_03" : "fit_2D_bin_Resolved==3",
-        #"Resolved_2d_04" : "fit_2D_bin_Resolved==4",
-        #"Resolved_2d_05" : "fit_2D_bin_Resolved==5",
-        #"Resolved_2d_06" : "fit_2D_bin_Resolved==6",
-        #"Resolved_2d_07" : "fit_2D_bin_Resolved==7",
-        #"Resolved_2d_08" : "fit_2D_bin_Resolved==8",
-        #"Resolved_2d_09" : "fit_2D_bin_Resolved==9",
-        #"Resolved_2d_10" : "fit_2D_bin_Resolved==10",
-        #"Resolved_2d_11" : "fit_2D_bin_Resolved==11",
-        #"Resolved_2d_12" : "fit_2D_bin_Resolved==12",
+        #"Boosted_Z_1":'fit_Z_bin_Boosted==1',
+        #"Boosted_Z_2":'fit_Z_bin_Boosted==2',
+        #"Boosted_Z_3":'fit_Z_bin_Boosted==3',
+        #"Boosted_Z_4":'fit_Z_bin_Boosted==4',
+        #"Boosted_Z_5":'fit_Z_bin_Boosted==5',
+        "Resolved_2d_01" : "fit_2D_bin_Resolved==1",
+        "Resolved_2d_02" : "fit_2D_bin_Resolved==2",
+        "Resolved_2d_03" : "fit_2D_bin_Resolved==3",
+        "Resolved_2d_04" : "fit_2D_bin_Resolved==4",
+        "Resolved_2d_05" : "fit_2D_bin_Resolved==5",
+        "Resolved_2d_06" : "fit_2D_bin_Resolved==6",
+        "Resolved_2d_07" : "fit_2D_bin_Resolved==7",
+        "Resolved_2d_08" : "fit_2D_bin_Resolved==8",
+        "Resolved_2d_09" : "fit_2D_bin_Resolved==9",
+        "Resolved_2d_10" : "fit_2D_bin_Resolved==10",
+        "Resolved_2d_11" : "fit_2D_bin_Resolved==11",
+        "Resolved_2d_12" : "fit_2D_bin_Resolved==12",
     },
     'FilesPerJob': 3,
     'EventsPerJob' : 50000,
@@ -274,7 +255,7 @@ samples['top'] = {
     'name': files,
     'weight': mcCommonWeight,
     'FilesPerJob': 6,
-    'EventsPerJob' : 50000,
+    'EventsPerJob' : 70000,
     'suppressNegative' :['all'],
     'suppressNegativeNuisances' :['all'],
 }
@@ -371,7 +352,92 @@ addSampleWeight(samples,'other','GluGluToWWToTNTN',  "1.53/1.4")
 addSampleWeight(samples,'other','ZZTo2L2Nu_ext2',  "1.11")
 addSampleWeight(samples,'other','ZZTo4L_ext2',  "1.11")
 
+######WJets#####
+#
+#files = nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT70_100') + \
+#	nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT100_200') + \
+#    nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT200_400') + \
+#    nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT400_600') + \
+#    nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT600_800') + \
+#    nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT800_1200') + \
+#    nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT1200_2500') + \
+#    nanoGetSampleFiles(mcDirectory, 'WJetsToLNu_HT2500_inf') 
+#
+#samples['WJets'] = {
+#    'name': files,
+#    'weight': mcCommonWeight, 
+#    'FilesPerJob': 6,
+#    'EventsPerJob' : 70000,
+#}
+#
+#addSampleWeight(samples,'WJets', 'WJetsToLNu-HT100_200', '0.993') 
+#addSampleWeight(samples,'WJets', 'WJetsToLNu-HT200_400', '1.002') 
+#addSampleWeight(samples,'WJets', 'WJetsToLNu-HT400_600', '1.009') 
+#addSampleWeight(samples,'WJets', 'WJetsToLNu-HT600_800', '1.120') 
+#addSampleWeight(samples,'WJets', 'WJetsToLNu-HT800_1200', '1.202') 
+#addSampleWeight(samples,'WJets', 'WJetsToLNu-HT1200_2500', '1.332') 
+#addSampleWeight(samples,'WJets', 'WJetsToLNu-HT2500_inf', '4.200') 
+#
+####### WW ########
+#files= nanoGetSampleFiles(mcDirectory, 'WpWmJJ_QCD_noTop') + \
+#        nanoGetSampleFiles(mcDirectory, 'WpWmJJ_EWK') + \
+#        nanoGetSampleFiles(mcDirectory, 'WpWpJJ_QCD') + \
+#        nanoGetSampleFiles(mcDirectory, 'WpWpJJ_EWK')
+#
+#
+#samples['WW'] = {
+#    'name': files,
+##nanoGetSampleFiles(mcDirectory, 'WpWmJJ_QCD_noTop'),
+#    'weight': mcCommonWeight, #+ '*nllW',
+#    'FilesPerJob': 6
+#}
+#
+## k-factor 1.4 already taken into account in XSWeight
+#files = nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENEN') + \
+#    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENMN') + \
+#    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENTN') + \
+#    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToMNEN') + \
+#    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToMNMN') + \
+#    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToMNTN') + \
+#    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToTNEN') + \
+#    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToTNMN') + \
+#    nanoGetSampleFiles(mcDirectory, 'GluGluToWWToTNTN')
+#
+#
+#samples['ggWW'] = {
+#    'name': files,
+#    'weight': mcCommonWeight + '*1.53/1.4', # updating k-factor
+#    'FilesPerJob': 4
+#}
 
+############ ZZ to leptons ############
+
+#files = nanoGetSampleFiles(mcDirectory, 'ZZTo2L2Nu_ext2') + \
+#        nanoGetSampleFiles(mcDirectory, 'ZZTo4L_ext2')
+##ZZ here is diboson prod?
+#samples['ZZlep'] = {
+#    'name': files,
+#    'weight': mcCommonWeight + '*1.11',
+#    'FilesPerJob': 2,
+#    'suppressNegative' :['all'],
+#    'suppressNegativeNuisances' :['all'],
+#}
+#
+########### VVV #########
+#
+#files = nanoGetSampleFiles(mcDirectory, 'ZZZ') + \
+#    nanoGetSampleFiles(mcDirectory, 'WZZ') + \
+#    nanoGetSampleFiles(mcDirectory, 'WWZ') + \
+#    nanoGetSampleFiles(mcDirectory, 'WWW') 
+# #nanoGetSampleFiles(mcDirectory, 'WWG') 
+##should this be included? or is it already taken into account in the WW sample?
+#
+#samples['VVV'] = {
+#    'name': files,
+#    'weight': mcCommonWeight,
+#    'FilesPerJob': 4
+#}
+#
 
 ###########################################
 ################## FAKE ###################
@@ -413,4 +479,4 @@ for _, sd in DataRun:
 
 
 
-"""
+

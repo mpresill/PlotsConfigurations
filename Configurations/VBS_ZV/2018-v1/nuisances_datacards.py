@@ -609,7 +609,7 @@ for sample in ["DY"] :
             'type'  : 'shape',
             'samples'  :  { sample: variations },
             #'group' : 'theory',
-	        # 'AsLnN': '1'    ##
+	         'AsLnN': '1'    ##
     }
 
 for sample in mc_eos :
