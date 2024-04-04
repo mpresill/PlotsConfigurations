@@ -28,10 +28,10 @@ from LatinoAnalysis.Tools.HiggsXSection import HiggsXSection
 HiggsXS = HiggsXSection()
 
 
-EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
+EFT_samples = ["sm","quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
 mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] #"tZq_ll","VZ",
 mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
-mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal #+ EFT_samples
+mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal + EFT_samples
 
 mc        = mc_common + mc_eos
 
@@ -201,8 +201,8 @@ nuisances['electronpt'] = {
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
     'samples': dict((skey, ['1', '1']) for skey in mc_common),
-    'folderUp': makeMCDirectory('ElepTup_suffix'),
-    'folderDown': makeMCDirectory('ElepTdo_suffix'),
+    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory('ElepTup_suffix'),
+    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory('ElepTdo_suffix'),
    # #'group':'lepton'
     #'AsLnN': '1'
 }
@@ -214,8 +214,8 @@ nuisances['electronpt_SMPeos'] = {
     'mapUp': 'ElepTup',
     'mapDown': 'ElepTdo',
     'samples': dict((skey, ['1','1']) for skey in mc_eos ),
-    'folderUp': makeMCDirectorySMPeos('ElepTup_suffix'),
-    'folderDown': makeMCDirectorySMPeos('ElepTdo_suffix'),
+    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectorySMPeos('ElepTup_suffix'),
+    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectorySMPeos('ElepTdo_suffix'),
    # #'group':'lepton'
     #'AsLnN': '1'
 }
@@ -237,8 +237,8 @@ nuisances['muonpt'] = {
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
     'samples': dict((skey, ['1', '1']) for skey in mc_common),
-    'folderUp': makeMCDirectory('MupTup_suffix'),
-    'folderDown': makeMCDirectory('MupTdo_suffix'),
+    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory('MupTup_suffix'),
+    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory('MupTdo_suffix'),
    # #'group':'lepton'
     #'AsLnN': '1'
 }
@@ -250,8 +250,8 @@ nuisances['muonpt_SMPeos'] = {
     'mapUp': 'MupTup',
     'mapDown': 'MupTdo',
     'samples': dict((skey, ['1','1']) for skey in mc_eos),
-    'folderUp': makeMCDirectorySMPeos('MupTup_suffix'),
-    'folderDown': makeMCDirectorySMPeos('MupTdo_suffix'),
+    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectorySMPeos('MupTup_suffix'),
+    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectorySMPeos('MupTdo_suffix'),
    # #'group':'lepton'
     #'AsLnN': '1'
 }
@@ -301,23 +301,23 @@ for js in jes_systs:
 #this is for signals
 for js_VBS_ZV in jes_systs:
   if 'Absolute' in js_VBS_ZV: 
-    folderup_signal = DirectorySMPeos+'__JESAbsoluteup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESAbsolutedo_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESAbsoluteup_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESAbsolutedo_suffix'
   elif 'BBEC1' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESBBEC1up_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESBBEC1do_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESBBEC1up_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESBBEC1do_suffix'
   elif 'EC2' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESEC2up_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESEC2do_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESEC2up_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESEC2do_suffix'
   elif 'HF' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESHFup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESHFdo_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESHFup_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESHFdo_suffix'
   elif 'Relative' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESRelativeup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESRelativedo_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESRelativeup_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESRelativedo_suffix'
   elif 'FlavorQCD' in js_VBS_ZV:
-    folderup_signal = DirectorySMPeos+'__JESFlavorQCDup_suffix'
-    folderdo_signal = DirectorySMPeos+'__JESFlavorQCDdo_suffix'
+    folderup_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESFlavorQCDup_suffix'
+    folderdo_signal = 'root://eoscms.cern.ch/'+DirectorySMPeos+'__JESFlavorQCDdo_suffix'
 
   nuisances[js_VBS_ZV+'_SMPeos'] = {
       'name': 'CMS_scale_'+js_VBS_ZV,
@@ -341,8 +341,8 @@ nuisances['JER']  = {
         'mapUp': 'JERup',
         'mapDown': 'JERdo',
         'samples': dict((skey, ['1.','1.']) for skey in mc_common),
-        'folderUp' : makeMCDirectory('JERup_suffix'),
-        'folderDown' : makeMCDirectory('JERdo_suffix'),
+        'folderUp' : 'root://eoscms.cern.ch/'+makeMCDirectory('JERup_suffix'),
+        'folderDown' : 'root://eoscms.cern.ch/'+makeMCDirectory('JERdo_suffix'),
         # #'group': 'AK4jet',
         # 'AsLnN'      : '1',
 }
@@ -354,8 +354,8 @@ nuisances['JER_SMPeos'] = {
          'mapUp': 'JERup',
          'mapDown': 'JERdo',
          'samples': dict((skey, ['1','1']) for skey in mc_eos),    
-         'folderUp': makeMCDirectorySMPeos('JERup_suffix'),
-         'folderDown': makeMCDirectorySMPeos('JERdo_suffix'),
+         'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectorySMPeos('JERup_suffix'),
+         'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectorySMPeos('JERdo_suffix'),
         # #'group': 'AK4jet',
         # 'AsLnN': '1'
 }
@@ -395,8 +395,8 @@ nuisances['cfj_pt_JESTotal'] = {
     'mapUp' : 'pt_jesTotalUp',
     'mapDown': 'pt_jesTotalDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -416,8 +416,8 @@ nuisances['cfj_pt_JER'] = {
     'mapUp' : 'pt_jerUp',
     'mapDown': 'pt_jerDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -436,8 +436,8 @@ nuisances['mV_jms'] = {
     'mapUp' : 'jmsUp',
     'mapDown': 'jmsDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -456,8 +456,8 @@ nuisances['mV_jmr'] = {
     'mapUp': 'jmrUp',
     'mapDown': 'jmrDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -477,8 +477,8 @@ nuisances['mV_jesTotal'] = {
     'mapUp' : 'jesTotalUp',
     'mapDown': 'jesTotalDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -498,8 +498,8 @@ nuisances['mV_jer'] = {
     'mapUp' : 'jerUp',
     'mapDown': 'jerDown',
     'samples': dict((skey, ['1', '1']) for skey in mc),
-#    'folderUp': makeMCDirectory(''),
-#    'folderDown': makeMCDirectory(''),
+#    'folderUp': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
+#    'folderDown': 'root://eoscms.cern.ch/'+makeMCDirectory(''),
     'cuts'  : [
                 'Boosted_topcr',
                 'Boosted_SR_bVeto',
@@ -528,7 +528,7 @@ nuisances['PS_ISR_latinos']  = {
     'samples': {
         'Vg'     : ['1.00227428567253*(nCleanGenJet==0) + 1.00572014989997*(nCleanGenJet==1) + 0.970824885256465*(nCleanGenJet==2) + 0.927346068071086*(nCleanGenJet>=3)', '0.996488506572636*(nCleanGenJet==0) + 0.993582795375765*(nCleanGenJet==1) + 1.03643678934568*(nCleanGenJet==2) + 1.09735277266955*(nCleanGenJet>=3)'],
         'VgS'    : ['1.0000536116408023*(nCleanGenJet==0) + 1.0100100693580492*(nCleanGenJet==1) + 0.959068359375*(nCleanGenJet==2) + 0.9117049260469496*(nCleanGenJet>=3)', '0.9999367833485968*(nCleanGenJet==0) + 0.9873682892005163*(nCleanGenJet==1) + 1.0492717737268518*(nCleanGenJet==2) + 1.1176958835210322*(nCleanGenJet>=3)'],
-        'top'    : ['1.0020618369910668*(nCleanGenJet==0) + 1.0063081530771556*(nCleanGenJet==1) + 1.0094298425968304*(nCleanGenJet==2) + 0.9854207999040726*(nCleanGenJet>=3)', '0.9974340279269026*(nCleanGenJet==0) + 0.9920634820709106*(nCleanGenJet==1) + 0.988226385054923*(nCleanGenJet==2) + 1.017968568319235*(nCleanGenJet>=3)'],
+        #'top'    : ['1.0020618369910668*(nCleanGenJet==0) + 1.0063081530771556*(nCleanGenJet==1) + 1.0094298425968304*(nCleanGenJet==2) + 0.9854207999040726*(nCleanGenJet>=3)', '0.9974340279269026*(nCleanGenJet==0) + 0.9920634820709106*(nCleanGenJet==1) + 0.988226385054923*(nCleanGenJet==2) + 1.017968568319235*(nCleanGenJet>=3)'],
         'DY'     : ['0.9998177685645392*(nCleanGenJet==0) + 1.0080838149428026*(nCleanGenJet==1) + 1.0057948912950987*(nCleanGenJet==2) + 0.9721358221196619*(nCleanGenJet>=3)', '1.0003244155266309*(nCleanGenJet==0) + 0.9897992135367016*(nCleanGenJet==1) + 0.9928782069009531*(nCleanGenJet==2) + 1.0348902921423981*(nCleanGenJet>=3)'],
     },
     #'rename':True,
@@ -543,7 +543,7 @@ nuisances['PS_FSR_latinos']  = {
     'samples': {
         'Vg'     : ['0.999935529935028*(nCleanGenJet==0) + 0.997948255568351*(nCleanGenJet==1) + 1.00561645493085*(nCleanGenJet==2) + 1.0212896960035*(nCleanGenJet>=3)', '1.00757702771109*(nCleanGenJet==0) + 1.00256681166083*(nCleanGenJet==1) + 0.93676371569867*(nCleanGenJet==2) + 0.956448336052435*(nCleanGenJet>=3)'],
         'VgS'    : ['0.9976593177227735*(nCleanGenJet==0) + 1.0016125187585532*(nCleanGenJet==1) + 1.0049344618055556*(nCleanGenJet==2) + 1.0195631514301164*(nCleanGenJet>=3)', '1.0026951855766457*(nCleanGenJet==0) + 1.0008132148661049*(nCleanGenJet==1) + 1.003949291087963*(nCleanGenJet==2) + 0.9708160910230832*(nCleanGenJet>=3)'],
-        'top'    : ['0.9910899786333963*(nCleanGenJet==0) + 0.9990635702054794*(nCleanGenJet==1) + 1.002141744200183*(nCleanGenJet==2) + 1.0129742776372779*(nCleanGenJet>=3)', '1.0068843378231833*(nCleanGenJet==0) + 0.998988498438759*(nCleanGenJet==1) + 0.9952696584115224*(nCleanGenJet==2) + 0.9790955840673237*(nCleanGenJet>=3)'],
+        #'top'    : ['0.9910899786333963*(nCleanGenJet==0) + 0.9990635702054794*(nCleanGenJet==1) + 1.002141744200183*(nCleanGenJet==2) + 1.0129742776372779*(nCleanGenJet>=3)', '1.0068843378231833*(nCleanGenJet==0) + 0.998988498438759*(nCleanGenJet==1) + 0.9952696584115224*(nCleanGenJet==2) + 0.9790955840673237*(nCleanGenJet>=3)'],
         'DY'     : ['0.9958763409773141*(nCleanGenJet==0) + 1.0041335498093422*(nCleanGenJet==1) + 1.0163363150953029*(nCleanGenJet==2) + 1.0296733670670226*(nCleanGenJet>=3)', '1.0066775262249232*(nCleanGenJet==0) + 0.9945601465681602*(nCleanGenJet==1) + 0.9662459619335311*(nCleanGenJet==2) + 0.9479423453563661*(nCleanGenJet>=3)'],
     },
     #'rename':True,
@@ -665,7 +665,7 @@ nuisances['pdf_weight'] = { # --> Now save also the normalization one for the si
     'name'  : 'pdf_1718',
     'kind'  : 'weight_envelope',
     'type'  : 'shape',
-    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["DY","top"]}, #-> here we reomve bkgs measured on, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
+    'samples' :  { s: [' Alt$(LHEPdfWeight['+str(i)+'], 1.)' for i in range(0,103)] for s in mc if s not in ["DY","top"]+EFT_samples}, #-> here we reomve bkgs measured on, as well as BSM signals (PHDF4LHC prescription for BSM measurement)
     #'group' : 'theory',
     'AsLnN':  '1'
 }

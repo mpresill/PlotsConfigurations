@@ -525,8 +525,8 @@ nuisances['PS_ISR']  = {
     'name': 'PS_ISR',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc if skey not in ['top']), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
-    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V']),
+    'samples': dict((skey, ['PSWeight[2]', 'PSWeight[0]']) for skey in mc), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
+   # 'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V']),
 #'AsLnN': '1',
 }
 
@@ -534,8 +534,8 @@ nuisances['PS_FSR']  = {
     'name': 'PS_FSR',
     'kind': 'weight',
     'type': 'shape',
-    'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc if skey not in ['top']), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
-    'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V']),
+    'samples': dict((skey, ['PSWeight[3]', 'PSWeight[1]']) for skey in mc), #PSWeights are buggy for some samples, we add them back by hand below, for DY, they are negligible. NB: rimuovere ,'tZq','sm_dipole','VBF-V' per topcr BOGUS NORM
+    #'cuts_samples' : dict((skey, ['Boosted_SR_bVeto','Boosted_SR_bTag','Resolved_SR_bVeto','Resolved_SR_bTag','Boosted_DYcr_bVeto','Boosted_DYcr_bTag','Resolved_DYcr_bVeto','Resolved_DYcr_bTag',]) for skey in ['sm_dipole','VBS_VV_QCD','tZq','other','VBF-V']),
 #'AsLnN': '1',
 }
 
