@@ -3,8 +3,8 @@ import os
 import inspect
 # Import the operators dictionary from EFT_dict.py
 # Execute the contents of EFT_dim8_dictionary.py, please update the path according to your exigency 
-with open('/afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/EFT/EFT_dim8_dictionary.py') as f:
-    code = compile(f.read(), 'EFT_dim8_dictionary.py', 'exec')
+with open('/afs/cern.ch/work/m/mpresill/Latino/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/VBS_ZV/EFT/ReweightFactory/EFT_dim8_dictionary_v2.py') as f:
+    code = compile(f.read(), 'EFT_dim8_dictionary_v2.py', 'exec')
     exec(code)
 
 configurations = os.path.realpath(inspect.getfile(inspect.currentframe())) # this file
