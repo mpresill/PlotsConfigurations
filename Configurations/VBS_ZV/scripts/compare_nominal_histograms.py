@@ -11,19 +11,24 @@ Hin_down = dict()
 Rat_up = dict()
 Rat_down = dict()
 
-file_Hin = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016-dim8/plots_VBS_ZV_6Dec2023_2016-dim8_boosted_wBkg_allOperators_v2.root'
-file_Hin_up = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted.root'
-file_Hin_down = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2016/corrections/plots_VBS_ZV_6Dec2023_2016_boosted.root'
+file_Hin = '/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_23Apr2024_2018-dim8/plots_VBS_ZV_23Apr2024_2018-dim8_boosted.root' #IRENE
+file_Hin_up = '/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_23Apr2024_2018-dim8/plots_VBS_ZV_23Apr2024_2018-dim8_boosted.root' #IRENE
+file_Hin_down = '/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_23Apr2024_2018-dim8/plots_VBS_ZV_23Apr2024_2018-dim8_boosted.root' #IRENE
 
-outputPath='/eos/user/m/mpresill/www/VBS/EFTplots/validation/'
+outputPath='/eos/user/m/mpresill/www/VBS/EFTplots/validation/23Apr2024_release/' #IRENE
 
-samples_Hin = ['sm' ] #, 'sm_lin_quad_cT0']
-samples_Hin_up = ['sm_dipole'] #, 'sm_lin_quad_cT0']
-samples_Hin_down = ['sm_dipole' ] #, 'sm_lin_quad_cT0']
+samples_Hin = ['sm']  ## this is the name of the histogram for SM_DIPOLE IRENE
+samples_Hin_up = ['sm_cT8'] ## this is the name for the histogram for SM prediction coming fom reweighting cT8 operator weights IRENE
+samples_Hin_down = ['sm_cM3'] ## this is the name for the histogram for SM prediction coming fom reweighting cM3 operator weights IRENE
+ 
+#suffixUp = '_QCDscale_ZVUp'
+#samples_Hin_up = [s + suffixUp for s in samples_HinUp]
+#suffixDown = '_QCDscale_ZVDown'
+#samples_Hin_down = [s + suffixDown for s in samples_HinDown]
 
 colors = ['kBlue+1', 'kGreen+1', 'kRed+1']
 
-variables = [ 'ZV_mass']
+variables = [ 'ZV_mass'] ## update mame of variable IRENE
 
 def Getting_histograms(sample_Hin, sample_Hin_up, sample_Hin_down, cut, variable):
     """Routine to get the histogram to plot from the .root files"""
@@ -39,8 +44,14 @@ def Getting_histograms(sample_Hin, sample_Hin_up, sample_Hin_down, cut, variable
         print('sample:', sample_Hin)
         print(cut+'/'+variable+'/histo_'+sample_Hin)
         Hin[sample_Hin] = Fin_Hin.Get(cut+'/'+variable+'/histo_'+sample_Hin).Clone()
+        # Subtracting the histogram
+        #Hin[sample_Hin].Add(Fin_Hin.Get(cut+'/'+variable+'/histo_sm').Clone(), -1)
+        #
         Hin[sample_Hin].SetBinErrorOption(ROOT.TH1.kPoisson)
         Hin_up[sample_Hin_up] = Fin_Hin_up.Get(cut+'/'+variable+'/histo_'+sample_Hin_up).Clone()
+        # Subtracting the histogram
+        #Hin_up[sample_Hin_up].Add(Fin_Hin_up.Get(cut+'/'+variable+'/histo_p_sm').Clone(), -1)
+        #
         Hin_up[sample_Hin_up].SetBinErrorOption(ROOT.TH1.kPoisson)
         Hin_down[sample_Hin_down] = Fin_Hin_down.Get(cut+'/'+variable+'/histo_'+sample_Hin_down).Clone()
         Hin_down[sample_Hin_down].SetBinErrorOption(ROOT.TH1.kPoisson)
@@ -48,6 +59,7 @@ def Getting_histograms(sample_Hin, sample_Hin_up, sample_Hin_down, cut, variable
     except:
         print('Could not get the histogram', sample_Hin)
         raise
+
 
     print('TRY 2:', Hin[sample_Hin])
     print('TRY 3:', Hin_up[sample_Hin_up])
@@ -60,7 +72,7 @@ def Getting_histograms(sample_Hin, sample_Hin_up, sample_Hin_down, cut, variable
     canvas.cd(1).SetBottomMargin(0.02)
     canvas.cd(1).SetTopMargin(0.1)
     canvas.cd(1).SetRightMargin(0.04)
-    canvas.cd(1).SetLogy() 
+#    canvas.cd(1).SetLogy() 
 
 
     # Plot main histogram
@@ -71,11 +83,14 @@ def Getting_histograms(sample_Hin, sample_Hin_up, sample_Hin_down, cut, variable
     Hin_up[sample_Hin_up].SetLineWidth(2)
     Hin_down[sample_Hin_down].SetLineWidth(2)
     Hin[sample_Hin].Draw("Ehist")
-    Hin_up[sample_Hin_up].Draw("Ehist sames")
-#    Hin_down[sample_Hin_down].Draw("Ehist sames")
+    Hin_up[sample_Hin_up].Draw("Ehist same")
+    Hin_down[sample_Hin_down].Draw("Ehist same")
+
+    yaxis = Hin[sample_Hin].GetYaxis()
+    yaxis.SetRangeUser(-5, 10)
 
     # Create and draw legend
-    legend = ROOT.TLegend(0.55, 0.7, 0.88, .9)
+    legend = ROOT.TLegend(0.1, 0.7, 0.38, .9)
     legend.SetTextSize(0.039)
     legend.SetFillStyle(0)
     legend.SetBorderSize(0)
@@ -85,9 +100,9 @@ def Getting_histograms(sample_Hin, sample_Hin_up, sample_Hin_down, cut, variable
     integral_Hin_down = Hin_down[sample_Hin_down].Integral()
 
     # Add the integral to the labels
-    legend.AddEntry(Hin_up[sample_Hin_up], "File 1, Integral: {:.2f}".format(integral_Hin_up), "l")
-    legend.AddEntry(Hin[sample_Hin], "File 2, Integral: {:.2f}".format(integral_Hin), "l")
-#    legend.AddEntry(Hin_down[sample_Hin_down], "File 3, Integral: {:.2f}".format(integral_Hin_down), "l")
+    legend.AddEntry(Hin[sample_Hin], "dipole, Int.: {:.2f}".format(integral_Hin), "l")                      ### if you wish, update legend IRENE
+    legend.AddEntry(Hin_up[sample_Hin_up], "cT8, Int.: {:.2f}".format(integral_Hin_up), "l")                ### if you wish, update legend IRENE
+    legend.AddEntry(Hin_down[sample_Hin_down], "cM3, Int.: {:.2f}".format(integral_Hin_down), "l")          ### if you wish, update legend IRENE
 
     legend.Draw("same")
     canvas.Update()
@@ -115,7 +130,7 @@ def Getting_histograms(sample_Hin, sample_Hin_up, sample_Hin_down, cut, variable
     Rat_up[sample_Hin].GetYaxis().SetTitleOffset(0.5)
     Rat_up[sample_Hin].GetYaxis().SetRangeUser(-50, 50)
     Rat_up[sample_Hin].Draw("hist")
-    Rat_down[sample_Hin].Draw("hist sames")
+    Rat_down[sample_Hin].Draw("hist same")
 
     # Calculate and print the integral ratios in the legend
     histoIntegral = Hin[sample_Hin].Integral()
@@ -141,12 +156,12 @@ def Getting_histograms(sample_Hin, sample_Hin_up, sample_Hin_down, cut, variable
     canvas.Update()
 
     ROOT.objs.append([canvas, Hin_up[sample_Hin_up], Hin[sample_Hin], Hin_down[sample_Hin_down], Rat_up[sample_Hin], Rat_down[sample_Hin], legend, legend_ratio])
-    canvas.SaveAs(outputPath+'_'+cut+'_'+sample_Hin+'_'+variable+'.pdf')
-    canvas.SaveAs(outputPath+'_'+cut+'_'+sample_Hin+'_'+variable+'.png')
+    canvas.SaveAs(outputPath+'SM_cT8_cM3_'+cut+'_'+sample_Hin+'_'+variable+'.png')  ## IRENE
+    canvas.SaveAs(outputPath+'SM_cT8_cM3_'+cut+'_'+sample_Hin+'_'+variable+'.pdf')   ## IRENE
 
 if __name__ == '__main__':
     import sys
-    cuts = [ 'Boosted_SR_bVeto','Boosted_SR_bTag'] 
+    cuts = [ 'Boosted_SR_bVeto','Boosted_SR_bTag']                      ### update here the name of your regions IRENE
 
     for sample_Hin, sample_Hin_up, sample_Hin_down in zip(samples_Hin, samples_Hin_up, samples_Hin_down):
         for cut in cuts:
