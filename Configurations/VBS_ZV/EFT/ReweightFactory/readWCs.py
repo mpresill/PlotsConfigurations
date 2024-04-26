@@ -1,3 +1,21 @@
+    
+"""
+
+    This code takes as input a reweighting weight txt file, 
+    and the name of the Wilson Coefficient of interest, e.g. FS0
+    and produces as output all possibile quadratic, linear, sm weights for Latinos:
+    
+    quadReweight_op = '( 0.5* (1/WC) * (1/WC) * (LHEReweightingWeight[+WC] + LHEReweightingWeight[-WC] - 2*LHEReweightingWeight[WC=0]) )'
+    LinReweight_op = '(0.5 * (1/WC) * (LHEReweightingWeight[+WC] - LHEReweightingWeight[-WC]) )'
+    sm_op = '(LHEReweightingWeight[WC=0])'
+
+    Run the code with "python readWCs.py".
+    Arguments of the code at the end.
+    
+"""
+
+
+
 def find_position(number, array):
     """
     Finds the position of a given number in an array.
@@ -15,61 +33,47 @@ def find_position(number, array):
         return -1
 
 
-def calculate_quadratic_function(filename, op, WC, result_dict):
-    # creates a dictionary of operators and Wilson Coefficients
+def calculate_quadratic_function(filename,op,WC):
+
+    # creates a dictionary of opearatos and Wilson Coefficients 
     vector = []
     with open(filename, 'r') as f:
         for line in f:
             if 'launch --rwgt_name' in line:
                 if op not in line:
-                    vector.append('x')
-                else:
-                    value_str = line.split("_")[-1].strip()  # get the value string after "_" and remove any whitespace
+                    vector.append('x') 
+                else:      
+                    value_str = line.split("_")[-1].strip() # get the value string after "_" and remove any whitespace
+                    #print(value_str)
                     if 'p' or 'm' in value_str:
-                        value = float(value_str.replace("p", ".").replace("m", "-"))  # replace "p" with "." and "m" with "-" and convert to float
+                        value = float(value_str.replace("p", ".").replace("m", "-")) # replace "p" with "." and "m" with "-" and convert to float
                     else:
                         value = float(value_str)
                     vector.append(value)
-    #print('**************************')         # debug
-    #print(vector)                               # debug
-    LHEwPLUS = find_position(WC, vector)
-    LHEwMINUS = find_position(-WC, vector)
-    LHEwZERO = find_position(0, vector)
+    print(vector)
+    print('**************************')
+    LHEwPLUS = find_position(WC,vector)
+    LHEwMINUS = find_position(-WC,vector)
+    LHEwZERO = find_position(0,vector)
 
     if LHEwPLUS and LHEwMINUS is not -1:
-        result_dict[op] = {
-            'quadReweight': '( 0.5* (1/({0})) * (1/({0})) * ( LHEReweightingWeight[{1}] + LHEReweightingWeight[{2}] - 2 * LHEReweightingWeight[{3}]))'.format(WC, LHEwPLUS, LHEwMINUS, LHEwZERO, op),
-            'LinReweight': '( 0.5* (1/({0})) * ( LHEReweightingWeight[{1}] - LHEReweightingWeight[{2}] ))'.format(WC, LHEwPLUS, LHEwMINUS, LHEwZERO, op),
-            'sm': '( LHEReweightingWeight[{3}] )'.format(WC, LHEwPLUS, LHEwMINUS, LHEwZERO, op)
-        }   
-        #print(op)                               # debug
-        #print(result_dict[op])                  # debug
+        print('quadReweight_{4} = ( 0.5* (1/({0})) * (1/({0})) * ( LHEReweightingWeight[{1}] + LHEReweightingWeight[{2}] - 2 * LHEReweightingWeight[{3}]))'.format(WC,LHEwPLUS,LHEwMINUS,LHEwZERO,op))
+        print('LinReweight_{4} = ( 0.5* (1/({0})) * ( LHEReweightingWeight[{1}] - LHEReweightingWeight[{2}] ))'.format(WC,LHEwPLUS,LHEwMINUS,LHEwZERO,op))
+        print('sm_{4} = ( LHEReweightingWeight[{3}] )'.format(WC,LHEwPLUS,LHEwMINUS,LHEwZERO,op))
     else:
         print('wilson coefficient {} not found for the operator {}'.format(WC, op))
 
 
-filename = 'aQGC_WMhadZlepJJ_EWK_LO_SM_mjj100_pTj10_reweight_card.txt'
-ops = ['FT0','FT1','FT2','FT3','FT4','FT5','FT6','FT7', 'FT8','FT9','FS0','FS1','FS2','FM0','FM1','FM2','FM3','FM4','FM5','FM7']  # List of operators
-WCs = [0.5, 0.5, 0.5, 0.5, 2, 1, 1, 2, 0.5, 1.5, 5.25, 5.25, 5.25, 1.8, 4.9, 3, 6, 4, 4, 10]  # List of Wilson Coefficients
-
-results = {}  # Dictionary to store results
-
-for op, WC in zip(ops, WCs):
-    calculate_quadratic_function(filename, op, WC, results)
-
-# Replace "F" with "c" in ops and results dictionary keys
-ops = [op.replace('F', 'c') for op in ops]
-results = {op.replace('F', 'c'): values for op, values in results.items()}
 
 
-# Writing results to a Python file
-with open('EFT_dim8_dictionary_v2.py', 'w') as f:
-    f.write('operators = {\n')
-    for op, values in results.items():
-        f.write("    '%s': {\n" % op)
-        for key, value in values.items():
-            f.write("        '%s': '%s',\n" % (key, value))
-        f.write('    },\n')
-    f.write('}')
 
 
+
+
+
+filename = 'InputCards_aQGC_WMhadZlepJJ/aQGC_WMhadZlepJJ_EWK_LO_SM_mjj100_pTj10_reweight_card.dat'
+#filename = 'InputCards_aQGC_ZlepZhadJJ/aQGC_ZlepZhadJJ_EWK_LO_SM_mjj100_pTj10_reweight_card.dat'
+op='FT0'
+WC=2
+quadReweight_cS0 = calculate_quadratic_function(filename,op,WC)
+print(quadReweight_cS0)
