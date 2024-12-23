@@ -1,7 +1,7 @@
 # example of configuration file
 treeName= 'Events'
 
-date='_16mar2024_2017_ewk_qcd' 
+date='_23Dec2024_2017_ewk_qcd' 
 
 categ = 'boosted'
 #operator = 'T9'

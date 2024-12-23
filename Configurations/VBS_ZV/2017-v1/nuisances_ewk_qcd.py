@@ -28,9 +28,9 @@ from LatinoAnalysis.Tools.HiggsXSection import HiggsXSection
 HiggsXS = HiggsXSection()
 
 
-EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
+#EFT_samples = ["quad_cS0","sm_lin_quad_cS0",  "quad_cS1","sm_lin_quad_cS1",   "quad_cM0","sm_lin_quad_cM0",  "quad_cM1","sm_lin_quad_cM1",   "quad_cM2","sm_lin_quad_cM2",   "quad_cM3","sm_lin_quad_cM3",   "quad_cM4","sm_lin_quad_cM4",   "quad_cM5","sm_lin_quad_cM5",   "quad_cM7","sm_lin_quad_cM7",   "quad_cT0","sm_lin_quad_cT0",   "quad_cT1","sm_lin_quad_cT1",   "quad_cT2","sm_lin_quad_cT2",   "quad_cT5","sm_lin_quad_cT5",   "quad_cT6","sm_lin_quad_cT6",   "quad_cT7","sm_lin_quad_cT7",   "quad_cT8","sm_lin_quad_cT8",   "quad_cT9","sm_lin_quad_cT9"  ]
 mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] #"tZq_ll","VZ",
-mc_signal= ["VBS_ZV_EWK_QCD"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
+mc_signal= ["sm_dipole","ZVjj_QCD"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
 mc_eos    = ["VBS_WV_QCD","tZq","tZq_QCD"] + mc_signal #+ EFT_samples
 
 mc        = mc_common + mc_eos
@@ -603,7 +603,7 @@ nuisances['PS_FSR']  = {
 ## variations   = ['Alt$(LHEScaleWeight[0],1)', 'Alt$(LHEScaleWeight[1],1)', 'Alt$(LHEScaleWeight[3],1)', 'Alt$(LHEScaleWeight[5],1)', 'Alt$(LHEScaleWeight[7],1)', 'Alt$(LHEScaleWeight[8],1)']
 variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
 
-for sample in mc_common :
+for sample in mc :
     if sample in ["DY"]: continue   #this sample apparently doesn't have LHE weights, but it's real minor for us
     nuisances['QCDscale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
@@ -637,25 +637,7 @@ for sample in ["DY"] :
     }
 
 
-for sample in mc_eos :
-    if sample in ["VBS_VV_QCD"]:
-        nuisances['QCDscale_'+sample] = {
-                'name'  : 'QCDscale_'+sample,
-                'kind': 'weight_envelope',
-                'type'  : 'shape',
-                'samples'  :  { sample: variations },
-                #'group' : 'theory',
-                #'AsLnN': '1'    ##
-        }
-    else:
-        nuisances['QCDscale_'+sample] = {
-                'name'  : 'QCDscale_'+sample,
-                'kind': 'weight_envelope',
-                'type'  : 'shape',
-                'samples'  :  { sample: variations },
-                #'group' : 'theory',
-                #'AsLnN': '1'    ##
-        }
+
 
 ###########################################
 #############    PDF WEIGHT  ##############
