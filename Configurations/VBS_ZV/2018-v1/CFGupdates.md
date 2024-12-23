@@ -103,6 +103,93 @@ You need to prepare one set of datacards per EFT operator, modifying samples, st
 sh eft.sh /eos/user/m/mpresill/CMS/VBS/VBS_ZV/DatacardsEFT/YearsCombination_8June2022/combined_boosted_bVeto.txt cT1 boosted_bVeto 
 ```
 
+---------
+## new EFT release with all operators 
+```sh
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim8/plots_VBS_ZV_6Dec2023_2018-dim8_boosted_wBkg_allOperators.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim8/plots_VBS_ZV_6Dec2023_2018-dim8_boosted_wBkg.root  /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_15Mar2024_2018-dim8/plots_VBS_ZV_15Mar2024_2018-dim8_boosted.root
+```
+
+### v2 release, with smallere wilson coefficients (9 April 2024)
+```sh
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim8/plots_VBS_ZV_6Dec2023_2018-dim8_boosted_wBkg_allOperators_v2.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim8/plots_VBS_ZV_6Dec2023_2018-dim8_boosted_wBkg.root  /eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_9Apr2024_2018-dim8/plots_VBS_ZV_9Apr2024_2018-dim8_boosted.root
+```
+
+From now one there is a dedicated script for producing datacards for all operators. Please check `VBS_ZV/EFT/prepare_datacards_EFT.py`.
+
+
+Since EFT samples have `pdf_1718` and `QCDscale` uncertainties affected by a bug, we'll extrapolate them from ´sm_dipole´ from EWK measurement and apply them to `sm` and `sm_lin_quad_cXX` and `quad_cXX` as follows:
+
+
+3. a. (ONLY ONCE) 
+    extract pdf uncertainty and QCDscale:
+```sh
+cd 2018-v1/boosted-dim8
+python ../../scripts/Utilities_nuisances/extract_nuisances_effect_EFT.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_18Jul2022_2018/plots_VBS_ZV_18Jul2022_2018_boosted.root -o /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/corrections/PDF+QCDscale_sig-plots_VBS_ZV_6Dec2023_2018_boosted.root -s sm -nsf samples_PS_extraction.txt -cf cuts_PS_extraction.txt -v ZV_mass -n QCDscale_sm
+```
+ b . apply them to EFT samples
+```sh
+python ../../scripts/Utilities_nuisances/apply_nuisances_effect.py -i /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim8/plots_VBS_ZV_6Dec2023_2018-dim8_boosted_wBkg_allOperators_v2.root -o /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim8/plots_VBS_ZV_6Dec2023_2018-dim8_boosted_wBkg_allOperators_v2_PDF+QCDscale_sig_variations.root  --nuisance-effect /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/corrections/PDF+QCDscale_sig-plots_VBS_ZV_6Dec2023_2018_boosted.root -s sm -n QCDscale_sm
+```
+c. hadd them:
+```sh
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim8/plots_VBS_ZV_6Dec2023_2018-dim8_boosted_wBkg_allOperators_v2+PDF+QCDscale_sig.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim8/plots_VBS_ZV_6Dec2023_2018-dim8_boosted_wBkg_allOperators_v2.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim8/plots_VBS_ZV_6Dec2023_2018-dim8_boosted_wBkg_allOperators_v2_PDF+QCDscale_sig_variations.root 
+```
+
+
+### v3 release (after all the debugging of centrally produced samples, we use here private ones with sm taken from ewk dipole recoil sample)
+```sh
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_16May2024_2018-dim8-private/plots_VBS_ZV_16May2024_2018-dim8-private_boosted_wBkg.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_16May2024_2018-dim8-private/plots_VBS_ZV_16May2024_2018-dim8-private_boosted.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/corrections/plots_VBS_ZV_6Dec2023_2018_boosted.root
+```
+there is also a version of root signals without statistical uncertainty:
+`/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_16May2024_2018-dim8-private/plots_VBS_ZV_16May2024_2018-dim8-private_boosted_noStat.root`
+```sh
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_16May2024_2018-dim8-private/plots_VBS_ZV_16May2024_2018-dim8-private_boosted_wBkg_noStat.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_16May2024_2018-dim8-private/plots_VBS_ZV_16May2024_2018-dim8-private_boosted_noStat.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/corrections/plots_VBS_ZV_6Dec2023_2018_boosted.root
+
+
+### v4 release (Giacomo re-re-processing of privateLHE nanoAOD chain) - 24 October 2024
+1. complete the list above for the SM EWK measurement and be sure to have the correct `variables.py` for both EWk and EFT processing
+2. hadd EFT outputs, and the manually hadd EFT and bkgs:
+```sh
+hadd /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_22Oct2024_2018-dim8-private-Giacomo/plots_VBS_ZV_22Oct2024_2018-dim8-private-Giacomo_boosted_wBkg.root /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018/corrections/plots_VBS_ZV_6Dec2023_2018_boosted.root  /eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_22Oct2024_2018-dim8-private-Giacomo/plots_VBS_ZV_22Oct2024_2018-dim8-private-Giacomo_boosted.root
+```
+3. remove the statistical uncertainties of the `sm` and `sm+lin+quad` and `quad` templates to comply with the EFT combine model. Launch from singularity:
+`python2 EFT/delete_statistical_uncertainty.py -i=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_22Oct2024_2018-dim8-private-Giacomo/plots_VBS_ZV_22Oct2024_2018-dim8-private-Giacomo_boosted_wBkg.root -vars=ZV_mass+DYfit_Z_bin_Boosted+events+Mzv`
+the latest file to use (in which also Mzv is removed of stat signal uncertainties) is the following: `/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_22Oct2024_2018-dim8-private-Giacomo/plots_VBS_ZV_22Oct2024_2018-dim8-private-Giacomo_boosted_wBkg_noStat_wQCDsignal_noStat.root` 
+
+4. prepare datacards (picking up the desired EFT signals in the `structure-dim8.py` and in the `samples-datacards-dim8.py`) and using the `nuisances_datacards-dim8.py`. Edit appropriately the script `EFT/prepare_datacards_EFT_allOps.py`, and launch it lik:
+`python2 EFT/prepare_datacards_EFT_allOps.py`
+
+DO the PUSH in gitlab  and proceed with the statistical analysis in KIT 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------
+## EFT dim-6 for VBS combination 
+Only `c_{W}`operator included, root file with backgrounds is here:
+`/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim6/plots_VBS_ZV_6Dec2023_2018-dim6_boosted_wBkg.root`.
+Datacards are produced as follows:
+```sh
+cd 2018-v1/boosted-dim6
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim6/plots_VBS_ZV_6Dec2023_2018-dim6_boosted_wBkg.root --skipMissingNuisance --nuisancesFile=../nuisances_datacards-dim6.py --samplesFile=samples-datacards-dim6.py --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/DatacardsEFT/eft_combination/cards/ZV/2018/
+
+mkDatacards.py --pycfg=configuration.py --inputFile=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile_6Dec2023_2018-dim6/plots_VBS_ZV_6Dec2023_2018-dim6_boosted_wBkg.root --skipMissingNuisance --nuisancesFile=../nuisances_datacards_topcr.py --cutsFile=cuts_boosted_topcr.py --samplesFile=samples-datacards-dim6.py --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/DatacardsEFT/eft_combination/cards/ZV/2018/
+```
+
+
 
 __________________________________________________
 # list of commands to make it work (EWK+QCD measurement):
@@ -166,3 +253,5 @@ mkDatacards.py --pycfg=configuration.py --inputFile=/eos/cms/store/group/phys_sm
 cd ../boosted_ewk_qcd
 mkDatacards.py --pycfg=configuration.py --inputFile=/eos/cms/store/group/phys_smp/VJets_NLO_VBSanalyses/ZV_analysis/histograms/rootFile_16Mar2024_2018_ewk_qcd/corrections/plots_VBS_ZV_16Mar2024_2018_ewk_qcd_boosted_wBkg.root  --outputDirDatacard=/eos/user/m/mpresill/CMS/VBS/VBS_ZV/Datacards/Datacards_16Mar2024_2018_ewk_qcd_QCDscaleDY_corr_ln_topcr/ --skipMissingNuisance --nuisancesFile=../nuisances_datacards_topcr.py --cutsFile=cuts_boosted_topcr.py
 ```
+
+Update on 23 dec 2024 - different approach: simulation of ewk+qcd signal separate (same ewk root files + sm_dipole_qcd sample + vv_qcd bkgs + tZq_qcd bkgs):
