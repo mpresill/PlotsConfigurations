@@ -107,23 +107,28 @@ def CombineBaseW(samples, proc, samplelist):
 ###########################################
 #############   SIGNALS  ##################
 ###########################################
-
 #************ dipole recoil ************#
-samples['VBS_ZV_EWK_QCD'] = {
-    'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J_dipoleRecoil')
-             +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil')
-             +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil')
-             +nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J_QCD')
+"""samples['sm_dipole'] = {
+    'name':   nanoGetSampleFiles(DirectorySMPeos, 'ZTo2L_ZTo2J_dipoleRecoil') 
+             +nanoGetSampleFiles(DirectorySMPeos, 'WmTo2J_ZTo2L_dipoleRecoil') 
+             +nanoGetSampleFiles(DirectorySMPeos, 'WpTo2J_ZTo2L_dipoleRecoil'),
+    'weight':  mcCommonWeight,
+    'FilesPerJob': 10
+}
+addSampleWeight(samples,'sm_dipole','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.03004/0.02982)')
+addSampleWeight(samples,'sm_dipole','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0) * (0.05526/0.05401)')
+"""
+#************ dipole recoil ************#
+samples['ZVjj_QCD'] = {
+    'name':   nanoGetSampleFiles(mcDirectorySMPeos, 'ZTo2L_ZTo2J_QCD')
              +nanoGetSampleFiles(mcDirectorySMPeos, 'WmTo2J_ZTo2L_QCD')
              +nanoGetSampleFiles(mcDirectorySMPeos, 'WpTo2J_ZTo2L_QCD'),
     'weight':  mcCommonWeight,
     'FilesPerJob': 10,
     'EventsPerJob' : 70000,
 }
-addSampleWeight(samples,'VBS_ZV_EWK_QCD','WmTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'VBS_ZV_EWK_QCD','WpTo2J_ZTo2L_dipoleRecoil','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'VBS_ZV_EWK_QCD','WmTo2J_ZTo2L_QCD','(Sum$(abs(GenPart_pdgId)==6)==0)')
-addSampleWeight(samples,'VBS_ZV_EWK_QCD','WpTo2J_ZTo2L_QCD','(Sum$(abs(GenPart_pdgId)==6)==0)')
+addSampleWeight(samples,'ZVjj_QCD','WmTo2J_ZTo2L_QCD','(Sum$(abs(GenPart_pdgId)==6)==0)')
+addSampleWeight(samples,'ZVjj_QCD','WpTo2J_ZTo2L_QCD','(Sum$(abs(GenPart_pdgId)==6)==0)')
 
 
 ###########################################
@@ -150,7 +155,7 @@ samples['tZq_QCD'] = {
     'FilesPerJob': 10
 }
 
-
+"""
 ###########################################
 #############  BACKGROUNDS  ###############
 ###########################################
@@ -384,3 +389,4 @@ for _, sd in DataRun:
 
 
 
+"""

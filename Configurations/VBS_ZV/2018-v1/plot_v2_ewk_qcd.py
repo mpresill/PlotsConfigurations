@@ -150,7 +150,7 @@ groupPlot['VBS']  = {
                  'nameHR' : 'VBS ewk+qcd',
                  'isSignal' : 1,
                  'color': colors["kRed"]+1,
-                 'samples'  : ['VBS_ZV_EWK_QCD'],
+                 'samples'  : ['sm_dipole','ZVjj_QCD'],
                  'fill': 1001
               }
 
@@ -227,7 +227,14 @@ plot['top'] = {
 
 
 
-plot['VBS_ZV_EWK_QCD']  = {
+plot['ZVjj_QCD']  = {
+                  'color': colors["kCyan"]+1, 
+                  'isSignal' : 1,
+                  'isData'   : 0,
+                  'scale'    : 1.   
+              }
+
+plot['sm_dipole']  = {
                   'color': colors["kCyan"]+1, 
                   'isSignal' : 1,
                   'isData'   : 0,
