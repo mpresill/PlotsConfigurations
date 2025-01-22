@@ -1,0 +1,292 @@
+{
+  "DY_Boosted_Z_4": {
+    "phase_spaces": {
+      "Boosted_bVeto": [
+        "Boosted_DYcr_bVeto", 
+        "Boosted_SR_bVeto"
+      ], 
+      "Boosted_bTag": [
+        "Boosted_DYcr_bTag", 
+        "Boosted_SR_bTag"
+      ]
+    }, 
+    "nuisances": [
+      "QCDscale_DY"
+    ], 
+    "results": {
+      "QCDscale_DY": {
+        "Boosted_bVeto": {
+          "down": [
+            83.71109908743135, 
+            68.66855144789511
+          ], 
+          "nom": [
+            99.66318174195784, 
+            80.0318225141729
+          ], 
+          "ratioDown": 1.1792585402633649, 
+          "up": [
+            120.85251701758267, 
+            94.7734601556111
+          ], 
+          "ratioUp": 0.833364359025245
+        }, 
+        "Boosted_bTag": {
+          "down": [
+            106.71553660397184, 
+            77.67482176439609
+          ], 
+          "nom": [
+            127.20264321227779, 
+            90.90998046560935
+          ], 
+          "ratioDown": 1.1828851877501654, 
+          "up": [
+            154.35561083977677, 
+            108.14773585017039
+          ], 
+          "ratioUp": 0.830894639737711
+        }
+      }
+    }
+  }, 
+  "DY_Boosted_Z_5": {
+    "phase_spaces": {
+      "Boosted_bVeto": [
+        "Boosted_DYcr_bVeto", 
+        "Boosted_SR_bVeto"
+      ], 
+      "Boosted_bTag": [
+        "Boosted_DYcr_bTag", 
+        "Boosted_SR_bTag"
+      ]
+    }, 
+    "nuisances": [
+      "QCDscale_DY"
+    ], 
+    "results": {
+      "QCDscale_DY": {
+        "Boosted_bVeto": {
+          "down": [
+            42.054461915078974, 
+            22.875913799490338
+          ], 
+          "nom": [
+            50.83473787825274, 
+            27.15728113975808
+          ], 
+          "ratioDown": 1.2011638337172088, 
+          "up": [
+            62.63533289238343, 
+            32.817454292503164
+          ], 
+          "ratioUp": 0.8170742973376433
+        }, 
+        "Boosted_bTag": {
+          "down": [
+            54.98068346759028, 
+            26.77153918981269
+          ], 
+          "nom": [
+            66.31782940056473, 
+            31.765211272746104
+          ], 
+          "ratioDown": 1.1997599268260268, 
+          "up": [
+            81.51390027391172, 
+            38.368227621553
+          ], 
+          "ratioUp": 0.8181623265716276
+        }
+      }
+    }
+  }, 
+  "DY_Boosted_Z_2": {
+    "phase_spaces": {
+      "Boosted_bVeto": [
+        "Boosted_DYcr_bVeto", 
+        "Boosted_SR_bVeto"
+      ], 
+      "Boosted_bTag": [
+        "Boosted_DYcr_bTag", 
+        "Boosted_SR_bTag"
+      ]
+    }, 
+    "nuisances": [
+      "QCDscale_DY"
+    ], 
+    "results": {
+      "QCDscale_DY": {
+        "Boosted_bVeto": {
+          "down": [
+            123.95900731667577, 
+            109.24883149997234
+          ], 
+          "nom": [
+            151.44849537996475, 
+            132.43215915938708
+          ], 
+          "ratioDown": 1.2172860740008982, 
+          "up": [
+            189.23529923100565, 
+            163.94326765091412
+          ], 
+          "ratioUp": 0.803787888505316
+        }, 
+        "Boosted_bTag": {
+          "down": [
+            162.03771782400653, 
+            142.37532332471517
+          ], 
+          "nom": [
+            199.3188309199601, 
+            172.49692967765836
+          ], 
+          "ratioDown": 1.2214186330340788, 
+          "up": [
+            250.6589111742697, 
+            213.32024344188343
+          ], 
+          "ratioUp": 0.8013630718070065
+        }
+      }
+    }
+  }, 
+  "DY_Boosted_Z_3": {
+    "phase_spaces": {
+      "Boosted_bVeto": [
+        "Boosted_DYcr_bVeto", 
+        "Boosted_SR_bVeto"
+      ], 
+      "Boosted_bTag": [
+        "Boosted_DYcr_bTag", 
+        "Boosted_SR_bTag"
+      ]
+    }, 
+    "nuisances": [
+      "QCDscale_DY"
+    ], 
+    "results": {
+      "QCDscale_DY": {
+        "Boosted_bVeto": {
+          "down": [
+            123.30216173345215, 
+            105.53063611938285
+          ], 
+          "nom": [
+            146.34267198218032, 
+            123.79141925411503
+          ], 
+          "ratioDown": 1.180486773622467, 
+          "up": [
+            177.08981340871588, 
+            147.7237727866199
+          ], 
+          "ratioUp": 0.8316588428473021
+        }, 
+        "Boosted_bTag": {
+          "down": [
+            144.32071631292712, 
+            127.90072746816462
+          ], 
+          "nom": [
+            173.2535381381863, 
+            150.96416416768903
+          ], 
+          "ratioDown": 1.1910072101689264, 
+          "up": [
+            212.16373308439154, 
+            181.4436717098815
+          ], 
+          "ratioUp": 0.82370834073951
+        }
+      }
+    }
+  }, 
+  "DY_Boosted_Z_1": {
+    "phase_spaces": {
+      "Boosted_bVeto": [
+        "Boosted_DYcr_bVeto", 
+        "Boosted_SR_bVeto"
+      ], 
+      "Boosted_bTag": [
+        "Boosted_DYcr_bTag", 
+        "Boosted_SR_bTag"
+      ]
+    }, 
+    "nuisances": [
+      "QCDscale_DY"
+    ], 
+    "results": {
+      "QCDscale_DY": {
+        "Boosted_bVeto": {
+          "down": [
+            90.34061088397424, 
+            82.92165246590423
+          ], 
+          "nom": [
+            112.31761128324847, 
+            102.87739126672349
+          ], 
+          "ratioDown": 1.242018881603874, 
+          "up": [
+            142.9502069486684, 
+            130.6256884087177
+          ], 
+          "ratioUp": 0.7866007429815838
+        }, 
+        "Boosted_bTag": {
+          "down": [
+            127.54030710953401, 
+            108.4714892377708
+          ], 
+          "nom": [
+            159.06608770374956, 
+            134.41130425325628
+          ], 
+          "ratioDown": 1.2434861159445483, 
+          "up": [
+            203.11859536513379, 
+            170.28195098091226
+          ], 
+          "ratioUp": 0.7859586570744541
+        }
+      }
+    }
+  }, 
+  "top": {
+    "phase_spaces": {
+      "Boosted": [
+        "Boosted_topcr", 
+        "Boosted_SR_bVeto", 
+        "Boosted_SR_bTag"
+      ]
+    }, 
+    "nuisances": [
+      "QCDscale_top"
+    ], 
+    "results": {
+      "QCDscale_top": {
+        "Boosted": {
+          "down": [
+            56.924215721960266, 
+            2.224325608066403, 
+            67.03921990377843
+          ], 
+          "nom": [
+            69.69759215660596, 
+            2.7027725108295177, 
+            83.07361916626158
+          ], 
+          "ratioDown": 1.232084493088275, 
+          "up": [
+            87.0871374076403, 
+            3.393749916709102, 
+            105.37642159177611
+          ], 
+          "ratioUp": 0.7938125194004257
+        }
+      }
+    }
+  }
+}

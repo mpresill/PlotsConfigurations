@@ -1,7 +1,7 @@
 # example of configuration file
 treeName= 'Events'
 
-date='_6Dec2023_2018-dim6'
+date='_14Jan2025_2018-dim6'
 
 categ = 'boosted'
 #operator = 'T9'
@@ -19,7 +19,7 @@ outputDir = '/eos/user/m/mpresill/CMS/VBS/VBS_ZV/histograms/rootFile'+date
 aliasesFile = '../aliases.py'
 
 # file with list of variables
-variablesFile = '../boosted/variables.py'
+variablesFile = 'variables.py'
 #variablesFile = '../variables_njet.py'
 
 # file with list of cuts

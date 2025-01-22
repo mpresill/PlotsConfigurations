@@ -29,10 +29,55 @@ HiggsXS = HiggsXSection()
 
 
 
-EFT_samples = ["sm","sm_lin_quad_cW","quad_cW"]
+EFT_samples = ['sm',
+ 'sm_lin_quad_cW',
+ 'quad_cW',
+ 'sm_lin_quad_mixed_cW_cHWB',
+ 'sm_lin_quad_mixed_cW_cHbox',
+ 'sm_lin_quad_mixed_cW_cHW',
+ 'sm_lin_quad_mixed_cW_cHl1',
+ 'sm_lin_quad_mixed_cW_cHB',
+ 'sm_lin_quad_mixed_cW_cHQ1',
+ 'sm_lin_quad_mixed_cW_cHj1',
+ 'sm_lin_quad_cHWB',
+ 'quad_cHWB',
+ 'sm_lin_quad_mixed_cHWB_cHbox',
+ 'sm_lin_quad_mixed_cHWB_cHW',
+ 'sm_lin_quad_mixed_cHWB_cHl1',
+ 'sm_lin_quad_mixed_cHWB_cHB',
+ 'sm_lin_quad_mixed_cHWB_cHQ1',
+ 'sm_lin_quad_mixed_cHWB_cHj1',
+ 'sm_lin_quad_cHbox',
+ 'quad_cHbox',
+ 'sm_lin_quad_mixed_cHbox_cHW',
+ 'sm_lin_quad_mixed_cHbox_cHl1',
+ 'sm_lin_quad_mixed_cHbox_cHB',
+ 'sm_lin_quad_mixed_cHbox_cHQ1',
+ 'sm_lin_quad_mixed_cHbox_cHj1',
+ 'sm_lin_quad_cHW',
+ 'quad_cHW',
+ 'sm_lin_quad_mixed_cHW_cHl1',
+ 'sm_lin_quad_mixed_cHW_cHB',
+ 'sm_lin_quad_mixed_cHW_cHQ1',
+ 'sm_lin_quad_mixed_cHW_cHj1',
+ 'sm_lin_quad_cHl1',
+ 'quad_cHl1',
+ 'sm_lin_quad_mixed_cHl1_cHB',
+ 'sm_lin_quad_mixed_cHl1_cHQ1',
+ 'sm_lin_quad_mixed_cHl1_cHj1',
+ 'sm_lin_quad_cHB',
+ 'quad_cHB',
+ 'sm_lin_quad_mixed_cHB_cHQ1',
+ 'sm_lin_quad_mixed_cHB_cHj1',
+ 'sm_lin_quad_cHQ1',
+ 'quad_cHQ1',
+ 'sm_lin_quad_mixed_cHQ1_cHj1',
+ 'sm_lin_quad_cHj1',
+ 'quad_cHj1']
+ 
 mc_common = ["DY", "top", "other", "Vg", "VgS", "VBF-V"] # "VZ","tZq_ll", 
-mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
-mc_eos    = ["VBS_VV_QCD","tZq"] + mc_signal + EFT_samples
+#mc_signal= ["sm_dipole"] #"sm","ewk_WpZ","ewk_WmZ","ewk_ZZ"]
+mc_eos    = ["VBS_VV_QCD","tZq"] + EFT_samples
 
 mc        = mc_common + mc_eos
 
@@ -571,7 +616,6 @@ nuisances['PS_FSR']  = {
 variations = ['LHEScaleWeight[0]', 'LHEScaleWeight[1]', 'LHEScaleWeight[3]', 'LHEScaleWeight[Length$(LHEScaleWeight)-4]', 'LHEScaleWeight[Length$(LHEScaleWeight)-2]', 'LHEScaleWeight[Length$(LHEScaleWeight)-1]']
 
 for sample in mc_common :
-    if sample in ["DY"]: continue   #this sample apparently doesn't have LHE weights, but it's real minor for us
     nuisances['QCDscale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
             'kind': 'weight_envelope',
@@ -581,47 +625,26 @@ for sample in mc_common :
 	        #'AsLnN': '1'    ##
     }
 
-for sample in ["DY"] :
+for sample in ["VBS_VV_QCD","tZq"] :
     nuisances['QCDscale_'+sample] = {
             'name'  : 'QCDscale_'+sample,
             'kind': 'weight_envelope',
             'type'  : 'shape',
             'samples'  :  { sample: variations },
-            #'group' : 'theory',
-            #'cuts'  : [
-            #       'Boosted_SR_bVeto',
-            #       'Boosted_DYcr_bVeto',
-            #       'Boosted_SR_bTag',
-            #       'Boosted_DYcr_bTag',
-            #       'Resolved_SR_bVeto',
-            #       'Resolved_DYcr_bVeto',
-            #       'Resolved_SR_bTag',
-            #       'Resolved_DYcr_bTag',
-            #       ],
-#            'symmetrize': True,
-#	         'AsLnN': '1'    ##
+           #'group' : 'theory',
+	        #'AsLnN': '1'    ##
     }
 
-for sample in mc_eos :
-    if sample in ["VBS_VV_QCD"]:
-        nuisances['QCDscale_'+sample] = {
-                'name'  : 'QCDscale_'+sample,
-                'kind': 'weight_envelope',
-                'type'  : 'shape',
-                'samples'  :  { sample: variations },
-               #'group' : 'theory',
-    	        #'AsLnN': '1'    ##
-        }
-    else: 
-        nuisances['QCDscale_'+sample] = {
-                'name'  : 'QCDscale_'+sample,
-                'kind': 'weight_envelope',
-                'type'  : 'shape',
-                'samples'  :  { sample: variations },
-               #'group' : 'theory',
-    	        #'AsLnN': '1'    ##
-        }
-
+#for sample in mc_eos :
+nuisances['QCDscale_ZVjj']  = {
+    'name': 'QCDscale_ZVjj',
+    'kind': 'weight_envelope',
+    'type'  : 'shape',
+    'samples'  :   {skey : variations  for skey in EFT_samples},
+#    'samples'  :   dict((skey: variations ) for skey in mc_eos),
+    #'samples'  :  { sample: variations },
+    #'AsLnN': '1',
+}
 
 
 ###########################################

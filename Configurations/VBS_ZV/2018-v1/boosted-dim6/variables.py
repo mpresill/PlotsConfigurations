@@ -173,7 +173,7 @@ variables['DYfit_Z_bin_Boosted'] ={  'name' : 'fit_Z_bin_Boosted',
 }
 
 
-    #************* coarse binning (2016 only) ***************#
+"""    #************* coarse binning (2016 only) ***************#
 variables['DNNoutput_pruned_bVeto'] = {
     'name': 'DNNoutput_pruned_bVeto',
     'range': ([0,0.1,0.2,0.3,0.4,0.5,0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],),
@@ -225,7 +225,7 @@ variables['DNNoutput_pruned_bVeto_rebin'] = {
     'fold': 3 ,                            
     'divideByBinWidth': 1,
 }
-
+"""
 
 variables['events']  = {   'name': '1',      
                         'range' : (1,0,2),  
@@ -248,14 +248,3 @@ variables['ZV_mass'] = { 'name': 'mZV',            #   variable name
                         'fold' :3,        
 }
 
-## mZV vs. DNN (with Giacomo's binning)
-variables['Mzv_vs_DNNoutput_pruned_bReq'] = {   'name': 'mZV:DNNoutput_pruned_bReq',
-                        'range' : ([ 200., 400., 600., 800., 1000., 1200., 1500., 2000., 3000.],[0,0.6,1.]), #variable range  
-                        'xaxis' : 'M_{ZV}:DNN [GeV]',
-                        'fold' : 3,
-                        }
-variables['Mzv_vs_DNNoutput_pruned_bVeto'] = {   'name': 'mZV:DNNoutput_pruned_bVeto',
-                        'range' : ([ 200., 400., 600., 800., 1000., 1200., 1500., 2000., 3000.],[0,0.6,1.]), #variable range  
-                        'xaxis' : 'M_{ZV}:DNN [GeV]',
-                        'fold' : 3,
-                        }
