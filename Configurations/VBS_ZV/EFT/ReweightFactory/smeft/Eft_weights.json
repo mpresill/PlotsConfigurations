@@ -1,0 +1,759 @@
+{
+  "meta": {
+    "source_card": "card_comments_only.dat",
+    "n_weights_in_card": 45,
+    "index_rule": "block rwgt_N is LHEReweightingWeight[N-1]; rwgt_1 (SM) is index 0",
+    "note": "Reweighting weights are normally ratios to the nominal weight. Event weight = generator weight * expression.",
+    "n_entries": 45
+  },
+  "entries": [
+    {
+      "name": "sm",
+      "kind": "sm",
+      "operators": [],
+      "terms": [
+        {
+          "index": 0,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[0]"
+    },
+    {
+      "name": "sm_lin_quad_cW",
+      "kind": "sm_lin_quad",
+      "operators": [
+        "cW"
+      ],
+      "terms": [
+        {
+          "index": 2,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[2]"
+    },
+    {
+      "name": "quad_cW",
+      "kind": "quad",
+      "operators": [
+        "cW"
+      ],
+      "terms": [
+        {
+          "index": 2,
+          "coefficient": 0.5
+        },
+        {
+          "index": 1,
+          "coefficient": 0.5
+        },
+        {
+          "index": 0,
+          "coefficient": -1.0
+        }
+      ],
+      "expression": "0.5*LHEReweightingWeight[2] + 0.5*LHEReweightingWeight[1] - LHEReweightingWeight[0]"
+    },
+    {
+      "name": "sm_lin_quad_cHWB",
+      "kind": "sm_lin_quad",
+      "operators": [
+        "cHWB"
+      ],
+      "terms": [
+        {
+          "index": 4,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[4]"
+    },
+    {
+      "name": "quad_cHWB",
+      "kind": "quad",
+      "operators": [
+        "cHWB"
+      ],
+      "terms": [
+        {
+          "index": 4,
+          "coefficient": 0.5
+        },
+        {
+          "index": 3,
+          "coefficient": 0.5
+        },
+        {
+          "index": 0,
+          "coefficient": -1.0
+        }
+      ],
+      "expression": "0.5*LHEReweightingWeight[4] + 0.5*LHEReweightingWeight[3] - LHEReweightingWeight[0]"
+    },
+    {
+      "name": "sm_lin_quad_cHbox",
+      "kind": "sm_lin_quad",
+      "operators": [
+        "cHbox"
+      ],
+      "terms": [
+        {
+          "index": 6,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[6]"
+    },
+    {
+      "name": "quad_cHbox",
+      "kind": "quad",
+      "operators": [
+        "cHbox"
+      ],
+      "terms": [
+        {
+          "index": 6,
+          "coefficient": 0.5
+        },
+        {
+          "index": 5,
+          "coefficient": 0.5
+        },
+        {
+          "index": 0,
+          "coefficient": -1.0
+        }
+      ],
+      "expression": "0.5*LHEReweightingWeight[6] + 0.5*LHEReweightingWeight[5] - LHEReweightingWeight[0]"
+    },
+    {
+      "name": "sm_lin_quad_cHW",
+      "kind": "sm_lin_quad",
+      "operators": [
+        "cHW"
+      ],
+      "terms": [
+        {
+          "index": 8,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[8]"
+    },
+    {
+      "name": "quad_cHW",
+      "kind": "quad",
+      "operators": [
+        "cHW"
+      ],
+      "terms": [
+        {
+          "index": 8,
+          "coefficient": 0.5
+        },
+        {
+          "index": 7,
+          "coefficient": 0.5
+        },
+        {
+          "index": 0,
+          "coefficient": -1.0
+        }
+      ],
+      "expression": "0.5*LHEReweightingWeight[8] + 0.5*LHEReweightingWeight[7] - LHEReweightingWeight[0]"
+    },
+    {
+      "name": "sm_lin_quad_cHl1",
+      "kind": "sm_lin_quad",
+      "operators": [
+        "cHl1"
+      ],
+      "terms": [
+        {
+          "index": 10,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[10]"
+    },
+    {
+      "name": "quad_cHl1",
+      "kind": "quad",
+      "operators": [
+        "cHl1"
+      ],
+      "terms": [
+        {
+          "index": 10,
+          "coefficient": 0.5
+        },
+        {
+          "index": 9,
+          "coefficient": 0.5
+        },
+        {
+          "index": 0,
+          "coefficient": -1.0
+        }
+      ],
+      "expression": "0.5*LHEReweightingWeight[10] + 0.5*LHEReweightingWeight[9] - LHEReweightingWeight[0]"
+    },
+    {
+      "name": "sm_lin_quad_cHB",
+      "kind": "sm_lin_quad",
+      "operators": [
+        "cHB"
+      ],
+      "terms": [
+        {
+          "index": 12,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[12]"
+    },
+    {
+      "name": "quad_cHB",
+      "kind": "quad",
+      "operators": [
+        "cHB"
+      ],
+      "terms": [
+        {
+          "index": 12,
+          "coefficient": 0.5
+        },
+        {
+          "index": 11,
+          "coefficient": 0.5
+        },
+        {
+          "index": 0,
+          "coefficient": -1.0
+        }
+      ],
+      "expression": "0.5*LHEReweightingWeight[12] + 0.5*LHEReweightingWeight[11] - LHEReweightingWeight[0]"
+    },
+    {
+      "name": "sm_lin_quad_cHQ1",
+      "kind": "sm_lin_quad",
+      "operators": [
+        "cHQ1"
+      ],
+      "terms": [
+        {
+          "index": 14,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[14]"
+    },
+    {
+      "name": "quad_cHQ1",
+      "kind": "quad",
+      "operators": [
+        "cHQ1"
+      ],
+      "terms": [
+        {
+          "index": 14,
+          "coefficient": 0.5
+        },
+        {
+          "index": 13,
+          "coefficient": 0.5
+        },
+        {
+          "index": 0,
+          "coefficient": -1.0
+        }
+      ],
+      "expression": "0.5*LHEReweightingWeight[14] + 0.5*LHEReweightingWeight[13] - LHEReweightingWeight[0]"
+    },
+    {
+      "name": "sm_lin_quad_cHj1",
+      "kind": "sm_lin_quad",
+      "operators": [
+        "cHj1"
+      ],
+      "terms": [
+        {
+          "index": 16,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[16]"
+    },
+    {
+      "name": "quad_cHj1",
+      "kind": "quad",
+      "operators": [
+        "cHj1"
+      ],
+      "terms": [
+        {
+          "index": 16,
+          "coefficient": 0.5
+        },
+        {
+          "index": 15,
+          "coefficient": 0.5
+        },
+        {
+          "index": 0,
+          "coefficient": -1.0
+        }
+      ],
+      "expression": "0.5*LHEReweightingWeight[16] + 0.5*LHEReweightingWeight[15] - LHEReweightingWeight[0]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cW_cHWB",
+      "alias": "sm_lin_quad_mixed_cHWB_cW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cW",
+        "cHWB"
+      ],
+      "terms": [
+        {
+          "index": 17,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[17]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cW_cHbox",
+      "alias": "sm_lin_quad_mixed_cHbox_cW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cW",
+        "cHbox"
+      ],
+      "terms": [
+        {
+          "index": 18,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[18]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cW_cHW",
+      "alias": "sm_lin_quad_mixed_cHW_cW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cW",
+        "cHW"
+      ],
+      "terms": [
+        {
+          "index": 19,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[19]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cW_cHl1",
+      "alias": "sm_lin_quad_mixed_cHl1_cW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cW",
+        "cHl1"
+      ],
+      "terms": [
+        {
+          "index": 20,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[20]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cW_cHB",
+      "alias": "sm_lin_quad_mixed_cHB_cW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cW",
+        "cHB"
+      ],
+      "terms": [
+        {
+          "index": 21,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[21]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cW_cHQ1",
+      "alias": "sm_lin_quad_mixed_cHQ1_cW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cW",
+        "cHQ1"
+      ],
+      "terms": [
+        {
+          "index": 22,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[22]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cW_cHj1",
+      "alias": "sm_lin_quad_mixed_cHj1_cW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cW",
+        "cHj1"
+      ],
+      "terms": [
+        {
+          "index": 23,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[23]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHWB_cHbox",
+      "alias": "sm_lin_quad_mixed_cHbox_cHWB",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHWB",
+        "cHbox"
+      ],
+      "terms": [
+        {
+          "index": 24,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[24]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHWB_cHW",
+      "alias": "sm_lin_quad_mixed_cHW_cHWB",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHWB",
+        "cHW"
+      ],
+      "terms": [
+        {
+          "index": 25,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[25]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHWB_cHl1",
+      "alias": "sm_lin_quad_mixed_cHl1_cHWB",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHWB",
+        "cHl1"
+      ],
+      "terms": [
+        {
+          "index": 26,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[26]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHWB_cHB",
+      "alias": "sm_lin_quad_mixed_cHB_cHWB",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHWB",
+        "cHB"
+      ],
+      "terms": [
+        {
+          "index": 27,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[27]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHWB_cHQ1",
+      "alias": "sm_lin_quad_mixed_cHQ1_cHWB",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHWB",
+        "cHQ1"
+      ],
+      "terms": [
+        {
+          "index": 28,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[28]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHWB_cHj1",
+      "alias": "sm_lin_quad_mixed_cHj1_cHWB",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHWB",
+        "cHj1"
+      ],
+      "terms": [
+        {
+          "index": 29,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[29]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHbox_cHW",
+      "alias": "sm_lin_quad_mixed_cHW_cHbox",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHbox",
+        "cHW"
+      ],
+      "terms": [
+        {
+          "index": 30,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[30]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHbox_cHl1",
+      "alias": "sm_lin_quad_mixed_cHl1_cHbox",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHbox",
+        "cHl1"
+      ],
+      "terms": [
+        {
+          "index": 31,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[31]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHbox_cHB",
+      "alias": "sm_lin_quad_mixed_cHB_cHbox",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHbox",
+        "cHB"
+      ],
+      "terms": [
+        {
+          "index": 32,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[32]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHbox_cHQ1",
+      "alias": "sm_lin_quad_mixed_cHQ1_cHbox",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHbox",
+        "cHQ1"
+      ],
+      "terms": [
+        {
+          "index": 33,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[33]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHbox_cHj1",
+      "alias": "sm_lin_quad_mixed_cHj1_cHbox",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHbox",
+        "cHj1"
+      ],
+      "terms": [
+        {
+          "index": 34,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[34]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHW_cHl1",
+      "alias": "sm_lin_quad_mixed_cHl1_cHW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHW",
+        "cHl1"
+      ],
+      "terms": [
+        {
+          "index": 35,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[35]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHW_cHB",
+      "alias": "sm_lin_quad_mixed_cHB_cHW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHW",
+        "cHB"
+      ],
+      "terms": [
+        {
+          "index": 36,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[36]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHW_cHQ1",
+      "alias": "sm_lin_quad_mixed_cHQ1_cHW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHW",
+        "cHQ1"
+      ],
+      "terms": [
+        {
+          "index": 37,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[37]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHW_cHj1",
+      "alias": "sm_lin_quad_mixed_cHj1_cHW",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHW",
+        "cHj1"
+      ],
+      "terms": [
+        {
+          "index": 38,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[38]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHl1_cHB",
+      "alias": "sm_lin_quad_mixed_cHB_cHl1",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHl1",
+        "cHB"
+      ],
+      "terms": [
+        {
+          "index": 39,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[39]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHl1_cHQ1",
+      "alias": "sm_lin_quad_mixed_cHQ1_cHl1",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHl1",
+        "cHQ1"
+      ],
+      "terms": [
+        {
+          "index": 40,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[40]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHl1_cHj1",
+      "alias": "sm_lin_quad_mixed_cHj1_cHl1",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHl1",
+        "cHj1"
+      ],
+      "terms": [
+        {
+          "index": 41,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[41]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHB_cHQ1",
+      "alias": "sm_lin_quad_mixed_cHQ1_cHB",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHB",
+        "cHQ1"
+      ],
+      "terms": [
+        {
+          "index": 42,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[42]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHB_cHj1",
+      "alias": "sm_lin_quad_mixed_cHj1_cHB",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHB",
+        "cHj1"
+      ],
+      "terms": [
+        {
+          "index": 43,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[43]"
+    },
+    {
+      "name": "sm_lin_quad_mixed_cHQ1_cHj1",
+      "alias": "sm_lin_quad_mixed_cHj1_cHQ1",
+      "kind": "sm_lin_quad_mixed",
+      "operators": [
+        "cHQ1",
+        "cHj1"
+      ],
+      "terms": [
+        {
+          "index": 44,
+          "coefficient": 1.0
+        }
+      ],
+      "expression": "LHEReweightingWeight[44]"
+    }
+  ]
+}
